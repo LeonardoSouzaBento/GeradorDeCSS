@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --text-xs: 0.922275em;
@@ -12,9 +12,9 @@
   --text-h2: 1.45215em;
   --text-h1: 1.549444em;
   --text-big-h1: 1.653256em;
-  --text-button: 1.00em;
-  --text-sm-button: 0.90em;
-  --text-lg-button: 1.10em;
+  --text-button: 1em;
+  --text-sm-button: 0.9em;
+  --text-lg-button: 1.1em;
   /* Cores */
   --color-background: hsl(210 20% 98%);
   --color-foreground: hsl(215 25% 15%);
@@ -60,6 +60,28 @@
 
   /* Transições */
   --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Animações do Accordion */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
 }
 
 /* Tema Escuro */
@@ -112,10 +134,10 @@ html {
   }
   body {
     font-family:
-      "Google Sans Flex",
+      'Google Sans Flex',
       -apple-system,
       BlinkMacSystemFont,
-      "Segoe UI",
+      'Segoe UI',
       sans-serif;
     @apply text-gray-800 bg-linear-to-br from-[#f9fafb00] to-[#f3f5f7] leading-normal;
   }
@@ -133,14 +155,14 @@ html {
     @apply cursor-default;
   }
   button {
-    font-family: "Google Sans", sans-serif;
+    font-family: 'Google Sans', sans-serif;
     @apply cursor-pointer capitalize flex items-center;
   }
   label {
     @apply text-muted-foreground tracking-normal;
   }
   pre {
-    font-family: "Ubuntu Mono", monospace;
+    font-family: 'Ubuntu Mono', monospace;
     @apply cursor-default bg-background text-foreground 
     rounded-md wrap-break-word py-4 px-5 whitespace-pre-wrap
     transition-opacity duration-400 font-normal overflow-y-scroll;

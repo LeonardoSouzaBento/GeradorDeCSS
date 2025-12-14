@@ -1,7 +1,5 @@
 import { SizeHierarchy, Scale, CssValues } from "@/data/types";
 
-/* C:/Users/souza/Desktop/repositorios-publicos/typografic-scale-generator/src/ui */
-
 export const sizes: SizeHierarchy[] = [
   { tagName: ".smaller-text", pow: -2, var: "--text-xs" },
   { tagName: ".small-text, label", pow: -1, var: "--text-sm" },
