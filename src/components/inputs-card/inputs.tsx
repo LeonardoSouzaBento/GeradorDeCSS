@@ -19,10 +19,15 @@ const Inputs = ({
   setCanGenerate,
 }: Props) => {
   useEffect(() => {
-    if (newMinBase && newMaxBase.toString().length > 1) {
+    if (
+      newMinBase &&
+      newMaxBase &&
+      newMinBase.toString().length > 1 &&
+      newMaxBase.toString().length > 1
+    ) {
       setCanGenerate((prev) => prev + 1);
     }
-  }, [newMaxBase]);
+  }, [newMaxBase, newMinBase]);
 
   return (
     <div className={`grid grid-cols-2 gap-4 -mb-px`}>

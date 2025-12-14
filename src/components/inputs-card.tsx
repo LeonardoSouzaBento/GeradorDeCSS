@@ -43,8 +43,8 @@ const InputsCard = ({
   canGenerate,
   setCanGenerate,
 }: Props) => {
-  const [newMinBase, setnewMinBase] = useState<number | null>(null);
-  const [newMaxBase, setnewMaxBase] = useState<number | null>(null);
+  const [newMinBase, setnewMinBase] = useState<number | null>(16.8);
+  const [newMaxBase, setnewMaxBase] = useState<number | null>(17.2);
   const [scaleValue, setScaleValue] = useState<number>(scales[0].value);
   const [scaledList, setScaledList] = useState<ScaledList[]>([]);
 

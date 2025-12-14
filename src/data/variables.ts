@@ -1,25 +1,42 @@
 import { SizeHierarchy, Scale, CssValues } from "@/data/types";
 
 export const sizes: SizeHierarchy[] = [
-  { tagName: "body", pow: 0 },
-
-  { tagName: ".big-h1", pow: 7 },
-  { tagName: "h1", pow: 6 },
-  { tagName: "h2", pow: 5 },
-  { tagName: "h3", pow: 4 },
-  { tagName: "h4", pow: 3 },
-  { tagName: "h5", pow: 2 },
-  { tagName: "h6", pow: 1 },
-
-  { tagName: ".large-text", pow: 1, var: "--text-lg" },
-  { tagName: ".normal-text", pow: 0, var: "--text-base" },
-  { tagName: ".small-text, label", pow: -1, var: "--text-sm" },
   { tagName: ".smaller-text", pow: -2, var: "--text-xs" },
+  { tagName: ".small-text, label", pow: -1, var: "--text-sm" },
+  { tagName: ".normal-text", pow: 0, var: "--text-base" },
+  { tagName: ".large-text", pow: 1, var: "--text-lg" },
 
-  { tagName: "button", ratio: 0.94 },
-  { tagName: ".small-button", ratio: 0.88 },
-  { tagName: ".large-button", ratio: 1.0 },
+  { tagName: "h6", pow: 1, var: "--text-h6" },
+  { tagName: "h5", pow: 2, var: "--text-h5" },
+  { tagName: "h4", pow: 3, var: "--text-h4" },
+  { tagName: "h3", pow: 4, var: "--text-h3" },
+  { tagName: "h2", pow: 5, var: "--text-h2" },
+  { tagName: "h1", pow: 6, var: "--text-h1" },
+  { tagName: ".big-h1", pow: 7, var: "--text-big-h1" },
+
+  { tagName: "button", ratio: 1, var: "--text-button" },
+  { tagName: ".small-button", ratio: 0.94, var: "--text-sm-button" },
+  { tagName: ".large-button", ratio: 1.06, var: "--text-lg-button" },
 ];
+
+export const buttonSizes: Record<string, string> = Object.fromEntries(
+  sizes
+    .filter((item) => item.ratio)
+    .map((item) => {
+      return [item.tagName, `${item.ratio}em`];
+    })
+    .filter(Boolean) as [string, string][]
+);
+
+/* variaveis para corpo */
+export const textClassSizes: Record<string, string> = Object.fromEntries(
+  sizes
+    .filter((item) => item.var)
+    .map((item) => {
+      const className = item.var!.replace("--", "");
+      return [item.tagName, className];
+    })
+);
 
 export const defaultCssValues: CssValues[] = sizes.map((item) => {
   return {
@@ -28,32 +45,18 @@ export const defaultCssValues: CssValues[] = sizes.map((item) => {
   };
 });
 
-/* variaveis para corpo */
-export const textClassSizes: Record<string, string> = {
-  "h6": "text-lg",
-  ".smaller-text": "text-xs",
-  ".normal-text": "text-base",
-  ".small-text, label": "text-sm",
-  ".large-text": "text-lg",
-};
-
 /* variaveis para botões */
-export const buttonSizes: Record<string, string> = {
-  small: "0.88em",
-  normal: "1.00em",
-  large: "1.12em",
-};
 
 export const fixedButtonSizes: Record<string, string> = {
-  button: `text-[${buttonSizes.normal}]`,
-  ".small-button": `text-[${buttonSizes.small}]`,
-  ".large-button": `text-[${buttonSizes.large}]`,
+  button: `text-[${buttonSizes.button}]`,
+  ".small-button": `text-[${buttonSizes[".small-button"]}]`,
+  ".large-button": `text-[${buttonSizes[".large-button"]}]`,
 };
 
 export const cssFixedButtonSizes: Record<string, string> = {
-  button: `font-size: ${buttonSizes.normal}`,
-  ".small-button": `font-size: ${buttonSizes.small}`,
-  ".large-button": `font-size: ${buttonSizes.large}`,
+  button: `font-size: ${buttonSizes.button}`,
+  ".small-button": `font-size: ${buttonSizes[".small-button"]}`,
+  ".large-button": `font-size: ${buttonSizes[".large-button"]}`,
 };
 
 /* escalas */

@@ -1,5 +1,6 @@
 import { sizes } from "@/data/variables";
 import { ScaledList } from "@/data/types";
+import { removeExcessZerosAndToFix } from "./removeExcessZeros";
 
 export function genTextVariables(
   scaledList: ScaledList[],
@@ -12,13 +13,13 @@ export function genTextVariables(
       const value = scaledList.find(
         (scaleItem) => item.tagName === scaleItem.tagName
       );
-      return `${item.var}: ${value.minSize}em;`;
+      return `${item.var}: ${removeExcessZerosAndToFix(value.minSize)}em;`;
     })
     .join("\n");
 
   if (returnType === "tw") {
-    return `@theme {\n...\n${variables}\n...\n}`;
+    return `@theme {\n${variables}\n}`;
   } else {
-    return `:root {\n...\n${variables}\n...\n}`;
+    return `:root {\n${variables}\n}`;
   }
 }

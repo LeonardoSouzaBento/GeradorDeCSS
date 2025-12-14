@@ -40,23 +40,12 @@ function scaleSizesForPureCSS(font640: number, font1280: number): string {
 function buildCSSPureTable(scaledList: ScaledList[]): CssValues[] {
   const table: CssValues[] = [];
 
-  scaledList.forEach(({ tagName, minSize, maxSize }) => {
-    const buttonSize = cssFixedButtonSizes[tagName];
+  scaledList.forEach(({ tagName}) => {
     const textSize = textClassSizes[tagName];
     if (textSize) {
       table.push({
         tagName,
         value: `font-size: var(--${textSize});`,
-      });
-    } else if (buttonSize) {
-      table.push({
-        tagName,
-        value: buttonSize,
-      });
-    } else if (!buttonSize && !textSize) {
-      table.push({
-        tagName,
-        value: scaleSizesForPureCSS(minSize, maxSize),
       });
     }
   });
@@ -71,11 +60,11 @@ export function scaleSizesAndReturnCSS(
 ): string {
   const scaledList = genScaledList(minSizeBody, maxSizeBody, scaleValue);
 
+  const textVariables = genTextVariables(scaledList, "css");
+  const bodyClass = `body {\n${scaleSizesForPureCSS(minSizeBody, maxSizeBody)}\n}`;
   const cssTable = buildCSSPureTable(scaledList);
 
-  const textVariables = genTextVariables(scaledList, "css");
-
-  return `${textVariables}\n\n ${cssTable
+  return `${textVariables}\n\n${bodyClass}\n\n${cssTable
     .map(({ tagName, value }) => `${tagName} {${value}}`)
     .join("\n\n")}`;
 }

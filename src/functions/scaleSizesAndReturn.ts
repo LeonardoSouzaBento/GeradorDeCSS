@@ -1,9 +1,5 @@
 import { CssValues, ScaledList } from "@/data/types";
-import {
-  fixedButtonSizes,
-  sizes,
-  textClassSizes
-} from "@/data/variables";
+import { fixedButtonSizes, sizes, textClassSizes } from "@/data/variables";
 import { genScaledList } from "./genScaledList";
 import { removeExcessZerosAndToFix } from "./removeExcessZeros";
 import { genTextVariables } from "./genTextVariables";
@@ -32,8 +28,7 @@ export function genFontSizeScale(font640: number, font1280: number): string {
 }
 
 function buildTailwindCSSTable(scaledList: ScaledList[]): CssValues[] {
-  return scaledList.map(({ tagName, minSize, maxSize }) => {
-    const buttonSize = fixedButtonSizes[tagName];
+  return scaledList.map(({ tagName }) => {
     const textSize = textClassSizes[tagName];
     if (textSize) {
       return {
@@ -41,16 +36,6 @@ function buildTailwindCSSTable(scaledList: ScaledList[]): CssValues[] {
         value: textSize,
       };
     }
-    if (buttonSize) {
-      return {
-        tagName,
-        value: buttonSize,
-      };
-    }
-    return {
-      tagName,
-      value: genFontSizeScale(minSize, maxSize),
-    };
   });
 }
 
@@ -62,14 +47,12 @@ export function scaleSizesAndReturn(
   scaleValue: number
 ): string {
   const scaledList = genScaledList(minSizeBody, maxSizeBody, scaleValue);
-
+  const bodyClass = `body {\n@apply ${genFontSizeScale(minSizeBody, maxSizeBody)};\n}`;
   const tailwindCSSTable = buildTailwindCSSTable(scaledList);
-
   const textVariables = genTextVariables(scaledList, "tw");
-
-  const layerComponents = `@layer components {\n${tailwindCSSTable
+  const layerComponents = `@layer components {\n${bodyClass}\n\n${tailwindCSSTable
     .map(({ tagName, value }) => {
-      return `${tagName} {\n@apply ${value};\n}`;
+      return `${tagName} {@apply ${value};}`;
     })
     .join("\n\n")} \n}`;
 

@@ -2,29 +2,26 @@ import { ClampValue } from "@/data/types";
 
 const buttonConfigs = [
   {
-    text: "Botão Pequeno",
+    text: "Pequeno",
     sizeKey: ".small-button",
     styles: "h-8 py-0 font-medium",
-    className: "small-button",
   },
   {
     text: "Botão Normal",
     sizeKey: "button",
     styles: "h-10 font-semibold",
-    className: "",
   },
   {
-    text: "Botão Grande",
+    text: "Call to Action",
     sizeKey: ".large-button",
     styles: "h-12 font-bold",
-    className: "large-button",
   },
 ];
 
 const css = {
-  wrapper: `flex gap-3`,
-  button: `bg-primary text-primary-foreground px-5 
-  rounded-full max-w-max text-muted-foreground`,
+  wrapper: `flex gap-3 pt-1.5`,
+  button: `bg-secondary text-secondary-foreground px-5 pr-3.5 box-content
+  rounded-full max-w-max text-muted-foreground font-semibold`,
 };
 
 const ButtonsSection = ({ clampValues }: { clampValues: ClampValue }) => {
@@ -33,11 +30,26 @@ const ButtonsSection = ({ clampValues }: { clampValues: ClampValue }) => {
       <div className={css.wrapper}>
         {buttonConfigs.map((config) => (
           <button
-            className={`flex items-center ${config.styles} ${css.button} ${config.className}`}
+            className={`flex items-center ${config.styles} ${css.button}`}
             key={config.sizeKey}
-            style={{ fontSize: clampValues[config.sizeKey] }}
+            style={{
+              fontSize: clampValues[config.sizeKey],
+              height: clampValues[config.sizeKey],
+              paddingTop: "0.7em",
+              paddingBottom: "0.7em",
+              paddingLeft: "0.81em",
+              paddingRight: "0.68em",
+            }}
           >
-            {config.text}
+            {config.text}{" "}
+            <p
+              className={`ml-2.5 mb-1.5 scale-150`}
+              style={{
+                fontSize: clampValues[config.sizeKey],
+              }}
+            >
+              ☺
+            </p>
           </button>
         ))}
       </div>
