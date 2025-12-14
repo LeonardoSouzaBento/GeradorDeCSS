@@ -11,10 +11,10 @@ export const sizes: SizeHierarchy[] = [
   { tagName: "h5", pow: 2 },
   { tagName: "h6", pow: 1 },
 
-  { tagName: ".large-text", pow: 1 },
-  { tagName: ".normal-text", pow: 0 },
-  { tagName: ".small-text, label", pow: -1 },
-  { tagName: ".smaller-text", pow: -2 },
+  { tagName: ".large-text", pow: 1, var: "--text-lg" },
+  { tagName: ".normal-text", pow: 0, var: "--text-base" },
+  { tagName: ".small-text, label", pow: -1, var: "--text-sm" },
+  { tagName: ".smaller-text", pow: -2, var: "--text-xs" },
 
   { tagName: "button", ratio: 0.94 },
   { tagName: ".small-button", ratio: 0.88 },
@@ -28,15 +28,35 @@ export const defaultCssValues: CssValues[] = sizes.map((item) => {
   };
 });
 
-export const twTextVariables = [
-  { varName: "--text-xs", className: ".smaller-text" },
-  { varName: "--text-base", className: "" },
-  { varName: "--text-sm", className: ".small-text, label" },
-  { varName: "--text-lg", className: ".large-text" },
-];
+/* variaveis para corpo */
+export const textClassSizes: Record<string, string> = {
+  "h6": "text-lg",
+  ".smaller-text": "text-xs",
+  ".normal-text": "text-base",
+  ".small-text, label": "text-sm",
+  ".large-text": "text-lg",
+};
 
-export const textClasses = twTextVariables.map((item) => item.className);
+/* variaveis para botões */
+export const buttonSizes: Record<string, string> = {
+  small: "0.88em",
+  normal: "1.00em",
+  large: "1.12em",
+};
 
+export const fixedButtonSizes: Record<string, string> = {
+  button: `text-[${buttonSizes.normal}]`,
+  ".small-button": `text-[${buttonSizes.small}]`,
+  ".large-button": `text-[${buttonSizes.large}]`,
+};
+
+export const cssFixedButtonSizes: Record<string, string> = {
+  button: `font-size: ${buttonSizes.normal}`,
+  ".small-button": `font-size: ${buttonSizes.small}`,
+  ".large-button": `font-size: ${buttonSizes.large}`,
+};
+
+/* escalas */
 export const scales: Scale[] = [
   { name: "minor-second", value: 1.067 },
   { name: "major-second", value: 1.125 },
@@ -47,9 +67,3 @@ export const scales: Scale[] = [
   { name: "perfect-fifth", value: 1.5 },
   { name: "golden-ratio", value: 1.618 },
 ];
-
-export const buttonSizes = {
-  small: "0.88em",
-  normal: "1.00em",
-  large: "1.12em",
-};

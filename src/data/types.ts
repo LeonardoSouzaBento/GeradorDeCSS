@@ -7,6 +7,7 @@ export interface SizeHierarchy {
   tagName: string;
   pow?: number;
   ratio?: number;
+  var?: string;
 }
 
 export interface ScaledList {

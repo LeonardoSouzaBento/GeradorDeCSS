@@ -19,9 +19,7 @@ const PersonalGuidelines = ({
           Coloque os estilos copiados em um <strong>arquivo separado</strong>{" "}
           que tenha apenas estilos para textos. Um nome como "textStyles.css" é
           conveniente. Por outro lado, o melhor lugar para definir a fonte
-          específica e as cores do texto é no globals.css. Importe o arquivo
-          globals.css em textStyles.css para usar as variáveis text-[size]
-          sobreescritas, se necessário.
+          específica e as cores do texto é no globals.css. Importe o arquivo globals.css em textStyles.css para usar as variáveis text-[size] sobreescritas, se necessário. No entanto, para estilizar tags p maiores ou menores, prefira usar as classes smaller-text, small-text e large-text, pois elas têm line-height ajustados por você.
         </p>
         <p className={`mb-5 text-muted-foreground`}>
           Você precisará de <strong>mais estilos</strong> além do CSS de

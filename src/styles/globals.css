@@ -27,7 +27,7 @@
   --color-accent: hsla(215, 90%, 45%, 0.5);
   --color-accent-foreground: hsl(0 0% 100%);
 
-  --color-destructive: hsl(0 72% 51%);
+  --color-destructive: hsl(0 80% 45%);
   --color-destructive-foreground: hsl(0, 43%, 93%);
 
   --color-warn: hsl(38 92% 50%);
@@ -107,9 +107,7 @@ html {
       BlinkMacSystemFont,
       "Segoe UI",
       sans-serif;
-    @apply text-gray-800 bg-linear-to-br from-[#f9fafb00] to-[#f3f5f7] 
-    text-[1.05000em] sm:text-[1.05938em] md:text-[1.06125em] lg:text-[1.06500em] 
-    xl:text-[1.06875em] 2xl:text-[1.07250em] leading-normal;
+    @apply text-gray-800 bg-linear-to-br from-[#f9fafb00] to-[#f3f5f7] leading-normal;
   }
   html,
   body {

@@ -34,6 +34,14 @@ function getPreHeight(
   return preHeight;
 }
 
+function scrollToTop(preRef: React.RefObject<HTMLPreElement>) {
+  if (!preRef.current) return;
+  preRef.current.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}
+
 const MoreStylesModal = ({
   setShowMoreStyles,
   rootFontSize,
@@ -43,11 +51,12 @@ const MoreStylesModal = ({
 }) => {
   const [selected, setSelected] = useState<string>("tw");
   const [copied, setCopied] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
   const [preHeight, setPreHeight] = useState("0");
   const [wasResized, setWasResized] = useState<number>(0);
+  const cardRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const buttonsDivRef = useRef<HTMLDivElement>(null);
+  const preRef = useRef<HTMLPreElement>(null);
 
   useResizeWatcher(setWasResized);
 
@@ -74,7 +83,12 @@ const MoreStylesModal = ({
   useEffect(() => {
     if (!cardRef.current) return;
     setPreHeight(getPreHeight(cardRef, headerRef, buttonsDivRef, rootFontSize));
+    scrollToTop(preRef);
   }, [wasResized]);
+
+  useEffect(() => {
+    scrollToTop(preRef);
+  }, [selected]);
 
   return (
     <div
@@ -85,7 +99,7 @@ const MoreStylesModal = ({
       <Card
         ref={cardRef}
         onClick={(e) => e.stopPropagation()}
-        className={`w-full h-[calc(100vh-3rem)] max-w-xl shadow-xl 
+        className={`w-full h-[calc(100vh-2.5rem)] max-w-xl shadow-xl 
         rounded-lg pb-0`}
       >
         <CardHeader
@@ -158,6 +172,7 @@ const MoreStylesModal = ({
           </div>
 
           <pre
+            ref={preRef}
             className={`bg-background rounded-md max-h-none mb-6`}
             style={{ height: `${preHeight}rem` }}
           >

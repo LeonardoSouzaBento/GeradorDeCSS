@@ -3,7 +3,6 @@ import { ClampValue } from "@/data/types";
 const ParagraphsSection = ({ clampValues }: { clampValues: ClampValue }) => {
   return (
     <>
-      <h4>Variações de Parágrafo</h4>
       <p style={{ fontSize: clampValues[".large-text"] }}>
         Parágrafo Grande — ideal para introduções, heros ou destaque moderado.
       </p>

@@ -45,6 +45,10 @@
     @apply font-bold;
   }
 
+  .big-h1 {
+    @apply font-extrabold;
+  }
+
   a,
   label,
   .big-link,
@@ -147,20 +151,20 @@
   }
 
   .large-text {
-    @apply text-[1.12035em];
+    @apply text-lg;
   }
 
   .normal-text {
-    @apply text-[1.00em];
+    @apply text-base;
   }
 
   .small-text,
   label {
-    @apply text-[0.984067em];
+    @apply text-sm;
   }
 
   .smaller-text {
-    @apply text-[0.922275em];
+    @apply text-xs;
   }
 
   button {

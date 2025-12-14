@@ -1,16 +1,7 @@
+import { WrapperInput } from "@/components/inputs-card/wrapper-input";
 import { StateSetter } from "@/data/types";
 import { Input } from "@/ui/input";
-import { WrapperInput } from "@/components/inputs-card/wrapper-input";
 import { useEffect } from "react";
-
-// function deduceFontAt1536px(
-//   font640: number,
-//   font1280: number
-// ): number {
-//   const font1536 = 1.20 * (font1280 - font640) + font640;
-
-//   return Number(font1536.toFixed(2));
-// }
 
 interface Props {
   newMinBase: number | null;
@@ -63,3 +54,17 @@ const Inputs = ({
 };
 
 export default Inputs;
+
+// const CleanInputButton = ({ onClick }: { onClick: () => void }) => {
+//   return (
+//     <Button
+//       variant="secondary"
+//       size="icon-xs"
+//       className={`size-8 absolute bottom-1 right-1
+//       rounded-full z-10 text-destructive bg-background`}
+//       onClick={onClick}
+//     >
+//       <Delete {...iconSm} />
+//     </Button>
+//   );
+// };

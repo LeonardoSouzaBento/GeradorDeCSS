@@ -7,6 +7,7 @@ import FormsSection from "./prev/forms-section";
 import Nav from "./prev/nav";
 import ParagraphsSection from "./prev/paragraphs-section";
 import TitlesSection from "./prev/titles-section";
+import { Alert, AlertDescription, AlertTitle } from "@/ui/alert";
 
 const css = {
   wrapper: `w-full mb-7 mx-auto`,
@@ -20,7 +21,13 @@ export const componentExamples = [
   "formulários",
 ];
 
-const Prev = ({ clampValues }: { clampValues: ClampValue }) => {
+const Prev = ({
+  clampValues,
+  disabled,
+}: {
+  clampValues: ClampValue;
+  disabled: boolean;
+}) => {
   const [selectedComponent, setSelectedComponent] = useState<string>("títulos");
   const firstSectionRef = useRef<HTMLDivElement>(null);
   const [firstSectionHeight, setFirstSectionHeight] = useState<string | number>(
@@ -50,6 +57,15 @@ const Prev = ({ clampValues }: { clampValues: ClampValue }) => {
           setSelectedComponent={setSelectedComponent}
         />
       </CardHeader>
+
+      {disabled && (
+        <Alert className={`mb-4 mt-4 xl:max-w-max`} variant="destructive">
+          <AlertTitle>Atenção</AlertTitle>
+          <AlertDescription>
+           Valores ausentes nos inputs. Sua escala não está sendo aplicada.
+          </AlertDescription>
+        </Alert>
+      )}
 
       <CardContent>
         <section

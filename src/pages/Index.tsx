@@ -81,7 +81,7 @@ const Index = () => {
       </main>
 
       <div className={`${mainCss} mb-7`}>
-        <Prev clampValues={clampValues} />
+        <Prev clampValues={clampValues} disabled={disabled}/>
 
         <div className={`block space-y-7 xl:grid xl:grid-cols-2 xl:gap-7`}>
           <PersonalGuidelines setShowMoreStyles={setShowMoreStyles} />

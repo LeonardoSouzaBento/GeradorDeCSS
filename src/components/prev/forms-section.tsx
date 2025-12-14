@@ -2,7 +2,7 @@ import { ClampValue } from "@/data/types";
 import { Input } from "@/ui/input";
 
 const css = {
-  form: `h-[calc(100%-3.5rem)] p-5 pt-4 overflow-y-scroll rounded-md border 
+  form: `h-[calc(100%-3rem)] p-5 pt-4 overflow-y-scroll rounded-md border 
   border-border! space-y-4`,
   wrapperInput: `flex flex-col gap-2`,
 };
@@ -10,10 +10,9 @@ const css = {
 const FormsSection = ({ clampValues }: { clampValues: ClampValue }) => {
   return (
     <>
-      <h4>Formulários</h4>
       <form className={css.form}>
         <div
-          className={`flex flex-col gap-4 sm:flex-row sm:gap-4 border-b pb-5`}
+          className={`flex flex-col gap-4 sm:flex-row sm:gap-4 border-b pb-6`}
         >
           <div className={css.wrapperInput}>
             <label htmlFor="nome">Nome</label>

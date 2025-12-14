@@ -1,8 +1,12 @@
 import { CssValues, ScaledList } from "@/data/types";
+import {
+  fixedButtonSizes,
+  sizes,
+  textClassSizes
+} from "@/data/variables";
 import { genScaledList } from "./genScaledList";
-import { buttonSizes, textClasses, twTextVariables } from "@/data/variables";
 import { removeExcessZerosAndToFix } from "./removeExcessZeros";
-
+import { genTextVariables } from "./genTextVariables";
 
 /* ---------- Funções auxiliares ---------- */
 export function genFontSizeScale(font640: number, font1280: number): string {
@@ -27,41 +31,27 @@ export function genFontSizeScale(font640: number, font1280: number): string {
   return result.trim();
 }
 
-const specialRules: Record<string, string> = {
-  ".normal-text": `text-[1.00em];`,
-  button: `text-[${buttonSizes.normal}];`,
-  ".small-button": `text-[${buttonSizes.small}];`,
-  ".large-button": `text-[${buttonSizes.large}];`,
-};
-
 function buildTailwindCSSTable(scaledList: ScaledList[]): CssValues[] {
   return scaledList.map(({ tagName, minSize, maxSize }) => {
-    const rule = specialRules[tagName];
-    if (textClasses.includes(tagName)) {
+    const buttonSize = fixedButtonSizes[tagName];
+    const textSize = textClassSizes[tagName];
+    if (textSize) {
       return {
         tagName,
-        value: `text-[${minSize}em];`,
+        value: textSize,
+      };
+    }
+    if (buttonSize) {
+      return {
+        tagName,
+        value: buttonSize,
       };
     }
     return {
       tagName,
-      value: rule ?? genFontSizeScale(minSize, maxSize),
+      value: genFontSizeScale(minSize, maxSize),
     };
   });
-}
-
-function genTextVariables(scaledList: ScaledList[]): string {
-  const variables = twTextVariables
-    .map(({ varName, className }) => {
-      const values = scaledList.find((item) => item.tagName === className);
-      if (varName === "--text-base") {
-        return `${varName}: 1.00em;`;
-      }
-      return `${varName}: ${values?.minSize}em;`;
-    })
-    .join("\n");
-
-  return `@theme {\n...\n${variables}\n...\n}`;
 }
 
 /* ---------- Função principal ---------- */
@@ -75,11 +65,11 @@ export function scaleSizesAndReturn(
 
   const tailwindCSSTable = buildTailwindCSSTable(scaledList);
 
-  const textVariables = genTextVariables(scaledList);
+  const textVariables = genTextVariables(scaledList, "tw");
 
   const layerComponents = `@layer components {\n${tailwindCSSTable
     .map(({ tagName, value }) => {
-      return `${tagName} {\n@apply ${value}\n}`;
+      return `${tagName} {\n@apply ${value};\n}`;
     })
     .join("\n\n")} \n}`;
 

@@ -1,7 +1,14 @@
 import { CssValues, ScaledList } from "@/data/types";
+import {
+  buttonSizes,
+  cssFixedButtonSizes,
+  fixedButtonSizes,
+  sizes,
+  textClassSizes,
+} from "@/data/variables";
 import { genScaledList } from "./genScaledList";
-import { buttonSizes, textClasses } from "@/data/variables";
 import { removeExcessZerosAndToFix } from "./removeExcessZeros";
+import { genTextVariables } from "./genTextVariables";
 
 function scaleSizesForPureCSS(font640: number, font1280: number): string {
   const breakpoints = [
@@ -30,27 +37,26 @@ function scaleSizesForPureCSS(font640: number, font1280: number): string {
   return result.trim();
 }
 
-const specialRules = {
-  ".normal-text": "font-size: 1.00em;",
-  button: `font-size: ${buttonSizes.normal};`,
-  ".small-button": `font-size: ${buttonSizes.small};`,
-  ".large-button": `font-size: ${buttonSizes.large};`,
-};
-
 function buildCSSPureTable(scaledList: ScaledList[]): CssValues[] {
   const table: CssValues[] = [];
 
   scaledList.forEach(({ tagName, minSize, maxSize }) => {
-    const rule = specialRules[tagName];
-    if (textClasses.includes(tagName)) {
+    const buttonSize = cssFixedButtonSizes[tagName];
+    const textSize = textClassSizes[tagName];
+    if (textSize) {
       table.push({
         tagName,
-        value: `font-size: ${minSize}em;`,
+        value: `font-size: var(--${textSize});`,
       });
-    } else {
+    } else if (buttonSize) {
       table.push({
         tagName,
-        value: rule ?? scaleSizesForPureCSS(minSize, maxSize),
+        value: buttonSize,
+      });
+    } else if (!buttonSize && !textSize) {
+      table.push({
+        tagName,
+        value: scaleSizesForPureCSS(minSize, maxSize),
       });
     }
   });
@@ -67,7 +73,9 @@ export function scaleSizesAndReturnCSS(
 
   const cssTable = buildCSSPureTable(scaledList);
 
-  return cssTable
+  const textVariables = genTextVariables(scaledList, "css");
+
+  return `${textVariables}\n\n ${cssTable
     .map(({ tagName, value }) => `${tagName} {${value}}`)
-    .join("\n\n");
+    .join("\n\n")}`;
 }

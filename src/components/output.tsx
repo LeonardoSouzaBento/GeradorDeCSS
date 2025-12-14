@@ -23,26 +23,25 @@ const Output = ({
   rootFontSize,
 }: Props) => {
   const [animate, setAnimate] = useState<boolean>(false);
-  const cardRef = useRef<HTMLDivElement>(null);
+  const preRef = useRef<HTMLPreElement>(null);
   const preHeight = (cardHeight / rootFontSize - 3).toFixed(3);
 
   useEffect(() => {
-    if (!cardRef.current) return;
-    if (cardRef.current.scrollTop === 0) {
+    if (!preRef.current) return;
+    if (preRef.current.scrollTop === 0) {
       setAnimate(true);
       setTimeout(() => {
         setAnimate(false);
       }, 200);
     }
-    cardRef.current.scrollTo({
+    preRef.current.scrollTo({
       top: 0,
       behavior: "smooth",
     });
-  }, [canGenerate]);
+  }, [canGenerate, returnType]);
 
   return (
     <Card
-      ref={cardRef}
       className={`animate-in fade-in slide-in-from-bottom-4 relative max-h-full 
       space-y-5 pr-5`}
       noHeader
@@ -54,6 +53,7 @@ const Output = ({
             transition-all duration-200 ${animate && "bg-white/66 z-2"}`}
         />
         <pre
+          ref={preRef}
           className={`${disabled && "text-neutral-400"}`}
           style={{ height: `${preHeight}rem` }}
         >

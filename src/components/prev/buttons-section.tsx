@@ -19,7 +19,6 @@ const css = {
 const ButtonsSection = ({ clampValues }: { clampValues: ClampValue }) => {
   return (
     <>
-      <h4>Botões em escala</h4>
       <div className={css.wrapper}>
         {buttonConfigs.map((config) => (
           <button
