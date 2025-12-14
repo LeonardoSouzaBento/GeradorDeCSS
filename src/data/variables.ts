@@ -1,5 +1,7 @@
 import { SizeHierarchy, Scale, CssValues } from "@/data/types";
 
+/* C:/Users/souza/Desktop/repositorios-publicos/typografic-scale-generator/src/ui */
+
 export const sizes: SizeHierarchy[] = [
   { tagName: ".smaller-text", pow: -2, var: "--text-xs" },
   { tagName: ".small-text, label", pow: -1, var: "--text-sm" },
@@ -15,8 +17,8 @@ export const sizes: SizeHierarchy[] = [
   { tagName: ".big-h1", pow: 7, var: "--text-big-h1" },
 
   { tagName: "button", ratio: 1, var: "--text-button" },
-  { tagName: ".small-button", ratio: 0.94, var: "--text-sm-button" },
-  { tagName: ".large-button", ratio: 1.06, var: "--text-lg-button" },
+  { tagName: ".small-button", ratio: 0.90, var: "--text-sm-button" },
+  { tagName: ".large-button", ratio: 1.10, var: "--text-lg-button" },
 ];
 
 export const buttonSizes: Record<string, string> = Object.fromEntries(

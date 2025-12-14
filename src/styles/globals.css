@@ -2,9 +2,19 @@
 
 @theme {
   --text-xs: 0.922275em;
-  --text-base: 1em;
   --text-sm: 0.984067em;
+  --text-base: 1.05em;
   --text-lg: 1.12035em;
+  --text-h6: 1.12035em;
+  --text-h5: 1.195413em;
+  --text-h4: 1.275506em;
+  --text-h3: 1.360965em;
+  --text-h2: 1.45215em;
+  --text-h1: 1.549444em;
+  --text-big-h1: 1.653256em;
+  --text-button: 1.00em;
+  --text-sm-button: 0.90em;
+  --text-lg-button: 1.10em;
   /* Cores */
   --color-background: hsl(210 20% 98%);
   --color-foreground: hsl(215 25% 15%);

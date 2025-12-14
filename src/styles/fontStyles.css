@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "./globals.css";
+@import 'tailwindcss';
+@import './globals.css';
 
 @layer components {
   p {
@@ -122,40 +122,8 @@
     @apply text-[1.05rem] sm:text-[1.0625rem] md:text-[1.065rem] lg:text-[1.07rem] xl:text-[1.075rem] 2xl:text-[1.0800rem];
   }
 
-  .big-h1 {
-    @apply text-[1.653256rem] sm:text-[1.672938rem] md:text-[1.676874rem] lg:text-[1.684747rem] xl:text-[1.69262rem] 2xl:text-[1.700493rem];
-  }
-
-  h1 {
-    @apply text-[1.549444rem] sm:text-[1.567890rem] md:text-[1.571579rem] lg:text-[1.578957rem] xl:text-[1.586335rem] 2xl:text-[1.593713rem];
-  }
-
-  h2 {
-    @apply text-[1.45215rem] sm:text-[1.469438rem] md:text-[1.472895rem] lg:text-[1.47981rem] xl:text-[1.486725rem] 2xl:text-[1.49364rem];
-  }
-
-  h3 {
-    @apply text-[1.360965rem] sm:text-[1.377167rem] md:text-[1.380407rem] lg:text-[1.386888rem] xl:text-[1.393369rem] 2xl:text-[1.399850rem];
-  }
-
-  h4 {
-    @apply text-[1.275506rem] sm:text-[1.290690rem] md:text-[1.293727rem] lg:text-[1.299801rem] xl:text-[1.305875rem] 2xl:text-[1.311949rem];
-  }
-
-  h5 {
-    @apply text-[1.195413rem] sm:text-[1.209645rem] md:text-[1.212491rem] lg:text-[1.218183rem] xl:text-[1.223876rem] 2xl:text-[1.229569rem];
-  }
-
-  h6 {
-    @apply text-[1.12035rem] sm:text-[1.133687rem] md:text-[1.136355rem] lg:text-[1.141690rem] xl:text-[1.147025rem] 2xl:text-[1.15236rem];
-  }
-
-  .large-text {
-    @apply text-lg;
-  }
-
-  .normal-text {
-    @apply text-base;
+  .smaller-text {
+    @apply text-xs;
   }
 
   .small-text,
@@ -163,19 +131,51 @@
     @apply text-sm;
   }
 
-  .smaller-text {
-    @apply text-xs;
+  .normal-text {
+    @apply text-base;
+  }
+
+  .large-text {
+    @apply text-lg;
+  }
+
+  h6 {
+    @apply text-h6;
+  }
+
+  h5 {
+    @apply text-h5;
+  }
+
+  h4 {
+    @apply text-h4;
+  }
+
+  h3 {
+    @apply text-h3;
+  }
+
+  h2 {
+    @apply text-h2;
+  }
+
+  h1 {
+    @apply text-h1;
+  }
+
+  .big-h1 {
+    @apply text-big-h1;
   }
 
   button {
-    @apply text-[1em];
+    @apply text-button;
   }
 
   .small-button {
-    @apply text-[0.90em];
+    @apply text-sm-button;
   }
 
   .large-button {
-    @apply text-[1.10em];
+    @apply text-lg-button;
   }
 }

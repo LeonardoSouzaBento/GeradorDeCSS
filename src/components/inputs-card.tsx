@@ -1,14 +1,14 @@
-import CopyButton from "@/components/inputs-card/copy-button";
-import { scales } from "@/data/variables";
-import { generateClamp } from "@/functions/generateClamp";
-import { genScaledList } from "@/functions/genScaledList";
-import { scaleSizesAndReturn } from "@/functions/scaleSizesAndReturn";
-import { scaleSizesAndReturnCSS } from "@/functions/scaleSizesAndReturnCSS";
-import { ClampValue, ScaledList, StateSetter } from "@/data/types";
-import { useEffect, useState } from "react";
-import Inputs from "./inputs-card/inputs";
-import OptionsScale from "./inputs-card/optionsScale";
-import ReturnOptions from "./inputs-card/return-options";
+import CopyButton from '@/components/inputs-card/copy-button';
+import { scales } from '@/data/variables';
+import { generateClamp } from '@/functions/generateClamp';
+import { genScaledList } from '@/functions/genScaledList';
+import { scaleSizesAndReturn } from '@/functions/scaleSizesAndReturn';
+import { scaleSizesAndReturnCSS } from '@/functions/scaleSizesAndReturnCSS';
+import { ClampValue, ScaledList, StateSetter } from '@/data/types';
+import { useEffect, useState } from 'react';
+import Inputs from './inputs-card/inputs';
+import OptionsScale from './inputs-card/optionsScale';
+import ReturnOptions from './inputs-card/return-options';
 
 function deduceFontAt1536px(font640: number, font1280: number): number {
   const font1536 = 1.2 * (font1280 - font640) + font640;
@@ -65,7 +65,7 @@ const InputsCard = ({
       const scaledList = genScaledList(minEm, maxEm, scaleValue);
       setScaledList(scaledList);
 
-      if (returnType === "tw") {
+      if (returnType === 'tw') {
         const fullCss = scaleSizesAndReturn(minEm, maxEm, scaleValue);
         setOutput(fullCss);
       } else {
@@ -106,8 +106,7 @@ const InputsCard = ({
 
       <div
         className={`flex flex-col gap-3 pt-3 pb-5 sm:flex-row border-t 
-        border-b border-input box-content`}
-      >
+        border-b border-input box-content`}>
         <OptionsScale
           scaleValue={scaleValue}
           setScaleValue={setScaleValue}
