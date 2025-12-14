@@ -5,9 +5,20 @@ const buttonConfigs = [
     text: "Botão Pequeno",
     sizeKey: ".small-button",
     styles: "h-8 py-0 font-medium",
+    className: "small-button",
   },
-  { text: "Botão Normal", sizeKey: "button", styles: "h-10 font-semibold" },
-  { text: "Botão Grande", sizeKey: ".large-button", styles: "h-12 font-bold" },
+  {
+    text: "Botão Normal",
+    sizeKey: "button",
+    styles: "h-10 font-semibold",
+    className: "",
+  },
+  {
+    text: "Botão Grande",
+    sizeKey: ".large-button",
+    styles: "h-12 font-bold",
+    className: "large-button",
+  },
 ];
 
 const css = {
@@ -22,7 +33,7 @@ const ButtonsSection = ({ clampValues }: { clampValues: ClampValue }) => {
       <div className={css.wrapper}>
         {buttonConfigs.map((config) => (
           <button
-            className={`flex items-center ${config.styles} ${css.button} `}
+            className={`flex items-center ${config.styles} ${css.button} ${config.className}`}
             key={config.sizeKey}
             style={{ fontSize: clampValues[config.sizeKey] }}
           >

@@ -8,6 +8,8 @@ import Nav from "./prev/nav";
 import ParagraphsSection from "./prev/paragraphs-section";
 import TitlesSection from "./prev/titles-section";
 import { Alert, AlertDescription, AlertTitle } from "@/ui/alert";
+import { AlertCircleIcon } from "lucide-react";
+import { iconSm } from "@/styles/lucideIconStyles";
 
 const css = {
   wrapper: `w-full mb-7 mx-auto`,
