@@ -18,13 +18,14 @@ const PersonalGuidelines = ({ setShowMoreStyles }: { setShowMoreStyles: StateSet
           </li>
           <li>
             Coloque os estilos copiados em um <strong>arquivo separado</strong> chamado
-            "textStyles.css", contendo apenas estilos para tipografia.
+            "typography.css", contendo apenas estilos para tipografia, pois ainda há muitos estilos
+            de tipografia a serem definidos.
           </li>
           <li>
             Defina as cores do texto, qual a fonte específica e as variaveis @theme no globals.css.
           </li>
           <li>
-            Importe o arquivo globals.css em textStyles.css para usar as variáveis text-[size]
+            Importe o arquivo globals.css em typography.css para usar as variáveis text-[size]
             sobreescritas.
           </li>
           <li>

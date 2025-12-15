@@ -2,7 +2,7 @@ import Footer from '@/components/footer';
 import Header from '@/components/header';
 import InputsCard from '@/components/inputs-card';
 import Prev from '@/components/prev';
-import PersonalGuidelines from '@/components/prev/personal-guidelines';
+import PersonalGuidelines from '@/components/personal-guidelines';
 import { useResizeWatcher } from '@/hooks/useResizeWatcher';
 import { ClampValue } from '@/data/types';
 import { Card, CardContent } from '@/ui/card';
