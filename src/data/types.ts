@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 
 export type BooleanSetter = Dispatch<SetStateAction<boolean>>;
 export type StateSetter<T> = Dispatch<SetStateAction<T>>;
@@ -18,9 +18,9 @@ export interface ScaledList {
 
 export type ClampValue = Record<string, string>;
 
-export interface CssValues {
+export interface TagAndCssVar {
   tagName: string;
-  value: string;
+  varName: string;
 }
 
 export interface Scale {

@@ -54,6 +54,7 @@ const Index = () => {
         <Card ref={cardRef} className={`w-full h-full max-h-max mx-auto pt-5`}>
           <CardContent className={`flex flex-col gap-5`}>
             <InputsCard
+              rootFontSize={rootFontSize}
               output={output}
               secondOutput={secondOutput}
               setOutput={setOutput}

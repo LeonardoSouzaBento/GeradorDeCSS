@@ -6,10 +6,10 @@ const ParagraphsSection = ({ clampValues }: { clampValues: ClampValue }) => {
       <p className={`large-text`} style={{ fontSize: clampValues[".large-text"] }}>
         Parágrafo Grande — ideal para introduções, heros ou destaque moderado.
       </p>
-      <p className={`normal-text`} style={{ fontSize: clampValues[".normal-text"] }}>
+      <p className={`.normal-text, li, input, select, option`} style={{ fontSize: clampValues[".normal-text"] }}>
         Parágrafo Padrão — usado para leitura contínua.
       </p>
-      <p className={`small-text`} style={{ fontSize: clampValues[".small-text"] }}>
+      <p className={`small-text`} style={{ fontSize: clampValues[".small-text, label"] }}>
         Parágrafo Pequeno — usado para textos auxiliares, notas e descrições.
       </p>
       <p className={`smaller-text`} style={{ fontSize: clampValues[".smaller-text"] }}>

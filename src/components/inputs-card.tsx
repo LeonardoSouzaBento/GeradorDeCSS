@@ -2,8 +2,8 @@ import CopyButton from '@/components/inputs-card/copy-button';
 import { scales } from '@/data/variables';
 import { generateClamp } from '@/functions/generateClamp';
 import { genScaledList } from '@/functions/genScaledList';
-import { scaleSizesAndReturn } from '@/functions/scaleSizesAndReturn';
-import { scaleSizesAndReturnCSS } from '@/functions/scaleSizesAndReturnCSS';
+import { returnTailwind } from '@/functions/returnTailwind';
+import { returnCSS } from '@/functions/returnCSS';
 import { ClampValue, ScaledList, StateSetter } from '@/data/types';
 import { useEffect, useState } from 'react';
 import Inputs from './inputs-card/inputs';
@@ -28,6 +28,7 @@ interface Props {
   setReturnType: StateSetter<string>;
   canGenerate: number;
   setCanGenerate: StateSetter<number>;
+  rootFontSize: number;
 }
 
 const InputsCard = ({
@@ -42,6 +43,7 @@ const InputsCard = ({
   setDisabled,
   canGenerate,
   setCanGenerate,
+  rootFontSize,
 }: Props) => {
   const [newMinBase, setnewMinBase] = useState<number | null>(16.8);
   const [newMaxBase, setnewMaxBase] = useState<number | null>(17.2);
@@ -60,16 +62,17 @@ const InputsCard = ({
   /* Gerar Tailwind ou Css Puro*/
   useEffect(() => {
     if (canGenerate > 0 && !disabled) {
-      const minEm = newMinBase / 16;
-      const maxEm = newMaxBase / 16;
+      const minEm = newMinBase / rootFontSize || 16;
+      const maxEm = newMaxBase / rootFontSize || 16;
       const scaledList = genScaledList(minEm, maxEm, scaleValue);
+      console.log(scaledList);
       setScaledList(scaledList);
 
       if (returnType === 'tw') {
-        const fullCss = scaleSizesAndReturn(minEm, maxEm, scaleValue);
+        const fullCss = returnTailwind(minEm, maxEm, scaleValue);
         setOutput(fullCss);
       } else {
-        const fullCss = scaleSizesAndReturnCSS(minEm, maxEm, scaleValue);
+        const fullCss = returnCSS(minEm, maxEm, scaleValue);
         console.log(fullCss);
 
         setSecondOutput(fullCss);
@@ -82,15 +85,15 @@ const InputsCard = ({
     const valuesInPx = scaledList.map((item) => {
       return {
         tagName: item.tagName,
-        minSize: item.minSize * 16,
-        maxSize: deduceFontAt1536px(item.minSize, item.maxSize) * 16,
+        minSize: item.minSize * rootFontSize || 16,
+        maxSize: deduceFontAt1536px(item.minSize, item.maxSize) * rootFontSize || 16,
       };
     });
     const clampTable = valuesInPx.reduce((acc, item) => {
       acc[item.tagName] = generateClamp(item.minSize, item.maxSize);
       return acc;
     }, {} as ClampValue);
-
+    
     setClampValues(clampTable);
   }, [scaledList]);
 

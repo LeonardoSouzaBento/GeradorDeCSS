@@ -4,11 +4,11 @@ https://typographic-scale-generator.netlify.app/
 
 ## Para que serve? O que faz?
 
-Typographic Scale Generator cria tamanhos de fonte responsivos de forma profissional para você. Copie para a área de transferência o CSS com tamanhos responsivos e tenha uma interface muito mais elegante com tags seguindo uma hierarquia de tamanho padronizada.
+Typographic Scale Generator gera hierarquias de tamanhos de fonte de forma profissional para você. Clique no botão copiar para pegar o CSS com tamanhos responsivos e tenha uma interface muito mais elegante com tags seguindo uma hierarquia de tamanho padronizada.
 
 ## Complexidade do projeto
 
-Embora seja basicamente retornar strings, o processo envolve muitas funções e cálculos. Entre as funções, temos: uma função para remover a quantidade de zeros desnecessários e arredondar para 6 casas decimais os números sem zeros a mais; uma função para gerar uma tabela de clamps com base nos valores recebidos para aplicar responsividade ao componente prévio; funções para formatar a saída em CSS e formatar a saída em Tailwind.
+Embora seja basicamente retornar strings, o processo envolve muitas funções e cálculos. Entre as funções, temos: uma função para remover a quantidade de zeros desnecessários e arredondar para 6 casas decimais os números sem zeros a mais; uma para gerar uma tabela de clamps válidos para cada tag e aplicar no componente prévia; uma função para formatar a saída em CSS e uma para formatar a saída em Tailwind.
 
 Além disso, para avisar mudanças no layout, temos um hook useRemObserver que pega o valor em px do font-size do HTML para descobrir a medida rem e manter a responsividade; e um hook useResizeWatcher para avisar resize de tela para aplicar tamanhos corretos nas divs.
 
@@ -40,22 +40,20 @@ Esse projeto mostra uma parte importante do meu conhecimento, especialmente em U
 
 @layer components {
   body {
-    @apply text-[1.05rem] sm:text-[1.0625rem] md:text-[1.065rem] lg:text-[1.07rem] xl:text-[1.075rem] 2xl:text-[1.0800rem];
+    @apply text-[1.05rem] sm:text-[1.0625rem] md:text-[1.065rem] 
+    lg:text-[1.07rem] xl:text-[1.075rem] 2xl:text-[1.0800rem];
   }
 
   .smaller-text {
     @apply text-xs;
   }
-
   .small-text,
   label {
     @apply text-sm;
   }
-
   .normal-text {
     @apply text-base;
   }
-
   .large-text {
     @apply text-lg;
   }
@@ -63,27 +61,21 @@ Esse projeto mostra uma parte importante do meu conhecimento, especialmente em U
   h6 {
     @apply text-h6;
   }
-
   h5 {
     @apply text-h5;
   }
-
   h4 {
     @apply text-h4;
   }
-
   h3 {
     @apply text-h3;
   }
-
   h2 {
     @apply text-h2;
   }
-
   h1 {
     @apply text-h1;
   }
-
   .big-h1 {
     @apply text-big-h1;
   }
@@ -91,16 +83,23 @@ Esse projeto mostra uma parte importante do meu conhecimento, especialmente em U
   button {
     @apply text-button;
   }
-
   .small-button {
     @apply text-sm-button;
   }
-
   .large-button {
     @apply text-lg-button;
   }
 }
 ```
+
+## Como fazemos a escadala de fontes?
+
+Aplicamos uma escala modular escolhida pelo usuário, como `1.067`, por exemplo. Nesse caso, queremos que a tag h6 seja 1.067 vezes maior que a tag p, h5 seja 1.067 vezes maior que h6, h4 seja 1.067 vezes maior que h5, e assim por diante até h1, ou seja, as tags seguem a regra `base x scala x scala ...` conforme o nível em que estão, portanto, cada tag tem um fator de potência. P é `base x scala ^ 0`, h6 é `base x scala ^ 1`, h5 é `base x scala ^ 2`, e assim por diante.
+
+## Como escalamos a fonte para o body?
+
+Usamos uma regra de três simples para decidir o quanto cada breakpoint vai receber da diferença de tamanho entre os valores mínimo e máximo recebidos. O breakpoint 1280px, tela de desktop, recebe 100% da diferença de tamanho. Se você decidiu como altura mínima e altura máxima de fonte, os valores 17 e 20. 1280px têm 3px de diferença, 3px a mais que o valor mínimo, 100% da diferença de tamanho entre mínimo e máximo, portanto, usando regra de três simples, 1536px, o próximo breakpoint, tem 120% dessa diferença, 1.2 * 3 = 3.6px a mais que o valor mínimo. Naturalmente, a diferença de tamanho entre os breakpoints será pequena se a diferença de tamanho entre mínimo e máximo for pequena. No entanto, tudo fica proporcional aplicando os seguintes fatores de porcentagem: sm: 0.5, md: 0.6, lg: 0.8, xl: 1.0, 2xl: 1.2.
+
 ## Composição do projeto
 
 ### Core
@@ -116,19 +115,16 @@ Esse projeto mostra uma parte importante do meu conhecimento, especialmente em U
 - **[Lucide React](https://lucide.dev/)** - Ícones modernos
 - **[Sonner](https://sonner.emilkowal.ski/)** - Notificações toast elegantes
 
-## 📄 Licença
+## Licença
 
 Este projeto é de código aberto e está disponível para uso pessoal e comercial.
 
-## 👨‍💻 Autor
+## Autor
 
 **Leonardo Souza Bento**
 
 - GitHub: [@LeonardoSouzaBento](https://github.com/LeonardoSouzaBento)
 
 <div align="center">
-
 **Desenvolvido usando React, TypeScript e Tailwind CSS**
-
 </div>
-````

@@ -43,7 +43,7 @@ const ButtonsSection = ({ clampValues }: { clampValues: ClampValue }) => {
           >
             {config.text}{" "}
             <p
-              className={`ml-2.5 mb-1.5 scale-150`}
+              className={`ml-2 mb-1 scale-150`}
               style={{
                 fontSize: clampValues[config.sizeKey],
               }}

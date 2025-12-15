@@ -127,11 +127,15 @@
   }
 
   .small-text,
-  label {
+  label, code {
     @apply text-sm;
   }
 
-  .normal-text {
+  .normal-text,
+  li,
+  input,
+  select,
+  option {
     @apply text-base;
   }
 
