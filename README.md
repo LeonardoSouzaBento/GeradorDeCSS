@@ -1,96 +1,109 @@
-## 🛣️ Oque é e para que serve o Typographic Scale Generator
+## Acesse:
+
+https://typographic-scale-generator.netlify.app/
+
+## Para que serve? O que faz?
 
 Typographic Scale Generator cria tamanhos de fonte responsivos de forma profissional para que voce.
 Copie para área de transferência o CSS com tamanhos responsivos e tenha tags seguindo uma hierarquia de tamanho padronizada.
+Usamos um conjunnto especifico de dados para usar nas funcçõe.
 
-#### Exemplo de Saída -
+## Complexidade do projeto
+
+Embora seja basicamente retornar strings, o processo envolve muitas funções e cálculos. Entre as funções, temos: uma função para remover a quantidade de zeros desnecessários e arredondar para 6 casas decimais os números sem zeros a mais; uma função para gerar uma tabela de clamps com base nos valores recebidos para aplicar responsividade ao componente prévio; funções para formatar a saída em CSS e formatar a saída em Tailwind.
+
+Além disso, para avisar mudanças no layout, temos um hook useRemObserver que pega o valor em px do font-size do HTML para descobrir a medida rem e manter a responsividade; e um hook useResizeWatcher para avisar resize de tela para aplicar tamanhos corretos nas divs.
+
+## Inportancia do projeto
+
+Tendo como fim a escalabilidade, sabemos que criar interfaces a partir de uma base padronizada de estilos é muito importante, principalmente nesse tempo de constante uso de Inteligência Artificial para codificação. É um conhecimento simples, porém não intuitivo, que orienta o trabalho de IAs, nos dá o poder de conferir se ela está aplicando um padrão de estilos conveniente e o saber personalizar sem perder a consistência entre componentes ou entre telas. Para alcançar um design belo e funcional dessa forma, aplicar uma escala tipográfica responsiva é essencial.
+
+Esse projeto mostra uma parte importante do meu conhecimento, especialmente em UI design, mas também em React, TypeScript, Tailwind CSS e uso de componentes reutilizáveis como os de shadcn/ui.
+
+## Exemplo de Saída -
 
 ```css
-body {
-  font-size: clamp(1.09375rem, calc(1.006875rem + 0.013574vw), 1.180625rem);
+@theme {
+  --text-xs: 0.922275em;
+  --text-sm: 0.984067em;
+  --text-base: 1.05em;
+  --text-lg: 1.12035em;
+  --text-h6: 1.12035em;
+  --text-h5: 1.195413em;
+  --text-h4: 1.275506em;
+  --text-h3: 1.360965em;
+  --text-h2: 1.45215em;
+  --text-h1: 1.549444em;
+  --text-big-h1: 1.653256em;
+  --text-button: 1.05em;
+  --text-sm-button: 0.945em;
+  --text-lg-button: 1.155em;
 }
 
-.big-h1 {
-  font-size: clamp(1.722142em, calc(1.585355em + 0.021373vw), 1.858929em);
+@layer components {
+  body {
+    @apply text-[1.05rem] sm:text-[1.0625rem] md:text-[1.065rem] lg:text-[1.07rem] xl:text-[1.075rem] 2xl:text-[1.0800rem];
+  }
+
+  .smaller-text {
+    @apply text-xs;
+  }
+
+  .small-text,
+  label {
+    @apply text-sm;
+  }
+
+  .normal-text {
+    @apply text-base;
+  }
+
+  .large-text {
+    @apply text-lg;
+  }
+
+  h6 {
+    @apply text-h6;
+  }
+
+  h5 {
+    @apply text-h5;
+  }
+
+  h4 {
+    @apply text-h4;
+  }
+
+  h3 {
+    @apply text-h3;
+  }
+
+  h2 {
+    @apply text-h2;
+  }
+
+  h1 {
+    @apply text-h1;
+  }
+
+  .big-h1 {
+    @apply text-big-h1;
+  }
+
+  button {
+    @apply text-button;
+  }
+
+  .small-button {
+    @apply text-sm-button;
+  }
+
+  .large-button {
+    @apply text-lg-button;
+  }
 }
-
-h1 {
-  font-size: clamp(1.614004em, calc(1.485806em + 0.020031vw), 1.742202em);
-}
-
-h2 {
-  font-size: clamp(1.512656em, calc(1.392508em + 0.018773vw), 1.632804em);
-}
-/*... e assim por diante*/
 ```
-
-## 🧐 Processo de uso
-
-1. Defina os tamanhos mínimo e máximo de fonte em pixels
-2. Escolha a escala
-3. Clique em gerar
-4. Copie o código gerado
-
-## 🧮 Principais processos do algoritmo
-
-**Extrapolar para 1530px**
-Se 1280 tem 100% da diferença entre os valores minimos e maximo, 1536 tem 120%.
-```js
-const font1536 = 1.2 * (font1280 - font640) + font640;
-```
-
-**Converter para em**
-
-```js
-const minEm = newMinBase / 16;
-const maxEm = realMaxBase / 16;
-```
-
-3. **Receber os dados**
-
-Usamos um objeto como esse:
-
-```js
-const item = { tagName: ".normal-p", minSize: 0, maxSize: 0, pow: 0 };
-```
-
-Pow é o fator de potencia:
-
-```js
-{ tagName: "h4", ... pow: 3 }, // tamanho base * escala * escala * escala
-{ tagName: "h5", ... pow: 2 }, // tamanho base * escala * escala
-{ tagName: "h6", ... pow: 1 }, // tamanho base * escala
-{ tagName: ".normal-p", ... pow: 0, }, // tamanho base (recebido)
-```
-
-4. **Funções que cauculam os valores**
-
-```js
-// Gerar para o body
-  const breakpoints: string[] = ["", "sm", "md", "lg", "xl", "2xl"];
-
-  const calcFontSize = (index: number) => {
-    // 0, 640, 768, 1024, 1280, 1536
-    const proportions: number[] = [0, 0.5, 0.6, 0.8, 1, 1.2];
-    const size = proportions[index] * (font1280 - minFontSize) + minFontSize;
-    return `${size}`;
-  };
-
-// Gerar o clamp individual
-const slope = (maxFont - minFont) / (maxWidth - minWidth);
-  const yAxisIntersection = minFont - slope * minWidth;
-
-  const slopeVw = slope * 100;
-  const preferred = `calc(${yAxisIntersection.toFixed(
-    6
-  )}rem + ${slopeVw.toFixed(6)}vw)`;
-
-  return `font-size: clamp(${minFont.toFixed(
-    6
-  )}rem, ${preferred}, ${maxFont.toFixed(6)}rem);`;
-```
-
-## 🛠️ Tecnologias Utilizadas
+## Composição do projeto
 
 ### Core
 
@@ -98,21 +111,12 @@ const slope = (maxFont - minFont) / (maxWidth - minWidth);
 - **[TypeScript](https://www.typescriptlang.org/)** `5.8.3` - Superset tipado de JavaScript
 - **[Vite](https://vitejs.dev/)** `5.4.19` - Build tool e dev server ultrarrápido
 
-### Estilização
-
-- **[Tailwind CSS](https://tailwindcss.com/)** `4.1.17` - Framework CSS utilitário
-- **[Radix UI](https://www.radix-ui.com/)** - Componentes acessíveis e sem estilo
-- **[Lucide React](https://lucide.dev/)** - Ícones modernos
-
-### UI Components
+### UI Components e estilos
 
 - **[shadcn/ui](https://ui.shadcn.com/)** - Componentes reutilizáveis construídos com Radix UI
+- **[Tailwind CSS](https://tailwindcss.com/)** `4.1.17` - Framework CSS utilitário
+- **[Lucide React](https://lucide.dev/)** - Ícones modernos
 - **[Sonner](https://sonner.emilkowal.ski/)** - Notificações toast elegantes
-
-### Roteamento e Estado
-
-- **[React Router DOM](https://reactrouter.com/)** `6.30.1` - Roteamento declarativo
-- **[TanStack Query](https://tanstack.com/query)** `5.83.0` - Gerenciamento de estado assíncrono
 
 ## 📄 Licença
 
@@ -126,7 +130,7 @@ Este projeto é de código aberto e está disponível para uso pessoal e comerci
 
 <div align="center">
 
-**Desenvolvido com ❤️ usando React, TypeScript e Tailwind CSS**
+**Desenvolvido usando React, TypeScript e Tailwind CSS**
 
 </div>
 ````
