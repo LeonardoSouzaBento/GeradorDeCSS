@@ -4,9 +4,7 @@ https://typographic-scale-generator.netlify.app/
 
 ## Para que serve? O que faz?
 
-Typographic Scale Generator cria tamanhos de fonte responsivos de forma profissional para que voce.
-Copie para área de transferência o CSS com tamanhos responsivos e tenha tags seguindo uma hierarquia de tamanho padronizada.
-Usamos um conjunnto especifico de dados para usar nas funcçõe.
+Typographic Scale Generator cria tamanhos de fonte responsivos de forma profissional para você. Copie para a área de transferência o CSS com tamanhos responsivos e tenha uma interface muito mais elegante com tags seguindo uma hierarquia de tamanho padronizada.
 
 ## Complexidade do projeto
 
@@ -14,7 +12,7 @@ Embora seja basicamente retornar strings, o processo envolve muitas funções e 
 
 Além disso, para avisar mudanças no layout, temos um hook useRemObserver que pega o valor em px do font-size do HTML para descobrir a medida rem e manter a responsividade; e um hook useResizeWatcher para avisar resize de tela para aplicar tamanhos corretos nas divs.
 
-## Inportancia do projeto
+## Importância do projeto
 
 Tendo como fim a escalabilidade, sabemos que criar interfaces a partir de uma base padronizada de estilos é muito importante, principalmente nesse tempo de constante uso de Inteligência Artificial para codificação. É um conhecimento simples, porém não intuitivo, que orienta o trabalho de IAs, nos dá o poder de conferir se ela está aplicando um padrão de estilos conveniente e o saber personalizar sem perder a consistência entre componentes ou entre telas. Para alcançar um design belo e funcional dessa forma, aplicar uma escala tipográfica responsiva é essencial.
 
