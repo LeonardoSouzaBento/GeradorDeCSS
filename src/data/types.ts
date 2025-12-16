@@ -14,6 +14,7 @@ export interface ScaledList {
   tagName: string;
   minSize: number;
   maxSize: number;
+  scale: number;
 }
 
 export type ClampValue = Record<string, string>;

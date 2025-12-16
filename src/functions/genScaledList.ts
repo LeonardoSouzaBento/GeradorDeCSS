@@ -15,6 +15,7 @@ export function genScaledList(
 
     return {
       ...item,
+      scale: Math.pow(scaleValue, item.pow ?? 0),
       minSize: Number(removeExcessZerosAndToFix(minSizeBody * factor)),
       maxSize: Number(removeExcessZerosAndToFix(maxSizeBody * factor)),
     };

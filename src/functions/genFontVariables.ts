@@ -17,8 +17,8 @@ export function genFontVariables(
 
   const fontSizeVars = itemsWithVar
     .map(({ tagName, var: varName, ratio }) => {
-      const value = scaledList.find((scaleItem) => tagName === scaleItem.tagName);
-      return ` ${varName}: ${removeExcessZerosAndToFix(ratio || value.minSize)}em;`;
+      const itemOfScale = scaledList.find((scaleItem) => tagName === scaleItem.tagName);
+      return ` ${varName}: ${removeExcessZerosAndToFix(ratio || itemOfScale.scale)}em;`;
     })
     .join('\n');
   const vars = `${fontVars}\n${fontSizeVars}`;
