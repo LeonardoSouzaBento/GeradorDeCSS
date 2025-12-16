@@ -55,13 +55,11 @@ const Output = ({
           ref={preRef}
           className={`${disabled && 'text-neutral-400'}`}
           style={{ height: `${preHeight}rem` }}>
-          <code className="language-css">
-            {disabled && returnType === 'tw'
-              ? outputExample
-              : returnType === 'tw'
-                ? output
-                : secondOutput || secondOutputExample}
-          </code>
+          {disabled && returnType === 'tw'
+            ? outputExample
+            : returnType === 'tw'
+              ? output
+              : secondOutput || secondOutputExample}
         </pre>
       </div>
     </Card>

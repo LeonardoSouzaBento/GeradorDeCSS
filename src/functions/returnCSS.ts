@@ -1,12 +1,12 @@
 import { genScaledList } from './genScaledList';
-import { genFontSizeVariables } from './genFontSizeVariables';
+import { genFontVariables } from './genFontVariables';
 import { scaleFontForBody } from './scaleFontForBody';
 import { genTagsWithVars } from './genTagsWithVars';
 
 export function returnCSS(minSizeBody: number, maxSizeBody: number, scaleValue: number): string {
   const scaledList = genScaledList(minSizeBody, maxSizeBody, scaleValue);
 
-  const fontSizeVariables = genFontSizeVariables(scaledList, 'css');
+  const fontSizeVariables = genFontVariables(scaledList, 'css');
   const bodyStyles = `body {\n ${scaleFontForBody(minSizeBody, maxSizeBody, 'css')}`;
   const tagsWithVars = genTagsWithVars(scaledList, 'css');
 
