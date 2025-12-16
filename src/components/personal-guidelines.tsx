@@ -25,8 +25,7 @@ const PersonalGuidelines = ({ setShowMoreStyles }: { setShowMoreStyles: StateSet
             Defina as cores do texto, qual a fonte específica e as variaveis @theme no globals.css.
           </li>
           <li>
-            Importe o arquivo globals.css em typography.css para usar as variáveis text-[size]
-            sobreescritas.
+            Importe o arquivo globals.css em typography.css e todos os outros arquivos .css para garantir que os estilos de layer base continuem funcionando.
           </li>
           <li>
             Prefira usar as classes <code className="text-sm">smaller-text</code>,{' '}

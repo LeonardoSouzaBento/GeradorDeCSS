@@ -1,7 +1,5 @@
 export const moreCSSStyles = `/* LARGURA MÁXIMA DO CORPO */
-p {
-  max-width: 65ch;
-}
+p {max-width: 65ch;}
 @media (min-width: 640px){p {max-width: 73ch;}}
 @media (min-width: 768px){p {max-width: 75ch;}}
 @media (min-width: 1024px){p {max-width: 78ch;}}
@@ -62,8 +60,9 @@ button { line-height: 1.15; }
 export const moreTwStyles = `@layer components { 
 /* LARGURA MÁXIMA DO CORPO */ 
 p { 
-  @apply max-w-[65ch] sm:max-w-[73ch] md:max-w-[75ch]
-  lg:max-w-[78ch] xl:max-w-[82ch] 2xl:max-w-[85ch]; 
+  @apply max-w-[65ch] sm:max-w-[73ch] 
+  md:max-w-[75ch] lg:max-w-[78ch] xl:max-w-[82ch] 
+  2xl:max-w-[85ch]; 
 }
 
 /* PESOS */

@@ -12,8 +12,6 @@ import MoreStylesModal from '@/components/more-styles-modal';
 import { useRemObserver } from '@/hooks/useRemObserver';
 import RelevantQuestions from '@/components/relevant-questions';
 
-const mainCss = `h-max px-3 sm:px-6 max-w-2xl xl:max-w-7xl mx-auto box-content`;
-
 const Index = () => {
   /* estados de controle */
   const [returnType, setReturnType] = useState<'tw' | 'css'>('tw');
@@ -44,11 +42,11 @@ const Index = () => {
   }, [wasResize]);
 
   return (
-    <div className={`min-h-screen py-8`}>
+    <div className={`min-h-screen pt-8`}>
       <Header />
 
       <main
-        className={`${mainCss}
+        className={`main-wrapper
           pb-7 space-y-7 overflow-hidden xl:pb-0 xl:grid
           xl:grid-cols-2 gap-7 relative`}>
         <Card ref={cardRef} className={`w-full h-full max-h-max mx-auto pt-5`}>
@@ -80,7 +78,7 @@ const Index = () => {
         />
       </main>
 
-      <div className={`${mainCss} mb-7`}>
+      <div className={`main-wrapper mb-7`}>
         <Prev clampValues={clampValues} disabled={disabled} />
 
         <div className={`block space-y-7 xl:grid xl:grid-cols-2 xl:gap-7`}>
