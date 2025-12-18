@@ -2,7 +2,7 @@ import { ClampValue } from "@/data/types";
 import { Input } from "@/ui/input";
 
 const css = {
-  form: `h-[calc(100%-3rem)] p-5 pt-4 mt-5 overflow-y-scroll rounded-md border 
+  form: `p-5 pt-4 overflow-y-scroll rounded-md border bg-white 
   border-border! space-y-4`,
   wrapperInput: `flex flex-col gap-2`,
 };

@@ -19,15 +19,15 @@ const buttonConfigs = [
 ];
 
 const css = {
-  wrapper: `flex gap-3 pt-1.5`,
+  wrapper: `flex gap-3`,
   button: `bg-secondary text-secondary-foreground px-5 pr-3.5 box-content
-  rounded-full max-w-max text-muted-foreground font-semibold`,
+  rounded-full max-w-max text-muted-foreground font-semibold [font-family:var(--font-target)]`,
 };
 
 const ButtonsSection = ({ clampValues }: { clampValues: ClampValue }) => {
   return (
     <>
-      <div className={css.wrapper}>
+      <div className={css.wrapper} style={{ fontFamily: "var(--font-target)" }}>
         {buttonConfigs.map((config) => (
           <button
             className={`flex items-center ${config.styles} ${css.button}`}
