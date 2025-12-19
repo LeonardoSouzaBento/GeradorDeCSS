@@ -9,6 +9,8 @@ import Nav from './prev/nav';
 import ParagraphsSection from './prev/paragraphs-section';
 import TitlesSection from './prev/titles-section';
 import FontSelector from './font-selector';
+import { TriangleAlert } from 'lucide-react';
+import { iconXs } from '@/styles/lucideIconStyles';
 
 const css = {
   wrapper: `w-full mb-7 mx-auto`,
@@ -45,6 +47,7 @@ const Prev = ({ clampValues, disabled }: { clampValues: ClampValue; disabled: bo
 
       {disabled && (
         <Alert className={`mb-4 mt-4 xl:max-w-max`} variant="destructive">
+          <TriangleAlert {...iconXs} />
           <AlertTitle>Atenção</AlertTitle>
           <AlertDescription>
             Valores ausentes nos inputs. Sua escala não está sendo aplicada.

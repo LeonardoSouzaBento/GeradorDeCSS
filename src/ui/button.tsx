@@ -42,6 +42,7 @@ export interface ButtonProps
   optionButton?: boolean;
   isSelected?: boolean;
   isDisable?: boolean;
+  closeButton?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -54,6 +55,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       optionButton,
       isSelected,
       isDisable,
+      closeButton,
       ...props
     },
     ref
@@ -67,6 +69,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             "rounded-full": optionButton,
             "ring ring-accent text-primary shadow-xs": isSelected,
             "grayscale-100 opacity-50 cursor-not-allowed": isDisable,
+            "rounded-full p-0!": closeButton,
           },
           className
         )}

@@ -1,15 +1,18 @@
-import React, { useRef, useState } from 'react';
-import { applyFontToTargets, loadFont } from '../functions/fontSelector';
+import { iconMd, iconXs } from '@/styles/lucideIconStyles';
+import { Alert, AlertDescription, AlertTitle } from '@/ui/alert';
 import { Button } from '@/ui/button';
-import { Check } from 'lucide-react';
-import { iconMd } from '@/styles/lucideIconStyles';
 import { Input } from '@/ui/input';
+import { Check, EyeOff, Info, X } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { applyFontToTargets, loadFont } from '../functions/changeFont';
 
 const FontSelector = ({ targetClassName = 'font-target' }: { targetClassName?: string }) => {
   const [fontName, setFontName] = useState('');
   const [currentFont, setCurrentFont] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showAlert, setShowAlert] = useState(true);
+
   const loadedFonts = useRef(new Set());
 
   const handleLoadFont = async (inputFontName: string) => {
@@ -90,6 +93,28 @@ const FontSelector = ({ targetClassName = 'font-target' }: { targetClassName?: s
           ))}
         </div>
       </div>
+
+      {showAlert && (
+        <Alert
+          className={`mt-5 [&>svg]:bg-warn/33 [&>svg]:text-destructive/50 [&>svg]:rounded-full`}>
+          <Info {...iconXs} />
+          <AlertTitle>Observações</AlertTitle>
+          <Button
+            variant="secondary"
+            size="icon-xs"
+            closeButton
+            className={`absolute top-2 right-2 text-destructive`}
+            onClick={() => setShowAlert(false)}>
+            <EyeOff {...iconXs} />
+          </Button>
+          <AlertDescription>
+            <ul className={`list-disc pl-4 space-y-1`}>
+              <li>Fontes magras exigem pesos maiores, ajuste no seu projeto.</li>
+              <li>Na escala 1.067 a diferença entre ps é difícil de perceber.</li>
+            </ul>
+          </AlertDescription>
+        </Alert>
+      )}
     </div>
   );
 };

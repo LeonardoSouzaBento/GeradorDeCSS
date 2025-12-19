@@ -22,6 +22,7 @@
   --text-sm-button: 0.9em;
   --text-lg-button: 1.1em;
   /* Cores */
+  --color-white: hsl(0 0% 100%);
   --color-background: hsl(210 20% 98%);
   --color-foreground: hsl(215 25% 15%);
 

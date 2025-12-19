@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import Inputs from './inputs-card/inputs';
 import OptionsScale from './inputs-card/optionsScale';
 import ReturnOptions from './inputs-card/return-options';
+import { findKey } from '@/functions/findKey';
 
 function deduceFontAt1536px(font640: number, font1280: number): number {
   const font1536 = 1.2 * (font1280 - font640) + font640;
@@ -30,6 +31,8 @@ interface Props {
   setCanGenerate: StateSetter<number>;
   rootFontSize: number;
 }
+
+const normalTextKey = findKey('--text-base');
 
 const InputsCard = ({
   output,
@@ -65,7 +68,6 @@ const InputsCard = ({
       const minEm = newMinBase / rootFontSize || 16;
       const maxEm = newMaxBase / rootFontSize || 16;
       const scaledList = genScaledList(minEm, maxEm, scaleValue);
-      console.log(scaledList);
       setScaledList(scaledList);
 
       if (returnType === 'tw') {
@@ -73,8 +75,6 @@ const InputsCard = ({
         setOutput(fullCss);
       } else {
         const fullCss = returnCSS(minEm, maxEm, scaleValue);
-        console.log(fullCss);
-
         setSecondOutput(fullCss);
       }
     }
@@ -83,17 +83,24 @@ const InputsCard = ({
   /* Gerar tabela de clamps em px para a prévia*/
   useEffect(() => {
     const valuesInPx = scaledList.map((item) => {
+      if (item.tagName === normalTextKey) {
+        return {
+          tagName: item.tagName,
+          minSize: newMinBase,
+          maxSize: newMaxBase,
+        };
+      }
       return {
         tagName: item.tagName,
-        minSize: item.minSize * rootFontSize || 16,
-        maxSize: deduceFontAt1536px(item.minSize, item.maxSize) * rootFontSize || 16,
+        minSize: item.minSize * (rootFontSize || 16),
+        maxSize: deduceFontAt1536px(item.minSize, item.maxSize) * (rootFontSize || 16),
       };
     });
     const clampTable = valuesInPx.reduce((acc, item) => {
       acc[item.tagName] = generateClamp(item.minSize, item.maxSize);
       return acc;
     }, {} as ClampValue);
-    
+
     setClampValues(clampTable);
   }, [scaledList]);
 

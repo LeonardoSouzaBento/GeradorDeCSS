@@ -1,5 +1,10 @@
 import { ClampValue } from "@/data/types";
 import { Input } from "@/ui/input";
+import { findKey } from "@/functions/findKey";
+
+const normalText = findKey('--text-base');
+const smallText = findKey('--text-sm-');
+const smallButton = findKey('--text-sm-button');
 
 const css = {
   form: `p-5 pt-4 overflow-y-scroll rounded-md border bg-white 
@@ -17,7 +22,7 @@ const FormsSection = ({ clampValues }: { clampValues: ClampValue }) => {
           <div className={css.wrapperInput}>
             <label
               htmlFor="nome"
-              style={{ fontSize: clampValues[".small-text, label"] }}
+              style={{ fontSize: clampValues[smallText] }}
             >
               Nome
             </label>
@@ -25,13 +30,13 @@ const FormsSection = ({ clampValues }: { clampValues: ClampValue }) => {
               id="nome"
               type="text"
               placeholder="Digite seu nome"
-              style={{ fontSize: clampValues[".normal-text"] }}
+              style={{ fontSize: clampValues[normalText] }}
             />
           </div>
           <div className={css.wrapperInput}>
             <label
               htmlFor="email"
-              style={{ fontSize: clampValues[".small-text, label"] }}
+              style={{ fontSize: clampValues[smallText] }}
             >
               E-mail
             </label>
@@ -39,7 +44,7 @@ const FormsSection = ({ clampValues }: { clampValues: ClampValue }) => {
               id="email"
               type="email"
               placeholder="email@exemplo.com"
-              style={{ fontSize: clampValues[".normal-text"] }}
+              style={{ fontSize: clampValues[normalText] }}
             />
           </div>
         </div>
@@ -47,22 +52,22 @@ const FormsSection = ({ clampValues }: { clampValues: ClampValue }) => {
         <div className={css.wrapperInput}>
           <label
             htmlFor="assunto"
-            style={{ fontSize: clampValues[".small-text, label"] }}
+            style={{ fontSize: clampValues[smallText] }}
           >
             Assunto
           </label>
           <select
             id="assunto"
             className={`h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50`}
-            style={{ fontSize: clampValues[".normal-text"] }}
+            style={{ fontSize: clampValues[normalText] }}
           >
-            <option style={{ fontSize: clampValues[".small-button"] }}>
+            <option style={{ fontSize: clampValues[smallButton] }}>
               Suporte
             </option>
-            <option style={{ fontSize: clampValues[".small-button"] }}>
+            <option style={{ fontSize: clampValues[smallButton] }}>
               Feedback
             </option>
-            <option style={{ fontSize: clampValues[".small-button"] }}>
+            <option style={{ fontSize: clampValues[smallButton] }}>
               Outros
             </option>
           </select>
@@ -71,12 +76,12 @@ const FormsSection = ({ clampValues }: { clampValues: ClampValue }) => {
         <div className={css.wrapperInput}>
           <label
             htmlFor="mensagem"
-            style={{ fontSize: clampValues[".small-text, label"] }}
+            style={{ fontSize: clampValues[smallText] }}
           >
             Mensagem
           </label>
           <textarea
-            style={{ fontSize: clampValues[".normal-text"] }}
+            style={{ fontSize: clampValues[normalText] }}
             id="mensagem"
             rows={4}
             placeholder="Digite sua mensagem"
