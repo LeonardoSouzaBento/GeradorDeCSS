@@ -109,8 +109,8 @@ const FontSelector = ({ targetClassName = 'font-target' }: { targetClassName?: s
           </Button>
           <AlertDescription>
             <ul className={`list-disc pl-4 space-y-1`}>
-              <li>Fontes magras exigem pesos maiores, ajuste no seu projeto.</li>
-              <li>Na escala 1.067 a diferença entre ps é difícil de perceber.</li>
+              <li>Fontes magras pedem pesos maiores, ajuste no seu projeto.</li>
+              <li>Na escala 1.067 a diferença entre ps é mais difícil de perceber.</li>
             </ul>
           </AlertDescription>
         </Alert>

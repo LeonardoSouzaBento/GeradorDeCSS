@@ -4,7 +4,7 @@ export const normalizeFontName = (name: string) => {
 
 export const createGoogleFontsUrl = (fontName: string) => {
   const normalized = normalizeFontName(fontName);
-  return `https://fonts.googleapis.com/css2?family=${normalized}:wght@400;500;600;700&display=swap`;
+  return `https://fonts.googleapis.com/css2?family=${normalized}:wght@300;400;500;600;700;800&display=swap`;
 };
 
 export const applyFontToTargets = (fontFamilyName: string, targetClassName: string) => {

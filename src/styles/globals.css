@@ -122,10 +122,6 @@
   --color-ring: hsl(186 62% 55%);
 }
 
-html {
-  font-size: 16px;
-}
-
 @layer base {
   * {
     @apply border-border;
@@ -140,7 +136,7 @@ html {
     scrollbar-color: var(--color-gray-200) #ffffff00; /*botão | fundo */
   }
   body {
-    @apply font-body text-gray-800 bg-linear-to-br from-[#f9fafb00] to-[#f3f5f7] leading-normal;
+    @apply font-body text-gray-800 bg-linear-to-br from-[#f9fafb00] to-[#f3f5f7];
   }
   html,
   body {
