@@ -1,9 +1,0 @@
-@import 'tailwindcss';
-@import './globals.css';
-@import './typography.css';
-
-@layer base {
-  .main-wrapper {
-    @apply h-max px-3 sm:px-6 max-w-2xl xl:max-w-7xl mx-auto box-content;
-  }
-}

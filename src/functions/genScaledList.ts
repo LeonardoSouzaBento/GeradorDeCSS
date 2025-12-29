@@ -1,6 +1,6 @@
-import { ScaledList } from "@/data/types";
-import { sizes } from "@/data/variables";
-import { removeExcessZerosAndToFix } from "./removeExcessZeros";
+import { ScaledList } from '@/data/typography/types';
+import { sizes } from '@/data/typography/variables';
+import { removeExcessZerosAndToFix } from './removeExcessZeros';
 
 export function genScaledList(
   minSizeBody: number,
@@ -8,10 +8,7 @@ export function genScaledList(
   scaleValue: number
 ): ScaledList[] {
   return sizes.map((item) => {
-    const factor =
-      item.ratio !== undefined
-        ? item.ratio
-        : Math.pow(scaleValue, item.pow ?? 0);
+    const factor = item.ratio !== undefined ? item.ratio : Math.pow(scaleValue, item.pow ?? 0);
 
     return {
       ...item,

@@ -1,13 +1,13 @@
-import { sizes } from '@/data/variables';
-import { ScaledList } from '@/data/types';
+import { sizes } from '@/data/typography/variables';
+import { ScaledList } from '@/data/typography/types';
 import { removeExcessZerosAndToFix } from './removeExcessZeros';
 
 const fontVars =
-  "/*font*/\n" +
+  '/*font*/\n' +
   " --font-body: 'Sua Fonte Do Corpo';\n" +
   " --font-button: 'Sua Fonte De Botão';\n" +
   " --font-title: 'Sua Fonte Para Titulos';\n\n" +
-  "/*font-sizes*/";
+  '/*font-sizes*/';
 
 export function genFontVariables(
   scaledList: ScaledList[],

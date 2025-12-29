@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+@import './globals.css';
+
+@layer base {
+  .main-wrapper {
+    @apply h-max px-3 sm:px-6 max-w-2xl xl:max-w-7xl mx-auto box-content;
+  }
+  .warn-icon {
+    @apply bg-warn/33 text-destructive/50 rounded-full;
+  }
+}

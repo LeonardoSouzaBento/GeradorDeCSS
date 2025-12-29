@@ -3,7 +3,7 @@ import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
-import { iconSm, iconXs } from '@/styles/lucideIconStyles';
+import { iconSm, iconXs } from '@/css/lucideIcons';
 
 const Accordion = AccordionPrimitive.Root;
 
@@ -23,7 +23,7 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger asChild ref={ref} {...props}>
       <p
         className={cn(
-          `w-full font-semibold tracking-normal flex flex-1 items-center justify-between py-2 cursor-pointer 
+          `w-full font-semibold tracking-normal flex flex-1 items-center justify-between pb-[1ex] cursor-pointer 
           transition-all duration-200 [&[data-state=open]>svg]:rotate-180 select-none`,
           className
         )}>

@@ -1,6 +1,6 @@
-import { ScaledList } from '@/data/types';
-import { textClassSizes } from '@/data/variables';
-import { TagAndCssVar } from '@/data/types';
+import { ScaledList } from '@/data/typography/types';
+import { textClassSizes } from '@/data/typography/variables';
+import { TagAndCssVar } from '@/data/typography/types';
 
 export function genTagsWithVars(
   scaledList: ScaledList[],

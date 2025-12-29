@@ -1,5 +1,5 @@
-import { StateSetter } from "@/data/types";
-import { useEffect, useRef } from "react";
+import { StateSetter } from '@/data/typography/types';
+import { useEffect, useRef } from 'react';
 
 export function useResizeWatcher(setWasResize: StateSetter<number>) {
   const windowWidthInitialRef = useRef<number | null>(null);
@@ -27,10 +27,10 @@ export function useResizeWatcher(setWasResize: StateSetter<number>) {
       }, 500);
     }
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
       if (resizeDowntime.current) {
         clearTimeout(resizeDowntime.current);
       }

@@ -1,9 +1,9 @@
-import { iconLg } from "@/styles/lucideIconStyles";
-import { Button } from "@/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
-import { ChevronDown } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import { questions } from "@/data/questions";
+import { iconLg } from '@/css/lucideIcons';
+import { Button } from '@/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/ui/card';
+import { ChevronDown } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { questions } from '@/data/typography/questions';
 
 const css = {
   wrapperQuestions: `mb-3 last:mb-0!`,
@@ -15,7 +15,7 @@ const css = {
 };
 
 const RelevantQuestions = () => {
-  const [selectedQuestion, setSelectedQuestion] = useState<string>("");
+  const [selectedQuestion, setSelectedQuestion] = useState<string>('');
 
   return (
     <Card>
@@ -31,29 +31,19 @@ const RelevantQuestions = () => {
                 key={index}
                 className={`${css.wrapperQuestions}`}
                 onClick={() => {
-                  setSelectedQuestion((prev) =>
-                    prev === item.question ? "" : item.question
-                  );
-                }}
-              >
+                  setSelectedQuestion((prev) => (prev === item.question ? '' : item.question));
+                }}>
                 <div
                   className={`${css.wrapperPAndButton} 
-                  ${selected && css.selectedWrapperPAndButton}`}
-                >
+                  ${selected && css.selectedWrapperPAndButton}`}>
                   <p className={`${css.pQuestion}`}>{item.question}</p>
 
-                  <Button
-                    className={`rounded-full`}
-                    variant="ghost"
-                    size="icon"
-                  >
-                    <ChevronDown {...iconLg} className={selected ? "rotate-180" : ""}/>
+                  <Button className={`rounded-full`} variant="ghost" size="icon">
+                    <ChevronDown {...iconLg} className={selected ? 'rotate-180' : ''} />
                   </Button>
                 </div>
 
-                <CollapsibleText isOpen={selected}>
-                  {item.answer}
-                </CollapsibleText>
+                <CollapsibleText isOpen={selected}>{item.answer}</CollapsibleText>
               </div>
             );
           })}
@@ -95,8 +85,7 @@ export const CollapsibleText = ({ isOpen, children }: Props) => {
         ease-out
         text-muted-foreground
         pr-6
-      "
-    >
+      ">
       {children}
     </p>
   );

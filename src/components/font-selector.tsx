@@ -1,19 +1,36 @@
-import { iconMd, iconXs } from '@/styles/lucideIconStyles';
+import { iconMd, iconSm, iconXs } from '@/css/lucideIcons';
 import { Alert, AlertDescription, AlertTitle } from '@/ui/alert';
 import { Button } from '@/ui/button';
 import { Input } from '@/ui/input';
-import { Check, EyeOff, Info, X } from 'lucide-react';
+import { BookType, Check, EyeOff, Info } from 'lucide-react';
 import React, { useRef, useState } from 'react';
-import { applyFontToTargets, loadFont } from '../functions/changeFont';
+import { applyFontToTargets, loadFont } from '@/functions/changeFont';
+import HeaderH6 from '@/ui/header-h6';
 
-const FontSelector = ({ targetClassName = 'font-target' }: { targetClassName?: string }) => {
+const typographyFonts = [
+  'Roboto',
+  'Open Sans',
+  'Montserrat',
+  'Lato',
+  'Poppins',
+  'Roboto Condensed',
+];
+const buttonPageFonts = ['Roboto', 'Montserrat', 'Lato', 'Poppins'];
+
+const FontSelector = ({
+  targetClassName = 'font-target',
+  page = 'typography',
+}: {
+  targetClassName?: string;
+  page?: string;
+}) => {
   const [fontName, setFontName] = useState('');
-  const [currentFont, setCurrentFont] = useState('');
+  const [currentFont, setCurrentFont] = useState('Google Sans');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [showAlert, setShowAlert] = useState(true);
-
   const loadedFonts = useRef(new Set());
+  const typographyPage = page === 'typography';
 
   const handleLoadFont = async (inputFontName: string) => {
     setIsLoading(true);
@@ -23,7 +40,7 @@ const FontSelector = ({ targetClassName = 'font-target' }: { targetClassName?: s
       const loadedName = await loadFont(inputFontName, loadedFonts.current);
       setCurrentFont(loadedName);
       applyFontToTargets(loadedName, targetClassName);
-    } catch (err: any) {
+    } catch (err) {
       setError(err?.toString() || 'Erro desconhecido');
     } finally {
       setIsLoading(false);
@@ -37,13 +54,21 @@ const FontSelector = ({ targetClassName = 'font-target' }: { targetClassName?: s
   };
 
   // Lista de fontes populares para sugestões
-  const popularFonts = ['Roboto', 'Open Sans', 'Montserrat', 'Lato', 'Poppins', 'Roboto Condensed'];
+  const fontList = typographyPage ? typographyFonts : buttonPageFonts;
 
   return (
-    <div className="border p-5 pt-3.5 mt-4 xl:mt-2 rounded-md">
+    <div
+      className={`border p-5 pt-3.5 bg-card ${typographyPage ? 'mt-4 xl:mt-2' : 'xl:mt-0 xl:max-h-max'} rounded-md`}>
       <form onSubmit={handleSubmit} className="mb-3 border-b">
         <div className="pb-2">
-          <label className="text-base">Troque a fonte:</label>
+          {typographyPage ? (
+            <label className="text-base">Troque a fonte:</label>
+          ) : (
+            <HeaderH6 mb={false}>
+              <BookType {...iconSm} />
+              <h6>Fonte</h6>
+            </HeaderH6>
+          )}
           {currentFont && (
             <p className="text-muted-foreground text-sm mb-0.5">
               Fonte atual: <strong className="">{currentFont}</strong>
@@ -51,22 +76,22 @@ const FontSelector = ({ targetClassName = 'font-target' }: { targetClassName?: s
           )}
         </div>
 
-        <div className="space-y-4 sm:flex gap-3 pb-5">
+        <div className={`space-y-4 ${typographyPage ? 'sm:flex' : ''} gap-3 pb-5`}>
           <Input
             type="text"
-            className={`sm:mb-0`}
+            className={`${typographyPage ? 'sm:mb-0' : ''}`}
             value={fontName}
             onChange={(e) => setFontName(e.target.value)}
             placeholder="Digite o nome da fonte (ex: Roboto, Open Sans)"
             disabled={isLoading}
           />
           <Button
-            className={`w-full sm:w-max`}
+            className={`w-full ${typographyPage ? 'sm:w-max' : ''}`}
             type="submit"
             variant="outline"
             disabled={isLoading}>
-            {isLoading ? 'Carregando...' : 'Aplicar Esta Fonte'}
             <Check {...iconMd} />
+            {isLoading ? 'Carregando...' : 'Aplicar Esta Fonte'}
           </Button>
         </div>
       </form>
@@ -76,13 +101,14 @@ const FontSelector = ({ targetClassName = 'font-target' }: { targetClassName?: s
       {/* Sugestões de fontes populares */}
       <div className="font-suggestions">
         <label className="text-muted-foreground">Sugestões:</label>
-        <div className={`flex flex-wrap gap-3 mt-1.5`}>
-          {popularFonts.map((font) => (
+        <div className={`flex flex-wrap mt-1.5`}>
+          {fontList.map((font) => (
             <Button
               key={font}
               variant="link"
               optionButton
               isSelected={currentFont === font && !error}
+              className={`mr-8`}
               onClick={() => {
                 setFontName(font);
                 handleLoadFont(font);
@@ -94,10 +120,9 @@ const FontSelector = ({ targetClassName = 'font-target' }: { targetClassName?: s
         </div>
       </div>
 
-      {showAlert && (
-        <Alert
-          className={`mt-5 [&>svg]:bg-warn/33 [&>svg]:text-destructive/50 [&>svg]:rounded-full`}>
-          <Info {...iconXs} />
+      {showAlert && typographyPage && (
+        <Alert className={`mt-5`}>
+          <Info {...iconXs} className="warn-icon" />
           <AlertTitle>Observações</AlertTitle>
           <Button
             variant="secondary"
