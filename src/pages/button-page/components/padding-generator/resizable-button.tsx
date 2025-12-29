@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 interface DynamicPaddingButtonProps {
   name: string;
@@ -12,25 +12,6 @@ interface DynamicPaddingButtonProps {
   outlineValue?: number;
 }
 
-type ButtonPaddingResult = {
-  paddingTop: number;
-  paddingBottom: number;
-};
-
-function generateButtonStyle(
-  targetHeight: number,
-  contentHeight: number,
-  adjustment: number
-): ButtonPaddingResult {
-  const totalSpaceNeeded = targetHeight - contentHeight;
-  const basePadding = totalSpaceNeeded > 0 ? totalSpaceNeeded / 2 : 0;
-
-  return {
-    paddingTop: Number((basePadding - adjustment).toFixed(3)),
-    paddingBottom: Number((basePadding + adjustment).toFixed(3)),
-  };
-}
-
 const ResizableButton = ({
   name,
   height,
@@ -39,33 +20,28 @@ const ResizableButton = ({
   initialFontSize,
   currentWeight,
   outlineValue,
+  color,
 }: DynamicPaddingButtonProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [paddingTop, setPaddingTop] = useState(0);
   const [paddingBottom, setPaddingBottom] = useState(0);
+  const [setAgain, setSetAgain] = useState<number>(0);
 
-  const handleResize = () => {
-    if (buttonRef.current && wrapperRef.current) {
-      buttonRef.current.style.paddingTop = '0px';
-      buttonRef.current.style.paddingBottom = '0px';
+  useLayoutEffect(() => {
+    if (!buttonRef.current) return;
 
-      const contentHeight = wrapperRef.current.getBoundingClientRect().height;
+    buttonRef.current.style.paddingTop = '0px';
+    buttonRef.current.style.paddingBottom = '0px';
 
-      const { paddingTop, paddingBottom } = generateButtonStyle(height, contentHeight, adjustment);
+    const contentHeight = buttonRef.current.getBoundingClientRect().height;
 
-      setPaddingTop(paddingTop);
-      setPaddingBottom(paddingBottom);
-    }
-  };
+    const totalSpaceNeeded = height - contentHeight;
+    const basePadding = totalSpaceNeeded > 0 ? totalSpaceNeeded / 2 : 0;
 
-  useEffect(() => {
-    handleResize();
-  }, [height, adjustment, relativeSize, initialFontSize, currentWeight, outlineValue]);
-
-  useEffect(() => {
-    handleResize();
-  }, []);
+    setPaddingTop(Number((basePadding - adjustment).toFixed(3)));
+    setPaddingBottom(Number((basePadding + adjustment).toFixed(3)));
+  }, [height, adjustment, relativeSize, initialFontSize, outlineValue]);
 
   return (
     <div ref={wrapperRef}>
@@ -76,13 +52,14 @@ const ResizableButton = ({
           paddingBottom: `${paddingBottom}px`,
           fontSize: `${initialFontSize * relativeSize}px`,
           fontWeight: currentWeight,
-          backgroundColor: outlineValue ? 'transparent' : 'blue',
-          color: outlineValue ? 'blue' : 'white',
-          border: outlineValue ? `${outlineValue}px solid blue` : 'none',
+          fontFamily: 'var(--font-target)',
+          backgroundColor: outlineValue ? 'transparent' : color,
+          color: outlineValue ? color : 'white',
+          border: outlineValue ? `${outlineValue}px solid ${color}` : 'none',
         }}
         className={`h-fit inline-block box-border
-          leading-none text-center rounded-full px-[2ex]`}>
-        {name} pt: {paddingTop}px, pb: {paddingBottom}px
+          leading-none text-center rounded-md px-[2ex]`}>
+        {name}
       </button>
     </div>
   );

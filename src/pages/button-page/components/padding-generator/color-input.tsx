@@ -5,11 +5,11 @@ import { Palette } from 'lucide-react';
 import React from 'react';
 
 const ColorInput = ({
-  currentColor,
-  setCurrentColor,
+  color,
+  setColor,
 }: {
-  currentColor: string;
-  setCurrentColor: StateSetter<string>;
+  color: string;
+  setColor: StateSetter<string>;
 }) => {
   return (
     <WrapperForm>
@@ -20,8 +20,8 @@ const ColorInput = ({
         <Input
           type="text"
           placeholder="Digite o código de cor"
-          value={currentColor}
-          onChange={(e) => setCurrentColor(e.target.value)}
+          value={color}
+          onChange={(e) => setColor(e.target.value)}
         />
       </WrapperInput>
     </WrapperForm>

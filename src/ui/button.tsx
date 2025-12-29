@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { ButtonRef } from "@/types/htmlTags";
 
 const buttonVariants = cva(
-  "tracking-wide inline-flex items-center justify-center gap-2 shrink-0 whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "px-[2ex] tracking-wide inline-flex items-center justify-center gap-2 shrink-0 whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -15,7 +15,7 @@ const buttonVariants = cva(
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline: "border-2 border-primary/70 text-primary bg-transparent hover:bg-gray-50 shadow-xs/12",
         ghost: "hover:bg-secondary/50 ring ring-border text-primary bg-transparent",
-        link: "text-primary underline-offset-4 hover:underline px-0",
+        link: "text-primary underline-offset-4 hover:underline",
         secondary:
           "bg-background text-secondary-foreground hover:bg-background/80",
       },
@@ -62,7 +62,6 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
     ref
   ) => {
     const Comp = asChild ? Slot : "button";
-    const paddingX = variant === "link" ? "px-0" : "px-4";
     return (
       <Comp
         className={cn(
@@ -73,7 +72,6 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
             "grayscale-100 opacity-50 cursor-not-allowed": isDisable,
             "rounded-full p-0!": closeButton,
           },
-          paddingX,
           className
         )}
         ref={ref}

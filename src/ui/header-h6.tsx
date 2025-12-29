@@ -3,7 +3,7 @@ import { Separator } from './separator';
 
 interface HeaderH6Props {
   title: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   mb?: boolean;
   className?: string;
   description?: string;

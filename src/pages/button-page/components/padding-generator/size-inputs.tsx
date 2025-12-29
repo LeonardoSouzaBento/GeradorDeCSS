@@ -1,12 +1,12 @@
 import { iconXs } from '@/css/lucideIcons';
 import { ButtonsData } from '@/data/buttons/variables';
-import { HeaderH6, Input, Label, WrapperInput, Separator, WrapperForm } from '@/ui/index';
+import { StateSetter } from '@/data/typography/types';
+import { HeaderH6, Input, Label, WrapperForm, WrapperInput } from '@/ui/index';
 import { ChartColumnDecreasing } from 'lucide-react';
-import React from 'react';
 
 interface SizeInputsProps {
   currentButtonsData: ButtonsData[];
-  setCurrentButtonsData: React.Dispatch<React.SetStateAction<ButtonsData[]>>;
+  setCurrentButtonsData: StateSetter<ButtonsData[]>;
 }
 
 const css = { wrapperInputs: `flex flex-col gap-[2ex] sm:flex-row mt-[1.5ex]` };

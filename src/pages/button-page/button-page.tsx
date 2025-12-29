@@ -3,8 +3,8 @@ import Header from '@/components/header';
 import { ButtonsData, buttonsData } from '@/data/buttons/variables';
 import { Card, CardContent, CardHeader, CardTitle } from '@/ui/card';
 import { MousePointerClick } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import ButtonPrev from './components/font-styles/buttons-prev';
+import { useState } from 'react';
+import FirstPrev from './components/font-styles/first-prev';
 import InitialSize from './components/font-styles/initial-size';
 import RelativeSizes from './components/font-styles/relative-sizes';
 import WeightSelector from './components/font-styles/weight-selector';
@@ -12,23 +12,20 @@ import AdjustmentInputs from './components/padding-generator/adjustment-inputs';
 import ColorGenerator from './components/padding-generator/color-generator';
 import ColorInput from './components/padding-generator/color-input';
 import LineThickness from './components/padding-generator/line-thickness';
+import ResultPreview from './components/padding-generator/result-preview';
 import SizeInputs from './components/padding-generator/size-inputs';
-import ResizableButton from './components/padding-generator/resizable-button';
-import { WrapperButtons } from '@/ui';
+import { HeaderH6, WrapperForm } from '@/ui';
 
 export const wrapperStyles = 'border rounded-lg p-5 pt-[1.5ex] bg-card';
 
 export default function ButtonPage() {
-  const [currentColor, setCurrentColor] = useState('#2B7FFF');
+  const [color, setColor] = useState('#0b5bcb');
+  const [bgColor, setBgColor] = useState<string>('');
   const [currentWeight, setCurrentWeight] = useState(600);
   const [initialFontSize, setInitialFontSize] = useState(17);
   const [relativeSizeScale, setRelativeSizeScale] = useState<string[]>(['0.9', '0.95', '1']);
   const [currentButtonsData, setCurrentButtonsData] = useState<ButtonsData[]>(buttonsData);
   const [lineThickness, setLineThickness] = useState('2');
-
-  // useEffect(() => {
-  //   console.log(currentButtonsData);
-  // }, [currentButtonsData]);
 
   return (
     <div>
@@ -67,11 +64,15 @@ export default function ButtonPage() {
                 setCurrentButtonsData={setCurrentButtonsData}
               />
               <div className="space-y-5">
-                <ButtonPrev
-                  currentWeight={currentWeight}
-                  initialFontSize={initialFontSize}
-                  relativeSizeScale={relativeSizeScale}
-                />
+                <FirstPrev>
+                  <ResultPreview
+                    currentButtonsData={currentButtonsData}
+                    initialFontSize={initialFontSize}
+                    currentWeight={currentWeight}
+                    color={color}
+                    lineThickness={lineThickness}
+                  />
+                </FirstPrev>
               </div>
             </div>
           </CardContent>
@@ -92,53 +93,27 @@ export default function ButtonPage() {
                 setCurrentButtonsData={setCurrentButtonsData}
               />
             </div>
-            <div className="space-y-5 xl:grid xl:grid-cols-2 xl:gap-5">
+            <div className="space-y-5 xl:grid xl:grid-cols-[1fr_1fr_2fr] xl:gap-5">
               <LineThickness lineThickness={lineThickness} setLineThickness={setLineThickness} />
-              <ColorInput currentColor={currentColor} setCurrentColor={setCurrentColor} />
+              <ColorInput color={color} setColor={setColor} />
+              <WrapperForm className={`flex flex-col gap-3`}>
+                <HeaderH6 title='Prévia' mb={false} separator={false}/>
+                <ResultPreview
+                  currentButtonsData={currentButtonsData}
+                  initialFontSize={initialFontSize}
+                  currentWeight={currentWeight}
+                  color={color}
+                  lineThickness={lineThickness}
+                />
+              </WrapperForm>
             </div>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>Prévia do resultado</CardTitle>
+            <CardTitle>CSS de altura</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
-            <WrapperButtons className='items-start!'>
-              {currentButtonsData.map((item, index) => {
-                const adjustment = Number(item.adjustment.replace('.', ''));
-                return (
-                  <ResizableButton
-                    key={index}
-                    name={item.name}
-                    height={item.height}
-                    adjustment={adjustment}
-                    relativeSize={item.relativeSize}
-                    initialFontSize={initialFontSize}
-                    currentWeight={currentWeight}
-                  />
-                );
-              })}
-            </WrapperButtons>
-            <WrapperButtons>
-              {currentButtonsData.map((item, index) => {
-                const adjustment = Number(item.adjustment.replace('.', ''));
-                const outlineValue = Number(lineThickness.replace('.', '')) || 1;
-                return (
-                  <ResizableButton
-                    key={index}
-                    name={item.name}
-                    height={item.height}
-                    adjustment={adjustment}
-                    relativeSize={item.relativeSize}
-                    initialFontSize={initialFontSize}
-                    currentWeight={currentWeight}
-                    outlineValue={outlineValue}
-                  />
-                );
-              })}
-            </WrapperButtons>
-          </CardContent>
         </Card>
 
         <Card>
@@ -146,7 +121,7 @@ export default function ButtonPage() {
             <CardTitle>Cores recomendadas</CardTitle>
           </CardHeader>
           <CardContent>
-            <ColorGenerator baseColor={currentColor} />
+            <ColorGenerator baseColor={color} />
           </CardContent>
         </Card>
       </main>
