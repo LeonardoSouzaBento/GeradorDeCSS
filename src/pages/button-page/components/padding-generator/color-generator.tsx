@@ -1,7 +1,13 @@
-import React, { useMemo } from 'react';
 import chroma from 'chroma-js';
+import { useMemo } from 'react';
 
-const ColorGenerator = ({ baseColor }) => {
+interface ColorGeneratorProps {
+  baseColor: string;
+}
+
+const ColorGenerator = ({
+  baseColor,
+}: ColorGeneratorProps) => {
   const shades = useMemo(() => {
     if (!chroma.valid(baseColor)) return [];
 

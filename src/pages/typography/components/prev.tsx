@@ -1,16 +1,19 @@
+import FontSelector from '@/components/font-selector';
+import { iconXs } from '@/css/lucideIcons';
 import { ClampValue } from '@/data/typography/types';
 import { useResizeWatcher } from '@/hooks/useResizeWatcher';
-import { Alert, AlertDescription, AlertTitle } from '@/ui/alert';
-import { Card, CardContent, CardHeader, CardTitle } from '@/ui/card';
-import { useEffect, useRef, useState } from 'react';
-import ButtonsSection from './prev/buttons-section';
-import FormsSection from './prev/forms-section';
-import Nav from './prev/nav';
-import ParagraphsSection from './prev/paragraphs-section';
-import TitlesSection from './prev/titles-section';
-import FontSelector from '@/components/font-selector';
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/ui/index';
 import { TriangleAlert } from 'lucide-react';
-import { iconXs } from '@/css/lucideIcons';
+import { useEffect, useRef, useState } from 'react';
+import { ButtonsSection, FormsSection, Nav, ParagraphsSection, TitlesSection } from './prev/index';
 
 const css = {
   wrapper: `w-full mb-7 mx-auto`,

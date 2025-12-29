@@ -6,5 +6,5 @@ interface WrapperButtonsProps {
 }
 
 export const WrapperButtons: React.FC<WrapperButtonsProps> = ({ children, className = '' }) => {
-  return <div className={`flex flex-wrap items-center gap-4 ${className}`}>{children}</div>;
+  return <div className={`max-h-max flex flex-wrap items-center gap-4 ${className}`}>{children}</div>;
 };

@@ -52,7 +52,6 @@ export default function Typography() {
         page="typography"
         icon={<CaseSensitive className={`text-white/93`} strokeWidth={2.2} size={'2rem'} />}
       />
-
       <main
         className={`main-wrapper
           pb-7 space-y-7 overflow-hidden xl:pb-0 xl:grid

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WrapperInput = ({
+export const WrapperInput = ({
   children,
   styles = '',
 }: {
@@ -9,5 +9,3 @@ const WrapperInput = ({
 }) => {
   return <div className={`w-full h-max flex flex-col gap-[1ex] ${styles}`}>{children}</div>;
 };
-
-export default WrapperInput;

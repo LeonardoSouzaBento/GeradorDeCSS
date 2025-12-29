@@ -1,49 +1,82 @@
-import { iconSm } from '@/css/lucideIcons';
+import { iconSm, iconXs } from '@/css/lucideIcons';
+import { ButtonsData, buttonsData } from '@/data/buttons/variables';
 import { StateSetter } from '@/data/typography/types';
-import HeaderH6 from '@/ui/header-h6';
-import { Input } from '@/ui/input';
-import { Label } from '@/ui/label';
-import WrapperInput from '@/ui/wrapper-input';
-import { ALargeSmall } from 'lucide-react';
+import { useDebounce } from '@/hooks/useDebounce';
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  HeaderH6,
+  Input,
+  Label,
+  WrapperForm,
+  WrapperInput,
+} from '@/ui/index';
+import { ALargeSmall, Info } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const inputs = ['Botão pequeno', 'Botão normal', 'Botão grande'];
 
 interface Props {
-  scaleFontSize: number[];
-  setScaleFontSize: StateSetter<number[]>;
-  styles?: string;
+  relativeSizeScale: string[];
+  setRelativeSizeScale: StateSetter<string[]>;
+  setCurrentButtonsData: StateSetter<ButtonsData[]>;
 }
 
-const RelativeSizes = ({ scaleFontSize, setScaleFontSize, styles }: Props) => {
-  const handleScaleFontSizeChange = (index: number, value: number) => {
-    const newScaleFontSize = [...scaleFontSize];
-    newScaleFontSize[index] = value;
-    setScaleFontSize(newScaleFontSize);
+const RelativeSizes = ({ relativeSizeScale, setRelativeSizeScale, setCurrentButtonsData }: Props) => {
+  const handleScaleFontSizeChange = (index: number, value: string) => {
+    const newScale = [...relativeSizeScale];
+    newScale[index] = value;
+    setRelativeSizeScale(newScale);
   };
 
+  /* debounce para setar dados dos botões */
+  const [eventCounter, setEventCounter] = useState(0);
+  const canSetButtonData = useDebounce(eventCounter, 300);
+
+  useEffect(() => {
+    setEventCounter((prev) => prev + 1);
+  }, [relativeSizeScale]);
+
+  useEffect(() => {
+    if (!canSetButtonData) return;
+    const newButtonsData = buttonsData.map((item, index) => ({
+      ...item,
+      relativeSize: Number(Number(relativeSizeScale[index].replace(',', '.')).toFixed(2)),
+    }));
+    setCurrentButtonsData(newButtonsData);
+  }, [canSetButtonData]);
+
   return (
-    <div className={styles}>
-      <HeaderH6 mb={false}>
+    <WrapperForm>
+      <HeaderH6
+        title="Tamanhos relativos"
+        description="Tamanhos na medida em (em relação ao tamanho do p normal)">
         <ALargeSmall {...iconSm} />
-        <h6>Tamanhos relativos</h6>
       </HeaderH6>
-      <p className="text-muted-foreground pb-[0.5ex] mb-[1.9ex] border-b">
-        Tamanhos na <strong>medida 'em'</strong> em relação ao tamanho da tag p
-      </p>
-      <div className={`flex flex-col gap-3`}>
+      <div className={`flex flex-col gap-3 sm:flex-row sm:justify-between pt-[1ex]`}>
         {inputs.map((item, index) => (
           <WrapperInput key={item}>
             <Label htmlFor={item}>{item}</Label>
             <Input
               id={item}
-              type="number"
-              value={scaleFontSize[index]}
-              onChange={(e) => handleScaleFontSizeChange(index, Number(e.target.value))}
+              type="text"
+              pattern="[0-9]*"
+              value={relativeSizeScale[index]}
+              onChange={(e) => handleScaleFontSizeChange(index, e.target.value)}
             />
           </WrapperInput>
         ))}
       </div>
-    </div>
+
+      <Alert className={`mt-5`}>
+        <Info {...iconXs} className="warn-icon" />
+        <AlertTitle className="text-foreground">Dica</AlertTitle>
+        <AlertDescription>
+          Defina o botão normal levemente menor que o corpo do texto do seu app/site.
+        </AlertDescription>
+      </Alert>
+    </WrapperForm>
   );
 };
 

@@ -1,0 +1,31 @@
+import { iconXs } from '@/css/lucideIcons';
+import { StateSetter } from '@/data/typography/types';
+import { HeaderH6, Input, WrapperForm, WrapperInput } from '@/ui';
+import { Palette } from 'lucide-react';
+import React from 'react';
+
+const ColorInput = ({
+  currentColor,
+  setCurrentColor,
+}: {
+  currentColor: string;
+  setCurrentColor: StateSetter<string>;
+}) => {
+  return (
+    <WrapperForm>
+      <HeaderH6 title="Cor">
+        <Palette {...iconXs} />
+      </HeaderH6>
+      <WrapperInput>
+        <Input
+          type="text"
+          placeholder="Digite o código de cor"
+          value={currentColor}
+          onChange={(e) => setCurrentColor(e.target.value)}
+        />
+      </WrapperInput>
+    </WrapperForm>
+  );
+};
+
+export default ColorInput;
