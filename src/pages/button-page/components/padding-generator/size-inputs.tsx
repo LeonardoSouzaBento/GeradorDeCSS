@@ -1,7 +1,7 @@
 import { iconXs } from '@/css/lucideIcons';
 import { ButtonsData } from '@/data/buttons/variables';
 import { StateSetter } from '@/data/typography/types';
-import { HeaderH6, Input, Label, WrapperForm, WrapperInput } from '@/ui/index';
+import { H6Description, H6Title, HeaderH6, Input, Label, WrapperForm, WrapperInput } from '@/ui/index';
 import { ChartColumnDecreasing } from 'lucide-react';
 
 interface SizeInputsProps {
@@ -9,7 +9,7 @@ interface SizeInputsProps {
   setCurrentButtonsData: StateSetter<ButtonsData[]>;
 }
 
-const css = { wrapperInputs: `flex flex-col gap-[2ex] sm:flex-row mt-[1.5ex]` };
+const css = { wrapperInputs: `flex flex-col gap-[2ex] sm:flex-row` };
 
 const SizeInputs = ({ currentButtonsData, setCurrentButtonsData }: SizeInputsProps) => {
   function handleSizeChange(index: number, value: string) {
@@ -19,9 +19,15 @@ const SizeInputs = ({ currentButtonsData, setCurrentButtonsData }: SizeInputsPro
   }
 
   return (
-    <WrapperForm className={`xl:mb-0`}>
-      <HeaderH6 title="Alturas" description="Alturas dos botões em px">
-        <ChartColumnDecreasing {...iconXs} />
+    <WrapperForm>
+      <HeaderH6 mb={0} className={`mb-[1cap]`}>
+        <H6Title>
+          <ChartColumnDecreasing {...iconXs} />
+          <h6>Alturas</h6>
+        </H6Title>
+        <H6Description>
+          <p>Alturas desejadas em <strong>px</strong></p>
+        </H6Description>
       </HeaderH6>
       <div className={css.wrapperInputs}>
         {currentButtonsData.map((item, index) => (

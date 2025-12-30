@@ -1,6 +1,6 @@
 import { iconXs } from '@/css/lucideIcons';
 import { ButtonsData } from '@/data/buttons/variables';
-import { HeaderH6, Input, Label, WrapperForm, WrapperInput } from '@/ui/index';
+import { H6Description, H6Title, HeaderH6, Input, Label, WrapperForm, WrapperInput } from '@/ui/index';
 import { AlignVerticalSpaceAround } from 'lucide-react';
 import React from 'react';
 
@@ -10,7 +10,7 @@ interface AdjustmentInputsProps {
   setCurrentButtonsData: React.Dispatch<React.SetStateAction<ButtonsData[]>>;
 }
 
-const css = { wrapperInputs: `flex flex-col gap-[2ex] sm:flex-row mt-[1.5ex]` };
+const css = { wrapperInputs: `flex flex-col gap-[2ex] sm:flex-row` };
 
 const AdjustmentInputs = ({ currentButtonsData, setCurrentButtonsData }: AdjustmentInputsProps) => {
   function handleAdjustmentChange(index: number, value: string) {
@@ -20,9 +20,15 @@ const AdjustmentInputs = ({ currentButtonsData, setCurrentButtonsData }: Adjustm
   }
 
   return (
-    <WrapperForm>
-      <HeaderH6 title="Correções" description="Diferença de padding para alinhar os botões">
-        <AlignVerticalSpaceAround {...iconXs} />
+    <WrapperForm className="space-y-[1cap]">
+      <HeaderH6 mb={0}>
+        <H6Title>
+          <AlignVerticalSpaceAround {...iconXs} />
+          <h6>Correções</h6>
+        </H6Title>
+        <H6Description>
+          <p>Diferença de padding para alinhar os botões</p>
+        </H6Description>
       </HeaderH6>
 
       <div className={css.wrapperInputs}>

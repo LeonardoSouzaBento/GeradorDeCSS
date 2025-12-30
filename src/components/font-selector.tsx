@@ -1,6 +1,6 @@
 import { iconMd, iconSm, iconXs } from '@/css/lucideIcons';
 import { applyFontToTargets, loadFont } from '@/functions/changeFont';
-import { Alert, AlertDescription, AlertTitle, Button, HeaderH6, Input, Separator, WrapperForm } from '@/ui/index';
+import { Alert, AlertDescription, AlertTitle, Button, H6Title, HeaderH6, Input, Separator, WrapperForm } from '@/ui/index';
 import { BookType, Check, EyeOff, Info } from 'lucide-react';
 import React, { useRef, useState } from 'react';
 
@@ -54,14 +54,17 @@ const FontSelector = ({
   const fontList = typographyPage ? typographyFonts : buttonPageFonts;
 
   return (
-    <WrapperForm className={`${typographyPage ? 'mt-4 xl:mt-2' : 'xl:mt-0 xl:max-h-max'}`}>
+    <WrapperForm className={`${typographyPage ? 'mt-4 xl:mt-2' : 'xl:mt-0'}`}>
       <form onSubmit={handleSubmit} className={`border-b ${typographyPage ? 'mb-3' : 'mb-0'}`}>
         <div className="pb-2">
           {typographyPage ? (
             <label className="text-base">Troque a fonte:</label>
           ) : (
-            <HeaderH6 mb={false} title="Fonte" separator={false}>
-              <BookType {...iconSm} />
+            <HeaderH6 mb={0}>
+              <H6Title>
+                <BookType {...iconSm} />
+                <h6>Fonte</h6>
+              </H6Title>
             </HeaderH6>
           )}
           {currentFont && (
@@ -69,7 +72,6 @@ const FontSelector = ({
               Fonte atual: <strong className="">{currentFont}</strong>
             </p>
           )}
-          {!typographyPage && <Separator className="mb-[1ex] mt-[0.5ex]" />}
         </div>
 
         <div className={`space-y-4 ${typographyPage ? 'sm:flex' : ''} gap-3 pb-5`}>

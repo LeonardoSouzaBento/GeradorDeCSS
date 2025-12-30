@@ -9,6 +9,8 @@ interface ResultPreviewProps {
   currentWeight: number;
   color: string;
   lineThickness: string;
+  textContrastColor: string;
+  paddingX: string;
 }
 
 const ResultPreview = ({
@@ -17,6 +19,8 @@ const ResultPreview = ({
   currentWeight,
   color,
   lineThickness,
+  textContrastColor,
+  paddingX,
 }: ResultPreviewProps) => {
   return (
     <>
@@ -33,6 +37,8 @@ const ResultPreview = ({
               initialFontSize={initialFontSize}
               currentWeight={currentWeight}
               color={color}
+              textContrastColor={textContrastColor}
+              paddingX={paddingX}
             />
           );
         })}
@@ -52,6 +58,8 @@ const ResultPreview = ({
               currentWeight={currentWeight}
               outlineValue={outlineValue}
               color={color}
+              textContrastColor={textContrastColor}
+              paddingX={paddingX}
             />
           );
         })}

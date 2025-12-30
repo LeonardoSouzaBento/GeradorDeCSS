@@ -1,5 +1,5 @@
 import { iconXs } from '@/css/lucideIcons';
-import { Button, HeaderH6, WrapperButtons } from '@/ui/index';
+import { Button, H6Title, HeaderH6, WrapperButtons } from '@/ui/index';
 import { Weight } from 'lucide-react';
 
 type Props = {
@@ -13,8 +13,11 @@ const weights = [500, 600, 700];
 const WeightSelector = ({ currentWeight, setCurrentWeight, styles }: Props) => {
   return (
     <div className={styles}>
-      <HeaderH6 title="Peso">
-        <Weight {...iconXs} />
+      <HeaderH6 mb={1}>
+        <H6Title>
+          <Weight {...iconXs} />
+          <h6>Peso</h6>
+        </H6Title>
       </HeaderH6>
       <WrapperButtons>
         {weights.map((weight) => (

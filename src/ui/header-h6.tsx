@@ -2,31 +2,48 @@ import React from 'react';
 import { Separator } from './separator';
 
 interface HeaderH6Props {
-  title: string;
   children?: React.ReactNode;
-  mb?: boolean;
+  mb?: number;
+  mbMeasurement?: string;
   className?: string;
-  description?: string;
   separator?: boolean;
 }
 
-export const HeaderH6 = ({
-  children,
-  mb = true,
-  className,
-  description,
-  separator = true,
-  title,
-}: HeaderH6Props) => {
+const HeaderH6 = ({ children, mb = 2, mbMeasurement = 'ex', className, separator = false }: HeaderH6Props) => {
   return (
-    <div className={`${mb ? 'mb-[2ex]' : ''}`}>
-      <div className={`h-max max-w-max flex justify-center items-center 
-        gap-[0.8ex] [&>svg]:mb-[0.2ex] ${className}`}>
-        {children}
-        <h6>{title}</h6>
-      </div>
-      {description && <p className="text-muted-foreground text-sm">{description}</p>}
+    <div className={`${className}`} style={{ marginBottom: mb > 0 ? `${mb}${mbMeasurement}` : '' }}>
+      {children}
       {separator && <Separator className="mt-[0.5ex]" />}
     </div>
   );
 };
+
+HeaderH6.displayName = 'HeaderH6';
+
+const H6Title = ({ children, className }: { children: React.ReactNode; className?: string }) => {
+  return (
+    <div
+      className={`h-max max-w-max flex justify-center items-center 
+        gap-[0.9ex] [&>svg]:mb-[0.2ex] ${className}`}>
+      {children}
+    </div>
+  );
+};
+
+H6Title.displayName = 'H6Title';
+
+const H6Description = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <div className={`first:text-muted-foreground first:text-sm ${className ?? ''}`}>{children}</div>
+  );
+};
+
+H6Description.displayName = 'H6Description';
+
+export { HeaderH6, H6Title, H6Description };

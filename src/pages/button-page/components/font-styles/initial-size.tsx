@@ -1,4 +1,4 @@
-import { Input, WrapperInput, HeaderH6 } from '@/ui/index';
+import { Input, WrapperInput, HeaderH6, H6Title, H6Description } from '@/ui/index';
 
 import { Ruler } from 'lucide-react';
 import { iconXs } from '@/css/lucideIcons';
@@ -12,14 +12,16 @@ type Props = {
 const InitialSize = ({ styles, initialFontSize, setInitialFontSize }: Props) => {
   return (
     <WrapperInput styles={styles}>
-      <div className="mb-[1ex]">
-        <HeaderH6
-          mb={false}
-          title="Tamanho inicial do parágrafo"
-          description="Tamanho inicial da tag p em px">
+      <HeaderH6 mb={0}>
+        <H6Title>
           <Ruler {...iconXs} />
-        </HeaderH6>
-      </div>
+          <h6>Tamanho inicial do parágrafo</h6>
+        </H6Title>
+        <H6Description>
+          <p>Tamanho inicial da tag p em px</p>
+        </H6Description>
+      </HeaderH6>
+
       <Input
         type="number"
         value={initialFontSize}

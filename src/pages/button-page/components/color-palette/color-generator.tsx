@@ -1,14 +1,20 @@
 import chroma from 'chroma-js';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 interface ColorGeneratorProps {
   baseColor: string;
+  setTextContrastColor: (color: string) => void;
 }
 
-const ColorGenerator = ({
-  baseColor,
-}: ColorGeneratorProps) => {
+const ColorGenerator = ({ baseColor, setTextContrastColor }: ColorGeneratorProps) => {
+  const contrastColor = chroma(baseColor).luminance() > 0.2 ? '#000' : '#fff';
+
+  useEffect(() => {
+    setTextContrastColor(contrastColor);
+  }, []);
+
   const shades = useMemo(() => {
+    setTextContrastColor(contrastColor);
     if (!chroma.valid(baseColor)) return [];
 
     // 1. Converter para o espaço de cor para medir luminosidade real
@@ -47,7 +53,6 @@ const ColorGenerator = ({
       const isBase = stop === closestStop;
       // Se for o stop mais próximo, usamos a cor original exata para evitar arredondamentos
       const hex = isBase ? color.hex() : scale(stop / 1000).hex();
-
       return {
         stop,
         hex: hex.toUpperCase(),

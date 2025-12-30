@@ -1,6 +1,6 @@
 import { iconXs } from '@/css/lucideIcons';
 import { StateSetter } from '@/data/typography/types';
-import { HeaderH6, Input, WrapperForm, WrapperInput } from '@/ui';
+import { H6Description, H6Title, HeaderH6, Input, WrapperForm, WrapperInput } from '@/ui';
 import { LineSquiggle } from 'lucide-react';
 
 const LineThickness = ({
@@ -11,9 +11,15 @@ const LineThickness = ({
   setLineThickness: StateSetter<string>;
 }) => {
   return (
-    <WrapperForm className="xl:mb-0">
-      <HeaderH6 title="Espessura da linha" description="Para botões com bordas">
-        <LineSquiggle {...iconXs} />
+    <WrapperForm className="sm:mb-0">
+      <HeaderH6 mb={1.2} className="mb-[1ex]">
+        <H6Title>
+          <LineSquiggle {...iconXs} />
+          <h6>Espessura da linha</h6>
+        </H6Title>
+        <H6Description>
+          <p>Para botões com bordas</p>
+        </H6Description>
       </HeaderH6>
       <WrapperInput>
         <Input

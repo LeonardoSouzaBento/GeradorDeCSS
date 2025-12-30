@@ -6,6 +6,8 @@ import {
   Alert,
   AlertDescription,
   AlertTitle,
+  H6Description,
+  H6Title,
   HeaderH6,
   Input,
   Label,
@@ -23,7 +25,11 @@ interface Props {
   setCurrentButtonsData: StateSetter<ButtonsData[]>;
 }
 
-const RelativeSizes = ({ relativeSizeScale, setRelativeSizeScale, setCurrentButtonsData }: Props) => {
+const RelativeSizes = ({
+  relativeSizeScale,
+  setRelativeSizeScale,
+  setCurrentButtonsData,
+}: Props) => {
   const handleScaleFontSizeChange = (index: number, value: string) => {
     const newScale = [...relativeSizeScale];
     newScale[index] = value;
@@ -48,13 +54,17 @@ const RelativeSizes = ({ relativeSizeScale, setRelativeSizeScale, setCurrentButt
   }, [canSetButtonData]);
 
   return (
-    <WrapperForm>
-      <HeaderH6
-        title="Tamanhos relativos"
-        description="Tamanhos na medida em (em relação ao tamanho do p normal)">
-        <ALargeSmall {...iconSm} />
+    <WrapperForm className="space-y-[1cap]">
+      <HeaderH6 mb={0}>
+        <H6Title>
+          <ALargeSmall {...iconSm} />
+          <h6>Tamanhos relativos</h6>
+        </H6Title>
+        <H6Description>
+          <p>Tamanhos na medida <strong>em</strong> (em relação ao tamanho do p normal)</p>
+        </H6Description>
       </HeaderH6>
-      <div className={`flex flex-col gap-3 sm:flex-row sm:justify-between pt-[1ex]`}>
+      <div className={`flex flex-col gap-3 sm:flex-row sm:justify-between`}>
         {inputs.map((item, index) => (
           <WrapperInput key={item}>
             <Label htmlFor={item}>{item}</Label>
@@ -73,7 +83,7 @@ const RelativeSizes = ({ relativeSizeScale, setRelativeSizeScale, setCurrentButt
         <Info {...iconXs} className="warn-icon" />
         <AlertTitle className="text-foreground">Dica</AlertTitle>
         <AlertDescription>
-          Defina o botão normal levemente menor que o corpo do texto do seu app/site.
+          Deixe o botão normal levemente menor que o corpo do texto do seu app/site.
         </AlertDescription>
       </Alert>
     </WrapperForm>

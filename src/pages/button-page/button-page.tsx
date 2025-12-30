@@ -1,31 +1,30 @@
-import FontSelector from '@/components/font-selector';
-import Header from '@/components/header';
+import { FontSelector, Header } from '@/components/index';
 import { ButtonsData, buttonsData } from '@/data/buttons/variables';
-import { Card, CardContent, CardHeader, CardTitle } from '@/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, H6Title, HeaderH6, WrapperForm } from '@/ui/index';
 import { MousePointerClick } from 'lucide-react';
 import { useState } from 'react';
-import FirstPrev from './components/font-styles/first-prev';
-import InitialSize from './components/font-styles/initial-size';
-import RelativeSizes from './components/font-styles/relative-sizes';
-import WeightSelector from './components/font-styles/weight-selector';
-import AdjustmentInputs from './components/padding-generator/adjustment-inputs';
-import ColorGenerator from './components/padding-generator/color-generator';
-import ColorInput from './components/padding-generator/color-input';
-import LineThickness from './components/padding-generator/line-thickness';
-import ResultPreview from './components/padding-generator/result-preview';
-import SizeInputs from './components/padding-generator/size-inputs';
-import { HeaderH6, WrapperForm } from '@/ui';
+import ColorGenerator from './components/color-palette/color-generator';
+import { FirstPrev, InitialSize, RelativeSizes, WeightSelector } from './components/font-styles/index';
+import {
+  AdjustmentInputs,
+  ColorInput,
+  LineThickness,
+  PaddingXInput,
+  ResultPreview,
+  SizeInputs,
+} from './components/padding-generator/index';
 
 export const wrapperStyles = 'border rounded-lg p-5 pt-[1.5ex] bg-card';
 
 export default function ButtonPage() {
   const [color, setColor] = useState('#0b5bcb');
-  const [bgColor, setBgColor] = useState<string>('');
+  const [textContrastColor, setTextContrastColor] = useState<string>('');
   const [currentWeight, setCurrentWeight] = useState(600);
   const [initialFontSize, setInitialFontSize] = useState(17);
   const [relativeSizeScale, setRelativeSizeScale] = useState<string[]>(['0.9', '0.95', '1']);
   const [currentButtonsData, setCurrentButtonsData] = useState<ButtonsData[]>(buttonsData);
   const [lineThickness, setLineThickness] = useState('2');
+  const [paddingX, setPaddingX] = useState('0.85');
 
   return (
     <div>
@@ -38,12 +37,14 @@ export default function ButtonPage() {
       <main className={`main-wrapper space-y-6 mb-8`}>
         <Card className={`max-h-max`}>
           <CardHeader>
-            <CardTitle>Tipografia do botão</CardTitle>
+            <CardTitle>Tipografia</CardTitle>
+            <CardDescription>Defina fonte, tamanhos e peso</CardDescription>
           </CardHeader>
           <CardContent className={`flex flex-col gap-5`}>
             <div className="space-y-5 xl:grid xl:grid-cols-2 xl:gap-5 xl:space-y-0">
               <FontSelector page="button-page" />
-              <div className="space-y-5">
+              <div className={`space-y-5 sm:grid sm:grid-cols-2 sm:gap-5 sm:space-y-0 
+                xl:grid-cols-1 grid-rows-2 xl:space-y-0`}>
                 <InitialSize
                   styles={wrapperStyles}
                   initialFontSize={initialFontSize}
@@ -71,6 +72,8 @@ export default function ButtonPage() {
                     currentWeight={currentWeight}
                     color={color}
                     lineThickness={lineThickness}
+                    textContrastColor={textContrastColor}
+                    paddingX={paddingX}
                   />
                 </FirstPrev>
               </div>
@@ -82,37 +85,50 @@ export default function ButtonPage() {
           <CardHeader>
             <CardTitle>Tamanhos e estilos</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-5">
-            <div className="space-y-5 xl:grid xl:grid-cols-2 xl:gap-5">
+          <CardContent className="space-y-5 xl:grid xl:grid-cols-2 xl:gap-5 xl:space-y-0">
+            <div className="space-y-5">
               <SizeInputs
                 currentButtonsData={currentButtonsData}
                 setCurrentButtonsData={setCurrentButtonsData}
               />
+              <div className="space-y-5 sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:gap-5">
+                <LineThickness lineThickness={lineThickness} setLineThickness={setLineThickness} />
+                <ColorInput color={color} setColor={setColor} />
+              </div>
+            </div>
+            <div className="space-y-5">
               <AdjustmentInputs
                 currentButtonsData={currentButtonsData}
                 setCurrentButtonsData={setCurrentButtonsData}
               />
-            </div>
-            <div className="space-y-5 xl:grid xl:grid-cols-[1fr_1fr_2fr] xl:gap-5">
-              <LineThickness lineThickness={lineThickness} setLineThickness={setLineThickness} />
-              <ColorInput color={color} setColor={setColor} />
               <WrapperForm className={`flex flex-col gap-3`}>
-                <HeaderH6 title='Prévia' mb={false} separator={false}/>
+                <HeaderH6 mb={0}>
+                  <H6Title>
+                    <h6>Prévia</h6>
+                  </H6Title>
+                </HeaderH6>
+
                 <ResultPreview
                   currentButtonsData={currentButtonsData}
                   initialFontSize={initialFontSize}
                   currentWeight={currentWeight}
                   color={color}
                   lineThickness={lineThickness}
+                  textContrastColor={textContrastColor}
+                  paddingX={paddingX}
                 />
               </WrapperForm>
             </div>
+            <PaddingXInput
+              paddingX={paddingX}
+              setPaddingX={setPaddingX}
+            />
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>CSS de altura</CardTitle>
+            <CardTitle>CSS de padding</CardTitle>
           </CardHeader>
         </Card>
 
@@ -121,7 +137,7 @@ export default function ButtonPage() {
             <CardTitle>Cores recomendadas</CardTitle>
           </CardHeader>
           <CardContent>
-            <ColorGenerator baseColor={color} />
+            <ColorGenerator baseColor={color} setTextContrastColor={setTextContrastColor}/>
           </CardContent>
         </Card>
       </main>

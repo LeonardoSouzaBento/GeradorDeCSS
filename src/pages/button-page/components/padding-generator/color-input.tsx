@@ -1,25 +1,27 @@
 import { iconXs } from '@/css/lucideIcons';
 import { StateSetter } from '@/data/typography/types';
-import { HeaderH6, Input, WrapperForm, WrapperInput } from '@/ui';
+import { H6Title, HeaderH6, Input, WrapperForm, WrapperInput } from '@/ui';
 import { Palette } from 'lucide-react';
 import React from 'react';
 
-const ColorInput = ({
-  color,
-  setColor,
-}: {
-  color: string;
-  setColor: StateSetter<string>;
-}) => {
+const ColorInput = ({ color, setColor }: { color: string; setColor: StateSetter<string> }) => {
   return (
     <WrapperForm>
-      <HeaderH6 title="Cor">
-        <Palette {...iconXs} />
+      <HeaderH6 mb={1}>
+        <H6Title>
+          <Palette {...iconXs} />
+          <h6>Cor</h6>
+        </H6Title>
       </HeaderH6>
-      <WrapperInput>
+      <WrapperInput gap={1.5}>
         <Input
           type="text"
           placeholder="Digite o código de cor"
+          value={color}
+          onChange={(e) => setColor(e.target.value)}
+        />
+        <Input
+          type="color"
           value={color}
           onChange={(e) => setColor(e.target.value)}
         />
