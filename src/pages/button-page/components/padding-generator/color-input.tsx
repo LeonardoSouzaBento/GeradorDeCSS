@@ -13,7 +13,7 @@ const ColorInput = ({ color, setColor }: { color: string; setColor: StateSetter<
           <h6>Cor</h6>
         </H6Title>
       </HeaderH6>
-      <WrapperInput gap={1.5}>
+      <WrapperInput gap={0} className="space-y-3">
         <Input
           type="text"
           placeholder="Digite o código de cor"

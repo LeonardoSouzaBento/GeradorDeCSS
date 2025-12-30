@@ -30,15 +30,16 @@ const RelativeSizes = ({
   setRelativeSizeScale,
   setCurrentButtonsData,
 }: Props) => {
+  /* debounce para setar dados dos botões */
+  const [eventCounter, setEventCounter] = useState(0);
+  const canSetButtonData = useDebounce(eventCounter, 300);
+  // const [currentIndex, setCurrentIndex] = useState(0);
+
   const handleScaleFontSizeChange = (index: number, value: string) => {
     const newScale = [...relativeSizeScale];
     newScale[index] = value;
     setRelativeSizeScale(newScale);
   };
-
-  /* debounce para setar dados dos botões */
-  const [eventCounter, setEventCounter] = useState(0);
-  const canSetButtonData = useDebounce(eventCounter, 300);
 
   useEffect(() => {
     setEventCounter((prev) => prev + 1);
@@ -61,7 +62,9 @@ const RelativeSizes = ({
           <h6>Tamanhos relativos</h6>
         </H6Title>
         <H6Description>
-          <p>Tamanhos na medida <strong>em</strong> (em relação ao tamanho do p normal)</p>
+          <p>
+            Tamanhos na medida <strong>em</strong> (em relação ao tamanho do p normal)
+          </p>
         </H6Description>
       </HeaderH6>
       <div className={`flex flex-col gap-3 sm:flex-row sm:justify-between`}>

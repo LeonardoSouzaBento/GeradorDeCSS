@@ -44,7 +44,7 @@ export default function ButtonPage() {
             <div className="space-y-5 xl:grid xl:grid-cols-2 xl:gap-5 xl:space-y-0">
               <FontSelector page="button-page" />
               <div className={`space-y-5 sm:grid sm:grid-cols-2 sm:gap-5 sm:space-y-0 
-                xl:grid-cols-1 grid-rows-2 xl:space-y-0`}>
+                xl:grid-cols-1 xl:grid-rows-2 xl:space-y-0`}>
                 <InitialSize
                   styles={wrapperStyles}
                   initialFontSize={initialFontSize}
@@ -84,6 +84,7 @@ export default function ButtonPage() {
         <Card>
           <CardHeader>
             <CardTitle>Tamanhos e estilos</CardTitle>
+            <CardDescription>Defina o tamanho do botão com padding</CardDescription>
           </CardHeader>
           <CardContent className="space-y-5 xl:grid xl:grid-cols-2 xl:gap-5 xl:space-y-0">
             <div className="space-y-5">

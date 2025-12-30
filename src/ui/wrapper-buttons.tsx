@@ -3,8 +3,19 @@ import React, { ReactNode } from 'react';
 interface WrapperButtonsProps {
   children: ReactNode;
   className?: string;
+  gap?: number;
 }
 
-export const WrapperButtons: React.FC<WrapperButtonsProps> = ({ children, className = '' }) => {
-  return <div className={`max-h-max flex flex-wrap items-center gap-4 ${className}`}>{children}</div>;
+export const WrapperButtons: React.FC<WrapperButtonsProps> = ({
+  children,
+  className = '',
+  gap = 3,
+}) => {
+  return (
+    <div
+      style={{ '--custom-gap': `${gap * 0.25}rem` } as React.CSSProperties}
+      className={`max-h-max flex flex-wrap items-center gap-(--custom-gap) ${className}`}>
+      {children}
+    </div>
+  );
 };

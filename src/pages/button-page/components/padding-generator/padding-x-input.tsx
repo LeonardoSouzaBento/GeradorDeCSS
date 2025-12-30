@@ -11,14 +11,19 @@ interface Props {
 }
 
 const PaddingXInput = ({ paddingX, setPaddingX }: Props) => {
-  const numericValue = Number(paddingX);
-  console.log(numericValue);
+  const [localPaddingX, setLocalPaddingX] = useState<string>(paddingX);
 
   useEffect(() => {
-    if (paddingX.includes(',')) {
-      setPaddingX(paddingX.replace(',', '.'));
+    if (localPaddingX.includes(',')) {
+      setLocalPaddingX(localPaddingX.replace(',', '.'));
     }
-  }, []);
+  }, [localPaddingX]);
+
+  useEffect(() => {
+    if (Number(localPaddingX) >= 0.4 && Number(localPaddingX) <= 10) {
+      setPaddingX(localPaddingX);
+    }
+  }, [localPaddingX]);
 
   return (
     <WrapperForm>
@@ -28,17 +33,22 @@ const PaddingXInput = ({ paddingX, setPaddingX }: Props) => {
           <h6>Padding X</h6>
         </H6Title>
         <H6Description>
-          <p>Padding horizontal na medida <strong>em</strong></p>
+          <p>
+            Padding horizontal na medida <strong>em</strong>
+          </p>
         </H6Description>
       </HeaderH6>
 
       <WrapperInput>
         <Input
-          id="padding-x"
           type="text"
-          pattern="[0-9]*"
-          value={paddingX}
-          onChange={(e) => setPaddingX(e.target.value)}
+          inputMode="decimal"
+          value={localPaddingX}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (!/^\d*[.,]?\d*$/.test(value)) return;
+            setLocalPaddingX(value);
+          }}
         />
       </WrapperInput>
     </WrapperForm>

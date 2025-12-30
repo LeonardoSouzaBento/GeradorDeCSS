@@ -55,7 +55,7 @@ const FontSelector = ({
 
   return (
     <WrapperForm className={`${typographyPage ? 'mt-4 xl:mt-2' : 'xl:mt-0'}`}>
-      <form onSubmit={handleSubmit} className={`border-b ${typographyPage ? 'mb-3' : 'mb-0'}`}>
+      <form onSubmit={handleSubmit} className={`border-b mb-[1.4ex]`}>
         <div className="pb-2">
           {typographyPage ? (
             <label className="text-base">Troque a fonte:</label>
@@ -98,7 +98,7 @@ const FontSelector = ({
 
       {/* Sugestões de fontes populares */}
       <div className="font-suggestions">
-        <label className="text-muted-foreground">Sugestões:</label>
+        <label className="text-muted-foreground mt-[1cap]">Sugestões:</label>
         <div className={`flex flex-wrap mt-1.5`}>
           {fontList.map((font) => (
             <Button
