@@ -65,7 +65,7 @@ const CardContent = React.forwardRef<DivRef, DivProps>(({ className, ...props },
 CardContent.displayName = 'CardContent';
 
 const CardFooter = React.forwardRef<DivRef, DivProps>(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('flex items-center p-6 pt-0', className)} {...props} />
+  <div ref={ref} className={cn('flex justify-center items-center', className)} {...props} />
 ));
 CardFooter.displayName = 'CardFooter';
 

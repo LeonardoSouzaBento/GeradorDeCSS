@@ -1,7 +1,5 @@
-import { iconMd } from '@/css/lucideIcons';
 import { ButtonsData } from '@/data/buttons/variables';
-import { Button, Separator, WrapperButtons } from '@/ui/index';
-import { ArrowDown } from 'lucide-react';
+import { WrapperButtons } from '@/ui/index';
 import ResizableButton from './resizable-button';
 
 interface ResultPreviewProps {
@@ -12,8 +10,6 @@ interface ResultPreviewProps {
   lineThickness: string;
   textContrastColor: string;
   paddingX: string;
-  editingTypography?: boolean;
-  typographyDivRef?: React.RefObject<HTMLDivElement>;
 }
 
 const ResultPreview = ({
@@ -24,20 +20,7 @@ const ResultPreview = ({
   lineThickness,
   textContrastColor,
   paddingX,
-  editingTypography = false,
-  typographyDivRef,
 }: ResultPreviewProps) => {
-  const handleScrollToTypography = () => {
-    if (!typographyDivRef.current) return;
-
-    const y = typographyDivRef.current.getBoundingClientRect().top + window.pageYOffset + 50;
-
-    window.scrollTo({
-      top: y,
-      behavior: 'smooth',
-    });
-  };
-
   return (
     <>
       <WrapperButtons className="items-start! font-target">
@@ -78,15 +61,6 @@ const ResultPreview = ({
           );
         })}
       </WrapperButtons>
-      {!editingTypography && (
-        <div className='flex flex-col items-end gap-5'>
-          <Separator/>
-          <Button variant="outline" onClick={handleScrollToTypography}>
-            Editar tipografia
-            <ArrowDown {...iconMd} />
-          </Button>
-        </div>
-      )}
     </>
   );
 };

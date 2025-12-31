@@ -26,5 +26,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "docs/dead-files/relevant-questions.tsx"]
+  "include": ["src", "docs/dead-files/relevant-questions.tsx", "docs/dead-files/button-page.tsx"]
 }

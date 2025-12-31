@@ -22,7 +22,7 @@ interface SizeInputsProps {
   setCurrentButtonsData: StateSetter<ButtonsData[]>;
 }
 
-const css = { wrapperInputs: `flex flex-col gap-[2ex] sm:flex-row` };
+const css = { wrapperInputs: `flex flex-col gap-[2ex] min-[575px]:flex-row` };
 
 const SizeInputs = ({ currentButtonsData, setCurrentButtonsData }: SizeInputsProps) => {
   const [sizeScale, setSizeScale] = useState<string[]>(
@@ -93,7 +93,7 @@ const SizeInputs = ({ currentButtonsData, setCurrentButtonsData }: SizeInputsPro
           </WrapperInput>
         ))}
       </div>
-      <WrapperButtons className="py-[2ex]">
+      <WrapperButtons className="pt-[2ex]">
         <Button variant="ghost" onClick={() => handleChangeScale('previous')}>
           <ChevronLeft {...iconSm} />
           Escala anterior

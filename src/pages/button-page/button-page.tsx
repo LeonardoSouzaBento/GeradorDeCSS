@@ -1,9 +1,8 @@
 import { FontSelector, Header } from '@/components/index';
-import { ButtonsData, buttonsData } from '@/data/buttons/variables';
+import { ButtonsData, buttonsData, NavOptions } from '@/data/buttons/variables';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
   H6Title,
@@ -13,12 +12,8 @@ import {
 import { MousePointerClick } from 'lucide-react';
 import { useRef, useState } from 'react';
 import ColorGenerator from './components/color-palette/color-generator';
-import {
-  FirstPrev,
-  InitialSize,
-  RelativeSizes,
-  WeightSelector,
-} from './components/font-styles/index';
+import { InitialSize, RelativeSizes, WeightSelector } from './components/font-styles/index';
+import Nav from './components/nav';
 import {
   AdjustmentInputs,
   ColorInput,
@@ -39,7 +34,7 @@ export default function ButtonPage() {
   const [currentButtonsData, setCurrentButtonsData] = useState<ButtonsData[]>(buttonsData);
   const [lineThickness, setLineThickness] = useState('2');
   const [paddingX, setPaddingX] = useState('0.85');
-  const typographyDivRef = useRef<HTMLDivElement>(null);
+  const [navOptions, setNavOptions] = useState<NavOptions>('Alturas');
 
   return (
     <div>
@@ -49,36 +44,59 @@ export default function ButtonPage() {
         description="Estilize seus botões mais rapidamente"
         icon={<MousePointerClick />}
       />
-      <main className={`main-wrapper space-y-6 mb-8`}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Tamanhos e estilos</CardTitle>
-            <CardDescription>Defina o tamanho do botão com padding</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-5 xl:grid xl:grid-cols-2 xl:gap-5 xl:space-y-0">
-            <div className="space-y-5">
-              <SizeInputs
-                currentButtonsData={currentButtonsData}
-                setCurrentButtonsData={setCurrentButtonsData}
-              />
-              <div className="space-y-5 sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:gap-5">
+      <main className={`space-y-6 mb-8 px-3 min-[840px]:px-6 max-w-5xl mx-auto xl:max-w-none`}>
+        <div className="xl:grid xl:grid-cols-[2fr_1fr] xl:gap-5">
+          <Card noHeader className="md:flex md:gap-5">
+            <Nav setNavOption={setNavOptions} navOption={navOptions} />
+            <CardContent className={`flex flex-col gap-5 items-start`}>
+              {navOptions === 'Alturas' && (
+                <SizeInputs
+                  currentButtonsData={currentButtonsData}
+                  setCurrentButtonsData={setCurrentButtonsData}
+                />
+              )}
+              {navOptions === 'Outline' && (
                 <LineThickness lineThickness={lineThickness} setLineThickness={setLineThickness} />
-                <ColorInput color={color} setColor={setColor} />
-              </div>
-            </div>
-            <div className="space-y-5">
-              <AdjustmentInputs
-                initialFontSize={initialFontSize}
-                currentButtonsData={currentButtonsData}
-                setCurrentButtonsData={setCurrentButtonsData}
-              />
-              <WrapperForm className={`flex flex-col gap-3`}>
+              )}
+              {navOptions === 'Cor' && <ColorInput color={color} setColor={setColor} />}
+              {navOptions === 'Alinhamento' && (
+                <AdjustmentInputs
+                  initialFontSize={initialFontSize}
+                  currentButtonsData={currentButtonsData}
+                  setCurrentButtonsData={setCurrentButtonsData}
+                />
+              )}
+              {navOptions === 'Padding X' && (
+                <PaddingXInput paddingX={paddingX} setPaddingX={setPaddingX} />
+              )}
+              {navOptions === 'Fonte' && <FontSelector page="button-page" />}
+              {navOptions === 'Font-size base' && (
+                <InitialSize
+                  styles={wrapperStyles}
+                  initialFontSize={initialFontSize}
+                  setInitialFontSize={setInitialFontSize}
+                />
+              )}
+              {navOptions === 'Peso' && (
+                <WeightSelector
+                  styles={wrapperStyles}
+                  currentWeight={currentWeight}
+                  setCurrentWeight={setCurrentWeight}
+                />
+              )}
+              {navOptions === 'Font-size dos botões' && (
+                <RelativeSizes
+                  relativeSizeScale={relativeSizeScale}
+                  setRelativeSizeScale={setRelativeSizeScale}
+                  setCurrentButtonsData={setCurrentButtonsData}
+                />
+              )}
+              <WrapperForm className={`flex flex-col gap-3 min-w-full`}>
                 <HeaderH6 mb={0}>
                   <H6Title>
                     <h6>Prévia</h6>
                   </H6Title>
                 </HeaderH6>
-
                 <ResultPreview
                   currentButtonsData={currentButtonsData}
                   initialFontSize={initialFontSize}
@@ -87,67 +105,12 @@ export default function ButtonPage() {
                   lineThickness={lineThickness}
                   textContrastColor={textContrastColor}
                   paddingX={paddingX}
-                  typographyDivRef={typographyDivRef}
                 />
               </WrapperForm>
-            </div>
-            <PaddingXInput paddingX={paddingX} setPaddingX={setPaddingX} />
-          </CardContent>
-        </Card>
-
-        <Card className={`max-h-max`} ref={typographyDivRef}>
-          <CardHeader>
-            <CardTitle>Tipografia</CardTitle>
-            <CardDescription>Defina fonte, tamanhos e peso</CardDescription>
-          </CardHeader>
-          <CardContent className={`flex flex-col gap-5`}>
-            <div className="space-y-5 xl:grid xl:grid-cols-2 xl:gap-5 xl:space-y-0">
-              <FontSelector page="button-page" />
-              <div
-                className={`space-y-5 sm:grid sm:grid-cols-2 sm:gap-5 sm:space-y-0 
-                xl:grid-cols-1 xl:grid-rows-2 xl:space-y-0`}>
-                <InitialSize
-                  styles={wrapperStyles}
-                  initialFontSize={initialFontSize}
-                  setInitialFontSize={setInitialFontSize}
-                />
-                <WeightSelector
-                  styles={wrapperStyles}
-                  currentWeight={currentWeight}
-                  setCurrentWeight={setCurrentWeight}
-                />
-              </div>
-            </div>
-
-            <div className="space-y-5 xl:grid xl:grid-cols-2 xl:gap-5">
-              <RelativeSizes
-                relativeSizeScale={relativeSizeScale}
-                setRelativeSizeScale={setRelativeSizeScale}
-                setCurrentButtonsData={setCurrentButtonsData}
-              />
-              <div className="space-y-5">
-                <FirstPrev>
-                  <ResultPreview
-                    currentButtonsData={currentButtonsData}
-                    initialFontSize={initialFontSize}
-                    currentWeight={currentWeight}
-                    color={color}
-                    lineThickness={lineThickness}
-                    textContrastColor={textContrastColor}
-                    paddingX={paddingX}
-                    editingTypography
-                  />
-                </FirstPrev>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>CSS de padding</CardTitle>
-          </CardHeader>
-        </Card>
+            </CardContent>
+          </Card>
+          <Card></Card>
+        </div>
 
         <Card>
           <CardHeader>

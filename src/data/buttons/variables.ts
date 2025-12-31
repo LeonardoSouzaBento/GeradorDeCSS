@@ -48,6 +48,26 @@ export const buttonScales = {
   64: [56, 64, 72],
 };
 
+export type NavOptions =
+  | 'Alturas'
+  | 'Padding X'
+  | 'Font-size dos botões'
+  | 'Alinhamento'
+  | 'Font-size base'
+  | 'Peso'
+  | 'Outline'
+  | 'Cor'
+  | 'Fonte';
+
+export const sizeAndStyleConfigs: NavOptions[] = [
+  'Alturas',
+  'Padding X',
+  'Alinhamento',
+  'Outline',
+];
+
+export const fontConfigs: NavOptions[] = ['Fonte', 'Peso', 'Font-size base', 'Font-size dos botões'];
+
 export interface ColorCombination {
   contrast: string;
   backgroundColor: string;
