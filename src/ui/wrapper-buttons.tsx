@@ -14,7 +14,7 @@ export const WrapperButtons: React.FC<WrapperButtonsProps> = ({
   return (
     <div
       style={{ '--custom-gap': `${gap * 0.25}rem` } as React.CSSProperties}
-      className={`max-h-max flex flex-wrap items-center gap-(--custom-gap) ${className}`}>
+      className={`h-auto flex flex-wrap items-center gap-(--custom-gap) ${className}`}>
       {children}
     </div>
   );

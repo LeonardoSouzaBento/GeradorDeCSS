@@ -32,11 +32,23 @@ export const buttonsData: ButtonsData[] = [
   },
 ];
 
+export const buttonScales = {
+  32: [28, 32, 36],
+  36: [32, 36, 40],
+  40: [36, 40, 44],
+  44: [40, 44, 48],
+  48: [42, 48, 54],
+  52: [46, 52, 58],
+  56: [50, 56, 62],
+  60: [54, 60, 66],
+  64: [56, 64, 72],
+};
+
 export interface ColorCombination {
   contrast: string;
   backgroundColor: string;
   color: string;
-};
+}
 
 export const buttonColors: ColorCombination[] = [
   {
@@ -55,4 +67,3 @@ export const buttonColors: ColorCombination[] = [
     color: '#2B7FFF',
   },
 ];
-

@@ -15,6 +15,7 @@ import {
 import { validateDecimalInput } from '@/utils/validateDecimalInput';
 import { ChartColumnDecreasing, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import {buttonScales} from '@/data/buttons/variables';
 
 interface SizeInputsProps {
   currentButtonsData: ButtonsData[];
@@ -24,35 +25,56 @@ interface SizeInputsProps {
 const css = { wrapperInputs: `flex flex-col gap-[2ex] sm:flex-row` };
 
 const SizeInputs = ({ currentButtonsData, setCurrentButtonsData }: SizeInputsProps) => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [sizeScale, setSizeScale] = useState<string[]>(
     currentButtonsData.map((item) => item.height.toString())
   );
-  const [canCheck, setCanCheck] = useState<number>(0);
+  const [checkCount, setCheckCount] = useState<number>(0);
+  const [stopChange, setStopChange] = useState<boolean>(false);
 
   function handleSizeChange(index: number, value: string) {
     if (!validateDecimalInput(value)) return;
-    setCurrentIndex(index);
+    if (stopChange) {
+      setStopChange(false);
+      return;
+    }
     setSizeScale((prev) => {
       const newScale = [...prev];
       newScale[index] = value;
       return newScale;
     });
-    setCanCheck((prev) => prev + 1);
+    setCheckCount((prev) => prev + 1);
   }
 
-  function handleChangeScale() {
-    const newScale = sizeScale.map((item) => Number(item + 4).toString());
+  function handleChangeScale(action: 'previous' | 'next') {
+    setStopChange(true);
+    const stopValue = Number(sizeScale[1]) <= 28;
+    if (stopValue) return;
+    const middleValue = Number(sizeScale[1]) + (action === 'previous' ? -4 : 4);
+
+    const newScale = sizeScale.map((item, index) => {
+      if (index === 0) {
+        return buttonScales[middleValue][0].toString();
+      }
+      else if (index === 1) {
+        return middleValue.toString();
+      }
+      else if (index === 2) {
+        return buttonScales[middleValue][2].toString();
+      }
+    });
     setSizeScale(newScale);
+    setCheckCount((prev) => prev + 1);
   }
 
   useEffect(() => {
-    if (Number(sizeScale[currentIndex]) >= 20 && Number(sizeScale[currentIndex]) <= 72) {
-      const newButtonsData = [...currentButtonsData];
-      newButtonsData[currentIndex].height = Number(sizeScale[currentIndex]);
-      setCurrentButtonsData(newButtonsData);
-    }
-  }, [canCheck]);
+    sizeScale.forEach((item, index) => {
+      if (Number(item) >= 28 && Number(item) <= 72) {
+        const newButtonsData = [...currentButtonsData];
+        newButtonsData[index].height = Number(item);
+        setCurrentButtonsData(newButtonsData);
+      }
+    });
+  }, [checkCount]);
 
   return (
     <WrapperForm>
@@ -83,12 +105,12 @@ const SizeInputs = ({ currentButtonsData, setCurrentButtonsData }: SizeInputsPro
         ))}
       </div>
       <WrapperButtons className="py-[2ex]">
-        <Button variant="ghost">
-          <ChevronLeft {...iconSm} /> 
+        <Button variant="ghost" onClick={() => handleChangeScale('previous')}>
+          <ChevronLeft {...iconSm} />
           Escala anterior
         </Button>
-        <Button variant="ghost">
-          Próxima escala 
+        <Button variant="ghost" onClick={() => handleChangeScale('next')}>
+          Próxima escala
           <ChevronRight {...iconSm} />
         </Button>
       </WrapperButtons>
