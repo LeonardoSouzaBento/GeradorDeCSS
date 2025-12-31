@@ -86,7 +86,7 @@ const FontSelector = ({
           <Button
             className={`w-full ${typographyPage ? 'sm:w-max' : ''}`}
             type="submit"
-            variant="outline"
+            variant="ghost"
             disabled={isLoading}>
             <Check {...iconMd} />
             {isLoading ? 'Carregando...' : 'Aplicar Esta Fonte'}

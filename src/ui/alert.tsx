@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 import { DivProps, DivRef, ParagraphProps, ParagraphRef } from "@/types/htmlTags"
 
 const alertVariants = cva(
-  "relative w-full rounded-xl border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4",
+  "relative w-full rounded-xl border p-4  [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:shrink-0",
   {
     variants: {
       variant: {

@@ -1,53 +1,132 @@
 import { iconXs } from '@/css/lucideIcons';
 import { ButtonsData } from '@/data/buttons/variables';
-import { H6Description, H6Title, HeaderH6, Input, Label, WrapperForm, WrapperInput } from '@/ui/index';
-import { AlignVerticalSpaceAround } from 'lucide-react';
-import React from 'react';
+import {
+  Alert,
+  AlertDescription,
+  Button,
+  H6Description,
+  H6Title,
+  HeaderH6,
+  Input,
+  WrapperButtons,
+  WrapperForm,
+  WrapperInput,
+  Separator,
+} from '@/ui/index';
+import { AlignVerticalSpaceAround, Info } from 'lucide-react';
+import React, { ComponentPropsWithoutRef, useState } from 'react';
 
 interface AdjustmentInputsProps {
   className?: string;
   currentButtonsData: ButtonsData[];
   setCurrentButtonsData: React.Dispatch<React.SetStateAction<ButtonsData[]>>;
+  initialFontSize: number;
 }
 
-const css = { wrapperInputs: `flex flex-col gap-[2ex] sm:flex-row` };
+const css = {
+  wrapperButtonsAlert: `mt-4 gap-4 grid grid-cols-1 sm:grid-cols-[1.5fr_1fr] xl:grid-cols-[1.5fr_1fr]`,
+  containerButtons: `h-max flex flex-row justify-start flex-nowrap gap-[1.5ex] 
+  sm:justify-between sm:flex-col sm:order-2`,
+  wrapperButtons: `h-max min-w-max sm:w-full relative sm:justify-between flex-nowrap`,
+};
 
-const AdjustmentInputs = ({ currentButtonsData, setCurrentButtonsData }: AdjustmentInputsProps) => {
-  function handleAdjustmentChange(index: number, value: string) {
-    const newButtonsData = [...currentButtonsData];
-    newButtonsData[index].adjustment = value;
-    setCurrentButtonsData(newButtonsData);
+const options = { positive: ['0.2', '0.4', '0.6'], negative: ['-0.2', '-0.4', '-0.6'] };
+
+const AdjustmentInputs = ({
+  currentButtonsData,
+  setCurrentButtonsData,
+  initialFontSize,
+}: AdjustmentInputsProps) => {
+  const [adjustmentScale, setAdjustmentScale] = useState('0');
+
+  function handleAdjustmentChange(value: string) {
+    setAdjustmentScale(value);
+    const numberValue = Number(value);
+    if (numberValue >= -50 && numberValue <= 50) {
+      const newValues = currentButtonsData.map((item) => ({
+        ...item,
+        adjustment: Number(((numberValue / 100) * initialFontSize * item.relativeSize).toFixed(4)),
+      }));
+      setCurrentButtonsData(newValues);
+    }
   }
 
   return (
     <WrapperForm className="space-y-[1cap]">
-      <HeaderH6 mb={0}>
+      <HeaderH6 mb={1}>
         <H6Title>
           <AlignVerticalSpaceAround {...iconXs} />
-          <h6>Correções</h6>
+          <h6>Correção</h6>
         </H6Title>
         <H6Description>
           <p>Diferença de padding para alinhar os botões</p>
         </H6Description>
       </HeaderH6>
 
-      <div className={css.wrapperInputs}>
-        {currentButtonsData.map((item, index) => (
-          <WrapperInput key={index}>
-            <Label htmlFor={item.name}>{item.name}</Label>
-            <Input
-              id={item.name}
-              type="text"
-              value={item.adjustment}
-              onChange={(e) => {
-                handleAdjustmentChange(index, e.target.value);
-              }}
-            />
-          </WrapperInput>
-        ))}
+      <WrapperInput>
+        <Input
+          id="pb"
+          type="text"
+          value={adjustmentScale}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (!/^-?\d*[.,]?\d*$/.test(value)) return;
+            const newValue = value.includes(',') ? value.replace(',', '.') : value;
+            handleAdjustmentChange(newValue);
+          }}
+        />
+      </WrapperInput>
+
+      <div className={css.wrapperButtonsAlert}>
+        <div className={css.containerButtons}>
+          <WrapperButtons className={css.wrapperButtons}>
+            {options.negative.map((value) => (
+              <OptionButton
+                key={value}
+                value={value}
+                onClick={() => handleAdjustmentChange(value)}
+              />
+            ))}
+          </WrapperButtons>
+          <Separator orientation="vertical" className="sm:hidden" />
+          <WrapperButtons className="h-max w-full relative sm:justify-between flex-nowrap">
+            {options.positive.map((value) => (
+              <OptionButton
+                key={value}
+                value={value}
+                onClick={() => handleAdjustmentChange(value)}
+              />
+            ))}
+          </WrapperButtons>
+        </div>
+
+        <Alert>
+          <Info {...iconXs} className="shrink-0 mb-1" />
+          <AlertDescription>
+            <strong>Eleve</strong> o texto com valores positivos; <strong>abaixe</strong> com
+            valores negativos
+          </AlertDescription>
+        </Alert>
       </div>
     </WrapperForm>
   );
 };
 
 export default AdjustmentInputs;
+
+interface OptionButtonProps extends ComponentPropsWithoutRef<'button'> {
+  value: string;
+}
+
+const OptionButton = ({ value, ...props }: OptionButtonProps) => {
+  return (
+    <Button
+      size="icon-xs"
+      variant="ghost"
+      optionButton
+      {...props}
+      className="text-foreground text-sm-button px-[1ex] box-content">
+      {value}
+    </Button>
+  );
+};

@@ -68,7 +68,7 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
           buttonVariants({ variant, size }),
           {
             "rounded-full": optionButton,
-            "ring-2 ring-selected text-primary border shadow-xs": isSelected,
+            "ring-[0.1rem] ring-selected text-primary border shadow-sm": isSelected,
             "grayscale-100 opacity-50 cursor-not-allowed": isDisable,
             "rounded-full p-0!": closeButton,
           },

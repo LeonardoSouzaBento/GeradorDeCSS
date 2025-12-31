@@ -15,7 +15,7 @@ import {
 import { validateDecimalInput } from '@/utils/validateDecimalInput';
 import { ChartColumnDecreasing, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import {buttonScales} from '@/data/buttons/variables';
+import { buttonScales } from '@/data/buttons/variables';
 
 interface SizeInputsProps {
   currentButtonsData: ButtonsData[];
@@ -29,14 +29,10 @@ const SizeInputs = ({ currentButtonsData, setCurrentButtonsData }: SizeInputsPro
     currentButtonsData.map((item) => item.height.toString())
   );
   const [checkCount, setCheckCount] = useState<number>(0);
-  const [stopChange, setStopChange] = useState<boolean>(false);
+  const [stopOnChange, setStopOnChange] = useState<boolean>(false);
 
   function handleSizeChange(index: number, value: string) {
-    if (!validateDecimalInput(value)) return;
-    if (stopChange) {
-      setStopChange(false);
-      return;
-    }
+    if (stopOnChange || !validateDecimalInput(value)) return;
     setSizeScale((prev) => {
       const newScale = [...prev];
       newScale[index] = value;
@@ -46,21 +42,13 @@ const SizeInputs = ({ currentButtonsData, setCurrentButtonsData }: SizeInputsPro
   }
 
   function handleChangeScale(action: 'previous' | 'next') {
-    setStopChange(true);
-    const stopValue = Number(sizeScale[1]) <= 28;
+    setStopOnChange(true);
+    const stopValue = Number(sizeScale[1]) <= 28 || Number(sizeScale[1]) >= 72;
     if (stopValue) return;
     const middleValue = Number(sizeScale[1]) + (action === 'previous' ? -4 : 4);
 
     const newScale = sizeScale.map((item, index) => {
-      if (index === 0) {
-        return buttonScales[middleValue][0].toString();
-      }
-      else if (index === 1) {
-        return middleValue.toString();
-      }
-      else if (index === 2) {
-        return buttonScales[middleValue][2].toString();
-      }
+      return buttonScales[middleValue][index].toString();
     });
     setSizeScale(newScale);
     setCheckCount((prev) => prev + 1);
@@ -97,6 +85,7 @@ const SizeInputs = ({ currentButtonsData, setCurrentButtonsData }: SizeInputsPro
               id={item.name}
               type="text"
               value={sizeScale[index]}
+              onClick={() => setStopOnChange(false)}
               onChange={(e) => {
                 handleSizeChange(index, e.target.value);
               }}

@@ -70,8 +70,8 @@ const ResizableButton = ({
           color: outlineValue ? color : textContrastColor,
           border: outlineValue ? `${outlineValue}px solid ${color}` : 'none',
         }}
-        className={`h-fit inline-block box-border
-          leading-none text-center rounded-md`}>
+        className={`h-fit flex items-center box-border
+          leading-none rounded-md`}>
         {name}
       </button>
     </div>

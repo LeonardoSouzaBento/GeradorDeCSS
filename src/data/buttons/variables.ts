@@ -7,28 +7,32 @@ export const buttonSizes = {
 export type ButtonsData = {
   name: string;
   relativeSize: number;
+  finalFontSize: number;
   height: number;
-  adjustment: string;
+  adjustment: number;
 };
 
 export const buttonsData: ButtonsData[] = [
   {
-    name: 'Botão pequeno',
+    name: 'Botão menor',
     relativeSize: 0.9,
+    finalFontSize: 0,
     height: 36,
-    adjustment: '0',
+    adjustment: 0,
   },
   {
     name: 'Botão normal',
     relativeSize: 0.95,
+    finalFontSize: 0,
     height: 40,
-    adjustment: '0',
+    adjustment: 0,
   },
   {
-    name: 'Botão grande',
+    name: 'Botão maior',
     relativeSize: 1,
+    finalFontSize: 0,
     height: 44,
-    adjustment: '0',
+    adjustment: 0,
   },
 ];
 
