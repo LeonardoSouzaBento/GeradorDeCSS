@@ -1,13 +1,15 @@
-import { fontConfigs, NavOptions, sizeAndStyleConfigs } from '@/data/buttons/variables';
+import { iconXs } from '@/css/lucideIcons';
+import { colorConfigs, fontConfigs, NavOptions, sizeConfigs } from '@/data/buttons/variables';
 import { StateSetter } from '@/data/typography/types';
 import { Button } from '@/ui';
+import { LucideIcon, Palette } from 'lucide-react';
 
 const css = {
-  wrapper: `hidden md:flex w-auto max-w-max flex-col space-y-[1ex]
-  border rounded-lg p-5 pt-3 box-content`,
-  wrapperGroup: `space-y-[0.5ex]`,
-  wrapperButtons: `flex flex-col items-start gap-2`,
-  title: `text-muted-foreground`,
+  wrapper: `hidden md:flex w-max flex-col space-y-[1ex]
+  border rounded-lg p-5 pt-3 box-content xl:min-w-52`,
+  wrapperGroup: `space-y-[0.8ex]`,
+  wrapperButtons: `flex flex-col items-start gap-[1ex]`,
+  title: `text-muted-foreground font-semibold`,
 };
 
 const Nav = ({
@@ -20,12 +22,13 @@ const Nav = ({
   return (
     <nav className={css.wrapper}>
       <div className={css.wrapperGroup}>
-        <h6 className={css.title}>Tamanho e outline</h6>
+        <p className={css.title}>Tamanho e outline</p>
         <div className={css.wrapperButtons}>
-          {sizeAndStyleConfigs.map((option) => (
+          {sizeConfigs.map((option) => (
             <OptionButton
-              key={option}
-              value={option}
+              Icon={option.icon}
+              key={option.name}
+              value={option.name}
               navOption={navOption}
               setNavOption={setNavOption}
             />
@@ -33,18 +36,27 @@ const Nav = ({
         </div>
       </div>
       <div className={css.wrapperGroup}>
-        <h6 className={css.title}>Cor</h6>
+        <p className={css.title}>Cor</p>
         <div className={css.wrapperButtons}>
-          <OptionButton value="Cor" navOption={navOption} setNavOption={setNavOption} />
+          {colorConfigs.map((option) => (
+            <OptionButton
+              Icon={option.icon}
+              key={option.name}
+              value={option.name}
+              navOption={navOption}
+              setNavOption={setNavOption}
+            />
+          ))}
         </div>
       </div>
       <div className={css.wrapperGroup}>
-        <h6 className={css.title}>Fonte</h6>
+        <p className={css.title}>Fonte</p>
         <div className={css.wrapperButtons}>
           {fontConfigs.map((option) => (
             <OptionButton
-              key={option}
-              value={option}
+              Icon={option.icon}
+              key={option.name}
+              value={option.name}
               navOption={navOption}
               setNavOption={setNavOption}
             />
@@ -61,16 +73,18 @@ interface OptionButtonProps {
   value: NavOptions;
   navOption: NavOptions;
   setNavOption: StateSetter<NavOptions>;
+  Icon: LucideIcon;
 }
 
-const OptionButton = ({ value, navOption, setNavOption }: OptionButtonProps) => {
+const OptionButton = ({ value, navOption, setNavOption, Icon }: OptionButtonProps) => {
   return (
     <Button
       size="sm"
       variant="link"
       isSelected={value === navOption}
       onClick={() => setNavOption(value)}
-      className="w-full justify-start small-button px-[1ex]">
+      className="w-full justify-start small-button px-[1.4ex] gap-[1ex]">
+      <Icon {...iconXs} />
       {value}
     </Button>
   );

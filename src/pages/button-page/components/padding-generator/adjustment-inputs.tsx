@@ -30,7 +30,7 @@ const css = {
   wrapperButtons: `h-max min-w-max sm:w-full relative sm:justify-between flex-nowrap`,
 };
 
-const options = { positive: ['0.2', '0.4', '0.6'], negative: ['-0.2', '-0.4', '-0.6'] };
+const options = { positive: ['0.25', '0.5', '0.75'], negative: ['-0.25', '-0.5', '-0.75'] };
 
 const AdjustmentInputs = ({
   currentButtonsData,
@@ -56,7 +56,7 @@ const AdjustmentInputs = ({
       <HeaderH6 mb={1}>
         <H6Title>
           <AlignVerticalSpaceAround {...iconXs} />
-          <h6>Correção</h6>
+          <h6>Alinhar botões</h6>
         </H6Title>
         <H6Description>
           <p>Diferença de padding para alinhar os botões</p>
@@ -121,11 +121,11 @@ interface OptionButtonProps extends ComponentPropsWithoutRef<'button'> {
 const OptionButton = ({ value, ...props }: OptionButtonProps) => {
   return (
     <Button
-      size="icon-xs"
+      size="sm"
       variant="ghost"
       optionButton
-      {...props}
-      className="text-foreground text-sm-button px-[1ex] box-content">
+      className='px-[1.4ex]'
+      {...props}>
       {value}
     </Button>
   );

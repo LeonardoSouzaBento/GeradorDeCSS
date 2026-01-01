@@ -1,6 +1,7 @@
 import { iconXs } from '@/css/lucideIcons';
+import { pxSuggestions } from '@/data/buttons/variables';
 import { StateSetter } from '@/data/typography/types';
-import { H6Description, H6Title, HeaderH6, WrapperForm, WrapperInput } from '@/ui';
+import { Button, H6Description, H6Title, HeaderH6, WrapperButtons, WrapperForm, WrapperInput } from '@/ui';
 import { Input } from '@/ui/input';
 import { RulerDimensionLine } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -51,6 +52,20 @@ const PaddingXInput = ({ paddingX, setPaddingX }: Props) => {
           }}
         />
       </WrapperInput>
+      <WrapperButtons className="pt-4">
+        {pxSuggestions.map((item) => (
+          <Button
+            variant="ghost"
+            size="sm"
+            optionButton
+            isSelected={item === paddingX}
+            key={item}
+            onClick={() => setPaddingX(item)}
+          >
+            {item}
+          </Button>
+        ))}
+      </WrapperButtons>
     </WrapperForm>
   );
 };

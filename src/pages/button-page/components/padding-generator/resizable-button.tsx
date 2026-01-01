@@ -10,9 +10,10 @@ interface DynamicPaddingButtonProps {
   paddingX: string;
   backgroundColor?: string;
   color?: string;
-  outlineValue?: number;
+  outlineValue?: string;
   textContrastColor?: string;
   definingPx?: boolean;
+  children?: React.ReactNode;
 }
 
 const ResizableButton = ({
@@ -27,11 +28,13 @@ const ResizableButton = ({
   textContrastColor,
   paddingX,
   definingPx = false,
+  children,
 }: DynamicPaddingButtonProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [paddingTop, setPaddingTop] = useState(0);
   const [paddingBottom, setPaddingBottom] = useState(0);
+  const [canCorrect, setCanCorrect] = useState<number>(0);
 
   useLayoutEffect(() => {
     if (!buttonRef.current || definingPx) return;
@@ -41,11 +44,18 @@ const ResizableButton = ({
 
     const contentHeight = buttonRef.current.getBoundingClientRect().height;
 
-    const totalSpaceNeeded = height - contentHeight;
+    // Subtrair a borda do cálculo (border-box inclui a borda na altura)
+    const borderWidth = outlineValue ? parseFloat(outlineValue) * 2 : 0;
+    const adjustedContentHeight = contentHeight - borderWidth;
+
+    const totalSpaceNeeded = height - adjustedContentHeight;
     const basePadding = totalSpaceNeeded > 0 ? totalSpaceNeeded / 2 : 0;
 
     setPaddingTop(Number((basePadding - adjustment).toFixed(3)));
     setPaddingBottom(Number((basePadding + adjustment).toFixed(3)));
+    if (outlineValue) {
+      setCanCorrect((prev) => prev + 1);
+    }
   }, [height, adjustment, relativeSize, initialFontSize, outlineValue]);
 
   useEffect(() => {
@@ -54,6 +64,11 @@ const ResizableButton = ({
       buttonRef.current.style.paddingBottom = '0px';
     }
   }, []);
+
+  useEffect(() => {
+    setPaddingBottom(paddingBottom - Number(outlineValue));
+    setPaddingTop(paddingTop - Number(outlineValue));
+  }, [canCorrect]);
 
   return (
     <div ref={wrapperRef}>
@@ -72,6 +87,7 @@ const ResizableButton = ({
         }}
         className={`h-fit flex items-center box-border
           leading-none rounded-md`}>
+        {children}
         {name}
       </button>
     </div>

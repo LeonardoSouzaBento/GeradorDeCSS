@@ -1,3 +1,22 @@
+import {
+  ALargeSmall,
+  AlignVerticalSpaceAround,
+  ChartColumnDecreasing,
+  Circle,
+  LineSquiggle,
+  LucideIcon,
+  PaintRoller,
+  Palette,
+  Pill,
+  Play,
+  RectangleHorizontal,
+  Ruler,
+  RulerDimensionLine,
+  Square,
+  TypeOutline,
+  Weight
+} from 'lucide-react';
+
 export const buttonSizes = {
   'Botão pequeno': 0.9,
   'Botão normal': 0.95,
@@ -48,6 +67,9 @@ export const buttonScales = {
   64: [56, 64, 72],
 };
 
+export const pxSuggestions = ["0.9", "1.1", "1.3", "1.5"];
+export const lineThicknessSuggestions = ["1", "2.0", "2.5", "3.0"];
+
 export type NavOptions =
   | 'Alturas'
   | 'Padding X'
@@ -57,16 +79,67 @@ export type NavOptions =
   | 'Peso'
   | 'Outline'
   | 'Cor'
+  | 'Paleta'
   | 'Fonte';
 
-export const sizeAndStyleConfigs: NavOptions[] = [
-  'Alturas',
-  'Padding X',
-  'Alinhamento',
-  'Outline',
+interface OptionButtonData {
+  name: NavOptions;
+  icon: LucideIcon;
+}
+
+export const sizeConfigs: OptionButtonData[] = [
+  {
+    name: 'Alturas',
+    icon: ChartColumnDecreasing,
+  },
+  {
+    name: 'Padding X',
+    icon: RulerDimensionLine,
+  },
+  {
+    name: 'Alinhamento',
+    icon: AlignVerticalSpaceAround,
+  },
+  {
+    name: 'Outline',
+    icon: LineSquiggle,
+  },
 ];
 
-export const fontConfigs: NavOptions[] = ['Fonte', 'Peso', 'Font-size base', 'Font-size dos botões'];
+export const fontConfigs: OptionButtonData[] = [
+  {
+    name: 'Fonte',
+    icon: TypeOutline,
+  },
+  {
+    name: 'Peso',
+    icon: Weight,
+  },
+  {
+    name: 'Font-size base',
+    icon: Ruler,
+  },
+  {
+    name: 'Font-size dos botões',
+    icon: ALargeSmall,
+  },
+];
+
+export const colorConfigs: OptionButtonData[] = [
+  {
+    name: 'Cor',
+    icon: PaintRoller,
+  },
+  {
+    name: 'Paleta',
+    icon: Palette,
+  },
+];
+
+export const iconButtons = {
+  names: ['Sm', 'Md', 'Lg'],
+  icons: [Square, RectangleHorizontal, Play, Circle, Pill],
+};
 
 export interface ColorCombination {
   contrast: string;

@@ -43,7 +43,6 @@ const ResultPreview = ({
       </WrapperButtons>
       <WrapperButtons className="items-start! font-target">
         {currentButtonsData.map((item, index) => {
-          const outlineValue = Number(lineThickness.replace('.', '')) || 1;
           return (
             <ResizableButton
               key={index}
@@ -52,7 +51,7 @@ const ResultPreview = ({
               relativeSize={item.relativeSize}
               initialFontSize={initialFontSize}
               currentWeight={currentWeight}
-              outlineValue={outlineValue}
+              outlineValue={lineThickness}
               color={color}
               textContrastColor={textContrastColor}
               paddingX={paddingX}

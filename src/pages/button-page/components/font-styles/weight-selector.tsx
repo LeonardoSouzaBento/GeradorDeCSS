@@ -12,7 +12,7 @@ const weights = [500, 600, 700];
 
 const WeightSelector = ({ currentWeight, setCurrentWeight, styles }: Props) => {
   return (
-    <div className={styles}>
+    <div className={`w-full ${styles}`}>
       <HeaderH6 mb={1}>
         <H6Title>
           <Weight {...iconXs} />
