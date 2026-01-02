@@ -42,13 +42,13 @@ const InitialSize = ({ styles, initialFontSize, setInitialFontSize }: Props) => 
 
       <Input
         type="number"
-        step={0.05}
+        step={0.5}
+        min={12}
+        max={24}
         value={localValue}
         onChange={(e) => {
           const value = e.target.value;
           if (!validateDecimalInput(value)) return;
-          // Remove zeros à esquerda, mas mantém o "0" se for seguido por "." (decimal)
-          // ou se o valor for apenas "0"
           const normalizedValue = value.replace(/^0+(?=\d)/, '');
           setLocalValue(Number(normalizedValue));
         }}

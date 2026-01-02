@@ -1,42 +1,65 @@
+import { useEffect, useRef, useState } from 'react';
+
 const linearGradient = 'from-start via-start to-end';
 
-const Header = ({
-  title,
-  description,
-  icon,
-  page,
-}: {
+interface Props {
   title: string;
   description: string;
   icon: React.ReactNode;
   page?: string;
-}) => {
-  return (
-    <header
-      className={`w-full mx-auto my-8 max-w-2xl px-4 sm:px-0 sm:w-[calc(100%-3rem)] text-center animate-in fade-in 
-        slide-in-from-top duration-500 min-[575px]:flex gap-3.5 justify-center min-[575px]:justify-start
-        xl:max-w-7xl`}>
-      <div className={`flex items-center justify-center mb-2 min-[575px]:mb-0`}>
-        <div
-          className={`h-13.5 w-13.5 text-white/93 flex items-center justify-center
-           p-2.5 mb-0.5 bg-linear-to-br ${linearGradient} rounded-xl shadow-lg`}>
-          {icon}
-        </div>
-      </div>
+  removeHeader?: boolean;
+  className?: string;
+  resizeCounter?: number;
+}
 
-      <div>
-        <h1
-          className={`h-auto pb-1 big-h1 bg-linear-to-r ${linearGradient} bg-clip-text text-transparent
-          mb-0 capitalize min-[575px]:text-left`}>
-          {title}
-        </h1>
-        <p
-          className={`text-muted-foreground max-w-2xl
-            mx-auto px-3 min-[575px]:text-left ${page === 'typography' ? 'min-[575px]:pl-1' : 'pl-[0.2ex]'} text-base`}>
-          {description}
-        </p>
-      </div>
-    </header>
+const Header = ({ title, description, icon, page, removeHeader, className, resizeCounter }: Props) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const [headerHeight, setHeaderHeight] = useState<number | string>(0);
+
+  function getHeight() {
+    if (!headerRef.current) return;
+    const headerHeight = headerRef.current.offsetHeight;
+    setHeaderHeight(headerHeight);
+  }
+
+  useEffect(() => {
+    getHeight();
+  }, []);
+
+  useEffect(() => {
+    getHeight();
+  }, [resizeCounter]);
+
+  return (
+    <div
+      ref={wrapperRef}
+      style={{ height: removeHeader ? 0 : headerHeight || 'auto' }}
+      className="w-full transition-all duration-400 overflow-hidden">
+      <header
+        ref={headerRef}
+        className={`w-full min-h-max h-auto mx-auto animate-in fade-in slide-in-from-top duration-500 ${className}`}>
+        <div className={`flex items-center justify-center mb-2 pre-sm:mb-0`}>
+          <div
+            className={`h-13.5 w-13.5 text-white/93 flex items-center justify-center
+             p-2.5 mb-0.5 bg-linear-to-br ${linearGradient} rounded-xl shadow-lg`}>
+            {icon}
+          </div>
+        </div>
+        <div>
+          <h1
+            className={`h-auto pb-1 big-h1 bg-linear-to-r ${linearGradient} bg-clip-text text-transparent
+            mb-0 capitalize pre-sm:text-left`}>
+            {title}
+          </h1>
+          <p
+            className={`text-muted-foreground max-w-2xl
+              mx-auto px-3 pre-sm:text-left ${page === 'typography' ? 'pre-sm:pl-1' : 'pl-[0.2ex]'} text-base`}>
+            {description}
+          </p>
+        </div>
+      </header>
+    </div>
   );
 };
 

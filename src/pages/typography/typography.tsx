@@ -49,6 +49,7 @@ export default function Typography() {
       <Header
         title="typographic scale generator"
         description="Gere o CSS de escala tipográfica do seu projeto"
+        className={`py-8 max-w-2xl px-4 sm:px-0 sm:w-[calc(100%-3rem)] text-center min-[575px]:flex gap-3.5 justify-center min-[575px]:justify-start xl:max-w-7xl`}
         page="typography"
         icon={<CaseSensitive className={`text-white/93`} strokeWidth={2.2} size={'2rem'} />}
       />

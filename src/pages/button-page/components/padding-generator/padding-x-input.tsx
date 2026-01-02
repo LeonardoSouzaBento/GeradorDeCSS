@@ -1,30 +1,38 @@
 import { iconXs } from '@/css/lucideIcons';
 import { pxSuggestions } from '@/data/buttons/variables';
 import { StateSetter } from '@/data/typography/types';
-import { Button, H6Description, H6Title, HeaderH6, WrapperButtons, WrapperForm, WrapperInput } from '@/ui';
+import {
+  Button,
+  H6Description,
+  H6Title,
+  HeaderH6,
+  WrapperButtons,
+  WrapperForm,
+  WrapperInput,
+} from '@/ui';
 import { Input } from '@/ui/input';
+import { normalizeDecimalInput } from '@/utils/normalizeDecimalInput';
 import { RulerDimensionLine } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface Props {
-  paddingX: string;
-  setPaddingX: StateSetter<string>;
+  paddingX: number;
+  setPaddingX: StateSetter<number>;
 }
 
 const PaddingXInput = ({ paddingX, setPaddingX }: Props) => {
-  const [localPaddingX, setLocalPaddingX] = useState<string>(paddingX);
+  const [inputValue, setInputValue] = useState<string>(paddingX.toString());
 
-  useEffect(() => {
-    if (localPaddingX.includes(',')) {
-      setLocalPaddingX(localPaddingX.replace(',', '.'));
-    }
-  }, [localPaddingX]);
+  function handleChangePaddingX(value: string) {
+    const stringValue = normalizeDecimalInput(value);
+    const numericValue = Number(stringValue);
+    if (!/^\d*[.,]?\d*$/.test(value)) return;
+    setInputValue(stringValue);
 
-  useEffect(() => {
-    if (Number(localPaddingX) >= 0.4 && Number(localPaddingX) <= 10) {
-      setPaddingX(localPaddingX);
+    if (numericValue >= 0.4 && numericValue <= 10) {
+      setPaddingX(numericValue);
     }
-  }, [localPaddingX]);
+  }
 
   return (
     <WrapperForm>
@@ -44,11 +52,9 @@ const PaddingXInput = ({ paddingX, setPaddingX }: Props) => {
         <Input
           type="text"
           inputMode="decimal"
-          value={localPaddingX}
+          value={inputValue}
           onChange={(e) => {
-            const value = e.target.value;
-            if (!/^\d*[.,]?\d*$/.test(value)) return;
-            setLocalPaddingX(value);
+            handleChangePaddingX(e.target.value);
           }}
         />
       </WrapperInput>
@@ -60,8 +66,10 @@ const PaddingXInput = ({ paddingX, setPaddingX }: Props) => {
             optionButton
             isSelected={item === paddingX}
             key={item}
-            onClick={() => setPaddingX(item)}
-          >
+            onClick={() => {
+              setPaddingX(item);
+              setInputValue((item).toString());
+            }}>
             {item}
           </Button>
         ))}

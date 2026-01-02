@@ -1,11 +1,11 @@
 import { iconSm, iconXs } from '@/css/lucideIcons';
 import { ButtonsData, buttonsData } from '@/data/buttons/variables';
 import { StateSetter } from '@/data/typography/types';
-import { useDebounce } from '@/hooks/useDebounce';
 import {
   Alert,
   AlertDescription,
   AlertTitle,
+  Button,
   H6Description,
   H6Title,
   HeaderH6,
@@ -14,8 +14,10 @@ import {
   WrapperForm,
   WrapperInput,
 } from '@/ui/index';
+import { normalizeDecimalInput } from '@/utils/normalizeDecimalInput';
+import { validateDecimalInput } from '@/utils/validateDecimalInput';
 import { ALargeSmall, Info } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const inputs = ['Botão pequeno', 'Botão normal', 'Botão grande'];
 
@@ -25,34 +27,29 @@ interface Props {
   setCurrentButtonsData: StateSetter<ButtonsData[]>;
 }
 
+const dica = `Deixe o botão normal levemente menor que o corpo do texto do seu app/site.`;
+
 const RelativeSizes = ({
   relativeSizeScale,
   setRelativeSizeScale,
   setCurrentButtonsData,
 }: Props) => {
-  /* debounce para setar dados dos botões */
-  const [eventCounter, setEventCounter] = useState(0);
-  const canSetButtonData = useDebounce(eventCounter, 300);
-  // const [currentIndex, setCurrentIndex] = useState(0);
+  const [seeModal, setSeeModal] = useState<boolean>(false);
 
   const handleScaleFontSizeChange = (index: number, value: string) => {
+    const normalized = normalizeDecimalInput(value);
+    if (!validateDecimalInput(normalized)) return;
     const newScale = [...relativeSizeScale];
-    newScale[index] = value;
+    newScale[index] = normalized;
     setRelativeSizeScale(newScale);
+    if (Number(normalized) >= 0.5 && Number(normalized) <= 1.5) {
+      const newButtonsData = buttonsData.map((item, index) => ({
+        ...item,
+        relativeSize: Number(normalized),
+      }));
+      setCurrentButtonsData(newButtonsData);
+    }
   };
-
-  useEffect(() => {
-    setEventCounter((prev) => prev + 1);
-  }, [relativeSizeScale]);
-
-  useEffect(() => {
-    if (!canSetButtonData) return;
-    const newButtonsData = buttonsData.map((item, index) => ({
-      ...item,
-      relativeSize: Number(Number(relativeSizeScale[index].replace(',', '.')).toFixed(2)),
-    }));
-    setCurrentButtonsData(newButtonsData);
-  }, [canSetButtonData]);
 
   return (
     <WrapperForm className="space-y-[1cap]">
@@ -81,13 +78,12 @@ const RelativeSizes = ({
           </WrapperInput>
         ))}
       </div>
-
       <Alert className={`mt-5`}>
         <Info {...iconXs} className="warn-icon" />
-        <AlertTitle className="text-foreground">Dica</AlertTitle>
-        <AlertDescription>
-          Deixe o botão normal levemente menor que o corpo do texto do seu app/site.
-        </AlertDescription>
+        <AlertDescription>Definimos automaticamente. Não se preocupe.</AlertDescription>
+        <Button variant="link" size="sm" className="gap-[0.75ex]" onClick={() => setSeeModal(true)}>
+          Saiba mais
+        </Button>
       </Alert>
     </WrapperForm>
   );

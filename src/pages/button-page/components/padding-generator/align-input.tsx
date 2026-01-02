@@ -32,7 +32,7 @@ const css = {
 
 const options = { positive: ['0.25', '0.5', '0.75'], negative: ['-0.25', '-0.5', '-0.75'] };
 
-const AdjustmentInputs = ({
+const AlignInput = ({
   currentButtonsData,
   setCurrentButtonsData,
   initialFontSize,
@@ -112,7 +112,7 @@ const AdjustmentInputs = ({
   );
 };
 
-export default AdjustmentInputs;
+export default AlignInput;
 
 interface OptionButtonProps extends ComponentPropsWithoutRef<'button'> {
   value: string;
@@ -120,12 +120,7 @@ interface OptionButtonProps extends ComponentPropsWithoutRef<'button'> {
 
 const OptionButton = ({ value, ...props }: OptionButtonProps) => {
   return (
-    <Button
-      size="sm"
-      variant="ghost"
-      optionButton
-      className='px-[1.4ex]'
-      {...props}>
+    <Button size="sm" variant="ghost" optionButton className="px-[1.4ex]" {...props}>
       {value}
     </Button>
   );

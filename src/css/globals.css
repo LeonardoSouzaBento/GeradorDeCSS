@@ -40,7 +40,19 @@ max-w-5xl,64rem,1024px
   --color-popover: hsl(0 0% 100%);
   --color-popover-foreground: hsl(215 25% 15%);
 
-  --color-primary: hsl(215 90% 42%);
+  --color-primary: #0b5bcb;
+  --color-primary-50: #F2F3FC;
+  --color-primary-100: #E5E6F8;
+  --color-primary-200: #CBCEF2;
+  --color-primary-300: #B1B6EA;
+  --color-primary-400: #959FE3;
+  --color-primary-500: #7789DC;
+  --color-primary-600: #5573D4;
+  --color-primary-700: #0B5BCB; /* Sua cor principal */
+  --color-primary-800: #0042AC;
+  --color-primary-900: #002688;
+  --color-primary-950: #001A76;
+  --color-primary-1000: #000B65;
   --color-primary-foreground: hsl(220 25% 98%);
 
   --color-secondary: hsl(215 15% 92%);
@@ -97,6 +109,11 @@ max-w-5xl,64rem,1024px
       height: 0;
     }
   }
+  /* Breakpoints */
+  --breakpoint-smaller-sm: 375px;
+  --breakpoint-medium-sm: 425px;
+  --breakpoint-pre-sm: 575px;
+  --breakpoint-pre-md: 768px;
 }
 
 /* Tema Escuro */

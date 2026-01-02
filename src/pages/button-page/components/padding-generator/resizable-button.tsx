@@ -1,3 +1,4 @@
+import { StateSetter } from '@/data/typography/types';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 interface DynamicPaddingButtonProps {
@@ -7,10 +8,10 @@ interface DynamicPaddingButtonProps {
   relativeSize: number;
   initialFontSize: number;
   currentWeight: number;
-  paddingX: string;
+  paddingX: number;
   backgroundColor?: string;
   color?: string;
-  outlineValue?: string;
+  outlineValue?: number;
   textContrastColor?: string;
   definingPx?: boolean;
   children?: React.ReactNode;
@@ -45,7 +46,7 @@ const ResizableButton = ({
     const contentHeight = buttonRef.current.getBoundingClientRect().height;
 
     // Subtrair a borda do cálculo (border-box inclui a borda na altura)
-    const borderWidth = outlineValue ? parseFloat(outlineValue) * 2 : 0;
+    const borderWidth = outlineValue ? outlineValue * 2 : 0;
     const adjustedContentHeight = contentHeight - borderWidth;
 
     const totalSpaceNeeded = height - adjustedContentHeight;
@@ -66,8 +67,11 @@ const ResizableButton = ({
   }, []);
 
   useEffect(() => {
-    setPaddingBottom(paddingBottom - Number(outlineValue));
-    setPaddingTop(paddingTop - Number(outlineValue));
+    if (!outlineValue) return;
+    const newPaddingBottom = paddingBottom - outlineValue;
+    const newPaddingTop = paddingTop - outlineValue;
+    setPaddingBottom(newPaddingBottom);
+    setPaddingTop(newPaddingTop);
   }, [canCorrect]);
 
   return (
@@ -77,7 +81,7 @@ const ResizableButton = ({
         style={{
           paddingTop: `${paddingTop}px`,
           paddingBottom: `${paddingBottom}px`,
-          paddingInline: paddingX + 'em',
+          paddingInline: `${paddingX}em`,
           fontSize: `${initialFontSize * relativeSize}px`,
           fontWeight: currentWeight,
           fontFamily: 'var(--font-target)',

@@ -3,7 +3,7 @@ import { iconLg, iconSm } from '@/css/lucideIcons.ts';
 import { Button } from '@/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/ui/card';
 import { CaseSensitive, MousePointerClick, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import ButtonsPreview from './components/buttons-preview.tsx';
 import TypographyPreview from './components/typography-preview';
 
@@ -24,11 +24,11 @@ const Home = () => {
           <CardContent>
             <div className={`flex gap-3`}>
               <Button>
-                <Link to="/typography">Gerador de escala tipográfica</Link>
+                <NavLink to="/typography">Gerador de escala tipográfica</NavLink>
                 <CaseSensitive {...iconLg} />
               </Button>
               <Button variant="outline">
-                <Link to="/buttons">Gerador de estilos para botões</Link>
+                <NavLink to="/buttons">Gerador de estilos para botões</NavLink>
                 <MousePointerClick {...iconSm} />
               </Button>
             </div>

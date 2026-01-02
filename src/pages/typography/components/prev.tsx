@@ -58,8 +58,8 @@ const Prev = ({ clampValues, disabled }: { clampValues: ClampValue; disabled: bo
         </Alert>
       )}
 
-      <div className={`xl:flex xl:gap-7`}>
-        <CardContent className={`font-target xl:w-4xl`}>
+      <div className={`xl:grid xl:grid-cols-2 xl:gap-7`}>
+        <CardContent className={`font-target`}>
           <section
             className={css.section}
             style={{

@@ -9,7 +9,7 @@ const alertVariants = cva(
   {
     variants: {
       variant: {
-        default: "text-muted-foreground",
+        default: "text-foreground",
         destructive:
           "ring ring-destructive/66 text-destructive [&>div:last-child]:text-destructive",
       },

@@ -17,23 +17,23 @@ import { ChartColumnDecreasing, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { buttonScales } from '@/data/buttons/variables';
 
-interface SizeInputsProps {
+interface HeightInputsProps {
   currentButtonsData: ButtonsData[];
   setCurrentButtonsData: StateSetter<ButtonsData[]>;
 }
 
 const css = { wrapperInputs: `flex flex-col gap-[2ex] min-[575px]:flex-row` };
 
-const SizeInputs = ({ currentButtonsData, setCurrentButtonsData }: SizeInputsProps) => {
-  const [sizeScale, setSizeScale] = useState<string[]>(
+const HeightInputs = ({ currentButtonsData, setCurrentButtonsData }: HeightInputsProps) => {
+  const [heightScale, setHeightScale] = useState<string[]>(
     currentButtonsData.map((item) => item.height.toString())
   );
   const [checkCount, setCheckCount] = useState<number>(0);
   const [stopOnChange, setStopOnChange] = useState<boolean>(false);
 
-  function handleSizeChange(index: number, value: string) {
+  function handleHeightChange(index: number, value: string) {
     if (stopOnChange || !validateDecimalInput(value)) return;
-    setSizeScale((prev) => {
+    setHeightScale((prev) => {
       const newScale = [...prev];
       newScale[index] = value;
       return newScale;
@@ -43,20 +43,22 @@ const SizeInputs = ({ currentButtonsData, setCurrentButtonsData }: SizeInputsPro
 
   function handleChangeScale(action: 'previous' | 'next') {
     setStopOnChange(true);
-    const stopValue = Number(sizeScale[1]) <= 28 || Number(sizeScale[1]) >= 72;
+    const stopValue =
+      (action === 'previous' && Number(heightScale[0]) <= 32) ||
+      (action === 'next' && Number(heightScale[2]) >= 72);
     if (stopValue) return;
-    const middleValue = Number(sizeScale[1]) + (action === 'previous' ? -4 : 4);
+    const middleValue = Number(heightScale[1]) + (action === 'previous' ? -4 : 4);
 
-    const newScale = sizeScale.map((item, index) => {
+    const newScale = heightScale.map((_, index) => {
       return buttonScales[middleValue][index].toString();
     });
-    setSizeScale(newScale);
+    setHeightScale(newScale);
     setCheckCount((prev) => prev + 1);
   }
 
   useEffect(() => {
-    sizeScale.forEach((item, index) => {
-      if (Number(item) >= 28 && Number(item) <= 72) {
+    heightScale.forEach((item, index) => {
+      if (Number(item) >= 32 && Number(item) <= 72) {
         const newButtonsData = [...currentButtonsData];
         newButtonsData[index].height = Number(item);
         setCurrentButtonsData(newButtonsData);
@@ -84,10 +86,10 @@ const SizeInputs = ({ currentButtonsData, setCurrentButtonsData }: SizeInputsPro
             <Input
               id={item.name}
               type="text"
-              value={sizeScale[index]}
+              value={heightScale[index]}
               onClick={() => setStopOnChange(false)}
               onChange={(e) => {
-                handleSizeChange(index, e.target.value);
+                handleHeightChange(index, e.target.value);
               }}
             />
           </WrapperInput>
@@ -107,4 +109,4 @@ const SizeInputs = ({ currentButtonsData, setCurrentButtonsData }: SizeInputsPro
   );
 };
 
-export default SizeInputs;
+export default HeightInputs;

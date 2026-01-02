@@ -1,15 +1,17 @@
 import { ButtonsData } from '@/data/buttons/variables';
 import { WrapperButtons } from '@/ui/index';
 import ResizableButton from './resizable-button';
+import { StateSetter } from '@/data/typography/types';
 
 interface ResultPreviewProps {
   currentButtonsData: ButtonsData[];
   initialFontSize: number;
   currentWeight: number;
   color: string;
-  lineThickness: string;
+  outlineValue: number;
   textContrastColor: string;
-  paddingX: string;
+  paddingX: number;
+  setPaddingX?: StateSetter<number>;
 }
 
 const ResultPreview = ({
@@ -17,9 +19,10 @@ const ResultPreview = ({
   initialFontSize,
   currentWeight,
   color,
-  lineThickness,
+  outlineValue,
   textContrastColor,
   paddingX,
+  setPaddingX,
 }: ResultPreviewProps) => {
   return (
     <>
@@ -43,6 +46,10 @@ const ResultPreview = ({
       </WrapperButtons>
       <WrapperButtons className="items-start! font-target">
         {currentButtonsData.map((item, index) => {
+          const fontSize = item.relativeSize * initialFontSize;
+          const pxInPx = fontSize * paddingX - (4 / 5) * outlineValue;
+          const fixedPx = pxInPx / fontSize;
+
           return (
             <ResizableButton
               key={index}
@@ -51,10 +58,10 @@ const ResultPreview = ({
               relativeSize={item.relativeSize}
               initialFontSize={initialFontSize}
               currentWeight={currentWeight}
-              outlineValue={lineThickness}
+              outlineValue={outlineValue}
               color={color}
               textContrastColor={textContrastColor}
-              paddingX={paddingX}
+              paddingX={fixedPx}
               adjustment={item.adjustment}
             />
           );

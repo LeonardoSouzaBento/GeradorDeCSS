@@ -1,5 +1,5 @@
 import { iconXs } from '@/css/lucideIcons';
-import { lineThicknessSuggestions } from '@/data/buttons/variables';
+import { outlineSuggestions } from '@/data/buttons/variables';
 import { StateSetter } from '@/data/typography/types';
 import {
   Button,
@@ -16,14 +16,14 @@ import { validateDecimalInput } from '@/utils/validateDecimalInput';
 import { LineSquiggle } from 'lucide-react';
 import { useState } from 'react';
 
-const LineThickness = ({
-  lineThickness,
-  setLineThickness,
+const OutlineInput = ({
+  outlineValue,
+  setOutlineValue,
 }: {
-  lineThickness: string;
-  setLineThickness: StateSetter<string>;
+  outlineValue: number;
+  setOutlineValue: StateSetter<number>;
 }) => {
-  const [inputValue, setInputValue] = useState<string>(lineThickness);
+  const [inputValue, setInputValue] = useState<string>(outlineValue.toString());
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = normalizeDecimalInput(e.target.value);
@@ -33,9 +33,9 @@ const LineThickness = ({
 
     // Aceitar valores entre 1 e 10
     if (numberValue >= 1 && numberValue <= 10 && value !== '') {
-      setLineThickness(value);
+      setOutlineValue(numberValue);
     } else if (value === '') {
-      setLineThickness('2');
+      setOutlineValue(2);
     }
   };
 
@@ -60,16 +60,16 @@ const LineThickness = ({
         />
       </WrapperInput>
       <WrapperButtons className="pt-4">
-        {lineThicknessSuggestions.map((item) => (
+        {outlineSuggestions.map((item) => (
           <Button
             variant="ghost"
             size="sm"
             optionButton
-            isSelected={item === lineThickness}
+            isSelected={item === outlineValue}
             key={item}
             onClick={() => {
-              setLineThickness(item);
-              setInputValue(item);
+              setOutlineValue(item);
+              setInputValue(item.toString());
             }}>
             {item}
           </Button>
@@ -79,4 +79,4 @@ const LineThickness = ({
   );
 };
 
-export default LineThickness;
+export default OutlineInput;

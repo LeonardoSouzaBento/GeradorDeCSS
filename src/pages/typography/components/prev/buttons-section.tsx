@@ -1,4 +1,8 @@
+import { iconXs } from '@/css/lucideIcons';
 import { ClampValue } from '@/data/typography/types';
+import { Button } from '@/ui';
+import { Link2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const buttonConfigs = [
   {
@@ -26,7 +30,7 @@ const css = {
 
 const ButtonsSection = ({ clampValues }: { clampValues: ClampValue }) => {
   return (
-    <>
+    <div>
       <div className={css.wrapper} style={{ fontFamily: 'var(--font-target)' }}>
         {buttonConfigs.map((config) => (
           <button
@@ -51,7 +55,13 @@ const ButtonsSection = ({ clampValues }: { clampValues: ClampValue }) => {
           </button>
         ))}
       </div>
-    </>
+      <Button variant="link" size="sm" className="mt-5 pt-5 w-full flex justify-end gap-[0.4em] border-t rounded-none">
+        <Link2 {...iconXs} />
+        <Link to="/button-page" className="normal-case">
+          Estilizar botões
+        </Link>
+      </Button>
+    </div>
   );
 };
 

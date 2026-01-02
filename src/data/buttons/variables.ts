@@ -56,7 +56,6 @@ export const buttonsData: ButtonsData[] = [
 ];
 
 export const buttonScales = {
-  32: [28, 32, 36],
   36: [32, 36, 40],
   40: [36, 40, 44],
   44: [40, 44, 48],
@@ -67,8 +66,10 @@ export const buttonScales = {
   64: [56, 64, 72],
 };
 
-export const pxSuggestions = ["0.9", "1.1", "1.3", "1.5"];
-export const lineThicknessSuggestions = ["1", "2.0", "2.5", "3.0"];
+export const validateButtonHeight = (value: number) => value >= 32 && value <= 72;
+
+export const pxSuggestions = [0.9, 1.1, 1.3, 1.5];
+export const outlineSuggestions = [1, 2.0, 2.5, 3.0];
 
 export type NavOptions =
   | 'Alturas'

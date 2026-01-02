@@ -55,7 +55,7 @@ const FontSelector = ({
 
   return (
     <WrapperForm className={`${typographyPage ? 'mt-4 xl:mt-2' : 'xl:mt-0'}`}>
-      <form onSubmit={handleSubmit} className={`border-b mb-[1.4ex]`}>
+      <form onSubmit={handleSubmit} className={`border-b mb-[1cap]`}>
         <div className="pb-2">
           {typographyPage ? (
             <label className="text-base">Troque a fonte:</label>
@@ -74,7 +74,7 @@ const FontSelector = ({
           )}
         </div>
 
-        <div className={`space-y-4 ${typographyPage ? 'sm:flex' : ''} gap-3 pb-5`}>
+        <div className={`space-y-4 ${typographyPage ? 'sm:flex' : ''} gap-3 pb-4`}>
           <Input
             type="text"
             className={`${typographyPage ? 'sm:mb-0' : ''}`}
