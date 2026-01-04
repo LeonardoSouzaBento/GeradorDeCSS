@@ -1,4 +1,5 @@
 import { StateSetter } from '@/data/typography/types';
+import { Label } from '@/ui';
 import { Button } from '@/ui/button';
 import { useEffect } from 'react';
 
@@ -19,8 +20,8 @@ const ReturnOptions = ({ returnType, setReturnType, setCanGenerate }: Props) => 
   }, [returnType]);
 
   return (
-    <div className={`flex flex-col gap-3 sm:pl-5 sm:border-l border-input`}>
-      <label>Saída</label>
+    <div className={`flex flex-col gap-[0.95cap] sm:pl-5 sm:border-l border-input`}>
+      <Label>Saída</Label>
       <div
         className={`w-full flex justify-start gap-3 sticky bottom-0
           right-0! sm:flex-col sm:max-w-max`}>

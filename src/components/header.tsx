@@ -10,9 +10,19 @@ interface Props {
   removeHeader?: boolean;
   className?: string;
   resizeCounter?: number;
+  isMobile?: boolean;
 }
 
-const Header = ({ title, description, icon, page, removeHeader, className, resizeCounter }: Props) => {
+const Header = ({
+  title,
+  description,
+  icon,
+  page,
+  removeHeader,
+  className,
+  resizeCounter,
+  isMobile,
+}: Props) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const [headerHeight, setHeaderHeight] = useState<number | string>(0);
@@ -34,11 +44,11 @@ const Header = ({ title, description, icon, page, removeHeader, className, resiz
   return (
     <div
       ref={wrapperRef}
-      style={{ height: removeHeader ? 0 : headerHeight || 'auto' }}
+      style={{ height: removeHeader ? 0 : isMobile ? 'auto' : headerHeight || 'auto' }}
       className="w-full transition-all duration-400 overflow-hidden">
       <header
         ref={headerRef}
-        className={`w-full min-h-max h-auto mx-auto animate-in fade-in slide-in-from-top duration-500 ${className}`}>
+        className={`w-full min-h-max h-auto mx-auto flex items-center animate-in fade-in slide-in-from-top duration-500 ${className}`}>
         <div className={`flex items-center justify-center mb-2 pre-sm:mb-0`}>
           <div
             className={`h-13.5 w-13.5 text-white/93 flex items-center justify-center

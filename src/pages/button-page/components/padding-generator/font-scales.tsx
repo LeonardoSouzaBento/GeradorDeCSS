@@ -10,10 +10,7 @@ interface Props {
   setScaleValue: StateSetter<number>;
 }
 
-const FontScales = ({
-  scaleValue,
-  setScaleValue,
-}: Props) => {
+const FontScales = ({ scaleValue, setScaleValue }: Props) => {
   return (
     <WrapperForm>
       <HeaderH6 mb={0}>
@@ -40,12 +37,13 @@ const FontScales = ({
             {item.value}
           </Button>
         ))}
+
+        <Button variant="link" size="sm">
+          <NavLink to="/typography" className="flex items-center gap-2">
+            <Link {...iconXs} /> Saber mais
+          </NavLink>
+        </Button>
       </WrapperButtons>
-      <Button variant="link" size="sm" className="w-full justify-end">
-        <NavLink to="/typography" className="flex items-center gap-2">
-          <Link {...iconXs} /> Saber mais
-        </NavLink>
-      </Button>
     </WrapperForm>
   );
 };

@@ -40,7 +40,7 @@ const H6Description = ({
   className?: string;
 }) => {
   return (
-    <div className={`first:text-muted-foreground first:text-sm ${className ?? ''}`}>{children}</div>
+    <div className={`text-muted-foreground text-sm ${className ?? ''}`}>{children}</div>
   );
 };
 

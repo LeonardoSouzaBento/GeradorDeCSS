@@ -1,6 +1,6 @@
 import { iconMd, iconSm, iconXs } from '@/css/lucideIcons';
 import { applyFontToTargets, loadFont } from '@/functions/changeFont';
-import { Alert, AlertDescription, AlertTitle, Button, H6Title, HeaderH6, Input, Separator, WrapperForm } from '@/ui/index';
+import { Alert, AlertDescription, AlertTitle, Button, H6Title, HeaderH6, Input, WrapperForm } from '@/ui/index';
 import { BookType, Check, EyeOff, Info } from 'lucide-react';
 import React, { useRef, useState } from 'react';
 
@@ -124,7 +124,7 @@ const FontSelector = ({
           <AlertTitle>Observações</AlertTitle>
           <Button
             variant="secondary"
-            size="icon-xs"
+            size="icon-sm"
             closeButton
             className={`absolute top-2 right-2 text-destructive`}
             onClick={() => setShowAlert(false)}>

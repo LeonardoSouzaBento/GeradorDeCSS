@@ -36,7 +36,7 @@ const InitialSize = ({ styles, initialFontSize, setInitialFontSize }: Props) => 
           <h6>Tamanho inicial do parágrafo</h6>
         </H6Title>
         <H6Description>
-          <p>Tamanho inicial da tag p em px</p>
+          <p>Tamanho inicial da tag p em <strong>px</strong></p>
         </H6Description>
       </HeaderH6>
 

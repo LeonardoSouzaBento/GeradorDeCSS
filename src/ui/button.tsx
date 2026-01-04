@@ -22,10 +22,10 @@ const buttonVariants = cva(
         sm: 'h-9 rounded-md px-4 small-button',
         default: `h-10 py-2 text-[0.95em]`,
         lg: 'h-11 rounded-md px-6 large-text text-[1.00em]',
-        'icon-xs': 'size-8 [align-content:_center]',
-        icon: 'size-8',
-        'icon-md': 'size-9',
-        'icon-lg': 'size-10',
+        'icon-sm': 'size-8',
+        icon: 'size-8.5',
+        'icon-md': 'size-9.5',
+        'icon-button': 'size-10',
       },
     },
     defaultVariants: {
@@ -66,7 +66,8 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
           buttonVariants({ variant, size }),
           {
             'rounded-full': optionButton,
-            'border-2 border-selected text-primary': isSelected,
+            'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card':
+              isSelected,
             'grayscale-100 opacity-50 cursor-not-allowed': isDisable,
             'rounded-full p-0!': closeButton,
           },

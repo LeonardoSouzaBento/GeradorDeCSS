@@ -1,6 +1,7 @@
 import { Button } from '@/ui/button';
 import { scales } from '@/data/typography/variables';
 import { StateSetter } from '@/data/typography/types';
+import { Label } from '@/ui';
 
 interface OptionsScaleProps {
   scaleValue: number;
@@ -11,9 +12,9 @@ interface OptionsScaleProps {
 const OptionsScale = ({ scaleValue, setScaleValue, setCanGenerate }: OptionsScaleProps) => {
   return (
     <div
-      className={`flex flex-col gap-3 rounded-none border-b 
+      className={`flex flex-col gap-[1cap] rounded-none border-b 
         border-input sm:border-b-0 pb-4.5 sm:pb-0`}>
-      <label htmlFor="scale">Escala tipográfica</label>
+      <Label htmlFor="scale">Escala tipográfica</Label>
       <div
         className={`flex flex-wrap gap-3 rounded-md 
            text-foreground`}>

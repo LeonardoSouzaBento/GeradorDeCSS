@@ -1,17 +1,19 @@
-import { ButtonsData } from '@/data/buttons/variables';
+import { ButtonsData, IconVariants } from '@/data/buttons/variables';
 import { WrapperButtons } from '@/ui/index';
+import { ThumbsUp } from 'lucide-react';
 import ResizableButton from './resizable-button';
-import { StateSetter } from '@/data/typography/types';
 
 interface ResultPreviewProps {
   currentButtonsData: ButtonsData[];
   initialFontSize: number;
   currentWeight: number;
   color: string;
+  color50: string;
+  color1000: string;
   outlineValue: number;
-  textContrastColor: string;
   paddingX: number;
-  setPaddingX?: StateSetter<number>;
+  iconHeightScale: number[];
+  iconData: IconVariants;
 }
 
 const ResultPreview = ({
@@ -20,10 +22,14 @@ const ResultPreview = ({
   currentWeight,
   color,
   outlineValue,
-  textContrastColor,
   paddingX,
-  setPaddingX,
+  iconHeightScale,
+  color50,
+  color1000,
+  iconData,
 }: ResultPreviewProps) => {
+  const iconStyles = [iconData.xs, iconData.sm, iconData.md, iconData.lg];
+
   return (
     <>
       <WrapperButtons className="items-start! font-target">
@@ -37,7 +43,7 @@ const ResultPreview = ({
               initialFontSize={initialFontSize}
               currentWeight={currentWeight}
               color={color}
-              textContrastColor={textContrastColor}
+              color50={color50}
               paddingX={paddingX}
               adjustment={item.adjustment}
             />
@@ -60,10 +66,23 @@ const ResultPreview = ({
               currentWeight={currentWeight}
               outlineValue={outlineValue}
               color={color}
-              textContrastColor={textContrastColor}
               paddingX={fixedPx}
               adjustment={item.adjustment}
             />
+          );
+        })}
+      </WrapperButtons>
+      <WrapperButtons>
+        {iconHeightScale.map((item, index) => {
+          const id = `icon-${index}`;
+          return (
+            <div
+              className="bg-primary-50 rounded-full flex items-center justify-center text-base"
+              key={id}
+              style={{ height: `${item}px`, width: `${item}px`, color: color1000 }}>
+              {' '}
+              <ThumbsUp {...iconStyles[index]} className="ml-px" />
+            </div>
           );
         })}
       </WrapperButtons>

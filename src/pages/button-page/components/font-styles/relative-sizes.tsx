@@ -80,7 +80,13 @@ const RelativeSizes = ({
       </div>
       <Alert className={`mt-5`}>
         <Info {...iconXs} className="warn-icon" />
-        <AlertDescription>Definimos automaticamente. Não se preocupe.</AlertDescription>
+        <AlertDescription>
+          Não se preocupe, definimos automaticamente pela{' '}
+          <strong className="text-primary cursor-pointer font-semibold">
+            escala de cresimento 
+          </strong>{" "}
+          selecionada.
+        </AlertDescription>
         <Button variant="link" size="sm" className="gap-[0.75ex]" onClick={() => setSeeModal(true)}>
           Saiba mais
         </Button>

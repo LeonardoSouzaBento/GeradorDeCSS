@@ -1,5 +1,5 @@
 import { FontSelector, Header } from '@/components/index';
-import { ButtonsData, buttonsData, NavOptions, pxSuggestions } from '@/data/buttons/variables';
+import { ButtonsData, buttonsData, iconVariants, IconVariants, NavOptions, pxSuggestions } from '@/data/buttons/variables';
 import { useColorShades } from '@/hooks/useColorShades';
 import { useResizeWatcher } from '@/hooks/useResizeWatcher';
 import { Card, CardContent, H6Title, HeaderH6, WrapperForm } from '@/ui/index';
@@ -24,44 +24,45 @@ import RemoveHeaderButton from './components/remove-header-button';
 export const wrapperStyles = 'border rounded-lg p-5 pt-[1.5ex] bg-card';
 
 export default function ButtonPage() {
+  /* valores unicos */
   const [color, setColor] = useState('#1F4780');
-  const [textContrastColor, setTextContrastColor] = useState<string>('');
   const [currentWeight, setCurrentWeight] = useState(600);
   const [initialFontSize, setInitialFontSize] = useState(17);
-  const [relativeSizeScale, setRelativeSizeScale] = useState<string[]>(['']); // [0.9, 0.95, 1]);
-  const [currentButtonsData, setCurrentButtonsData] = useState<ButtonsData[]>(buttonsData);
-  const [iconSizeScale, setIconSizeScale] = useState<number[]>([0, 0, 0, 0]);
   const [outlineValue, setOutlineValue] = useState(2);
   const [paddingX, setPaddingX] = useState(pxSuggestions[0]);
-  const [navOptions, setNavOptions] = useState<NavOptions>('Alturas');
-  const { shades, blackColor, whiteColor } = useColorShades(color);
   const [scaleValue, setScaleValue] = useState<number>(1.067);
+  /* escalas e dados compostos*/
+  const [relativeSizeScale, setRelativeSizeScale] = useState<string[]>(['']);
+  const [currentButtonsData, setCurrentButtonsData] = useState<ButtonsData[]>(buttonsData);
+  const [iconHeightScale, setIconHeightScale] = useState<number[]>([0, 0, 0, 0]);
+  const [iconData, setIconData] = useState<IconVariants>(iconVariants);
+  const { shades, color1000, color50 } = useColorShades(color);
+  /* iteratividade */
+  const [navOptions, setNavOptions] = useState<NavOptions>('Alturas');
   const [removeHeader, setRemoveHeader] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const [resizeCounter, setResizeCounter] = useState<number>(0);
   useResizeWatcher(setResizeCounter);
 
   useEffect(() => {
     if (window.innerWidth < 1280) {
       setRemoveHeader(false);
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
     }
   }, [resizeCounter]);
-
-  useEffect(() => {
-    if (!blackColor || !whiteColor) return;
-    const contrastColor =
-      chroma(color).luminance() > 0.2 ? blackColor || '#000' : whiteColor || '#fff';
-    setTextContrastColor(contrastColor);
-  }, [color, blackColor, whiteColor, setTextContrastColor]);
 
   useEffect(() => {
     const [sm, md] = currentButtonsData
       .filter((_, index) => index !== 2)
       .map((button) => button.height);
-    const xlIconSize = md;
-    const lgIconSize = sm;
-    const mdIconSize = sm - (md - sm) / 2;
-    const smIconSize = sm - (md - sm);
-    setIconSizeScale([smIconSize, mdIconSize, lgIconSize, xlIconSize]);
+    const small = sm - (md - sm); //altura do botão pequeno - a diferença de aturas
+    const medium = sm - (md - sm) / 2; //altura do botão pequeno - metade da diferença de aturas
+    const largeSize = sm; //altura do botão pequeno
+    const buttonSize = md; //altura do botão normal
+    const iconHeightScale = [small, medium, largeSize, buttonSize];
+    setIconHeightScale(iconHeightScale);
   }, [currentButtonsData]);
 
   useEffect(() => {
@@ -90,13 +91,14 @@ export default function ButtonPage() {
         icon={<MousePointerClick />}
         resizeCounter={resizeCounter}
         removeHeader={removeHeader}
+        isMobile={isMobile}
       />
       <main className={`space-y-6 px-3 mt-4 min-[840px]:px-6 max-w-5xl mx-auto xl:max-w-none`}>
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.8fr_1fr]">
-          <Card noHeader className="md:flex md:gap-5 xl:h-157 relative">
+          <Card noHeader className="md:flex md:gap-4 xl:h-157 relative p-5">
             <RemoveHeaderButton removeHeader={removeHeader} setRemoveHeader={setRemoveHeader} />
             <Nav setNavOption={setNavOptions} navOption={navOptions} />
-            <CardContent className={`w-full flex flex-col gap-5 items-start`}>
+            <CardContent className={`w-full flex flex-col gap-5 items-start overflow-y-scroll scrollbar-hidden`}>
               {navOptions === 'Alturas' && (
                 <HeightInputs
                   currentButtonsData={currentButtonsData}
@@ -130,9 +132,11 @@ export default function ButtonPage() {
               )}
               {navOptions === 'Peso' && (
                 <WeightSelector
-                  styles={wrapperStyles}
+                  iconData={iconData}
+                  setIconData={setIconData}
                   currentWeight={currentWeight}
                   setCurrentWeight={setCurrentWeight}
+                  color={color}
                 />
               )}
               {navOptions === 'Font-size dos botões' && (
@@ -143,7 +147,7 @@ export default function ButtonPage() {
                 />
               )}
               {navOptions === 'Paleta' && (
-                <ColorGenerator shades={shades} blackColor={blackColor} whiteColor={whiteColor} />
+                <ColorGenerator shades={shades} />
               )}
               {navOptions !== 'Paleta' && (
                 <WrapperForm className={`flex flex-col gap-3 min-w-full`}>
@@ -157,16 +161,18 @@ export default function ButtonPage() {
                     initialFontSize={initialFontSize}
                     currentWeight={currentWeight}
                     color={color}
+                    color50={color50}
+                    color1000={color1000}
                     outlineValue={outlineValue}
-                    textContrastColor={textContrastColor}
                     paddingX={paddingX}
-                    setPaddingX={setPaddingX}
+                    iconHeightScale={iconHeightScale}
+                    iconData={iconData}
                   />
                 </WrapperForm>
               )}
             </CardContent>
           </Card>
-          <Card noHeader className="h-full xl:h-157">
+          <Card noHeader className="h-full xl:h-157 p-5 border">
             <CardContent className="h-full relative space-y-5">
               <pre className="h-[calc(100%-3.75rem)]">
                 {JSON.stringify(currentButtonsData, null, 2)}

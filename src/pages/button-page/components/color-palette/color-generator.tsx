@@ -1,16 +1,13 @@
 import { iconSm, iconXs } from '@/css/lucideIcons';
 import { ColorShade } from '@/hooks/useColorShades';
 import { Alert, AlertDescription, AlertTitle, Button, H6Title, HeaderH6, WrapperButtons, WrapperForm } from '@/ui';
-import chroma from 'chroma-js';
 import { ChartSpline, Info, Palette } from 'lucide-react';
 
 interface ColorGeneratorProps {
-  blackColor: string;
-  whiteColor: string;
   shades: ColorShade[];
 }
 
-const ColorGenerator = ({ blackColor, whiteColor, shades }: ColorGeneratorProps) => {
+const ColorGenerator = ({ shades }: ColorGeneratorProps) => {
   const baseColor = shades.find((item) => item.isBase);
 
   return (
@@ -29,7 +26,7 @@ const ColorGenerator = ({ blackColor, whiteColor, shades }: ColorGeneratorProps)
               className={`w-20.5 text-left p-[1ex]`}
               style={{
                 backgroundColor: item.hex,
-                color: chroma(item.hex).luminance() > 0.2 ? blackColor : whiteColor,
+                color: item.textColor,
                 zIndex: item.isBase ? 2 : 1,
               }}>
               <p className="small-text font-medium max-w-max">{item.stop}</p>

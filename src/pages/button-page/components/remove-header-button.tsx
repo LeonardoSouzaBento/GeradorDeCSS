@@ -1,4 +1,4 @@
-import { iconMd, iconSm } from '@/css/lucideIcons';
+import { iconMd, iconXs } from '@/css/lucideIcons';
 import { Button } from '@/ui/index';
 import { ArrowUpToLine, Menu } from 'lucide-react';
 
@@ -15,7 +15,7 @@ const RemoveHeaderButton = ({ removeHeader, setRemoveHeader }: Props) => {
       closeButton
       className="absolute top-2 right-2 z-6 md:hidden xl:flex"
       onClick={() => setRemoveHeader(!removeHeader)}>
-      <ArrowUpToLine {...iconSm} className="hidden xl:flex" />
+      <ArrowUpToLine {...iconXs} className="hidden xl:flex" />
       <Menu {...iconMd} className="md:hidden" />
     </Button>
   );

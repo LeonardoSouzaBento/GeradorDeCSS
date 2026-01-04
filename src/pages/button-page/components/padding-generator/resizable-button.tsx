@@ -1,4 +1,4 @@
-import { StateSetter } from '@/data/typography/types';
+import { Pointer } from 'lucide-react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 interface DynamicPaddingButtonProps {
@@ -11,8 +11,8 @@ interface DynamicPaddingButtonProps {
   paddingX: number;
   backgroundColor?: string;
   color?: string;
+  color50?: string;
   outlineValue?: number;
-  textContrastColor?: string;
   definingPx?: boolean;
   children?: React.ReactNode;
 }
@@ -26,7 +26,7 @@ const ResizableButton = ({
   currentWeight,
   outlineValue,
   color,
-  textContrastColor,
+  color50,
   paddingX,
   definingPx = false,
   children,
@@ -86,12 +86,13 @@ const ResizableButton = ({
           fontWeight: currentWeight,
           fontFamily: 'var(--font-target)',
           backgroundColor: outlineValue ? 'transparent' : color,
-          color: outlineValue ? color : textContrastColor,
+          color: outlineValue ? color : color50,
           border: outlineValue ? `${outlineValue}px solid ${color}` : 'none',
         }}
         className={`h-fit flex items-center box-border
-          leading-none rounded-md`}>
+          leading-none rounded-md gap-2`}>
         {children}
+        <Pointer size={'1em'} strokeWidth={2.7}/>
         {name}
       </button>
     </div>

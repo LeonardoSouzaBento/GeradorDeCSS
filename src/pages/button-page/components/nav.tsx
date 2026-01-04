@@ -6,7 +6,7 @@ import { LucideIcon, Palette } from 'lucide-react';
 
 const css = {
   wrapper: `hidden md:flex w-max flex-col space-y-[1ex]
-  border rounded-lg p-5 pt-3 box-content xl:min-w-52`,
+  border rounded-lg p-5 pt-3 box-content xl:min-w-min`,
   wrapperGroup: `space-y-[0.8ex]`,
   wrapperButtons: `flex flex-col items-start gap-[1ex]`,
   title: `text-muted-foreground font-semibold`,

@@ -12,6 +12,8 @@ const Home = () => {
     <div className={`pb-8 min-h-screen bg-transparent`}>
       <Header
         title="CSS Generator"
+        className={`py-8 flex-col pre-sm:flex-row items-center gap-2.5 text-center
+          pre-sm:text-left main-wrapper`}
         description="Gerador de estilos para começar seu projeto"
         icon={<Sparkles strokeWidth={2.2} size={'1.6rem'} />}
       />

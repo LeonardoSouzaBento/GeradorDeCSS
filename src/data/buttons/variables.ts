@@ -165,3 +165,20 @@ export const buttonColors: ColorCombination[] = [
     color: '#2B7FFF',
   },
 ];
+
+export type IconVariants = Record<
+  "xs" | "sm" | "md" | "lg" | "xl",
+  {
+    strokeWidth: number;
+    size: string;
+  }
+>;
+
+
+export const iconVariants: IconVariants = {
+  xs: { strokeWidth: 2.4, size: "0.937em" },
+  sm: { strokeWidth: 2.4, size: "0.968em" },
+  md: { strokeWidth: 2.4, size: "1em" },
+  lg: { strokeWidth: 2.4, size: "1.033em" },
+  xl: { strokeWidth: 2.4, size: "1.067em" },
+};
