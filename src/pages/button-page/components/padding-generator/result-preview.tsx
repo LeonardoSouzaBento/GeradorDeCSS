@@ -1,4 +1,4 @@
-import { ButtonsData, IconVariants } from '@/data/buttons/variables';
+import { ButtonsData } from '@/data/buttons/variables';
 import { WrapperButtons } from '@/ui/index';
 import { ThumbsUp } from 'lucide-react';
 import ResizableButton from './resizable-button';
@@ -13,7 +13,8 @@ interface ResultPreviewProps {
   outlineValue: number;
   paddingX: number;
   iconHeightScale: number[];
-  iconData: IconVariants;
+  iconSizes: string[];
+  strokeWidth: number;
 }
 
 const ResultPreview = ({
@@ -26,10 +27,9 @@ const ResultPreview = ({
   iconHeightScale,
   color50,
   color1000,
-  iconData,
+  iconSizes,
+  strokeWidth,
 }: ResultPreviewProps) => {
-  const iconStyles = [iconData.xs, iconData.sm, iconData.md, iconData.lg];
-
   return (
     <>
       <WrapperButtons className="items-start! font-target">
@@ -46,6 +46,7 @@ const ResultPreview = ({
               color50={color50}
               paddingX={paddingX}
               adjustment={item.adjustment}
+              strokeWidth={strokeWidth}
             />
           );
         })}
@@ -68,6 +69,7 @@ const ResultPreview = ({
               color={color}
               paddingX={fixedPx}
               adjustment={item.adjustment}
+              strokeWidth={strokeWidth}
             />
           );
         })}
@@ -81,7 +83,7 @@ const ResultPreview = ({
               key={id}
               style={{ height: `${item}px`, width: `${item}px`, color: color1000 }}>
               {' '}
-              <ThumbsUp {...iconStyles[index]} className="ml-px" />
+              <ThumbsUp size={iconSizes[index]} strokeWidth={strokeWidth} className="ml-px" />
             </div>
           );
         })}

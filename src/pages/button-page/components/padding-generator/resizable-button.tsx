@@ -1,4 +1,4 @@
-import { Pointer } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 interface DynamicPaddingButtonProps {
@@ -15,6 +15,7 @@ interface DynamicPaddingButtonProps {
   outlineValue?: number;
   definingPx?: boolean;
   children?: React.ReactNode;
+  strokeWidth: number;
 }
 
 const ResizableButton = ({
@@ -30,6 +31,7 @@ const ResizableButton = ({
   paddingX,
   definingPx = false,
   children,
+  strokeWidth = 2.7,
 }: DynamicPaddingButtonProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -92,7 +94,7 @@ const ResizableButton = ({
         className={`h-fit flex items-center box-border
           leading-none rounded-md gap-2`}>
         {children}
-        <Pointer size={'1em'} strokeWidth={2.7}/>
+        <Sparkles size={'1em'} strokeWidth={strokeWidth} />
         {name}
       </button>
     </div>

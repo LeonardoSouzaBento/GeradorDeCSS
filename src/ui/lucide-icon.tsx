@@ -3,18 +3,19 @@ import { LucideIcon } from 'lucide-react';
 interface IconProps {
   size?: string;
   Icon: LucideIcon;
+  className?: string;
 }
 
-const iconVariants = {
-  xs: { strokeWidth: 2.7, size: '0.937em' },
-  sm: { strokeWidth: 2.5, size: '0.968em' },
-  md: { strokeWidth: 2.3, size: '1em' },
-  lg: { strokeWidth: 2.1, size: '1.033em' },
-  xl: { strokeWidth: 2.0, size: '1.067em' },
+const iconSizes = {
+  xs: '0.937em',
+  sm: '0.968em',
+  md: '1em',
+  lg: '1.033em',
+  xl: '1.067em',
+  '2xl': '1.1385em',
+  '3xl': '1.2148em',
 };
 
-const Icon = ({ size, Icon }: IconProps) => {
-  return <Icon {...iconVariants[size || 'md']} />;
+export const Icon = ({ size, Icon, className }: IconProps) => {
+  return <Icon size={iconSizes[size || 'md']} strokeWidth={2.4} className={className} />;
 };
-
-export default Icon;

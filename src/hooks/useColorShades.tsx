@@ -6,6 +6,7 @@ export interface ColorShade {
   hex: string;
   isBase: boolean;
   textColor: string;
+  contrastValue: number;
 }
 
 export const useColorShades = (baseColor: string) => {
@@ -17,8 +18,7 @@ export const useColorShades = (baseColor: string) => {
     const perceptualLightness = L / 100;
     const luminance = color.luminance();
 
-    const perceivedDarkness =
-      (1 - perceptualLightness) * 0.75 + (1 - luminance) * 0.25;
+    const perceivedDarkness = (1 - perceptualLightness) * 0.75 + (1 - luminance) * 0.25;
 
     const rawWeight = perceivedDarkness * 1000;
 
@@ -49,12 +49,17 @@ export const useColorShades = (baseColor: string) => {
     const color1000 = baseShades.find((s) => s.stop === 1000)?.hex ?? '#000';
     const color50 = baseShades.find((s) => s.stop === 50)?.hex ?? '#fff';
 
-    // 3️⃣ calcula textColor corretamente
-    return baseShades.map((item) => ({
-      ...item,
-      textColor:
-        chroma(item.hex).luminance() > 0.2 ? color1000 : color50,
-    }));
+    return baseShades.map((item) => {
+      const textColor = chroma(item.hex).luminance() > 0.2 ? color1000 : color50;
+
+      const contrastValue = chroma.contrast(item.hex, textColor).toFixed(2);
+
+      return {
+        ...item,
+        textColor,
+        contrastValue,
+      };
+    });
   }, [baseColor]);
 
   const color1000 = shades.find((item) => item.stop === 1000)?.hex;

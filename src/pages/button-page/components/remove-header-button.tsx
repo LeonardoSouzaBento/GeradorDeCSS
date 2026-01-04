@@ -10,10 +10,10 @@ interface Props {
 const RemoveHeaderButton = ({ removeHeader, setRemoveHeader }: Props) => {
   return (
     <Button
-      variant="secondary"
+      variant="transparent"
       size="icon"
       closeButton
-      className="absolute top-2 right-2 z-6 md:hidden xl:flex"
+      className="absolute top-2 right-2 z-6 md:hidden xl:flex bg-card border text-primary"
       onClick={() => setRemoveHeader(!removeHeader)}>
       <ArrowUpToLine {...iconXs} className="hidden xl:flex" />
       <Menu {...iconMd} className="md:hidden" />

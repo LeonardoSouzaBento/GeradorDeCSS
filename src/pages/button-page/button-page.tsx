@@ -1,11 +1,19 @@
 import { FontSelector, Header } from '@/components/index';
-import { ButtonsData, buttonsData, iconVariants, IconVariants, NavOptions, pxSuggestions } from '@/data/buttons/variables';
+import {
+  ButtonsData,
+  buttonsData,
+  buttonStylesExample,
+  defaultIconSizes,
+  iconReturnExample,
+  NavOptions,
+  pxSuggestions,
+  variablesReturnExample
+} from '@/data/buttons/variables';
 import { useColorShades } from '@/hooks/useColorShades';
 import { useResizeWatcher } from '@/hooks/useResizeWatcher';
 import { Card, CardContent, H6Title, HeaderH6, WrapperForm } from '@/ui/index';
-import chroma from 'chroma-js';
 import { MousePointerClick } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ColorGenerator from './components/color-palette/color-generator';
 import { InitialSize, RelativeSizes, WeightSelector } from './components/font-styles/index';
 import Nav from './components/nav';
@@ -31,17 +39,19 @@ export default function ButtonPage() {
   const [outlineValue, setOutlineValue] = useState(2);
   const [paddingX, setPaddingX] = useState(pxSuggestions[0]);
   const [scaleValue, setScaleValue] = useState<number>(1.067);
+  const [strokeWidth, setStrokeWidth] = useState<number>(2.6);
   /* escalas e dados compostos*/
   const [relativeSizeScale, setRelativeSizeScale] = useState<string[]>(['']);
+  const [iconSizes, setIconSizes] = useState<string[]>(defaultIconSizes);
   const [currentButtonsData, setCurrentButtonsData] = useState<ButtonsData[]>(buttonsData);
   const [iconHeightScale, setIconHeightScale] = useState<number[]>([0, 0, 0, 0]);
-  const [iconData, setIconData] = useState<IconVariants>(iconVariants);
   const { shades, color1000, color50 } = useColorShades(color);
   /* iteratividade */
   const [navOptions, setNavOptions] = useState<NavOptions>('Alturas');
   const [removeHeader, setRemoveHeader] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [resizeCounter, setResizeCounter] = useState<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
   useResizeWatcher(setResizeCounter);
 
   useEffect(() => {
@@ -53,6 +63,7 @@ export default function ButtonPage() {
     }
   }, [resizeCounter]);
 
+  /* alturas dos botões de ícone */
   useEffect(() => {
     const [sm, md] = currentButtonsData
       .filter((_, index) => index !== 2)
@@ -65,7 +76,9 @@ export default function ButtonPage() {
     setIconHeightScale(iconHeightScale);
   }, [currentButtonsData]);
 
+  /* tamanhos relativos da fonte dos botões */
   useEffect(() => {
+    /* escala dos botões */
     const sm = (1 / scaleValue).toFixed(3);
     const md = (1 / Math.sqrt(scaleValue)).toFixed(3);
     const relativeSizeScale = [sm, md, '1'];
@@ -75,6 +88,16 @@ export default function ButtonPage() {
       relativeSize: Number(relativeSizeScale[index]),
     }));
     setCurrentButtonsData(newButtonsData);
+
+    /* escala dos ícones */
+    const firstIconSizes = relativeSizeScale.map((item) => `${item}em`);
+    const restIconSizes = [0, 1, 2, 4].map((index) => {
+      const size = Math.pow(scaleValue, index + 1).toFixed(3);
+      return `${size}em`;
+    });
+    restIconSizes.unshift(Math.sqrt(scaleValue).toFixed(3) + 'em');
+    const iconSizes = [...firstIconSizes, ...restIconSizes];
+    setIconSizes(iconSizes);
   }, [scaleValue]);
 
   return (
@@ -98,7 +121,9 @@ export default function ButtonPage() {
           <Card noHeader className="md:flex md:gap-4 xl:h-157 relative p-5">
             <RemoveHeaderButton removeHeader={removeHeader} setRemoveHeader={setRemoveHeader} />
             <Nav setNavOption={setNavOptions} navOption={navOptions} />
-            <CardContent className={`w-full flex flex-col gap-5 items-start overflow-y-scroll scrollbar-hidden`}>
+            <CardContent
+              ref={containerRef}
+              className={`w-full flex flex-col gap-5 items-start overflow-y-scroll scrollbar-hidden`}>
               {navOptions === 'Alturas' && (
                 <HeightInputs
                   currentButtonsData={currentButtonsData}
@@ -132,11 +157,13 @@ export default function ButtonPage() {
               )}
               {navOptions === 'Peso' && (
                 <WeightSelector
-                  iconData={iconData}
-                  setIconData={setIconData}
                   currentWeight={currentWeight}
                   setCurrentWeight={setCurrentWeight}
                   color={color}
+                  iconSizes={iconSizes}
+                  strokeWidth={strokeWidth}
+                  setStrokeWidth={setStrokeWidth}
+                  containerRef={containerRef}
                 />
               )}
               {navOptions === 'Font-size dos botões' && (
@@ -146,9 +173,7 @@ export default function ButtonPage() {
                   setCurrentButtonsData={setCurrentButtonsData}
                 />
               )}
-              {navOptions === 'Paleta' && (
-                <ColorGenerator shades={shades} />
-              )}
+              {navOptions === 'Paleta' && <ColorGenerator shades={shades} />}
               {navOptions !== 'Paleta' && (
                 <WrapperForm className={`flex flex-col gap-3 min-w-full`}>
                   <HeaderH6 mb={0}>
@@ -166,7 +191,8 @@ export default function ButtonPage() {
                     outlineValue={outlineValue}
                     paddingX={paddingX}
                     iconHeightScale={iconHeightScale}
-                    iconData={iconData}
+                    iconSizes={iconSizes}
+                    strokeWidth={strokeWidth}
                   />
                 </WrapperForm>
               )}
@@ -175,7 +201,7 @@ export default function ButtonPage() {
           <Card noHeader className="h-full xl:h-157 p-5 border">
             <CardContent className="h-full relative space-y-5">
               <pre className="h-[calc(100%-3.75rem)]">
-                {JSON.stringify(currentButtonsData, null, 2)}
+                {buttonStylesExample}
               </pre>
               <CopyButton />
             </CardContent>

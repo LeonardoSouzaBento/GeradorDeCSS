@@ -27,9 +27,9 @@ export const sizes: SizeHierarchy[] = [
   { tagName: 'h1', pow: 6, var: '--text-h1' },
   { tagName: '.big-h1', pow: 7, var: '--text-big-h1' },
 
-  { tagName: 'button', ratio: 1, var: '--text-button' },
-  { tagName: '.small-button', ratio: 0.9, var: '--text-sm-button' },
-  { tagName: '.large-button', ratio: 1.1, var: '--text-lg-button' },
+  { tagName: 'button', pow: -0.5, var: '--text-button' },
+  { tagName: '.small-button', pow: -1, var: '--text-sm-button' },
+  { tagName: '.large-button', ratio: 1, var: '--text-lg-button' },
 ];
 
 export const buttonSizes: Record<string, string> = Object.fromEntries(

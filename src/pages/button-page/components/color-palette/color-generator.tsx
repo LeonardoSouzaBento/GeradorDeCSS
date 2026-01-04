@@ -1,19 +1,53 @@
 import { iconSm, iconXs } from '@/css/lucideIcons';
 import { ColorShade } from '@/hooks/useColorShades';
-import { Alert, AlertDescription, AlertTitle, Button, H6Title, HeaderH6, WrapperButtons, WrapperForm } from '@/ui';
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  Button,
+  H6Description,
+  H6Title,
+  HeaderH6,
+  WrapperButtons,
+  WrapperForm,
+} from '@/ui';
 import { ChartSpline, Info, Palette } from 'lucide-react';
+import { useMemo } from 'react';
 
 interface ColorGeneratorProps {
   shades: ColorShade[];
 }
 
+const buttonNames = ['Leve', 'Bom', 'Maior', 'Máximo'];
+
 const ColorGenerator = ({ shades }: ColorGeneratorProps) => {
   const baseColor = shades.find((item) => item.isBase);
 
+  const FIXED_STOPS = [800, 700, 100];
+  const MIDDLE_STOPS = [600, 500, 400];
+  const CONTRAST_THRESHOLD = 6.5;
+
+  const selectedShades = useMemo(() => {
+    if (!shades.length) return [];
+    const fixed = shades.filter((s) => FIXED_STOPS.includes(s.stop));
+    const middleCandidates = shades
+      .filter((s) => MIDDLE_STOPS.includes(s.stop))
+      .sort((a, b) => b.contrastValue - a.contrastValue);
+
+    const bestAccessible = middleCandidates.find((s) => s.contrastValue > CONTRAST_THRESHOLD);
+    const fallback400 = shades.find((s) => s.stop === 400);
+    const middle = bestAccessible ?? fallback400;
+
+    return [...fixed, middle]
+      .filter(Boolean)
+      .filter((item, index, arr) => arr.findIndex((i) => i.stop === item!.stop) === index)
+      .sort((a, b) => a.contrastValue - b.contrastValue);
+  }, [shades]);
+
   return (
-    <div className='space-y-5'>
+    <div className="space-y-5">
       <WrapperForm>
-        <HeaderH6 mb={1}>
+        <HeaderH6 mb={1.2}>
           <H6Title>
             <Palette {...iconSm} />
             <h6>Paleta de Cores</h6>
@@ -33,29 +67,34 @@ const ColorGenerator = ({ shades }: ColorGeneratorProps) => {
             </div>
           ))}
         </div>
-        <p className="pt-[1ex] smaller-text">
+        <p className="pt-[1cap] smaller-text">
           Sua cor: <br /> <strong>{baseColor.stop}</strong> | {baseColor.hex}{' '}
         </p>
       </WrapperForm>
       <WrapperForm>
-        <HeaderH6 mb={1}>
+        <HeaderH6 mb={1.5}>
           <H6Title>
             <ChartSpline {...iconSm} />
             <h6>Contrastes sugeridos</h6>
           </H6Title>
+          <H6Description>Contraste dos fundos com a cor 50 ou 1000 aplicada no texto</H6Description>
         </HeaderH6>
-        <WrapperButtons className='flex gap-2 mb-4'>
-          <Button>Fraco</Button>
-          <Button>Medio</Button>
-          <Button>Forte</Button>
+        <WrapperButtons className="flex gap-2 mb-[2ex]">
+          {selectedShades.map((item, index) => (
+            <button
+              key={index}
+              className="h-10 px-[1.4ex] rounded-full"
+              style={{ backgroundColor: item.hex, color: item.textColor }}>
+              <p className="small-text">
+                {item.stop} - <u className="font-medium">{item.contrastValue}</u>
+              </p>
+            </button>
+          ))}
         </WrapperButtons>
         <Alert>
-          <Info {...iconXs}/>
-          <AlertTitle>
-            Recomendação
-          </AlertTitle>
-          <AlertDescription>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit
+          <Info {...iconXs} className="mt-[0.25ex]"/>
+          <AlertDescription className="mt-[0.5ex]">
+            Usamos o contraste maior que 6.5 como critério.
           </AlertDescription>
         </Alert>
       </WrapperForm>
@@ -64,3 +103,11 @@ const ColorGenerator = ({ shades }: ColorGeneratorProps) => {
 };
 
 export default ColorGenerator;
+
+/* 
+{stop: 700, hex: '#465F92', isBase: false, textColor: '#F2F3F7', contrastValue: 5.717593960816893}
+{stop: 400, hex: '#96A0C0', isBase: false, textColor: '#000D3E', contrastValue: 7.174225685949362}
+{stop: 800, hex: '#1F4780', isBase: true, textColor: '#F2F3F7', contrastValue: 8.338443601200323}
+{stop: 100, hex: '#E4E6EF', isBase: false, textColor: '#000D3E', contrastValue: 14.961828553986662}
+
+*/

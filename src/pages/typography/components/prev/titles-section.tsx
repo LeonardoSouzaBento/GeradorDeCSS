@@ -19,7 +19,7 @@ const TitlesSection = ({
 }) => {
   return (
     <div ref={props.ref} className={`space-y-2`}>
-      <h1 className={`big-h1`} style={{ fontSize: clampValues[bigH1] }}>
+      <h1 className={`h1-hero`} style={{ fontSize: clampValues[bigH1] }}>
         h1 (maior) - Hero
       </h1>
       <h1 style={{ fontSize: clampValues[h1] }}>h1 - Título Principal</h1>

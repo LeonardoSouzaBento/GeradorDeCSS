@@ -45,7 +45,7 @@
     @apply font-bold;
   }
 
-  .big-h1 {
+  .h1-hero {
     @apply font-extrabold;
   }
 
@@ -167,8 +167,8 @@
     @apply text-h1;
   }
 
-  .big-h1 {
-    @apply text-big-h1;
+  .h1-hero {
+    @apply text-h1-hero;
   }
 
   button {

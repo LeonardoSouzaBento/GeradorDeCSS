@@ -1,23 +1,31 @@
 import { iconXs } from '@/css/lucideIcons';
-import { IconVariants } from '@/data/buttons/variables';
-import { StateSetter } from '@/data/typography/types';
 import {
+  Alert,
+  AlertDescription,
   Button,
   H6Description,
   H6Title,
   HeaderH6,
+  Icon,
   Input,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
   WrapperButtons,
   WrapperForm,
 } from '@/ui/index';
-import { Package, Weight } from 'lucide-react';
+import { normalizeDecimalInput, validateDecimalInput } from '@/utils';
+import { Info, Maximize2, Minimize2, Package, Weight } from 'lucide-react';
+import { useState } from 'react';
 
 type Props = {
   currentWeight: number;
   setCurrentWeight: (weight: number) => void;
-  iconData: IconVariants;
-  setIconData: StateSetter<IconVariants>;
+  strokeWidth: number;
+  setStrokeWidth: (strokeWidth: number) => void;
   color: string;
+  iconSizes: string[];
+  containerRef: React.RefObject<HTMLDivElement>;
 };
 
 const weights = [500, 600, 700];
@@ -25,14 +33,36 @@ const weights = [500, 600, 700];
 const WeightSelector = ({
   currentWeight,
   setCurrentWeight,
-  iconData,
-  setIconData,
+  strokeWidth,
+  setStrokeWidth,
   color,
+  iconSizes,
+  containerRef,
 }: Props) => {
+  const [inputValue, setInputValue] = useState<string>(strokeWidth.toString());
+  const [expandIcon, setExpandIcon] = useState<boolean>(false);
+
+  function scrollToBottom() {
+    containerRef.current?.scrollTo({
+      top: containerRef.current.scrollHeight,
+      behavior: 'smooth',
+    });
+  }
+
+  function handleChange(value: string) {
+    const normalized = normalizeDecimalInput(value);
+    setInputValue(normalized);
+    if (!validateDecimalInput(normalized)) return;
+    const numberValue = parseFloat(normalized);
+    if (numberValue >= 1.5 && numberValue <= 5) {
+      setStrokeWidth(numberValue);
+    }
+  }
+
   return (
-    <div className={`w-full flex-col gap-5 space-y-5`}>
+    <div className={`w-full space-y-5 pb-px`}>
       <WrapperForm className={`w-full`}>
-        <HeaderH6 mb={0.5}>
+        <HeaderH6 mb={0.75}>
           <H6Title>
             <Weight {...iconXs} />
             <h6>Peso da fonte</h6>
@@ -54,37 +84,83 @@ const WeightSelector = ({
         </WrapperButtons>
       </WrapperForm>
 
-      <WrapperForm className={`w-full`}>
-        <HeaderH6 mb={0.5}>
+      <WrapperForm className={`w-full relative`}>
+        <HeaderH6 mb={1}>
           <H6Title>
             <Weight {...iconXs} />
-            <h6>Peso do ícones</h6>
+            <h6>Peso do ícone</h6>
           </H6Title>
           <H6Description>Harmonize o peso do ícone com o peso da fonte</H6Description>
         </HeaderH6>
-        <WrapperButtons>
-          {Object.entries(iconData).map(([variant, props]) => (
-            <div
-              key={variant}
-              className={`flex gap-[0.75ex] items-center 
-            p-2 rounded-md`}
-              style={{ color: color }}>
-              <Package {...props} />
-              <p style={{ fontSize: props.size, fontWeight: currentWeight }}>Aa</p>
+        <Input
+          type="text"
+          value={inputValue}
+          onClick={scrollToBottom}
+          onChange={(e) => {
+            handleChange(e.target.value);
+          }}
+        />
+        <WrapperButtons className={`my-[1cap] border rounded-md px-[0.5ex] 
+          py-[0.25ex] justify-between`}>
+          {!expandIcon ? (
+            <div className="flex gap-[0.5ex]">
+              {iconSizes.slice(0, 5).map((size, index) => (
+                <div
+                  key={size}
+                  className={`flex gap-[0.75ex] items-center
+                  py-[0.5ex] px-[1ex] rounded-sm relative`}
+                  style={{
+                    color: color,
+                    border: `${index === 2 ? `1.2px solid var(--color-input)` : 'none'}`,
+                  }}>
+                  <Package size={size} strokeWidth={strokeWidth} />
+                  {index === 2 && <p className="absolute left-1 -top-1 text-lg">*</p>}
+                  <p style={{ fontSize: size, fontWeight: currentWeight }}>Aa</p>
+                </div>
+              ))}
             </div>
-          ))}
+          ) : (
+            <div
+              className={`flex gap-[0.6ex] items-center
+                  py-[0.5ex] px-[1ex] rounded-md relative text-[calc(var(--text-h1-hero)*2)]`}
+              style={{
+                color: color,
+              }}>
+              <Package color={color} strokeWidth={strokeWidth} size={'0.97em'} />
+              <p style={{ fontWeight: currentWeight }}>Aa</p>
+            </div>
+          )}
+          <Tooltip delayDuration={450}>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon-sm"
+                className="text-primary"
+                onClick={() => {
+                  setExpandIcon(!expandIcon);
+                  setTimeout(() => {
+                    if (!expandIcon) {
+                      scrollToBottom();
+                    }
+                  }, 200);
+                }}>
+                <Icon size="md" Icon={expandIcon ? Minimize2 : Maximize2} />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Aumentar previsualização</p>
+            </TooltipContent>
+          </Tooltip>
         </WrapperButtons>
-        <Input type="number" step={0.01} min={1} max={5} defaultValue={2.4} />
-        {/* <Alert className="mt-1">
+
+        <Alert className="mt-1">
           <Icon size="xs" Icon={Info} />
           <AlertDescription className="text-muted-foreground">
-            Tenha uma variedade de tamanhos de ícones para escolher caso 1em não seja um valor
-            conveniente.{' '}
-            <Button variant="link" size="sm">
-              Saiba mais
-            </Button>
+            <strong className="text-lg">*</strong> Tamanho padrão do ícone do botão normal, 1em do
+            botão normal. Os demais tamanhos são mais opções de tamanhos que geramos, caso 1em não
+            seja um valor conveniente.
           </AlertDescription>
-        </Alert> */}
+        </Alert>
       </WrapperForm>
     </div>
   );

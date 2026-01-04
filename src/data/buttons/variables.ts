@@ -14,7 +14,7 @@ import {
   RulerDimensionLine,
   Square,
   TypeOutline,
-  Weight
+  Weight,
 } from 'lucide-react';
 
 export const buttonSizes = {
@@ -137,11 +137,6 @@ export const colorConfigs: OptionButtonData[] = [
   },
 ];
 
-export const iconButtons = {
-  names: ['Sm', 'Md', 'Lg'],
-  icons: [Square, RectangleHorizontal, Play, Circle, Pill],
-};
-
 export interface ColorCombination {
   contrast: string;
   backgroundColor: string;
@@ -166,19 +161,62 @@ export const buttonColors: ColorCombination[] = [
   },
 ];
 
-export type IconVariants = Record<
-  "xs" | "sm" | "md" | "lg" | "xl",
-  {
-    strokeWidth: number;
-    size: string;
-  }
->;
+export const defaultIconSizes: string[] = ['0.937em', '0.968em', '1em', '1.033em', '1.067em'];
+//xs, sm, md, lg, xl, h6, h5, h4, h3
 
+export const iconReturnFirstPart = `import { LucideIcon } from 'lucide-react';\n
+interface IconProps {
+  size?: string;
+  Icon: LucideIcon;
+  className?: string;
+}\n`;
 
-export const iconVariants: IconVariants = {
-  xs: { strokeWidth: 2.4, size: "0.937em" },
-  sm: { strokeWidth: 2.4, size: "0.968em" },
-  md: { strokeWidth: 2.4, size: "1em" },
-  lg: { strokeWidth: 2.4, size: "1.033em" },
-  xl: { strokeWidth: 2.4, size: "1.067em" },
-};
+export const iconSizesExample = `const iconSizes = {
+  xs: '0.937em',
+  sm: '0.968em',
+  md: '1em',
+  lg: '1.033em',
+  h6: '1.067em',
+  h5: '1.1385em',
+  h4: '1.2148em',
+  h3: '1.2961em',
+};\n`;
+
+export const iconReturnSecondPart = `export const Icon = ({ size, Icon, className }: IconProps) => {\nreturn (\n<Icon size={iconSizes[size || 'md']} strokeWidth={2.6} className={className} />\n);};\n\n/*Exemplo de uso\n<Icon size="sm" Icon={Play} />*/`;
+
+export const iconReturnExample =
+  iconReturnFirstPart + '\n' + iconSizesExample + '\n' + iconReturnSecondPart;
+
+export const variablesReturnExample = `/* Botões */
+--text-sm-button: 0.93em;
+--text-button: 0.97em;
+--text-lg-button: 1em;\n
+/*Paleta*/
+--color-primary: #0b5bcb;
+--color-primary-50: #f2f3fc;
+--color-primary-100: #e5e6f8;
+--color-primary-200: #cbcef2;
+--color-primary-300: #b1b6ea;
+--color-primary-400: #959fe3;
+--color-primary-500: #7789dc;
+--color-primary-600: #5573d4;
+--color-primary-700: #0b5bcb; /*Sua cor*/
+--color-primary-800: #0042ac;
+--color-primary-900: #002688;
+--color-primary-950: #001a76;
+--color-primary-1000: #000b65;
+`;
+
+export const buttonStylesExample = `variant: {
+default: 'bg-primary hover:bg-primary/90 text-primary-50',
+outline:'border-2 border-primary text-primary bg-transparent hover:bg-primary-50/50',  
+secondary: 'bg-primary-100 text-primary hover:bg-primary-200',...};\n
+size:{
+sm: 'h-9 rounded-md px-4 small-button',
+default: 'h-10 py-2 text-[0.95em]',
+lg: 'h-11 rounded-md px-6 large-text text-[1.00em]',
+icon-sm: 'size-8 p-0',
+icon: 'size-8.5 p-0',
+icon-md: 'size-9.5 p-0',
+icon-button: 'size-10 p-0',
+},`;

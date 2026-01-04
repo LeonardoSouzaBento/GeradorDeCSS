@@ -58,7 +58,7 @@ const Header = ({
         </div>
         <div>
           <h1
-            className={`h-auto pb-1 big-h1 bg-linear-to-r ${linearGradient} bg-clip-text text-transparent
+            className={`h-auto pb-1 h1-hero bg-linear-to-r ${linearGradient} bg-clip-text text-transparent
             mb-0 capitalize pre-sm:text-left`}>
             {title}
           </h1>

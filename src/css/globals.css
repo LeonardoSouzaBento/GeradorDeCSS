@@ -15,17 +15,17 @@ max-w-5xl,64rem,1024px
   --font-button: 'Google Sans', sans-serif;
   --font-code: 'Ubuntu Mono', monospace;
   /*font sizes*/
-  --text-xs: 0.922275em;
-  --text-sm: 0.984067em;
+  --text-xs: 0.878357em;
+  --text-sm: 0.937207em;
   --text-base: 1em;
-  --text-lg: 1.12035em;
-  --text-h6: 1.12035em;
-  --text-h5: 1.195413em;
-  --text-h4: 1.275506em;
-  --text-h3: 1.360965em;
-  --text-h2: 1.45215em;
-  --text-h1: 1.549444em;
-  --text-big-h1: 1.653256em;
+  --text-lg: 1.067em;
+  --text-h6: 1.067em;
+  --text-h5: 1.138489em;
+  --text-h4: 1.214768em;
+  --text-h3: 1.296157em;
+  --text-h2: 1.383em;
+  --text-h1: 1.475661em;
+  --text-h1-hero: 1.57453em;
   --text-sm-button: 0.93em;
   --text-button: 0.97em;
   --text-lg-button: 1em;
@@ -41,18 +41,18 @@ max-w-5xl,64rem,1024px
   --color-popover-foreground: hsl(215 25% 15%);
 
   --color-primary: #0b5bcb;
-  --color-primary-50: #F2F3FC;
-  --color-primary-100: #E5E6F8;
-  --color-primary-200: #CBCEF2;
-  --color-primary-300: #B1B6EA;
-  --color-primary-400: #959FE3;
-  --color-primary-500: #7789DC;
-  --color-primary-600: #5573D4;
-  --color-primary-700: #0B5BCB; /* Sua cor principal */
-  --color-primary-800: #0042AC;
+  --color-primary-50: #f2f3fc;
+  --color-primary-100: #e5e6f8;
+  --color-primary-200: #cbcef2;
+  --color-primary-300: #b1b6ea;
+  --color-primary-400: #959fe3;
+  --color-primary-500: #7789dc;
+  --color-primary-600: #5573d4;
+  --color-primary-700: #0b5bcb; /* Sua cor principal */
+  --color-primary-800: #0042ac;
   --color-primary-900: #002688;
-  --color-primary-950: #001A76;
-  --color-primary-1000: #000B65;
+  --color-primary-950: #001a76;
+  --color-primary-1000: #000b65;
   --color-primary-foreground: hsl(220 25% 98%);
 
   --color-secondary: hsl(215 15% 92%);

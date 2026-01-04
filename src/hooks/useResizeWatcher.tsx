@@ -1,4 +1,4 @@
-import { StateSetter } from '@/data/typography/types';
+import type { StateSetter } from '@/data/typography/types';
 import { useEffect, useRef } from 'react';
 
 export function useResizeWatcher(setWasResize: StateSetter<number>) {
