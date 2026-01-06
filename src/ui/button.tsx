@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { ButtonRef } from '@/types/htmlTags';
 
 const buttonVariants = cva(
-  'px-[2ex] tracking-wide inline-flex items-center justify-center gap-2 shrink-0 whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  'tracking-wide inline-flex items-center justify-center gap-2 shrink-0 whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {
@@ -23,10 +23,10 @@ const buttonVariants = cva(
         sm: 'h-9 rounded-md px-4 small-button',
         default: `h-10 py-2 text-[0.95em]`,
         lg: 'h-11 rounded-md px-6 large-text text-[1.00em]',
-        'icon-sm': 'size-8 p-0',
-        icon: 'size-8.5 p-0',
-        'icon-md': 'size-9.5 p-0',
-        'icon-button': 'size-10 p-0',
+        'icon-sm': 'size-8',
+        icon: 'size-8.5',
+        'icon-md': 'size-9.5',
+        'icon-button': 'size-10',
       },
     },
     defaultVariants: {
@@ -61,14 +61,16 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
     ref
   ) => {
     const Comp = asChild ? Slot : 'button';
+    // const sizes = ["default", "", "", ""];
+    const px = size === 'default' || size === 'lg' || size === 'sm' || !size ? 'px-[0.9em]' : '';
     return (
       <Comp
         className={cn(
           buttonVariants({ variant, size }),
+          px,
           {
             'rounded-full': optionButton,
-            'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card':
-              isSelected,
+            'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card': isSelected,
             'grayscale-100 opacity-50 cursor-not-allowed': isDisable,
             'rounded-full p-0!': closeButton,
           },
@@ -82,4 +84,4 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
 );
 Button.displayName = 'Button';
 
-export { Button, buttonVariants };
+export { Button };

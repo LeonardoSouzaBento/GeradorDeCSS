@@ -1,22 +1,34 @@
-import { cssButtonPreview } from '@/data/buttons/variables';
-import { WrapperButtons, WrapperForm } from '@/ui/index';
+import { cssButtonPreview } from "@/data/buttons/variables";
+import { Button, WrapperButtons, WrapperForm } from "@/ui/index";
 
-const buttons = [
+type ButtonData = {
+  text: string;
+  size:
+    | "default"
+    | "sm"
+    | "lg"
+    | "icon-sm"
+    | "icon"
+    | "icon-md"
+    | "icon-button";
+};
+
+const buttons: ButtonData[] = [
   {
-    classes: 'h-9 small-button',
-    text: 'Menor',
+    text: "Menor",
+    size: "sm",
   },
   {
-    classes: 'h-10',
-    text: 'Normal',
+    text: "Normal",
+    size: "default",
   },
   {
-    classes: 'h-11 large-button',
-    text: 'Maior',
+    text: "Maior",
+    size: "lg",
   },
 ];
 
-const defaultButtonClasses = 'rounded-md box-border px-[1.1em]';
+const defaultButtonClasses = "rounded-md box-border px-[1.1em]";
 
 const ButtonsPreview = () => {
   return (
@@ -26,26 +38,23 @@ const ButtonsPreview = () => {
       <div className="mb-[1cap]">
         <p>Defina a escala de botões do seu projeto</p>
         <p className="smaller-text text-muted-foreground">
-          Gere paleta de cores e vários estilos para botões <strong>rapidamente</strong>
+          Gere paleta de cores e vários estilos para botões{" "}
+          <strong>rapidamente</strong>
         </p>
       </div>
       <div className="space-y-[1ex] pb-4">
         <WrapperButtons className="items-start">
           {buttons.map((button, index) => (
-            <button
-              key={index}
-              className={`${button.classes} ${defaultButtonClasses} text-primary border-2 border-primary`}>
+            <Button key={index} size={button.size}>
               {button.text}
-            </button>
+            </Button>
           ))}
         </WrapperButtons>
         <WrapperButtons className="items-start pb-0.5">
           {buttons.map((button, index) => (
-            <button
-              key={index}
-              className={`${button.classes} ${defaultButtonClasses} text-primary-50 bg-primary`}>
+            <Button variant="outline" key={index} size={button.size}>
               {button.text}
-            </button>
+            </Button>
           ))}
         </WrapperButtons>
       </div>
