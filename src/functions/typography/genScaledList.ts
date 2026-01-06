@@ -1,6 +1,6 @@
 import { ScaledList } from '@/data/typography/types';
 import { sizes } from '@/data/typography/variables';
-import { removeExcessZerosAndToFix } from './removeExcessZeros';
+import { removeExcessZerosAndToFix } from '../removeExcessZeros';
 
 export function genScaledList(
   minSizeBody: number,

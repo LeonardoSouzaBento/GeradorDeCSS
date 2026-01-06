@@ -1,7 +1,8 @@
-import { ButtonsData } from '@/data/buttons/variables';
+import { ButtonsData, PaddingTypes } from '@/data/buttons/variables';
 import { WrapperButtons } from '@/ui/index';
 import { ThumbsUp } from 'lucide-react';
 import ResizableButton from './resizable-button';
+import { StateSetter } from '@/data/typography/types';
 
 interface ResultPreviewProps {
   currentButtonsData: ButtonsData[];
@@ -12,9 +13,11 @@ interface ResultPreviewProps {
   color1000: string;
   outlineValue: number;
   paddingX: number;
-  iconHeightScale: number[];
+  iconButtonSizes: number[];
   iconSizes: string[];
   strokeWidth: number;
+  setFillPaddings: StateSetter<PaddingTypes[]>;
+  setOutlinePaddings: StateSetter<PaddingTypes[]>;
 }
 
 const ResultPreview = ({
@@ -24,11 +27,13 @@ const ResultPreview = ({
   color,
   outlineValue,
   paddingX,
-  iconHeightScale,
+  iconButtonSizes,
   color50,
   color1000,
   iconSizes,
   strokeWidth,
+  setFillPaddings,
+  setOutlinePaddings,
 }: ResultPreviewProps) => {
   return (
     <>
@@ -47,6 +52,8 @@ const ResultPreview = ({
               paddingX={paddingX}
               adjustment={item.adjustment}
               strokeWidth={strokeWidth}
+              index={index}
+              setFillPaddings={setFillPaddings}
             />
           );
         })}
@@ -55,7 +62,7 @@ const ResultPreview = ({
         {currentButtonsData.map((item, index) => {
           const fontSize = item.relativeSize * initialFontSize;
           const pxInPx = fontSize * paddingX - (4 / 5) * outlineValue;
-          const fixedPx = pxInPx / fontSize;
+          const fixedPx = Number((pxInPx / fontSize).toFixed(5));
 
           return (
             <ResizableButton
@@ -70,12 +77,14 @@ const ResultPreview = ({
               paddingX={fixedPx}
               adjustment={item.adjustment}
               strokeWidth={strokeWidth}
+              index={index}
+              setOutlinePaddings={setOutlinePaddings}
             />
           );
         })}
       </WrapperButtons>
       <WrapperButtons>
-        {iconHeightScale.map((item, index) => {
+        {iconButtonSizes.map((item, index) => {
           const id = `icon-${index}`;
           return (
             <div

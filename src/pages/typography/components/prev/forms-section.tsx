@@ -1,6 +1,6 @@
 import { ClampValue } from '@/data/typography/types';
 import { Input } from '@/ui/input';
-import { findKey } from '@/functions/findKey';
+import { findKey } from '@/functions/typography/findKey';
 
 const normalText = findKey('--text-base');
 const smallText = findKey('--text-sm-');

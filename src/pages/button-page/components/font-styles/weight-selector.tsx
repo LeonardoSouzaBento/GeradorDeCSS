@@ -40,7 +40,7 @@ const WeightSelector = ({
   containerRef,
 }: Props) => {
   const [inputValue, setInputValue] = useState<string>(strokeWidth.toString());
-  const [expandIcon, setExpandIcon] = useState<boolean>(false);
+  const [expandIcon, setExpandIcon] = useState<boolean>(true);
 
   function scrollToBottom() {
     containerRef.current?.scrollTo({
@@ -100,7 +100,8 @@ const WeightSelector = ({
             handleChange(e.target.value);
           }}
         />
-        <WrapperButtons className={`my-[1cap] border rounded-md px-[0.5ex] 
+        <WrapperButtons
+          className={`my-[1cap] border rounded-md px-[0.5ex] 
           py-[0.25ex] justify-between`}>
           {!expandIcon ? (
             <div className="flex gap-[0.5ex]">
@@ -138,17 +139,12 @@ const WeightSelector = ({
                 className="text-primary"
                 onClick={() => {
                   setExpandIcon(!expandIcon);
-                  setTimeout(() => {
-                    if (!expandIcon) {
-                      scrollToBottom();
-                    }
-                  }, 200);
                 }}>
                 <Icon size="md" Icon={expandIcon ? Minimize2 : Maximize2} />
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Aumentar previsualização</p>
+              <p>{expandIcon ? 'Diminuir previsualização' : 'Aumentar previsualização'}</p>
             </TooltipContent>
           </Tooltip>
         </WrapperButtons>

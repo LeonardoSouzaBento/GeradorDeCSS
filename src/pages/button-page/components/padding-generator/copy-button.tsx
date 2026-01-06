@@ -1,12 +1,22 @@
-import { iconSm } from '@/css/lucideIcons';
+import { iconMd, iconSm } from '@/css/lucideIcons';
 import { Button } from '@/ui/index';
-import { ClipboardCopy } from 'lucide-react';
+import { ClipboardCopy, CopyCheck } from 'lucide-react';
+import { useState } from 'react';
 
-const CopyButton = () => {
+const CopyButton = ({ returnString }: { returnString: string }) => {
+  const [copied, setCopied] = useState(false);
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(returnString);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  };
+
   return (
-    <Button className="w-full">
-      <ClipboardCopy {...iconSm} />
-      Copiar CSS gerado
+    <Button className="w-full" onClick={copyToClipboard}>
+      {copied ? <CopyCheck {...iconMd} /> : <ClipboardCopy {...iconSm} />}
+      {copied ? 'Copiado!' : 'Copiar CSS'}
     </Button>
   );
 };

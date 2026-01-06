@@ -1,5 +1,5 @@
 import { ClampValue } from '@/data/typography/types';
-import { findKey } from '@/functions/findKey';
+import { findKey } from '@/functions/typography/findKey';
 
 const largeText = findKey('--text-lg');
 const normalText = findKey('--text-base');

@@ -1,4 +1,4 @@
-import { removeExcessZerosAndToFix } from "./removeExcessZeros";
+import { removeExcessZerosAndToFix } from '../removeExcessZeros';
 
 export function scaleFontForBody(
   font640: number,

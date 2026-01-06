@@ -1,6 +1,6 @@
 import { sizes } from '@/data/typography/variables';
 import { ScaledList } from '@/data/typography/types';
-import { removeExcessZerosAndToFix } from './removeExcessZeros';
+import { removeExcessZerosAndToFix } from '../removeExcessZeros';
 
 const fontVars =
   '/*font*/\n' +

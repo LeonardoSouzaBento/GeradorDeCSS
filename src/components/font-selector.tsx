@@ -1,6 +1,15 @@
 import { iconMd, iconSm, iconXs } from '@/css/lucideIcons';
-import { applyFontToTargets, loadFont } from '@/functions/changeFont';
-import { Alert, AlertDescription, AlertTitle, Button, H6Title, HeaderH6, Input, WrapperForm } from '@/ui/index';
+import { applyFontToTargets, loadFont } from '@/functions/typography/changeFont';
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  Button,
+  H6Title,
+  HeaderH6,
+  Input,
+  WrapperForm,
+} from '@/ui/index';
 import { BookType, Check, EyeOff, Info } from 'lucide-react';
 import React, { useRef, useState } from 'react';
 

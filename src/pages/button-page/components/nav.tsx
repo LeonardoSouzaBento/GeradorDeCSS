@@ -9,7 +9,7 @@ const css = {
   border rounded-lg p-5 pt-3 box-content xl:min-w-min`,
   wrapperGroup: `space-y-[0.8ex]`,
   wrapperButtons: `flex flex-col items-start gap-[1ex]`,
-  title: `text-muted-foreground font-semibold`,
+  title: `text-muted-foreground`,
 };
 
 const Nav = ({
@@ -22,7 +22,7 @@ const Nav = ({
   return (
     <nav className={css.wrapper}>
       <div className={css.wrapperGroup}>
-        <p className={css.title}>Tamanho e outline</p>
+        <h6 className={css.title}>Tamanho e outline</h6>
         <div className={css.wrapperButtons}>
           {sizeConfigs.map((option) => (
             <OptionButton
@@ -36,7 +36,7 @@ const Nav = ({
         </div>
       </div>
       <div className={css.wrapperGroup}>
-        <p className={css.title}>Cor</p>
+        <h6 className={css.title}>Cor</h6>
         <div className={css.wrapperButtons}>
           {colorConfigs.map((option) => (
             <OptionButton
@@ -50,7 +50,7 @@ const Nav = ({
         </div>
       </div>
       <div className={css.wrapperGroup}>
-        <p className={css.title}>Fonte</p>
+        <h6 className={css.title}>Fonte</h6>
         <div className={css.wrapperButtons}>
           {fontConfigs.map((option) => (
             <OptionButton

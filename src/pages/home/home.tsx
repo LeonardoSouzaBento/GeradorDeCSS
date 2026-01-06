@@ -4,8 +4,7 @@ import { Button } from '@/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/ui/card';
 import { CaseSensitive, MousePointerClick, Sparkles } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
-import ButtonsPreview from './components/buttons-preview.tsx';
-import TypographyPreview from './components/typography-preview';
+import { ButtonsPreview, TypographyPreview } from './components/index';
 
 const Home = () => {
   return (
@@ -36,7 +35,7 @@ const Home = () => {
             </div>
           </CardContent>
         </Card>
-        <Card noHeader className={`grid grid-cols-1 xl:grid-cols-2 gap-3`}>
+        <Card noHeader className={`grid grid-cols-1 xl:grid-cols-2 gap-4`}>
           <TypographyPreview />
           <ButtonsPreview />
         </Card>

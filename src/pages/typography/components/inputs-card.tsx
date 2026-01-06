@@ -1,15 +1,15 @@
 import CopyButton from '@/pages/typography/components/inputs-card/copy-button';
 import { scales } from '@/data/typography/variables';
-import { generateClamp } from '@/functions/generateClamp';
-import { genScaledList } from '@/functions/genScaledList';
-import { returnTailwind } from '@/functions/returnTailwind';
-import { returnCSS } from '@/functions/returnCSS';
+import { generateClamp } from '@/functions/typography/generateClamp';
+import { genScaledList } from '@/functions/typography/genScaledList';
+import { returnTailwind } from '@/functions/typography/returnTailwind';
+import { returnCSS } from '@/functions/typography/returnCSS';
 import { ClampValue, ScaledList, StateSetter } from '@/data/typography/types';
 import { useEffect, useState } from 'react';
 import Inputs from './inputs-card/inputs';
 import OptionsScale from './inputs-card/optionsScale';
 import ReturnOptions from './inputs-card/return-options';
-import { findKey } from '@/functions/findKey';
+import { findKey } from '@/functions/typography/findKey';
 
 function deduceFontAt1536px(font640: number, font1280: number): number {
   const font1536 = 1.2 * (font1280 - font640) + font640;
