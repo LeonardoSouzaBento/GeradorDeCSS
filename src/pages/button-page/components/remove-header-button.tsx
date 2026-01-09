@@ -13,10 +13,9 @@ const RemoveHeaderButton = ({ removeHeader, setRemoveHeader }: Props) => {
       variant="transparent"
       size="icon"
       closeButton
-      className="absolute top-2 right-2 z-6 md:hidden xl:flex bg-card border text-primary"
+      className="absolute top-2 right-2 z-6 hidden xl:flex bg-card border text-primary"
       onClick={() => setRemoveHeader(!removeHeader)}>
-      <ArrowUpToLine {...iconXs} className="hidden xl:flex" />
-      <Menu {...iconMd} className="md:hidden" />
+      <ArrowUpToLine {...iconXs}/>
     </Button>
   );
 };

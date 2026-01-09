@@ -114,6 +114,7 @@ max-w-5xl,64rem,1024px
   --breakpoint-medium-sm: 425px;
   --breakpoint-pre-sm: 575px;
   --breakpoint-pre-md: 768px;
+  --breakpoint-next-md: 840px;
 }
 
 /* Tema Escuro */

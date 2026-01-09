@@ -4,6 +4,5 @@ export { default as OutlineInput } from './outline-input';
 export { default as PaddingXInput } from './padding-x-input';
 export { default as PalletSugestion } from './pallet-sugestion';
 export { default as ResizableButton } from './resizable-button';
-export { default as ResultPreview } from './result-preview';
 export { default as HeightInputs } from './height-inputs';
 export { default as StylesSelector } from './styles-selector';

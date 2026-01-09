@@ -15,7 +15,7 @@ const buttonVariants = cva(
         outline:
           'border-2 border-primary/88 text-primary bg-transparent hover:bg-gray-50 shadow-xs/12',
         ghost: 'hover:bg-secondary/50 border text-primary bg-transparent',
-        transparent: 'bg-transparent text-foreground hover:bg-primary-50/33',
+        transparent: 'bg-transparent text-primary hover:bg-primary-50/33',
         link: 'text-primary underline-offset-4 hover:underline',
         secondary: 'bg-primary-50 text-primary hover:bg-primary-100',
       },
@@ -26,7 +26,7 @@ const buttonVariants = cva(
         'icon-sm': 'size-8',
         icon: 'size-8.5',
         'icon-md': 'size-9.5',
-        'icon-button': 'size-10',
+        'icon-lg': 'size-10',
       },
     },
     defaultVariants: {
@@ -43,6 +43,7 @@ export interface ButtonProps
   isSelected?: boolean;
   isDisable?: boolean;
   closeButton?: boolean;
+  fullWidth?: boolean;
 }
 
 const Button = React.forwardRef<ButtonRef, ButtonProps>(
@@ -53,6 +54,7 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
       size,
       asChild = false,
       optionButton,
+      fullWidth = false,
       isSelected,
       isDisable,
       closeButton,
@@ -69,6 +71,7 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
           buttonVariants({ variant, size }),
           px,
           {
+            'w-full': fullWidth,
             'rounded-full': optionButton,
             'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card': isSelected,
             'grayscale-100 opacity-50 cursor-not-allowed': isDisable,

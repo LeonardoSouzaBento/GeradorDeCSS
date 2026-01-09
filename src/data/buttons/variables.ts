@@ -20,7 +20,7 @@ export const buttonSizes = {
 
 export type PaddingTypes = Record<'px' | 'pb' | 'pt' | 'py', string>;
 
-export type ButtonsData = {
+export interface ButtonsData {
   name: string;
   relativeSize: number;
   finalFontSize: number;
@@ -99,10 +99,13 @@ export type NavOptions =
   | 'Paleta'
   | 'Fonte';
 
-interface OptionButtonData {
+export interface OptionButtonData {
   name: NavOptions;
   icon: LucideIcon;
 }
+
+export const optionsReturn = ['variáveis', 'botões', 'lucide icon', 'mui icon'];
+export type OptionReturn = 'variáveis' | 'botões' | 'lucide icon' | 'mui icon';
 
 export const sizeConfigs: OptionButtonData[] = [
   {

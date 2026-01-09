@@ -83,7 +83,7 @@ const OptionButton = ({ value, navOption, setNavOption, Icon }: OptionButtonProp
       variant="link"
       isSelected={value === navOption}
       onClick={() => setNavOption(value)}
-      className="w-full justify-start small-button px-[1.4ex] gap-[1ex]">
+      className="w-full justify-start px-[1.4ex] gap-[1ex]">
       <Icon {...iconXs} />
       {value}
     </Button>

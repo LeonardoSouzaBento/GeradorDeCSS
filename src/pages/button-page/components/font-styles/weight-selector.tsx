@@ -1,7 +1,5 @@
 import { iconXs } from '@/css/lucideIcons';
 import {
-  Alert,
-  AlertDescription,
   Button,
   H6Description,
   H6Title,
@@ -12,10 +10,10 @@ import {
   TooltipContent,
   TooltipTrigger,
   WrapperButtons,
-  WrapperForm,
+  WrapperForm
 } from '@/ui/index';
 import { normalizeDecimalInput, validateDecimalInput } from '@/utils';
-import { Info, Maximize2, Minimize2, Package, Weight } from 'lucide-react';
+import { Maximize2, Minimize2, Package, Weight } from 'lucide-react';
 import { useState } from 'react';
 
 type Props = {
@@ -101,7 +99,7 @@ const WeightSelector = ({
           }}
         />
         <WrapperButtons
-          className={`my-[1cap] border rounded-md px-[0.5ex] 
+          className={`mt-[1cap] border rounded-md px-[0.5ex] 
           py-[0.25ex] justify-between`}>
           {!expandIcon ? (
             <div className="flex gap-[0.5ex]">
@@ -148,15 +146,6 @@ const WeightSelector = ({
             </TooltipContent>
           </Tooltip>
         </WrapperButtons>
-
-        <Alert className="mt-1">
-          <Icon size="xs" Icon={Info} />
-          <AlertDescription className="text-muted-foreground">
-            <strong className="text-lg">*</strong> Tamanho padrão do ícone do botão normal, 1em do
-            botão normal. Os demais tamanhos são mais opções de tamanhos que geramos, caso 1em não
-            seja um valor conveniente.
-          </AlertDescription>
-        </Alert>
       </WrapperForm>
     </div>
   );

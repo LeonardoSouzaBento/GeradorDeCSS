@@ -1,32 +1,17 @@
 import { FontSelector, Header } from '@/components/index';
-import {
-  ButtonsData,
-  buttonsData,
-  defaultIconSizes,
-  NavOptions,
-  PaddingTypes,
-} from '@/data/buttons/variables';
+import type { ButtonsData, NavOptions, OptionReturn, PaddingTypes } from '@/data/buttons/variables';
+import { buttonsData, defaultIconSizes, optionsReturn } from '@/data/buttons/variables';
 import { genButtonStyles } from '@/functions/buttons/genButtonStyles';
 import { genIconComponent } from '@/functions/buttons/genIconComponent';
 import { genVariables } from '@/functions/buttons/genVariables';
 import { useColorShades } from '@/hooks/useColorShades';
 import { useResizeWatcher } from '@/hooks/useResizeWatcher';
-import {
-  Button,
-  Card,
-  CardContent,
-  H6Title,
-  HeaderH6,
-  Icon,
-  WrapperButtons,
-  WrapperForm,
-} from '@/ui/index';
-import { Maximize2, MousePointerClick } from 'lucide-react';
+import { Card, CardContent } from '@/ui/index';
+import { MousePointerClick } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import ColorGenerator from './components/color-palette/color-generator';
 import { InitialSize, RelativeSizes, WeightSelector } from './components/font-styles/index';
-import Nav from './components/nav';
-import CopyButton from './components/padding-generator/copy-button';
+import { CSSReturn, Nav, OptionsMenu, Preview, RemoveHeaderButton } from './components/index';
 import FontScales from './components/padding-generator/font-scales';
 import {
   AlignInput,
@@ -34,13 +19,9 @@ import {
   HeightInputs,
   OutlineInput,
   PaddingXInput,
-  ResultPreview,
 } from './components/padding-generator/index';
-import RemoveHeaderButton from './components/remove-header-button';
 
 export const wrapperStyles = 'border rounded-lg p-5 pt-[1.5ex] bg-card';
-const optionsReturn = ['variáveis', 'botões', 'lucide icon', 'mui icon'];
-type OptionReturn = 'variáveis' | 'botões' | 'lucide icon' | 'mui icon';
 
 export default function ButtonPage() {
   /* valores unicos */
@@ -68,6 +49,7 @@ export default function ButtonPage() {
     { px: '', pb: '', pt: '', py: '' },
   ]);
   /* saidas e iteratividade */
+  const [openSelect, setOpenSelect] = useState<boolean>(false);
   const [optionReturn, setOptionReturn] = useState<OptionReturn>('botões');
   const currentOptionIndex = optionsReturn.findIndex((item) => item === optionReturn);
   const [returns, setReturns] = useState<string[]>([]);
@@ -76,6 +58,7 @@ export default function ButtonPage() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [resizeCounter, setResizeCounter] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   useResizeWatcher(setResizeCounter);
 
   useEffect(() => {
@@ -159,6 +142,7 @@ export default function ButtonPage() {
 
   return (
     <div
+      onClick={() => setOpenSelect(false)}
       style={{
         marginBottom: !removeHeader ? '2.5rem' : '0rem',
       }}>
@@ -167,16 +151,23 @@ export default function ButtonPage() {
         title="Gerador de estilos para botões"
         description="Estilize seus botões mais rapidamente"
         className={`pt-7 pb-4 flex flex-col px-3 justify-center gap-0 items-center text-center
-        pre-sm:flex-row pre-sm:justify-start pre-sm:gap-3 min-[840px]:px-6 max-w-5xl mx-auto xl:max-w-none`}
+        pre-sm:flex-row pre-sm:justify-start pre-sm:gap-3 next-md:px-6 max-w-5xl mx-auto xl:max-w-none`}
         icon={<MousePointerClick />}
         resizeCounter={resizeCounter}
         removeHeader={removeHeader}
         isMobile={isMobile}
       />
-      <main className={`space-y-6 px-3 mt-4 min-[840px]:px-6 max-w-5xl mx-auto xl:max-w-none`}>
-        <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.8fr_1fr]">
-          <Card noHeader className="md:flex md:gap-4 xl:h-157 relative p-5">
+      <main className={`space-y-6 px-3 mt-4 next-md:px-6 max-w-5xl mx-auto xl:max-w-none`}>
+        <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.7fr_1fr]">
+          <Card noHeader className="md:flex md:gap-4 xl:h-157 relative p-5" ref={cardRef}>
             <RemoveHeaderButton removeHeader={removeHeader} setRemoveHeader={setRemoveHeader} />
+            <OptionsMenu
+              openSelect={openSelect}
+              setNavOption={setNavOptions}
+              navOption={navOptions}
+              cardRef={cardRef}
+              setOpenSelect={setOpenSelect}
+            />
             <Nav setNavOption={setNavOptions} navOption={navOptions} />
             <CardContent
               ref={containerRef}
@@ -231,56 +222,30 @@ export default function ButtonPage() {
                 />
               )}
               {navOptions === 'Paleta' && <ColorGenerator shades={shades} />}
-              {navOptions !== 'Paleta' && (
-                <WrapperForm className={`flex flex-col gap-3 min-w-full`}>
-                  <HeaderH6 mb={0}>
-                    <H6Title>
-                      <h6>Prévia</h6>
-                    </H6Title>
-                  </HeaderH6>
-                  <ResultPreview
-                    currentButtonsData={currentButtonsData}
-                    initialFontSize={initialFontSize}
-                    currentWeight={currentWeight}
-                    color={color}
-                    color50={color50}
-                    color1000={color1000}
-                    outlineValue={outlineValue}
-                    paddingX={paddingX}
-                    iconButtonSizes={iconButtonSizes}
-                    iconSizes={iconSizes}
-                    strokeWidth={strokeWidth}
-                    setFillPaddings={setFillPaddings}
-                    setOutlinePaddings={setOutlinePaddings}
-                  />
-                </WrapperForm>
-              )}
+
+              <Preview
+                currentButtonsData={currentButtonsData}
+                initialFontSize={initialFontSize}
+                currentWeight={currentWeight}
+                color={color}
+                outlineValue={outlineValue}
+                paddingX={paddingX}
+                iconButtonSizes={iconButtonSizes}
+                color50={color50}
+                color1000={color1000}
+                iconSizes={iconSizes}
+                strokeWidth={strokeWidth}
+                setFillPaddings={setFillPaddings}
+                setOutlinePaddings={setOutlinePaddings}
+              />
             </CardContent>
           </Card>
-          <Card noHeader className="h-full xl:h-157 p-5 border flex flex-col gap-4.5 relative">
-            <Button size="icon-sm" variant="outline" className="hidden xl:flex absolute top-4 right-4">
-              <Icon Icon={Maximize2} />
-            </Button>
-            <WrapperButtons className="xl:pr-16">
-              {optionsReturn.map((item: OptionReturn) => (
-                <Button
-                  key={item}
-                  size="sm"
-                  variant="ghost"
-                  optionButton
-                  isSelected={optionReturn === item}
-                  onClick={() => {
-                    setOptionReturn(item);
-                  }}>
-                  {item}
-                </Button>
-              ))}
-            </WrapperButtons>
-            <CardContent className="relative space-y-5">
-              <pre className="h-105.5">{returns[currentOptionIndex]}</pre>
-            </CardContent>
-            <CopyButton returnString={returns[currentOptionIndex]} />
-          </Card>
+          <CSSReturn
+            optionReturn={optionReturn}
+            setOptionReturn={setOptionReturn}
+            returns={returns}
+            currentOptionIndex={currentOptionIndex}
+          />
         </div>
       </main>
     </div>
