@@ -4,6 +4,7 @@ interface IconProps {
   size?: string;
   Icon: LucideIcon;
   className?: string;
+  strokeValue?: string | number;
 }
 
 const iconSizes = {
@@ -14,8 +15,21 @@ const iconSizes = {
   xl: '1.067em',
   '2xl': '1.1385em',
   '3xl': '1.2148em',
+
 };
 
-export const Icon = ({ size, Icon, className }: IconProps) => {
-  return <Icon size={iconSizes[size || 'md']} strokeWidth={2.4} className={className} />;
+const weights = {
+  thin: 2.2,
+  light: 2.4,
+  regular: 2.6,
+};
+
+export const Icon = ({ size, Icon, className, strokeValue }: IconProps) => {
+  return (
+    <Icon
+      size={iconSizes[size || 'md']}
+      strokeWidth={weights[strokeValue] || strokeValue || 2.6}
+      className={className}
+    />
+  );
 };

@@ -5,8 +5,9 @@ import {
   defaultIconSizes,
   NavOptions,
   PaddingTypes,
-  pxSuggestions,
 } from '@/data/buttons/variables';
+import { genButtonStyles } from '@/functions/buttons/genButtonStyles';
+import { genIconComponent } from '@/functions/buttons/genIconComponent';
 import { genVariables } from '@/functions/buttons/genVariables';
 import { useColorShades } from '@/hooks/useColorShades';
 import { useResizeWatcher } from '@/hooks/useResizeWatcher';
@@ -16,10 +17,11 @@ import {
   CardContent,
   H6Title,
   HeaderH6,
+  Icon,
   WrapperButtons,
   WrapperForm,
 } from '@/ui/index';
-import { MousePointerClick } from 'lucide-react';
+import { Maximize2, MousePointerClick } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import ColorGenerator from './components/color-palette/color-generator';
 import { InitialSize, RelativeSizes, WeightSelector } from './components/font-styles/index';
@@ -35,12 +37,10 @@ import {
   ResultPreview,
 } from './components/padding-generator/index';
 import RemoveHeaderButton from './components/remove-header-button';
-import { genIconComponent } from '@/functions/buttons/genIconComponent';
-import { genButtonStyles } from '@/functions/buttons/genButtonStyles';
 
 export const wrapperStyles = 'border rounded-lg p-5 pt-[1.5ex] bg-card';
-const optionsReturn = ['variáveis', 'botões', 'ícone componente'];
-type OptionReturn = 'variáveis' | 'botões' | 'ícone componente';
+const optionsReturn = ['variáveis', 'botões', 'lucide icon', 'mui icon'];
+type OptionReturn = 'variáveis' | 'botões' | 'lucide icon' | 'mui icon';
 
 export default function ButtonPage() {
   /* valores unicos */
@@ -68,7 +68,7 @@ export default function ButtonPage() {
     { px: '', pb: '', pt: '', py: '' },
   ]);
   /* saidas e iteratividade */
-  const [optionReturn, setOptionReturn] = useState<OptionReturn>('variáveis');
+  const [optionReturn, setOptionReturn] = useState<OptionReturn>('botões');
   const currentOptionIndex = optionsReturn.findIndex((item) => item === optionReturn);
   const [returns, setReturns] = useState<string[]>([]);
   const [navOptions, setNavOptions] = useState<NavOptions>('Peso');
@@ -115,7 +115,7 @@ export default function ButtonPage() {
 
     /* escala dos ícones */
     const firstIconSizes = relativeSizeScale.map((item) => `${item}em`);
-    const restIconSizes = [0, 1, 2, 4].map((index) => {
+    const restIconSizes = [0, 1, 2, 3].map((index) => {
       const size = Math.pow(scaleValue, index + 1).toFixed(3);
       return `${size}em`;
     });
@@ -137,7 +137,8 @@ export default function ButtonPage() {
       outlineValue
     );
     const iconReturn = genIconComponent(iconSizes, strokeWidth);
-    setReturns([varsReturn, buttonsReturn, iconReturn]);
+    const muiIconReturn = genIconComponent(iconSizes, strokeWidth, currentWeight, 'mui icon');
+    setReturns([varsReturn, buttonsReturn, iconReturn, muiIconReturn]);
   };
 
   useEffect(() => {
@@ -256,8 +257,11 @@ export default function ButtonPage() {
               )}
             </CardContent>
           </Card>
-          <Card noHeader className="h-full xl:h-157 p-5 border flex flex-col gap-5">
-            <WrapperButtons>
+          <Card noHeader className="h-full xl:h-157 p-5 border flex flex-col gap-4.5 relative">
+            <Button size="icon-sm" variant="outline" className="hidden xl:flex absolute top-4 right-4">
+              <Icon Icon={Maximize2} />
+            </Button>
+            <WrapperButtons className="xl:pr-16">
               {optionsReturn.map((item: OptionReturn) => (
                 <Button
                   key={item}
@@ -273,9 +277,9 @@ export default function ButtonPage() {
               ))}
             </WrapperButtons>
             <CardContent className="relative space-y-5">
-              <pre className="h-117.5">{returns[currentOptionIndex]}</pre>
+              <pre className="h-105.5">{returns[currentOptionIndex]}</pre>
             </CardContent>
-            <CopyButton returnString={returns[currentOptionIndex]}/>
+            <CopyButton returnString={returns[currentOptionIndex]} />
           </Card>
         </div>
       </main>
