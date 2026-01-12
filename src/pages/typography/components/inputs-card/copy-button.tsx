@@ -45,7 +45,7 @@ const CopyButton = ({ output, secondOutput, disabled, returnType }: CopyButtonPr
 
   return (
     <Button
-      isDisable={disabled}
+      disabled={disabled}
       onClick={handleCopy}
       className={`${css.button} ${disabled && css.disabled}`}>
       {warn && (

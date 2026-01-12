@@ -8,7 +8,7 @@ import { ButtonRef } from '@/types/htmlTags';
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 const buttonVariants = cva(
-  'w-auto tracking-wide inline-flex items-center justify-center gap-2 rounded-md ring-offset-background transition-colors disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 relative data-w-full:w-full data-round:rounded-full focus:outline-none',
+  'w-auto tracking-wide inline-flex items-center justify-center gap-2 rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 relative data-w-full:w-full',
   {
     variants: {
       variant: {
@@ -90,4 +90,75 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
 );
 Button.displayName = 'Button';
 
-export { Button };
+import { WrapperButtons } from '@/ui';
+
+const buttons: ButtonVariants['variant'][] = [
+  'default',
+  'outline',
+  'ghost',
+  'secondary',
+  'destructive',
+];
+
+const disabledButtons: ButtonVariants['variant'][] = ['default', 'outline', 'ghost', 'secondary'];
+
+const ButtonStyleTester = () => {
+  return (
+    <div
+      className={`flex flex-col gap-3 [&>div]:flex [&>div]:flex-col [&>div]:gap-2
+      [&>div>div]:h-auto [&>div>div]:flex [&>div>div]:flex-wrap [&>div>div]:items-center [&>div>div]:gap-3`}>
+      <div>
+        <p>Padrão</p>
+        <div>
+          {buttons.map((button) => (
+            <Button key={button} variant={button as ButtonVariants['variant']}>
+              {button}
+            </Button>
+          ))}
+        </div>
+      </div>
+      <div>
+        <p>Desabiitado</p>
+        <div>
+          {disabledButtons.map((button) => (
+            <Button key={button} variant={button as ButtonVariants['variant']} disabled={true}>
+              {button}
+            </Button>
+          ))}
+        </div>
+      </div>
+      <div>
+        <p>Hover</p>
+        <div>
+          {buttons.map((button) => (
+            <Button key={button} variant={button as ButtonVariants['variant']} data-test-hover>
+              {button}
+            </Button>
+          ))}
+        </div>
+      </div>
+      <div>
+        <p>Focus</p>
+        <div>
+          {buttons.map((button) => (
+            <Button key={button} variant={button as ButtonVariants['variant']} data-test-focus>
+              {button}
+            </Button>
+          ))}
+        </div>
+      </div>
+      <div>
+        <p>Active</p>
+        <div>
+          {buttons.map((button) => (
+            <Button key={button} variant={button as ButtonVariants['variant']} data-test-active>
+              {button}
+            </Button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ButtonStyleTester;

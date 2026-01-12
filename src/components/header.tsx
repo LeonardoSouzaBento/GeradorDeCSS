@@ -9,7 +9,7 @@ interface Props {
   page?: string;
   removeHeader?: boolean;
   className?: string;
-  resizeCounter?: number;
+  resizingCounter?: number;
   isMobile?: boolean;
 }
 
@@ -20,12 +20,13 @@ const Header = ({
   page,
   removeHeader,
   className,
-  resizeCounter,
+  resizingCounter,
   isMobile,
 }: Props) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const [headerHeight, setHeaderHeight] = useState<number | string>(0);
+
 
   function getHeight() {
     if (!headerRef.current) return;
@@ -39,16 +40,16 @@ const Header = ({
 
   useEffect(() => {
     getHeight();
-  }, [resizeCounter]);
+  }, [resizingCounter]);
 
   return (
     <div
       ref={wrapperRef}
       style={{ height: removeHeader ? 0 : isMobile ? 'auto' : headerHeight || 'auto' }}
-      className="w-full transition-all duration-400 overflow-hidden">
+      className="w-full box-border transition-all duration-400 overflow-hidden">
       <header
         ref={headerRef}
-        className={`w-full min-h-max h-auto mx-auto flex items-center animate-in fade-in slide-in-from-top duration-500 ${className}`}>
+        className={`w-full box-border min-h-max h-auto mx-auto flex items-center animate-in fade-in slide-in-from-top duration-500 ${className}`}>
         <div className={`flex items-center justify-center mb-2 pre-sm:mb-0`}>
           <div
             className={`h-13.5 w-13.5 text-white/93 flex items-center justify-center

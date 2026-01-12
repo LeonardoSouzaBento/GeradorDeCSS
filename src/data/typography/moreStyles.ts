@@ -31,8 +31,8 @@ h1, strong { font-weight: 700;}
 
 /* LINE HEIGHTS */
 .h1-hero { line-height: 1.1; }
-h1 { line-height: 1.22; }
-h2 { line-height: 1.24; }
+h1 { line-height: 1.17; }
+h2 { line-height: 1.22; }
 h3 { line-height: 1.28; }
 h4 { line-height: 1.32; }
 h5 { line-height: 1.38; }
@@ -43,18 +43,18 @@ li,
 input,
 select,
 option {
-  line-height: 1.52;
+  @apply leading-normal;
 }
-label { line-height: 1.35; }
-button { line-height: 1.15; }
+label { @apply leading-[1.36]; }
+button { @apply leading-[1.12]; }
 
 .large-text { line-height: 1.68; }
 .normal-text { line-height: 1.5; }
 
-.small-text { line-height: 1.6; }
-.smaller-text { line-height: 1.5; }
-.large-button { line-height: 1.20; }
-.small-button { line-height: 1.10; }
+.large-text { @apply leading-[1.45]; }
+.normal-text { @apply leading-[1.48]; }
+.small-text { @apply leading-[1.51]; }
+.smaller-text { @apply leading-[1.54]; }
 `;
 
 export const moreTwStyles = `@layer components { 

@@ -15,7 +15,7 @@ import {
   Footer,
 } from './components/index';
 
-export default function Typography() {
+export default function Typography({ resizingCounter }: { resizingCounter?: number }) {
   /* estados de controle */
   const [returnType, setReturnType] = useState<'tw' | 'css'>('tw');
   const [disabled, setDisabled] = useState<boolean>(false);
@@ -27,9 +27,7 @@ export default function Typography() {
   const [showMoreStyles, setShowMoreStyles] = useState<boolean>(false);
   /* altura do segundo card */
   const [cardHeight, setCardHeight] = useState<number>(0);
-  const [wasResize, setWasResize] = useState<number>();
   const cardRef = useRef<HTMLDivElement>(null);
-  useResizeWatcher(setWasResize);
   const rootFontSize = useRemObserver();
 
   useEffect(() => {
@@ -39,17 +37,17 @@ export default function Typography() {
   }, []);
 
   useEffect(() => {
-    if (wasResize && cardRef.current) {
+    if (resizingCounter && cardRef.current) {
       setCardHeight(cardRef.current.offsetHeight);
     }
-  }, [wasResize]);
+  }, [resizingCounter]);
 
   return (
     <div className={`min-h-screen`}>
       <Header
         title="typographic scale generator"
         description="Gere o CSS de escala tipográfica do seu projeto"
-        className={`py-8 max-w-2xl px-4 sm:px-0 sm:w-[calc(100%-3rem)] text-center min-[575px]:flex gap-3.5 justify-center min-[575px]:justify-start xl:max-w-7xl`}
+        className={`py-8 max-w-2xl px-4 sm:px-0 sm:w-[calc(100%-3rem)] text-center pre-sm:flex gap-3.5 justify-center pre-sm:justify-start xl:max-w-7xl`}
         page="typography"
         icon={<CaseSensitive className={`text-white/93`} strokeWidth={2.2} size={'2rem'} />}
       />

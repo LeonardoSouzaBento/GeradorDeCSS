@@ -23,7 +23,7 @@ import {
 
 export const wrapperStyles = 'border rounded-lg p-5 pt-[1.5ex] bg-card';
 
-export default function ButtonPage() {
+export default function ButtonPage({ resizingCounter }: { resizingCounter?: number }) {
   /* valores unicos */
   const [color, setColor] = useState('#1F4780');
   const [currentWeight, setCurrentWeight] = useState(600);
@@ -56,10 +56,8 @@ export default function ButtonPage() {
   const [navOptions, setNavOptions] = useState<NavOptions>('Peso');
   const [removeHeader, setRemoveHeader] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [resizeCounter, setResizeCounter] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  useResizeWatcher(setResizeCounter);
 
   useEffect(() => {
     if (window.innerWidth < 1280) {
@@ -68,7 +66,7 @@ export default function ButtonPage() {
     } else {
       setIsMobile(false);
     }
-  }, [resizeCounter]);
+  }, [resizingCounter]);
 
   /* alturas dos botões de ícone */
   useEffect(() => {
@@ -153,7 +151,7 @@ export default function ButtonPage() {
         className={`pt-7 pb-4 flex flex-col px-3 justify-center gap-0 items-center text-center
         pre-sm:flex-row pre-sm:justify-start pre-sm:gap-3 next-md:px-6 max-w-5xl mx-auto xl:max-w-none`}
         icon={<MousePointerClick />}
-        resizeCounter={resizeCounter}
+        resizingCounter={resizingCounter}
         removeHeader={removeHeader}
         isMobile={isMobile}
       />

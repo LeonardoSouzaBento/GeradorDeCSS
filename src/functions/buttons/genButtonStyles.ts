@@ -42,13 +42,15 @@ export const genButtonStyles = (
     .map((item, index) => {
       return `${item} ${iconHeights[index]},\n`;
     })
-    .join('').trimEnd();
+    .join('')
+    .trimEnd();
 
   const fillPadding = getPadding(fillPaddings);
   const outlinePadding = getPadding(outlinePaddings);
-  const buttonStyles = `default:\n'bg-primary hover:bg-primary/90 text-primary-50',\n
-outline:\n'border-${outlineValue} border-primary text-primary bg-transparent hover:bg-primary-50/50',\n  
-secondary:\n'bg-primary-100 text-primary hover:bg-primary-200',...};\n`;
+  const buttonStyles = `default:\n'bg-primary hover:bg-primary/90 text-primary-50 disabled:bg-neutral-300 disabled:text-neutral-500/80',\n
+outline:\n'border-${outlineValue} border-primary text-primary bg-transparent hover:bg-primary-50/50 disabled:bg-neutral-100 disabled:border-neutral-300 disabled:text-neutral-500/75',\n
+ghost:\n'hover:bg-primary-50 border text-primary bg-transparent disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none',\n
+secondary:\n'bg-primary-100 text-primary hover:bg-primary-200 disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none',...};\n`;
 
   const sizeStyles = `size:{
 sm:\n '${fillPadding[0]} text-sm-button',\n

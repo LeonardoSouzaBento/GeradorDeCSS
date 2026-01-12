@@ -57,14 +57,14 @@
   }
 
   /* ---------- Line heights ---------- */
-  .hero {
-    @apply leading-[1.1];
+  .h1-hero {
+    @apply leading-[1.10];
   }
   h1 {
-    @apply leading-[1.22];
+    @apply leading-[1.17];
   }
   h2 {
-    @apply leading-[1.24];
+    @apply leading-[1.22];
   }
   h3 {
     @apply leading-[1.28];
@@ -78,34 +78,35 @@
   h6 {
     @apply leading-[1.44];
   }
+
   p,
   li,
   input,
   select,
   option {
-    @apply leading-[1.52];
+    @apply leading-normal;
   }
 
   label {
-    @apply leading-[1.35];
+    @apply leading-[1.36];
   }
 
   button {
-    @apply leading-[1.15];
+    @apply leading-[1.12];
   }
 
   /* corpo */
   .large-text {
-    @apply leading-[1.68];
+    @apply leading-[1.45];
   }
   .normal-text {
-    @apply leading-normal;
+    @apply leading-[1.48];
   }
   .small-text {
-    @apply leading-[1.6];
+    @apply leading-[1.51];
   }
   .smaller-text {
-    @apply leading-normal;
+    @apply leading-[1.54];
   }
 
   /* botões */

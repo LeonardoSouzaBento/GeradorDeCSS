@@ -1,7 +1,7 @@
 import type { StateSetter } from '@/data/typography/types';
 import { useEffect, useRef } from 'react';
 
-export function useResizeWatcher(setWasResize: StateSetter<number>) {
+export function useResizeWatcher(setResizingCounter: StateSetter<number>) {
   const windowWidthInitialRef = useRef<number | null>(null);
   const resizeDowntime = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -21,7 +21,7 @@ export function useResizeWatcher(setWasResize: StateSetter<number>) {
           windowWidthInitialRef.current !== null &&
           widthOfWindow !== windowWidthInitialRef.current
         ) {
-          setWasResize((prev) => prev + 1);
+          setResizingCounter((prev) => prev + 1);
           windowWidthInitialRef.current = widthOfWindow;
         }
       }, 500);
@@ -35,5 +35,5 @@ export function useResizeWatcher(setWasResize: StateSetter<number>) {
         clearTimeout(resizeDowntime.current);
       }
     };
-  }, [setWasResize]);
+  }, [setResizingCounter]);
 }
