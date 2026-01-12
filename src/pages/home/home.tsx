@@ -16,7 +16,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
         resizingCounter={resizingCounter}
         title="CSS Generator"
         className={`py-8 flex-col pre-sm:flex-row items-center gap-2.5 text-center
-          pre-sm:text-left main-wrapper`}
+          pre-sm:text-left main-wrapper sm:w-[calc(100%-3rem)] sm:px-0`} 
         description="Gerador de estilos para começar seu projeto"
         icon={<Sparkles strokeWidth={2.2} size={'1.6rem'} />}
       />
