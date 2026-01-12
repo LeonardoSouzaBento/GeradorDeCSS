@@ -52,7 +52,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
           </CardHeader>
           <CardContent className="max-w-max space-y-4">
             <WrapperForm>
-              <h6>Previsualizar botões</h6>
+              <h6>Pré-visualizador de estilos e estados de botões</h6>
               <ButtonStyleTester />
               <Alert className="mt-gap-sm">
                 <Icon Icon={Info} size="xs" />
