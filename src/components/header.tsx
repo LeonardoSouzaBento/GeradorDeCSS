@@ -49,7 +49,7 @@ const Header = ({
       className="w-full box-border transition-all duration-400 overflow-hidden">
       <header
         ref={headerRef}
-        className={`w-full box-border min-h-max h-auto mx-auto flex items-center animate-in fade-in slide-in-from-top duration-500 ${className}`}>
+        className={`w-full py-gap-lg box-border min-h-max h-auto mx-auto flex items-center animate-in fade-in slide-in-from-top duration-500 ${className}`}>
         <div className={`flex items-center justify-center mb-2 pre-sm:mb-0`}>
           <div
             className={`h-13.5 w-13.5 text-white/93 flex items-center justify-center

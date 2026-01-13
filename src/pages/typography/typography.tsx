@@ -47,7 +47,7 @@ export default function Typography({ resizingCounter }: { resizingCounter?: numb
       <Header
         title="typographic scale generator"
         description="Gere o CSS de escala tipográfica do seu projeto"
-        className={`flex flex-col sm:flex-row py-8 max-w-2xl px-4 sm:px-0 sm:w-[calc(100%-3rem)] text-center pre-sm:flex gap-3.5 justify-center pre-sm:justify-start xl:max-w-7xl`}
+        className={`flex flex-col sm:flex-row max-w-2xl px-4 sm:px-0 sm:w-[calc(100%-3rem)] text-center pre-sm:flex gap-3.5 justify-center pre-sm:justify-start xl:max-w-7xl`}
         page="typography"
         icon={<CaseSensitive className={`text-white/93`} strokeWidth={2.2} size={'2rem'} />}
         resizingCounter={resizingCounter}

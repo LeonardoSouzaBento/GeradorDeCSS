@@ -30,7 +30,7 @@ const Inputs = ({
   }, [newMaxBase, newMinBase]);
 
   return (
-    <div className={`grid grid-cols-2 gap-4 -mb-px`}>
+    <div className={`grid grid-cols-1 xxs:grid-cols-2 gap-4 xxs:-mb-px`}>
       <WrapperInput htmlFor="minBase" label="até 640px">
         <Input
           type="number"

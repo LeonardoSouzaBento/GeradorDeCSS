@@ -148,7 +148,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
         page="buttons"
         title="Gerador de estilos para botões"
         description="Estilize seus botões mais rapidamente"
-        className={`pt-7 pb-4 flex flex-col px-3 justify-center gap-0 items-center text-center
+        className={`flex flex-col px-3 justify-center gap-0 items-center text-center
         pre-sm:flex-row pre-sm:justify-start pre-sm:gap-3 next-md:px-6 max-w-5xl mx-auto xl:max-w-none`}
         icon={<MousePointerClick />}
         resizingCounter={resizingCounter}
