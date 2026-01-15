@@ -19,9 +19,9 @@ const Card = React.forwardRef<DivRef, CardProps>(
     <div
       ref={ref}
       className={cn(
-        `rounded-lg bg-card text-card-foreground 
+        `rounded-lg bg-card text-card-foreground flex flex-col
        transition-shadow duration-300 shadow-md hover:shadow-lg border border-border/24`,
-        noHeader ? 'p-6 pt-6' : 'p-6 pt-0',
+        noHeader ? 'p-6' : 'p-6 pt-0',
         className
       )}
       {...props}
@@ -35,7 +35,7 @@ const CardHeader = React.forwardRef<DivRef, DivProps>(({ className, ...props }, 
     <div
       ref={ref}
       className={cn(
-        `flex flex-col space-y-[0.8ex] pb-1.5 pt-4.5 mb-3.5
+        `flex flex-col space-y-[0.8ex] pb-1.5 mb-4
            border-b border-border`,
         className
       )}
@@ -46,7 +46,7 @@ const CardHeader = React.forwardRef<DivRef, DivProps>(({ className, ...props }, 
 CardHeader.displayName = 'CardHeader';
 
 const CardTitle = React.forwardRef<HeadRef, HeadProps>(({ className, ...props }, ref) => (
-  <h3 ref={ref} className={cn('tracking-tight leading-normal', className)} {...props} />
+  <h3 ref={ref} className={cn('tracking-tight leading-normal pt-[1cap]', className)} {...props} />
 ));
 CardTitle.displayName = 'CardTitle';
 

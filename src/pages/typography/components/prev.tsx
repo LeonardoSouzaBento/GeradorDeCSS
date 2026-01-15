@@ -43,7 +43,7 @@ const Prev = ({ clampValues, disabled }: { clampValues: ClampValue; disabled: bo
 
   return (
     <Card className={css.wrapper}>
-      <CardHeader className={`pb-5 mb-4.5`}>
+      <CardHeader className={`pb-5 mb-4.5 space-y-ex-offset`}>
         <CardTitle className={`text-primary`}>Prévia</CardTitle>
         <Nav selectedComponent={selectedComponent} setSelectedComponent={setSelectedComponent} />
       </CardHeader>

@@ -29,20 +29,16 @@ max-w-5xl,64rem,1024px
   --text-sm-button: 0.937em;
   --text-button: 0.97em;
   --text-lg-button: 1em;
-  /* Espaçamentos */
-  --spacing-gap-xs: 0.5rem; /* 8px */
-  --spacing-gap-pre-sm: 0.75rem; /* 12px */
-  --spacing-gap-sm: 1rem; /* 16px */
-  --spacing-gap-md: 1.5rem; /* 24px */
-  --spacing-gap-lg: 2rem; /* 32px */
-  --spacing-gap-xl: 2.5rem; /* 40px */
+  --spacing-cap-offset: calc(1cap - ((1em - 1cap) / 2));
+  --spacing-ex-offset: calc(1ex - ((1em - 1cap) / 2));
   /* Cores */
   --color-white: hsl(0 0% 100%);
   --color-background: hsl(210 20% 98%);
   --color-foreground: hsl(215 25% 15%);
 
   --color-card: hsl(0 0% 100%);
-  --color-card-foreground: hsl(215 25% 15%);
+  --color-card-foreground: hsl(227 25% 15%);
+  --other-foreground: hsl(227, 25%, 12%);
 
   --color-popover: hsl(0 0% 100%);
   --color-popover-foreground: hsl(215 25% 15%);
@@ -170,6 +166,7 @@ max-w-5xl,64rem,1024px
     scrollbar-color: var(--color-gray-200) #ffffff00; /*botão | fundo */
   }
   body {
+    min-height: 100dvh;
     @apply font-body text-gray-800 bg-linear-to-br from-[#f9fafb00] to-[#f3f5f7];
   }
   html,

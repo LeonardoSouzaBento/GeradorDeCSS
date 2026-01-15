@@ -52,9 +52,11 @@ export default function OptionsMenu({
           data-show-icon="false"
           className={`w-max h-max
            border-none`}>
-          <Button variant="transparent">
-            Propriedades
-            <Icon Icon={Menu} />
+          <Button asChild variant="transparent">
+            <div>
+              Propriedades
+              <Icon Icon={Menu} />
+            </div>
           </Button>
         </SelectTrigger>
       </div>

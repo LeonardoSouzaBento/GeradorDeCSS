@@ -15,7 +15,7 @@ import {
   Footer,
 } from './components/index';
 
-export default function Typography({ resizingCounter }: { resizingCounter?: number }) {
+export default function TypographyPage({ resizingCounter }: { resizingCounter?: number }) {
   /* estados de controle */
   const [returnType, setReturnType] = useState<'tw' | 'css'>('tw');
   const [disabled, setDisabled] = useState<boolean>(false);

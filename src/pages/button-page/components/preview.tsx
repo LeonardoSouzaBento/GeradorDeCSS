@@ -1,8 +1,8 @@
 import { ButtonsData, PaddingTypes } from '@/data/buttons/variables';
 import { StateSetter } from '@/data/typography/types';
-import { H6Title, HeaderH6, WrapperForm } from '@/ui';
+import { Alert, AlertDescription, AlertTitle, H6Title, HeaderH6, Icon, WrapperForm } from '@/ui';
 import { WrapperButtons } from '@/ui/index';
-import { ThumbsUp } from 'lucide-react';
+import { Info, ThumbsUp } from 'lucide-react';
 import { ResizableButton } from './padding-generator';
 
 interface PreviewProps {
@@ -36,6 +36,7 @@ const Preview = ({
   setFillPaddings,
   setOutlinePaddings,
 }: PreviewProps) => {
+  const isBadColor = false;
   return (
     <WrapperForm className={`flex flex-col gap-3 min-w-full`}>
       <HeaderH6 mb={0}>
@@ -43,6 +44,16 @@ const Preview = ({
           <h6>Prévia</h6>
         </H6Title>
       </HeaderH6>
+      {isBadColor && (
+        <Alert>
+          <Icon Icon={Info} />
+          <AlertTitle>Alerta</AlertTitle>
+          <AlertDescription>
+            Use uma cor que seja boa para o botão outline. <br /> Acesse a aba "Paleta" para ver
+            bons contrastes.
+          </AlertDescription>
+        </Alert>
+      )}
       <div className="next-md:flex gap-4 space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-[max-content_max-content] gap-4">
           <WrapperButtons className="items-start! font-target md:flex-col">

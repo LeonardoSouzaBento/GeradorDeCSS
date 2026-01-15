@@ -5,7 +5,6 @@ import { genButtonStyles } from '@/functions/buttons/genButtonStyles';
 import { genIconComponent } from '@/functions/buttons/genIconComponent';
 import { genVariables } from '@/functions/buttons/genVariables';
 import { useColorShades } from '@/hooks/useColorShades';
-import { useResizeWatcher } from '@/hooks/useResizeWatcher';
 import { Card, CardContent } from '@/ui/index';
 import { MousePointerClick } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
@@ -20,6 +19,7 @@ import {
   OutlineInput,
   PaddingXInput,
 } from './components/padding-generator/index';
+import chroma from 'chroma-js';
 
 export const wrapperStyles = 'border rounded-lg p-5 pt-[1.5ex] bg-card';
 
@@ -32,6 +32,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
   const [paddingX, setPaddingX] = useState(0.9);
   const [scaleValue, setScaleValue] = useState<number>(1.067);
   const [strokeWidth, setStrokeWidth] = useState<number>(2.6);
+  const [isBadColor, setIsBadColor] = useState<boolean>(false);
   /* escalas e dados compostos*/
   const { shades, color1000, color50 } = useColorShades(color);
   const [iconSizes, setIconSizes] = useState<string[]>(defaultIconSizes);
@@ -138,11 +139,24 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
     currentButtonsData,
   ]);
 
+  useEffect(() => {
+    if (navOptions === 'Paleta') {
+      setOptionReturn('variáveis');
+    } else if (navOptions === 'Peso') {
+      setOptionReturn('lucide icon');
+    } else {
+      if (optionReturn !== 'botões') {
+        setOptionReturn('botões');
+      }
+    }
+  }, [navOptions]);
+
   return (
     <div
       onClick={() => setOpenSelect(false)}
       style={{
-        marginBottom: !removeHeader ? '2.5rem' : '0rem',
+        marginBottom: !removeHeader ? '2rem' : '0rem',
+        marginTop: removeHeader ? '1rem' : '0rem',
       }}>
       <Header
         page="buttons"
@@ -155,9 +169,9 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
         removeHeader={removeHeader}
         isMobile={isMobile}
       />
-      <main className={`space-y-6 px-3 mt-4 next-md:px-6 max-w-5xl mx-auto xl:max-w-none`}>
-        <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.7fr_1fr]">
-          <Card noHeader className="md:flex md:gap-4 xl:h-157 relative p-5" ref={cardRef}>
+      <main className={`space-y-6 px-3 next-md:px-6 max-w-5xl mx-auto xl:max-w-none`}>
+        <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1.7fr_1fr]">
+          <Card noHeader className="md:flex-row md:gap-4 xl:h-157 relative p-5" ref={cardRef}>
             <RemoveHeaderButton removeHeader={removeHeader} setRemoveHeader={setRemoveHeader} />
             <OptionsMenu
               openSelect={openSelect}

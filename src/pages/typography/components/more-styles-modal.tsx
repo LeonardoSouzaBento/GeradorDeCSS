@@ -96,14 +96,14 @@ const MoreStylesModal = ({
           className={`w-full flex flex-row flex-nowrap 
           justify-between mb-0`}>
           <div>
-            <CardTitle>Estilos adicionais</CardTitle>
+            <CardTitle className="mb-cap-offset">Estilos adicionais</CardTitle>
             <CardDescription>Larguras máxima do corpo, pesos e line-height</CardDescription>
           </div>
           <Button
             size="icon"
             variant="secondary"
             className={`border-border rounded-full 
-            -mr-1`}
+            -mr-2 mt-4`}
             onClick={(e) => {
               e.stopPropagation();
               setShowMoreStyles(false);

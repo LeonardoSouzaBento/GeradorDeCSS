@@ -9,9 +9,9 @@ const RelevantQuestions = () => {
         <CardTitle>Perguntas pertinentes</CardTitle>
       </CardHeader>
       <CardContent>
-        <Accordion type="single" collapsible className="w-full">
+        <Accordion type="single" collapsible className="w-full gap-cap-offset">
           {questions.map((item, index) => (
-            <AccordionItem key={index} value={`item-${index}`}>
+            <AccordionItem key={index} value={`item-${index}`} className="mb-2">
               <AccordionTrigger>{item.question}</AccordionTrigger>
               <AccordionContent>{item.answer}</AccordionContent>
             </AccordionItem>

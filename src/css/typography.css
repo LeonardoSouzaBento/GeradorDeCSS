@@ -84,7 +84,7 @@
   input,
   select,
   option {
-    @apply leading-normal;
+    @apply leading-[1.48];
   }
 
   label {
@@ -120,7 +120,7 @@
 
 @layer components {
   body {
-    @apply text-[1.05rem] sm:text-[1.0625rem] md:text-[1.065rem] lg:text-[1.07rem] xl:text-[1.075rem] 2xl:text-[1.0800rem];
+    @apply text-[1.0625rem] sm:text-[1.08125rem] md:text-[1.085rem] lg:text-[1.0925rem] xl:text-[1.10rem] 2xl:text-[1.107500rem];
   }
 
   .smaller-text {
@@ -128,7 +128,9 @@
   }
 
   .small-text,
-  label, code, pre {
+  label,
+  code,
+  pre {
     @apply text-sm;
   }
 

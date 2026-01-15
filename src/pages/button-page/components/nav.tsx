@@ -2,15 +2,7 @@ import { iconXs } from '@/css/lucideIcons';
 import { colorConfigs, fontConfigs, NavOptions, sizeConfigs } from '@/data/buttons/variables';
 import { StateSetter } from '@/data/typography/types';
 import { Button } from '@/ui';
-import { LucideIcon, Palette } from 'lucide-react';
-
-const css = {
-  wrapper: `hidden md:flex w-max flex-col space-y-[1ex]
-  border rounded-lg p-5 pt-3 box-content xl:min-w-max`,
-  wrapperGroup: `space-y-[0.8ex]`,
-  wrapperButtons: `flex flex-col items-start gap-[1ex]`,
-  title: `text-muted-foreground font-medium`,
-};
+import { LucideIcon } from 'lucide-react';
 
 const Nav = ({
   navOption,
@@ -20,10 +12,14 @@ const Nav = ({
   setNavOption: StateSetter<NavOptions>;
 }) => {
   return (
-    <nav className={css.wrapper}>
-      <div className={css.wrapperGroup}>
-        <p className={css.title}>Tamanho e outline</p>
-        <div className={css.wrapperButtons}>
+    <nav
+      className={`hidden md:flex min-w-max flex-col space-y-[1ex]
+      border rounded-lg p-2 pt-[0.75em] box-content [&>div]:space-y-[0.8ex] 
+      [&>div>div]:flex [&>div>div]:flex-col [&>div>div]:items-start [&>div>div]:gap-[1ex]
+      [&>div>p]:text-muted-foreground [&>div>p]:font-medium [&>div>p]:pl-[0.68em]`}>
+      <div>
+        <p>Tamanho e outline</p>
+        <div>
           {sizeConfigs.map((option) => (
             <OptionButton
               Icon={option.icon}
@@ -35,9 +31,9 @@ const Nav = ({
           ))}
         </div>
       </div>
-      <div className={css.wrapperGroup}>
-        <p className={css.title}>Cor</p>
-        <div className={css.wrapperButtons}>
+      <div>
+        <p>Cor</p>
+        <div>
           {colorConfigs.map((option) => (
             <OptionButton
               Icon={option.icon}
@@ -49,9 +45,9 @@ const Nav = ({
           ))}
         </div>
       </div>
-      <div className={css.wrapperGroup}>
-        <p className={css.title}>Fonte</p>
-        <div className={css.wrapperButtons}>
+      <div>
+        <p>Fonte</p>
+        <div>
           {fontConfigs.map((option) => (
             <OptionButton
               Icon={option.icon}

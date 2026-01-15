@@ -17,7 +17,7 @@ const buttonVariants = cva(
         outline:
           'border-2 border-primary/88 text-primary bg-transparent hover:bg-gray-50 shadow-xs/12 disabled:bg-neutral-100 disabled:border-neutral-300 disabled:text-neutral-500/75 data-test-hover:bg-primary-50 data-test-focus:outline-selected/70 data-test-focus:outline-2 data-test-active:bg-primary-100',
         ghost:
-          'hover:bg-secondary/50 border text-primary bg-transparent disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none data-test-hover:bg-primary-50 data-test-focus:outline-selected/70 data-test-focus:outline-3 data-test-focus:border-primary-400 data-test-active:bg-primary-100',
+          'hover:bg-primary-50 border text-primary bg-transparent disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none data-test-hover:bg-primary-50 data-test-focus:outline-selected/70 data-test-focus:outline-3 data-test-focus:border-primary-400 data-test-active:bg-primary-100',
         transparent: 'bg-transparent text-primary hover:bg-primary-50',
         link: 'text-primary underline-offset-4 hover:underline',
         secondary:

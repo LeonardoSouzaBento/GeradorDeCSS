@@ -2,12 +2,34 @@ import { CustomNavLink } from '@/components';
 import Header from '@/components/header';
 import { iconLg, iconSm } from '@/css/lucideIcons.ts';
 import { Alert, AlertDescription, AlertTitle, Icon, WrapperButtons, WrapperForm } from '@/ui';
-import { Button } from '@/ui/button';
+import { Button, ButtonVariants } from '@/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/ui/card';
-import { CaseSensitive, Download, Info, MousePointerClick, Sparkles } from 'lucide-react';
+import { CaseSensitive, Download, Info, MousePointerClick, Palette, Sparkles } from 'lucide-react';
 import ButtonStyleTester from './components/button-style-tester';
 import { ButtonsPreview, TypographyPreview } from './components/index';
 import buttonTesterContent from './components/button-tester-for-download.tsx?raw';
+
+const pages = [
+  {
+    path: '/typography',
+    name: 'Gerador de escala tipográfica',
+    icon: CaseSensitive,
+    variant: 'default',
+  },
+  {
+    path: '/buttons',
+    name: 'Gerador de estilos para botões',
+    icon: MousePointerClick,
+    variant: 'outline',
+  },
+  {
+    path: '/palette-generator',
+    name: 'Gerador de cores neutras',
+    icon: Palette,
+    variant: 'ghost',
+    className: 'shadow-sm',
+  },
+];
 
 const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
   return (
@@ -16,7 +38,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
         resizingCounter={resizingCounter}
         title="CSS Generator"
         className={`flex-col pre-sm:flex-row items-center gap-2.5 text-center
-          pre-sm:text-left main-wrapper sm:w-[calc(100%-3rem)] sm:px-0`} 
+          pre-sm:text-left main-wrapper sm:w-[calc(100%-3rem)] sm:px-0`}
         description="Gerador de estilos para começar seu projeto"
         icon={<Sparkles strokeWidth={2.2} size={'1.6rem'} />}
       />
@@ -28,16 +50,16 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
           </CardHeader>
           <CardContent>
             <WrapperButtons>
-              <Button>
-                <CustomNavLink link="/typography" />
-                Gerador de escala tipográfica
-                <CaseSensitive {...iconLg} />
-              </Button>
-              <Button variant="outline">
-                <CustomNavLink link="/buttons" />
-                Gerador de estilos para botões
-                <MousePointerClick {...iconSm} />
-              </Button>
+              {pages.map((page) => (
+                <Button
+                  key={page.path}
+                  variant={page.variant as ButtonVariants['variant']}
+                  className={page.className || ''}>
+                  <CustomNavLink link={page.path} />
+                  {page.name}
+                  <Icon Icon={page.icon} />
+                </Button>
+              ))}
             </WrapperButtons>
           </CardContent>
         </Card>
@@ -54,17 +76,25 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
             <WrapperForm>
               <h6>Pré-visualizador de estilos e estados de botões</h6>
               <ButtonStyleTester />
-              <Alert className="mt-gap-sm">
+              <Alert className="mt-4">
                 <Icon Icon={Info} size="xs" />
                 <AlertTitle>Atenção</AlertTitle>
                 <AlertDescription>
-                  Instale o <a href="https://ui.shadcn.com/docs/installation" target="_blank" rel="noopener noreferrer">Shadcn UI</a> para usar esse componente.
+                  Instale o{' '}
+                  <a
+                    href="https://ui.shadcn.com/docs/installation"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    Shadcn UI
+                  </a>{' '}
+                  para usar esse componente.
                 </AlertDescription>
               </Alert>
-              <Alert className="mt-gap-sm">
+              <Alert className="mt-4">
                 <Icon Icon={Info} size="xs" />
                 <AlertDescription data-no-title>
-                  Nosso site é <strong>estático e seguro</strong>, fique tranquilo quanto a links externos.
+                  Nosso site é <strong>estático e seguro</strong>, fique tranquilo quanto a links
+                  externos.
                 </AlertDescription>
               </Alert>
             </WrapperForm>

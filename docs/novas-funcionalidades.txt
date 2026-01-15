@@ -1,1 +1,15 @@
 Gerador de paleta de cores
+
+Gerar a peleta de preto pra pegar os valores a seguir:
+card-foreground
+muted-foregorund
+border (cor pronta)
+input-border
+input-background
+
+gerar variavel destuctive com os comentários //destructive focus, hover e active
+variavel success
+variavel warn (laranja)
+variavel selected
+variavel disabled
+
