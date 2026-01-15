@@ -9,7 +9,6 @@ import { StateSetter } from '@/data/typography/types';
 import { Button, Icon, WrapperButtons } from '@/ui';
 import { Select, SelectContent, SelectGroup, SelectLabel, SelectTrigger } from '@/ui/select';
 import { Menu } from 'lucide-react';
-import { useState } from 'react';
 
 interface OptionGroup {
   label: string;
@@ -38,22 +37,26 @@ export default function OptionsMenu({
   setOpenSelect,
 }: OptionsMenuProps) {
   function handleClick() {
-    cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setOpenSelect(true);
+    if (!cardRef.current) return;
+    cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setOpenSelect(!openSelect);
   }
 
   return (
-    <Select open={openSelect} onOpenChange={() => setOpenSelect(!openSelect)}>
+    <Select
+      open={openSelect}
+      onOpenChange={() => {
+        setOpenSelect(!openSelect);
+      }}>
       <div
         className="w-full flex justify-end md:hidden rounded-md border mb-4"
-        onClick={handleClick}
-        onMouseEnter={handleClick}>
+        onClick={handleClick}>
         <SelectTrigger
           data-show-icon="false"
           className={`w-max h-max
            border-none`}>
           <Button asChild variant="transparent">
-            <div>
+            <div onClick={handleClick}>
               Propriedades
               <Icon Icon={Menu} />
             </div>
