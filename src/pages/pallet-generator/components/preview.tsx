@@ -8,54 +8,61 @@ interface PreviewProps {
 const Preview = ({ neutralColors }: PreviewProps) => {
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className='border-none mb-[0.25ex]'>
         <CardTitle className="text-primary">Prévia</CardTitle>
       </CardHeader>
-      <WrapperButtons>
-        {neutralColors.map((color, index) => {
-          return (
-            <div key={variables[index]} className="flex items-center gap-4 rounded-md border px-3">
-              <div className="flex-1 pt-ex-offset pb-cap-offset">
-                <div className="font-semibold">{variables[index]}</div>
-                <div className="text-xs opacity-75">{color}</div>
-              </div>
+      <div className="grid grid-cols-1 gap-4 pre-lg:grid-cols-2">
+        <WrapperButtons className="w-full">
+          {neutralColors.map((color, index) => {
+            return (
               <div
-                className="w-8 h-8 rounded-md border border-gray-200"
-                style={{
-                  background: color,
-                }}
-              />
-            </div>
-          );
-        })}
-      </WrapperButtons>
-      <div className="mt-4">
-        <div className="rounded-md p-4 pt-3" style={{ border: `1px solid ${neutralColors[2]}` }}>
+                key={variables[index]}
+                className="flex pre-lg:flex-auto items-center gap-2 rounded-md border px-3">
+                <div
+                  className="w-8 h-9.5 rounded-md"
+                  style={{
+                    background: color,
+                  }}
+                />
+                <div className="flex-1 pt-ex-offset pb-cap-offset">
+                  <p className="font-semibold small-text">{variables[index]}</p>
+                  <p className="smaller-text text-muted-foreground">{color}</p>
+                </div>
+              </div>
+            );
+          })}
+        </WrapperButtons>
+
+        <div
+          className="rounded-md p-4 pt-3 pb-6 relative"
+          style={{ border: `1px solid ${neutralColors[2]}` }}>
           <h3 className="mb-1" style={{ color: neutralColors[0] }}>
-            Título com card-foreground
+            Color: card-foreground
           </h3>
           <p
-            className="pb-1 border-b mb-2 large-text"
+            className="pb-1 border-b mb-cap-offset large-text"
             style={{ color: neutralColors[1], borderColor: `${neutralColors[2]}` }}>
-            Parágrafo com muted-foreground
+            Color:muted-foreground
           </p>
-          <div className="flex flex-col mb-4">
+          <div className="flex flex-col">
             <label className="small-text mb-ex-offset" style={{ color: neutralColors[0] }}>
-              Label
+              Color: card-foreground
             </label>
             <input
               className="rounded-md py-1 px-[1ex] border"
               type="text"
               placeholder="input de texto"
-              value="input-bg + input-border"
+              value="input-border + input-bg"
               style={{
                 background: neutralColors[4],
                 borderColor: `${neutralColors[2]}`,
-                color: `${neutralColors[1]}`
+                color: `${neutralColors[1]}`,
               }}
             />
           </div>
-          <p style={{ color: neutralColors[1] }}>*Borda do card com border*</p>
+          <p className="absolute -bottom-3 left-4 text-xs" style={{ color: neutralColors[1] }}>
+            border
+          </p>
         </div>
       </div>
     </Card>

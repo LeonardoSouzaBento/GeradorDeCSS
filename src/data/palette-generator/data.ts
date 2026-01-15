@@ -16,8 +16,8 @@ export const initialPaletteVariables = {
   border: {
     saturationMin: 5,
     saturationMax: 8,
-    lightnessMin: 75,
-    lightnessMax: 85,
+    lightnessMin: 78,
+    lightnessMax: 88,
     stops: [300, 400],
   },
   'input-border': {

@@ -6,6 +6,7 @@ interface IconProps {
   Icon: LucideIcon;
   className?: string;
   strokeValue?: string | number;
+  data?: string;
 }
 
 const iconSizes = {

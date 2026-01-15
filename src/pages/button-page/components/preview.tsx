@@ -19,9 +19,11 @@ interface PreviewProps {
   strokeWidth: number;
   setFillPaddings: StateSetter<PaddingTypes[]>;
   setOutlinePaddings: StateSetter<PaddingTypes[]>;
+  badContrast: boolean;
 }
 
 const Preview = ({
+  badContrast,
   currentButtonsData,
   initialFontSize,
   currentWeight,
@@ -30,13 +32,11 @@ const Preview = ({
   paddingX,
   iconButtonSizes,
   color50,
-  color1000,
   iconSizes,
   strokeWidth,
   setFillPaddings,
   setOutlinePaddings,
 }: PreviewProps) => {
-  const isBadColor = false;
   return (
     <WrapperForm className={`flex flex-col gap-3 min-w-full`}>
       <HeaderH6 mb={0}>
@@ -44,13 +44,12 @@ const Preview = ({
           <h6>Prévia</h6>
         </H6Title>
       </HeaderH6>
-      {isBadColor && (
-        <Alert>
+      {badContrast && (
+        <Alert data-warn>
           <Icon Icon={Info} />
-          <AlertTitle>Alerta</AlertTitle>
-          <AlertDescription>
-            Use uma cor que seja boa para o botão outline. <br /> Acesse a aba "Paleta" para ver
-            bons contrastes.
+          <AlertTitle data-warn>Alerta</AlertTitle>
+          <AlertDescription data-warn>
+            Cores claras demais são ruins para acessibilidade!
           </AlertDescription>
         </Alert>
       )}
@@ -109,7 +108,7 @@ const Preview = ({
               <div
                 className="bg-primary-50 rounded-full flex items-center justify-center text-base"
                 key={id}
-                style={{ height: `${item}px`, width: `${item}px`, color: color1000 }}>
+                style={{ height: `${item}px`, width: `${item}px`, color: color }}>
                 {' '}
                 <ThumbsUp size={iconSizes[index]} strokeWidth={strokeWidth} className="ml-px" />
               </div>

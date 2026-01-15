@@ -39,7 +39,7 @@ const AlertTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("mb-2 font-medium leading-none tracking-tight", className)}
+    className={cn("mb-2 font-medium leading-none tracking-tight data-warn:", className)}
     {...props}
   />
 ))

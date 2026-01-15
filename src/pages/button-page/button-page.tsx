@@ -32,7 +32,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
   const [paddingX, setPaddingX] = useState(0.9);
   const [scaleValue, setScaleValue] = useState<number>(1.067);
   const [strokeWidth, setStrokeWidth] = useState<number>(2.6);
-  const [isBadColor, setIsBadColor] = useState<boolean>(false);
+  const [badContrast, setBadContrast] = useState<boolean>(false);
   /* escalas e dados compostos*/
   const { shades, color1000, color50 } = useColorShades(color);
   const [iconSizes, setIconSizes] = useState<string[]>(defaultIconSizes);
@@ -84,7 +84,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
 
   /* tamanhos relativos da fonte dos botões */
   useEffect(() => {
-    /* escala dos botões */
+    // escala dos botões
     const sm = (1 / scaleValue).toFixed(3);
     const md = (1 / Math.sqrt(scaleValue)).toFixed(3);
     const relativeSizeScale = [sm, md, '1'];
@@ -95,7 +95,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
     }));
     setCurrentButtonsData(newButtonsData);
 
-    /* escala dos ícones */
+    // escala dos ícones
     const firstIconSizes = relativeSizeScale.map((item) => `${item}em`);
     const restIconSizes = [0, 1, 2, 3].map((index) => {
       const size = Math.pow(scaleValue, index + 1).toFixed(3);
@@ -106,6 +106,12 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
     setIconSizes(iconSizes);
   }, [scaleValue]);
 
+  useEffect(() => {
+    const contrast = chroma.contrast(color, '#fff');
+    setBadContrast(contrast <= 4.5);
+  }, [color]);
+
+  /* formatar o css */
   const formatCss = () => {
     const varsReturn = genVariables(
       relativeSizeScale,
@@ -139,6 +145,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
     currentButtonsData,
   ]);
 
+  /* Mudar o retorno conforme a opção selecionada */
   useEffect(() => {
     if (navOptions === 'Paleta') {
       setOptionReturn('variáveis');
@@ -154,9 +161,9 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
   return (
     <div
       onClick={() => setOpenSelect(false)}
+      className="w-screen min-h-dvh grid grid-cols-1"
       style={{
         marginBottom: !removeHeader ? '2rem' : '0rem',
-        marginTop: removeHeader ? '1rem' : '0rem',
       }}>
       <Header
         page="buttons"
@@ -249,6 +256,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
                 strokeWidth={strokeWidth}
                 setFillPaddings={setFillPaddings}
                 setOutlinePaddings={setOutlinePaddings}
+                badContrast={badContrast}
               />
             </CardContent>
           </Card>

@@ -80,7 +80,7 @@ export default function PaletteGeneratorPage() {
   }, [neutralColors]);
 
   return (
-    <main className="px-3 sm:px-4 mt-4 space-y-6 pb-6">
+    <main className="px-3 sm:px-4 mx-auto mt-4 space-y-6 pb-6 min-h-dvh max-w-7xl">
       <Card className="space-y-4">
         <CardHeader>
           <CardTitle className="text-primary">Preferências</CardTitle>

@@ -43,7 +43,7 @@ export default function TypographyPage({ resizingCounter }: { resizingCounter?: 
   }, [resizingCounter]);
 
   return (
-    <div className={`min-h-screen`}>
+    <div className="min-h-dvh">
       <Header
         title="typographic scale generator"
         description="Gere o CSS de escala tipográfica do seu projeto"
