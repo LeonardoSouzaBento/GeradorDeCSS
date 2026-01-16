@@ -5,6 +5,8 @@ import { Palette } from 'lucide-react';
 import React from 'react';
 
 const ColorInput = ({ color, setColor }: { color: string; setColor: StateSetter<string> }) => {
+  const [inputValue, setInputValue] = React.useState<string>(color);
+
   return (
     <WrapperForm>
       <HeaderH6 mb={1}>
@@ -17,14 +19,16 @@ const ColorInput = ({ color, setColor }: { color: string; setColor: StateSetter<
         <Input
           type="text"
           placeholder="Digite o código de cor"
-          value={color}
-          onChange={(e) => setColor(e.target.value)}
+          value={inputValue}
+          onChange={(e) => {
+            const value = e.target.value;
+            setInputValue(value);
+            if (value === '' || /^#([0-9A-F]{0,6})$/i.test(value)) {
+              setColor(value);
+            }
+          }}
         />
-        <Input
-          type="color"
-          value={color}
-          onChange={(e) => setColor(e.target.value)}
-        />
+        <Input type="color" value={color} onChange={(e) => setColor(e.target.value)} />
       </WrapperInput>
     </WrapperForm>
   );
