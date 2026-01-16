@@ -15,7 +15,7 @@ const textVariables = `@theme {
   --text-h3: 1.296157em;
   --text-h2: 1.38300em;
   --text-h1: 1.475661em;
-  --text-big-h1: 1.574530em;
+  --text-h1-hero: 1.574530em;
   --text-button: 0.968095em;
   --text-sm-button: 0.937207em;
   --text-lg-button: 1.00em;

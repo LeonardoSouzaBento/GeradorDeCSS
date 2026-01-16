@@ -37,7 +37,7 @@ export default function PaletteGeneratorPage() {
         const newSaturations = array.map((_, index) => saturationValues[index][saturation]);
         const newLightness = array.map((_, index) => lightnessValues[index][lightness]);
         const newColors = array.map(
-          (_, index) => `hsl(${hue} ${newSaturations[index]}% ${newLightness[index]}%)`
+          (_, index) => `hsl(${hue} ${newSaturations[index]}% ${newLightness[index]}%)`,
         );
         setNeutralColors(newColors);
       }
@@ -73,7 +73,7 @@ export default function PaletteGeneratorPage() {
   useEffect(() => {
     if (neutralColors.length === variables.length) {
       const cssReturn = neutralColors.map(
-        (color: string, index: number) => `--color-${variables[index]}: ${color};\n`
+        (color: string, index: number) => `--color-${variables[index]}: ${color};\n`,
       );
       setCssReturn(cssReturn.join(''));
     }
@@ -93,7 +93,13 @@ export default function PaletteGeneratorPage() {
               <Input
                 type="text"
                 value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setInputValue(value);
+                  if (value === '' || /^#([0-9A-F]{0,6})$/i.test(value)) {
+                    setBaseColor(value);
+                  }
+                }}
               />
               <Input
                 type="color"
@@ -101,9 +107,7 @@ export default function PaletteGeneratorPage() {
                 onChange={(e) => {
                   const value = e.target.value;
                   setInputValue(value);
-                  if (value === '' || /^#([0-9A-F]{0,6})$/i.test(value)) {
-                    setBaseColor(value);
-                  }
+                  setBaseColor(value);
                 }}
               />
             </div>

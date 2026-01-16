@@ -1,17 +1,7 @@
-import { iconSm, iconXs } from '@/css/lucideIcons';
+import { iconSm } from '@/css/lucideIcons';
 import { ColorShade } from '@/hooks/useColorShades';
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-  Button,
-  H6Description,
-  H6Title,
-  HeaderH6,
-  WrapperButtons,
-  WrapperForm,
-} from '@/ui';
-import { ChartSpline, Info, Palette } from 'lucide-react';
+import { H6Description, H6Title, HeaderH6, WrapperButtons, WrapperForm } from '@/ui';
+import { ChartSpline, Palette } from 'lucide-react';
 import { useMemo } from 'react';
 
 interface ColorGeneratorProps {
@@ -79,7 +69,7 @@ const ColorGenerator = ({ shades }: ColorGeneratorProps) => {
           </H6Title>
           <H6Description>Contraste dos fundos com a cor 50 ou 1000 aplicada no texto</H6Description>
         </HeaderH6>
-        <WrapperButtons className="flex gap-2 mb-[2ex]">
+        <WrapperButtons className="flex gap-2">
           {selectedShades.map((item, index) => (
             <button
               key={index}
@@ -91,12 +81,6 @@ const ColorGenerator = ({ shades }: ColorGeneratorProps) => {
             </button>
           ))}
         </WrapperButtons>
-        <Alert>
-          <Info {...iconXs} className="mt-[0.25ex]"/>
-          <AlertDescription className="mt-[0.5ex]">
-            Usamos o contraste maior que 6.5 como critério.
-          </AlertDescription>
-        </Alert>
       </WrapperForm>
     </div>
   );

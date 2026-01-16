@@ -11,7 +11,7 @@ const Preview = ({ neutralColors }: PreviewProps) => {
       <CardHeader className='border-none mb-[0.25ex]'>
         <CardTitle className="text-primary">Prévia</CardTitle>
       </CardHeader>
-      <div className="grid grid-cols-1 gap-4 pre-lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 pre-lg:grid-cols-[1fr_1.2fr]">
         <WrapperButtons className="w-full">
           {neutralColors.map((color, index) => {
             return (
