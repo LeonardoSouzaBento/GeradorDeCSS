@@ -8,7 +8,7 @@ var __vite_injected_original_dirname = "C:\\Users\\souza\\Desktop\\repositorios-
 var vite_config_default = defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 8080
+    port: 3001
   },
   plugins: [react(), tailwindcss(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {

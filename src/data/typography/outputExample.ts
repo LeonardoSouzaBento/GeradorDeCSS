@@ -12,7 +12,7 @@ body {
 @apply text-[1.06250rem] sm:text-[1.09375rem] md:text-[1.10000rem] lg:text-[1.11250rem] xl:text-[1.12500rem] 2xl:text-[1.13750rem]
 }
 
-.big-h1 {
+.h1-hero {
 @apply text-[1.67294rem] sm:text-[1.72214rem] md:text-[1.73198rem] lg:text-[1.75166rem] xl:text-[1.77135rem] 2xl:text-[1.79103rem]
 }
 

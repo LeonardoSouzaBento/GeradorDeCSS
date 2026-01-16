@@ -5,7 +5,7 @@ export const secondOutputExample = `body {font-size: 1.06250rem;
 @media (min-width: 1280px) {font-size: 1.12500rem;}
 @media (min-width: 1536px) {font-size: 1.13750rem;}}
 
-.big-h1 {font-size: 1.67294rem;
+.h1-hero {font-size: 1.67294rem;
 @media (min-width: 640px) {font-size: 1.72214rem;}
 @media (min-width: 768px) {font-size: 1.73198rem;}
 @media (min-width: 1024px) {font-size: 1.75166rem;}

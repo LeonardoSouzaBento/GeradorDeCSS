@@ -25,7 +25,7 @@ export const sizes: SizeHierarchy[] = [
   { tagName: 'h3', pow: 4, var: '--text-h3' },
   { tagName: 'h2', pow: 5, var: '--text-h2' },
   { tagName: 'h1', pow: 6, var: '--text-h1' },
-  { tagName: '.big-h1', pow: 7, var: '--text-big-h1' },
+  { tagName: '.h1-hero', pow: 7, var: '--text-h1-hero' },
 
   { tagName: 'button', pow: -0.5, var: '--text-button' },
   { tagName: '.small-button', pow: -1, var: '--text-sm-button' },
