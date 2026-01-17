@@ -36,7 +36,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
     <div className={`pb-8 min-h-screen bg-transparent`}>
       <Header
         resizingCounter={resizingCounter}
-        title="CSS Generator"
+        title="Gerador de CSS"
         className={`flex-col pre-sm:flex-row items-center gap-2.5 text-center
           pre-sm:text-left main-wrapper sm:w-[calc(100%-3rem)] sm:px-0`}
         description="Gerador de estilos para começar seu projeto"
@@ -54,7 +54,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
                 <Button
                   key={page.path}
                   variant={page.variant as ButtonVariants['variant']}
-                  className={page.className || ''}>
+                  className={`${page.className || ''} max-[720px]:w-full`}>
                   <CustomNavLink link={page.path} />
                   {page.name}
                   <Icon Icon={page.icon} />

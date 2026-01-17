@@ -45,7 +45,7 @@ export default function TypographyPage({ resizingCounter }: { resizingCounter?: 
   return (
     <div className="min-h-dvh">
       <Header
-        title="typographic scale generator"
+        title="Gerador de Escala Tipográfica"
         description="Gere o CSS de escala tipográfica do seu projeto"
         className={`flex flex-col sm:flex-row max-w-2xl px-4 sm:px-0 sm:w-[calc(100%-3rem)] text-center pre-sm:flex gap-3.5 justify-center pre-sm:justify-start xl:max-w-7xl`}
         page="typography"
