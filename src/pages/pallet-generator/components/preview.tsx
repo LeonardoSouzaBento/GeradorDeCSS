@@ -1,5 +1,5 @@
 import { variables } from '@/data/palette-generator/data';
-import { Card, CardHeader, CardTitle, WrapperButtons } from '@/ui';
+import { H6Title, HeaderH6, WrapperButtons, WrapperForm } from '@/ui';
 
 interface PreviewProps {
   neutralColors: string[];
@@ -7,10 +7,12 @@ interface PreviewProps {
 
 const Preview = ({ neutralColors }: PreviewProps) => {
   return (
-    <Card>
-      <CardHeader className='border-none mb-[0.25ex]'>
-        <CardTitle className="text-primary">Prévia</CardTitle>
-      </CardHeader>
+    <WrapperForm>
+      <HeaderH6 mb={0.5}>
+        <H6Title>
+          <h6>Prévia</h6>
+        </H6Title>
+      </HeaderH6>
       <div className="grid grid-cols-1 gap-4 pre-lg:grid-cols-[1fr_1.2fr]">
         <WrapperButtons className="w-full">
           {neutralColors.map((color, index) => {
@@ -65,7 +67,7 @@ const Preview = ({ neutralColors }: PreviewProps) => {
           </p>
         </div>
       </div>
-    </Card>
+    </WrapperForm>
   );
 };
 

@@ -1,15 +1,17 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/ui';
+import { CardContent, H6Title, HeaderH6, WrapperForm } from '@/ui';
 
 const CssReturn = ({ neutralColors }: { neutralColors: any }) => {
   return (
-    <Card>
-      <CardHeader className='border-none mb-[0.25ex]'>
-        <CardTitle className='text-primary'>Saída</CardTitle>
-      </CardHeader>
+    <WrapperForm>
+      <HeaderH6 mb={0.75}>
+        <H6Title>
+          <h6>Saída</h6>
+        </H6Title>
+      </HeaderH6>
       <CardContent>
         <pre>{neutralColors}</pre>
       </CardContent>
-    </Card>
+    </WrapperForm>
   );
 };
 

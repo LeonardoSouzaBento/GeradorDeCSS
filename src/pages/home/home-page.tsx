@@ -24,7 +24,7 @@ const pages = [
   },
   {
     path: '/palette-generator',
-    name: 'Gerador de cores neutras',
+    name: 'Gerador de paleta de cor',
     icon: Palette,
     variant: 'ghost',
     className: 'shadow-sm',

@@ -4,11 +4,19 @@ import {
   saturationValues,
   variables,
 } from '@/data/palette-generator/data';
-import { useColorShades } from '@/hooks/useColorShades';
-import { Card, CardHeader, CardTitle, Input, Label, WrapperInput } from '@/ui';
-import { useEffect, useState } from 'react';
-import { CssReturn, Preview } from './components';
 import { getHSL } from '@/functions/pallet-generator/genInitialColors';
+import { useColorShades } from '@/hooks/useColorShades';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  H6Title,
+  HeaderH6,
+  Separator,
+  WrapperForm
+} from '@/ui';
+import { useEffect, useState } from 'react';
+import { CssReturn, Inputs, Preview } from './components';
 
 export default function PaletteGeneratorPage() {
   const [baseColor, setBaseColor] = useState('#1F4780');
@@ -82,70 +90,31 @@ export default function PaletteGeneratorPage() {
   return (
     <main className="px-3 sm:px-4 mx-auto mt-4 space-y-6 pb-6 min-h-dvh max-w-7xl">
       <Card className="space-y-4">
-        <CardHeader>
-          <CardTitle className="text-primary">Preferências</CardTitle>
+        <CardHeader className="border-none mb-0">
+          <CardTitle className="text-primary">Cores neutras</CardTitle>
         </CardHeader>
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-[0.35fr_0.65fr]">
-          {/* cor base */}
-          <WrapperInput className="">
-            <Label>Cor base</Label>
-            <div className="grid grid-cols-1 md-sm:grid-cols-[0.65fr_0.35fr] gap-2">
-              <Input
-                type="text"
-                value={inputValue}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  setInputValue(value);
-                  if (value === '' || /^#([0-9A-F]{0,6})$/i.test(value)) {
-                    setBaseColor(value);
-                  }
-                }}
-              />
-              <Input
-                type="color"
-                value={inputValue}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  setInputValue(value);
-                  setBaseColor(value);
-                }}
-              />
-            </div>
-          </WrapperInput>
-          {/* saturação e luminosidade */}
-          <div
-            className={`flex flex-col gap-4
-             sm:flex-row sm:items-center [&>div>div]:border 
-             [&>div>div]:rounded-md [&>div>div]:px-2`}>
-            <WrapperInput>
-              <Label>Saturação</Label>
-              <div>
-                <Input
-                  type="range"
-                  min={0}
-                  max={7}
-                  value={saturation}
-                  onChange={(e) => setSaturation(Number(e.target.value))}
-                />
-              </div>
-            </WrapperInput>
-            <WrapperInput>
-              <Label>Luminosidade</Label>
-              <div>
-                <Input
-                  type="range"
-                  min={0}
-                  max={10}
-                  value={lightness}
-                  onChange={(e) => setLightness(Number(e.target.value))}
-                />
-              </div>
-            </WrapperInput>
+        <WrapperForm>
+          <HeaderH6 mb={1.5}>
+            <H6Title>
+              <h6>Preferências</h6>
+            </H6Title>
+            <Separator />
+          </HeaderH6>
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-[0.35fr_0.65fr]">
+            <Inputs
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              setBaseColor={setBaseColor}
+              saturation={saturation}
+              setSaturation={setSaturation}
+              lightness={lightness}
+              setLightness={setLightness}
+            />
           </div>
-        </div>
+        </WrapperForm>
+        <Preview neutralColors={neutralColors} />
+        <CssReturn neutralColors={cssReturn} />
       </Card>
-      <Preview neutralColors={neutralColors} />
-      <CssReturn neutralColors={cssReturn} />
     </main>
   );
 }

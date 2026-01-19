@@ -1,6 +1,7 @@
 import { iconXs } from '@/css/lucideIcons';
 import { StateSetter } from '@/data/typography/types';
 import { H6Title, HeaderH6, Input, WrapperForm, WrapperInput } from '@/ui';
+import { isHexColor } from '@/utils/isHexColor';
 import { Palette } from 'lucide-react';
 import React from 'react';
 
@@ -18,12 +19,12 @@ const ColorInput = ({ color, setColor }: { color: string; setColor: StateSetter<
       <WrapperInput gap={0} className="space-y-3">
         <Input
           type="text"
-          placeholder="Digite o código de cor"
+          placeholder="#1F4780"
           value={inputValue}
           onChange={(e) => {
             const value = e.target.value;
             setInputValue(value);
-            if (value === '' || /^#([0-9A-F]{0,6})$/i.test(value)) {
+            if (isHexColor(value)) {
               setColor(value);
             }
           }}

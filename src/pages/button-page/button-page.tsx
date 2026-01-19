@@ -6,6 +6,7 @@ import { genIconComponent } from '@/functions/buttons/genIconComponent';
 import { genVariables } from '@/functions/buttons/genVariables';
 import { useColorShades } from '@/hooks/useColorShades';
 import { Card, CardContent } from '@/ui/index';
+import chroma from 'chroma-js';
 import { MousePointerClick } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import ColorGenerator from './components/color-palette/color-generator';
@@ -19,7 +20,6 @@ import {
   OutlineInput,
   PaddingXInput,
 } from './components/padding-generator/index';
-import chroma from 'chroma-js';
 
 export const wrapperStyles = 'border rounded-lg p-5 pt-[1.5ex] bg-card';
 
@@ -33,6 +33,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
   const [scaleValue, setScaleValue] = useState<number>(1.067);
   const [strokeWidth, setStrokeWidth] = useState<number>(2.6);
   const [badContrast, setBadContrast] = useState<boolean>(false);
+  const [colorNickname, setColorNickname] = useState<string>('primary');
   /* escalas e dados compostos*/
   const { shades, color1000, color50 } = useColorShades(color);
   const [iconSizes, setIconSizes] = useState<string[]>(defaultIconSizes);
@@ -116,7 +117,8 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
     const varsReturn = genVariables(
       relativeSizeScale,
       shades.map((item) => item.hex),
-      color
+      color,
+      colorNickname
     );
     const buttonsReturn = genButtonStyles(
       iconButtonSizes,
@@ -143,6 +145,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
     iconSizes,
     iconButtonSizes,
     currentButtonsData,
+    colorNickname,
   ]);
 
   /* Mudar o retorno conforme a opção selecionada */
@@ -265,6 +268,8 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
             setOptionReturn={setOptionReturn}
             returns={returns}
             currentOptionIndex={currentOptionIndex}
+            colorNickname={colorNickname}
+            setColorNickname={setColorNickname}
           />
         </div>
       </main>
