@@ -1,5 +1,5 @@
 const sizePrefixes = ['xs', 'sm', 'md', 'lg', 'h6', 'h5', 'h4', 'h3'];
-const alternativePrefixes = ['xl', '2xl', '3xl', '4xl'];
+const alternativePrefixes = ['xl', '"2xl"', '"3xl"', '"4xl"'];
 
 const firstPart = `import { LucideIcon } from 'lucide-react';\n
 interface IconProps {
