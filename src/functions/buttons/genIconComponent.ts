@@ -1,40 +1,42 @@
 const sizePrefixes = ['xs', 'sm', 'md', 'lg', 'h6', 'h5', 'h4', 'h3'];
 const alternativePrefixes = ['xl', '"2xl"', '"3xl"', '"4xl"'];
 
-const firstPart = `import { LucideIcon } from 'lucide-react';\n
+const LucideIconFirstPart = `import { LucideIcon } from 'lucide-react';
+
 interface IconProps {
+  LucideIcon: LucideIcon;
   size?: string;
-  Icon: LucideIcon;
   className?: string;
-  strokeValue: string | number;
-}\n`;
+  strokeValue?: string | number;
+  fill?: string;
+}
 
-export const genIconComponent = (
-  sizesValues: string[],
-  strokeWidth: number,
-  currentWeight?: number,
-  returnOption?: string
-): string => {
-  /* variaveis em comum */
-  const valuesFirstPart = sizePrefixes.map((item, index) => {
-    return `${item}: "${sizesValues[index]}",\n`;
-  });
-  const altPrefixesLength = alternativePrefixes.length;
-  const sizesValuesLength = sizesValues.length;
+/* Ajuste depois */
+const weights = {
+  thin: 2.25,
+  light: 2.35,
+  normal: *value*, // valor padrão
+  semibold: 2.67,
+  bold: 2.8,
+  extrabold: 3,
+};
+`;
 
-  const valuesSecondPart = alternativePrefixes.map((item, index) => {
-    return `${item}: "${sizesValues[sizesValuesLength - (altPrefixesLength - index)]}",\n`;
-  });
-  const values = `${valuesFirstPart.join('')}${valuesSecondPart.join('').trimEnd()}`;
-  /* lucide icon */
-  if (returnOption === 'lucide icon' || !returnOption) {
-    const weights = `const weights = {\nthin: ${strokeWidth - 0.4},\nlight: ${strokeWidth - 0.2},\n};`;
+const LucideIconSecondPart = `export const Icon = ({ LucideIcon, size, className, strokeValue, fill }: IconProps) => {
+  return (
+    <div className="h-3 flex-center overflow-visible [&_svg]:shrink-0">
+      <LucideIcon
+        size={iconSizes[size as keyof typeof iconSizes] || size || '1em'}
+        strokeWidth={weights[strokeValue as keyof typeof weights] || strokeValue || *value*}
+        className={className}
+        fill={fill || 'none'}
+      />
+    </div>
+  );
+};
+`;
 
-    const secondPart = `export const Icon = ({ size, LucideIcon, className, strokeValue }: IconProps) => {\nreturn (\n<LucideIcon size={iconSizes[size] || size || "1em"} strokeWidth={weights[strokeValue] || strokeValue || ${strokeWidth}} className={className || ""} />\n);};\n\n/*Exemplo de uso\n<LucideIcon size="sm" Icon={Play} />\nPasse para a prop size uma string key de iconSizes ou qualquer valor de altura CSS válido, 12px por exemplo\n\nPasse para a prop strokeValue uma string key de weights ou qualquer valor de peso numérico válido*/`;
-    return `${firstPart}\nconst iconSizes = {\n${values}\n};\n\n${weights}\n\n${secondPart}`;
-  }
-  /* material icon */
-  const muiIconSecondPart = `interface IconProps {
+const muiIconSecondPart = `interface IconProps {
   icon: string;
   size?: string;
   fill?: number;
@@ -47,22 +49,57 @@ export const MuiIcon = ({
   icon,
   size,
   fill = 0,
-  weight = ${currentWeight},
+  weight = *value*,
   margin = '0',
   className,
 }: IconProps) => {
-return (
-  <span
-    className={className || 'material-symbols-rounded'}
-    style={{
-      margin: margin,
-      fontVariationSettings: \`"FILL" \${fill}, "wght" \${weight}\`,
-      fontSize: iconSizes[size] || size || '1em',
-    }}>
-    {icon}
-  </span>
-);
+ return (
+    <div className="h-3 flex-center overflow-visible">
+      <span
+        className={\`material-symbols-rounded \${className}\`}
+        style={{
+          fontVariationSettings: \`"FILL" \${fill}, "wght" \${weight}\`,
+          fontSize: iconSizes[size as keyof typeof iconSizes] || size || '1em',
+        }}>
+        {icon}
+      </span>
+    </div>
+  );
 };`;
 
-  return `const iconSizes = {\n${values}\n};\n\n${muiIconSecondPart}`;
+function generateFontSizes(sizesValues: string[]): string {
+  const firstPart = sizePrefixes.map((item, index) => {
+    return `${item}: "${sizesValues[index]}",\n`;
+  });
+
+  const altPrefixesLength = alternativePrefixes.length;
+  const sizesValuesLength = sizesValues.length;
+
+  const secondPart = alternativePrefixes.map((item, index) => {
+    return `${item}: "${sizesValues[sizesValuesLength - (altPrefixesLength - index)]}",\n`;
+  });
+
+  return `${firstPart.join('')}${secondPart.join('').trimEnd()}`;
+}
+
+export const genIconComponent = (
+  sizesValues: string[],
+  strokeWidth: number,
+  currentWeight?: number,
+  returnOption?: string,
+): string => {
+  /* variaveis em comum */
+  const strWeight = currentWeight?.toString();
+  const strStrokeWidth = strokeWidth.toString();
+
+  const fontSizes = generateFontSizes(sizesValues);
+  /* lucide icon */
+  if (returnOption === 'lucide icon' || !returnOption) {
+    const firstPart = LucideIconFirstPart.replace('*value*', strStrokeWidth);
+    const secondPart = LucideIconSecondPart.replace('*value*', strStrokeWidth);
+    return `${firstPart}\nconst iconSizes = {\n${fontSizes}\n};\n\n${secondPart}`;
+  }
+  /* material icon */
+  const secondPart = muiIconSecondPart.replace('*value*', strWeight);
+  return `const iconSizes = {\n${fontSizes}\n};\n\n${secondPart}`;
 };

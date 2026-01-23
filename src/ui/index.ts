@@ -9,7 +9,6 @@ export * from './input';
 export * from './label';
 export * from './separator';
 export * from './sheet';
-export * from './skeleton';
 export * from './sonner';
 export * from './toast';
 export * from './tooltip';

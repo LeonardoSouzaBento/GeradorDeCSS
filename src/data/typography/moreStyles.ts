@@ -118,4 +118,43 @@ button {
 
 .large-button { @apply leading-[1.20]; } 
 .small-button { @apply leading-[1.10]; } }
+/* ------- PESOS PARA *FONTES MAGRAS* -------- */
+input::placeholder,
+.helper-text,
+.description-text {
+  @apply font-normal; /* 400 */
+}
+
+p,
+li,
+input,
+select,
+option {
+  @apply font-medium; /* 500 */
+}
+
+a,
+h6,
+h5,
+h4 {
+  @apply font-semibold; /* 600 */
+}
+
+button,
+label,
+.small-button,
+.big-link,
+.small-link {
+  @apply font-semibold; /* 600 */
+}
+
+h3,
+h2 {
+  @apply font-bold; /* 700 */
+}
+
+h1,
+strong {
+  @apply font-extrabold; /* 800 */
+}
 `;

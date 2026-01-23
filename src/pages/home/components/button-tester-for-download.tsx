@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
-
 import { cn } from '@/lib/utils';
-import { ButtonRef } from '@/types/htmlTags';
 
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
 
@@ -13,17 +11,17 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-primary hover:bg-primary/90 text-primary-foreground disabled:bg-neutral-300 disabled:text-neutral-500/80 data-test-active:bg-primary-800 data-test-hover:bg-primary-600 data-test-focus:border-3 data-test-focus:border-selected/75',
+          'bg-primary hover:bg-primary/90 text-primary-foreground disabled:bg-neutral-300 disabled:text-neutral-500/80 data-active:bg-primary-800 data-hover:bg-primary-600 data-focus:border-3 data-focus:border-selected/75',
         outline:
-          'border-2 border-primary/88 text-primary bg-transparent hover:bg-gray-50 shadow-xs/12 disabled:bg-neutral-100 disabled:border-neutral-300 disabled:text-neutral-500/75 data-test-hover:bg-primary-50 data-test-focus:outline-selected/70 data-test-focus:outline-2 data-test-active:bg-primary-100',
+          'border-2 border-primary/88 text-primary bg-transparent hover:bg-gray-50 shadow-xs/12 disabled:bg-neutral-100 disabled:border-neutral-300 disabled:text-neutral-500/75 data-hover:bg-primary-50 data-focus:outline-selected/70 data-focus:outline-2 data-active:bg-primary-100',
         ghost:
-          'hover:bg-secondary/50 border text-primary bg-transparent disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none data-test-hover:bg-primary-50 data-test-focus:outline-selected/70 data-test-focus:outline-3 data-test-focus:border-primary-400 data-test-active:bg-primary-100',
+          'hover:bg-secondary/50 border text-primary bg-transparent disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none data-hover:bg-primary-50 data-focus:outline-selected/70 data-focus:outline-3 data-focus:border-primary-400 data-active:bg-primary-100',
         transparent: 'bg-transparent text-primary hover:bg-primary-50',
         link: 'text-primary underline-offset-4 hover:underline',
         secondary:
-          'bg-primary-50 text-primary hover:bg-primary-100 disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none data-test-hover:bg-primary-50/75 data-test-focus:outline-3 data-test-focus:outline-selected/75 data-test-active:bg-primary-100',
+          'bg-primary-50 text-primary hover:bg-primary-100 disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none data-hover:bg-primary-50/75 data-focus:outline-3 data-focus:outline-selected/75 data-active:bg-primary-100',
         destructive:
-          'bg-red-700 text-red-50 hover:bg-red-600 data-test-hover:bg-red-600 data-test-focus:outline-3 data-test-focus:outline-red-200 data-test-active:bg-red-800',
+          'bg-red-700 text-red-50 hover:bg-red-600 data-hover:bg-red-600 data-focus:outline-3 data-focus:outline-red-200 data-active:bg-red-800',
       },
       size: {
         sm: 'min-h-9 rounded-md small-button',
@@ -51,7 +49,7 @@ export interface ButtonProps
   closeButton?: boolean;
 }
 
-const Button = React.forwardRef<ButtonRef, ButtonProps>(
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
@@ -89,8 +87,6 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
   }
 );
 Button.displayName = 'Button';
-
-import { WrapperButtons } from '@/ui';
 
 const buttons: ButtonVariants['variant'][] = [
   'default',
@@ -131,7 +127,7 @@ const ButtonStyleTester = () => {
         <p>Hover</p>
         <div>
           {buttons.map((button) => (
-            <Button key={button} variant={button as ButtonVariants['variant']} data-test-hover>
+            <Button key={button} variant={button as ButtonVariants['variant']} data-hover>
               {button}
             </Button>
           ))}
@@ -141,7 +137,7 @@ const ButtonStyleTester = () => {
         <p>Focus</p>
         <div>
           {buttons.map((button) => (
-            <Button key={button} variant={button as ButtonVariants['variant']} data-test-focus>
+            <Button key={button} variant={button as ButtonVariants['variant']} data-focus>
               {button}
             </Button>
           ))}
@@ -151,7 +147,7 @@ const ButtonStyleTester = () => {
         <p>Active</p>
         <div>
           {buttons.map((button) => (
-            <Button key={button} variant={button as ButtonVariants['variant']} data-test-active>
+            <Button key={button} variant={button as ButtonVariants['variant']} data-active>
               {button}
             </Button>
           ))}
