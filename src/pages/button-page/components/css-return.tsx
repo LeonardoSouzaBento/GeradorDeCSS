@@ -1,6 +1,6 @@
 import type { OptionReturn } from '@/data/buttons/variables';
 import { optionsReturn } from '@/data/buttons/variables';
-import { Button, Card, CardContent, WrapperButtons } from '@/ui';
+import { Button, Card, CardContent, CardHeader, CardTitle, WrapperButtons } from '@/ui';
 import CopyButton from './padding-generator/copy-button';
 
 interface CSSReturnProps {
@@ -21,7 +21,10 @@ const CSSReturn = ({
   colorNickname,
 }: CSSReturnProps) => {
   return (
-    <Card noHeader className="h-full xl:h-157 p-5 border flex flex-col gap-4.5 relative">
+    <Card className="h-full border space-y-5 relative">
+      <CardHeader className="border-none mb-0">
+        <CardTitle>Retorno</CardTitle>
+      </CardHeader>
       <WrapperButtons>
         {optionsReturn.map((item: OptionReturn) => (
           <Button
@@ -37,14 +40,14 @@ const CSSReturn = ({
           </Button>
         ))}
       </WrapperButtons>
-      <CardContent className="relative space-y-5">
-        <pre className="h-105.5">{returns[currentOptionIndex]}</pre>
+      <CardContent className="relative">
+        <pre className="h-90">{returns[currentOptionIndex]}</pre>
         {optionReturn === 'variáveis' && (
           <Button
             size="sm"
             variant="ghost"
             optionButton
-            className="absolute bottom-0 right-2"
+            className="absolute bottom-4 right-4"
             onClick={() => {
               const nickname = colorNickname === 'primary' ? 'secondary' : 'primary';
               setColorNickname(nickname);

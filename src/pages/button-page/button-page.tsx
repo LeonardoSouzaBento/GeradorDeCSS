@@ -5,9 +5,20 @@ import { genButtonStyles } from '@/functions/buttons/genButtonStyles';
 import { genIconComponent } from '@/functions/buttons/genIconComponent';
 import { genVariables } from '@/functions/buttons/genVariables';
 import { useColorShades } from '@/hooks/useColorShades';
-import { Card, CardContent } from '@/ui/index';
+import {
+  Card,
+  CardContent,
+  Dialog,
+  DialogContent,
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  Icon,
+  CardHeader,
+  CardTitle,
+} from '@/ui/index';
 import chroma from 'chroma-js';
-import { MousePointerClick } from 'lucide-react';
+import { AlertCircle, MousePointerClick } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import ColorGenerator from './components/color-palette/color-generator';
 import { InitialSize, RelativeSizes, WeightSelector } from './components/font-styles/index';
@@ -58,6 +69,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
   const [navOptions, setNavOptions] = useState<NavOptions>('Peso');
   const [removeHeader, setRemoveHeader] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [openDialog, setOpenDialog] = useState<boolean>(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -118,13 +130,13 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
       relativeSizeScale,
       shades.map((item) => item.hex),
       color,
-      colorNickname
+      colorNickname,
     );
     const buttonsReturn = genButtonStyles(
       iconButtonSizes,
       fillPaddings,
       outlinePaddings,
-      outlineValue
+      outlineValue,
     );
     const iconReturn = genIconComponent(iconSizes, strokeWidth);
     const muiIconReturn = genIconComponent(iconSizes, strokeWidth, currentWeight, 'mui icon');
@@ -168,100 +180,116 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
       style={{
         marginBottom: !removeHeader ? '2rem' : '0rem',
       }}>
+      <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+        <DialogContent>
+          <Alert>
+            <Icon Icon={AlertCircle} />
+            <AlertTitle>Importante</AlertTitle>
+            <AlertDescription>
+              Use nosso componente de ícone mostrado na saída para evitar a distorçao da altura do
+              botão.
+            </AlertDescription>
+          </Alert>
+        </DialogContent>
+      </Dialog>
       <Header
         page="buttons"
         title="Gerador de estilos para botões"
         description="Estilize seus botões mais rapidamente"
         className={`flex flex-col px-3 justify-center gap-0 items-center text-center
-        pre-sm:flex-row pre-sm:justify-start pre-sm:gap-3 next-md:px-6 max-w-5xl mx-auto xl:max-w-none`}
+        pre-sm:flex-row pre-sm:justify-start pre-sm:gap-3 next-md:px-6 lg:max-w-5xl xl:max-w-6xl mx-auto`}
         icon={<MousePointerClick />}
         resizingCounter={resizingCounter}
         removeHeader={removeHeader}
         isMobile={isMobile}
       />
-      <main className={`space-y-6 px-3 next-md:px-6 max-w-5xl mx-auto xl:max-w-none`}>
-        <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1.7fr_1fr]">
-          <Card noHeader className="md:flex-row md:gap-4 xl:h-157 relative p-5" ref={cardRef}>
+      <main className={`w-full space-y-6 px-3 next-md:px-6 lg:max-w-5xl xl:max-w-6xl mx-auto`}>
+        <div className="grid grid-cols-1 gap-6">
+          <Card className="relative" ref={cardRef}>
+            <CardHeader className="border-none mb-1">
+              <CardTitle>Configurações</CardTitle>
+            </CardHeader>
             <RemoveHeaderButton removeHeader={removeHeader} setRemoveHeader={setRemoveHeader} />
-            <OptionsMenu
-              openSelect={openSelect}
-              setNavOption={setNavOptions}
-              navOption={navOptions}
-              cardRef={cardRef}
-              setOpenSelect={setOpenSelect}
-            />
-            <Nav setNavOption={setNavOptions} navOption={navOptions} />
-            <CardContent
-              ref={containerRef}
-              className={`w-full flex flex-col gap-5 items-start overflow-y-scroll scrollbar-hidden`}>
-              {navOptions === 'Alturas' && (
-                <HeightInputs
-                  currentButtonsData={currentButtonsData}
-                  setCurrentButtonsData={setCurrentButtonsData}
-                />
-              )}
-              {navOptions === 'Outline' && (
-                <OutlineInput outlineValue={outlineValue} setOutlineValue={setOutlineValue} />
-              )}
-              {navOptions === 'Cor' && <ColorInput color={color} setColor={setColor} />}
-              {navOptions === 'Alinhamento' && (
-                <AlignInput
-                  initialFontSize={initialFontSize}
-                  currentButtonsData={currentButtonsData}
-                  setCurrentButtonsData={setCurrentButtonsData}
-                />
-              )}
-              {navOptions === 'Padding X' && (
-                <PaddingXInput paddingX={paddingX} setPaddingX={setPaddingX} />
-              )}
-              {navOptions === 'Fonte' && <FontSelector page="button-page" />}
-              {navOptions === 'Font-size base' && (
-                <div className="space-y-5">
-                  <InitialSize
-                    styles={wrapperStyles}
-                    initialFontSize={initialFontSize}
-                    setInitialFontSize={setInitialFontSize}
+            <div className="flex flex-col gap-4 md:flex-row">
+              <OptionsMenu
+                openSelect={openSelect}
+                setNavOption={setNavOptions}
+                navOption={navOptions}
+                cardRef={cardRef}
+                setOpenSelect={setOpenSelect}
+              />
+              <Nav setNavOption={setNavOptions} navOption={navOptions} />
+              <CardContent
+                ref={containerRef}
+                className={`w-full flex flex-col gap-5 items-start overflow-y-scroll scrollbar-hidden`}>
+                {navOptions === 'Alturas' && (
+                  <HeightInputs
+                    currentButtonsData={currentButtonsData}
+                    setCurrentButtonsData={setCurrentButtonsData}
                   />
-                  <FontScales scaleValue={scaleValue} setScaleValue={setScaleValue} />
-                </div>
-              )}
-              {navOptions === 'Peso' && (
-                <WeightSelector
+                )}
+                {navOptions === 'Outline' && (
+                  <OutlineInput outlineValue={outlineValue} setOutlineValue={setOutlineValue} />
+                )}
+                {navOptions === 'Cor' && <ColorInput color={color} setColor={setColor} />}
+                {navOptions === 'Alinhamento' && (
+                  <AlignInput
+                    initialFontSize={initialFontSize}
+                    currentButtonsData={currentButtonsData}
+                    setCurrentButtonsData={setCurrentButtonsData}
+                  />
+                )}
+                {navOptions === 'Padding X' && (
+                  <PaddingXInput paddingX={paddingX} setPaddingX={setPaddingX} />
+                )}
+                {navOptions === 'Fonte' && <FontSelector page="button-page" />}
+                {navOptions === 'Font-size base' && (
+                  <div className="space-y-5">
+                    <InitialSize
+                      styles={wrapperStyles}
+                      initialFontSize={initialFontSize}
+                      setInitialFontSize={setInitialFontSize}
+                    />
+                    <FontScales scaleValue={scaleValue} setScaleValue={setScaleValue} />
+                  </div>
+                )}
+                {navOptions === 'Peso' && (
+                  <WeightSelector
+                    currentWeight={currentWeight}
+                    setCurrentWeight={setCurrentWeight}
+                    color={color}
+                    iconSizes={iconSizes}
+                    strokeWidth={strokeWidth}
+                    setStrokeWidth={setStrokeWidth}
+                    containerRef={containerRef}
+                  />
+                )}
+                {navOptions === 'Font-size dos botões' && (
+                  <RelativeSizes
+                    relativeSizeScale={relativeSizeScale}
+                    setRelativeSizeScale={setRelativeSizeScale}
+                    setCurrentButtonsData={setCurrentButtonsData}
+                  />
+                )}
+                {navOptions === 'Paleta' && <ColorGenerator shades={shades} />}
+                <Preview
+                  currentButtonsData={currentButtonsData}
+                  initialFontSize={initialFontSize}
                   currentWeight={currentWeight}
-                  setCurrentWeight={setCurrentWeight}
                   color={color}
+                  outlineValue={outlineValue}
+                  paddingX={paddingX}
+                  iconButtonSizes={iconButtonSizes}
+                  color50={color50}
+                  color1000={color1000}
                   iconSizes={iconSizes}
                   strokeWidth={strokeWidth}
-                  setStrokeWidth={setStrokeWidth}
-                  containerRef={containerRef}
+                  setFillPaddings={setFillPaddings}
+                  setOutlinePaddings={setOutlinePaddings}
+                  badContrast={badContrast}
                 />
-              )}
-              {navOptions === 'Font-size dos botões' && (
-                <RelativeSizes
-                  relativeSizeScale={relativeSizeScale}
-                  setRelativeSizeScale={setRelativeSizeScale}
-                  setCurrentButtonsData={setCurrentButtonsData}
-                />
-              )}
-              {navOptions === 'Paleta' && <ColorGenerator shades={shades} />}
-
-              <Preview
-                currentButtonsData={currentButtonsData}
-                initialFontSize={initialFontSize}
-                currentWeight={currentWeight}
-                color={color}
-                outlineValue={outlineValue}
-                paddingX={paddingX}
-                iconButtonSizes={iconButtonSizes}
-                color50={color50}
-                color1000={color1000}
-                iconSizes={iconSizes}
-                strokeWidth={strokeWidth}
-                setFillPaddings={setFillPaddings}
-                setOutlinePaddings={setOutlinePaddings}
-                badContrast={badContrast}
-              />
-            </CardContent>
+              </CardContent>
+            </div>
           </Card>
           <CSSReturn
             optionReturn={optionReturn}

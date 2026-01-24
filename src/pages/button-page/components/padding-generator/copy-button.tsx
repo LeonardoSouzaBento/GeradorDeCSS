@@ -14,7 +14,7 @@ const CopyButton = ({ returnString }: { returnString: string }) => {
   };
 
   return (
-    <Button className="w-full" onClick={copyToClipboard}>
+    <Button className='max-w-max' onClick={copyToClipboard}>
       {copied ? <CopyCheck {...iconMd} /> : <ClipboardCopy {...iconSm} />}
       {copied ? 'Copiado!' : 'Copiar CSS'}
     </Button>

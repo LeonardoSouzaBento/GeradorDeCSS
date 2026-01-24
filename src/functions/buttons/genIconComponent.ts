@@ -24,7 +24,7 @@ const weights = {
 
 const LucideIconSecondPart = `export const Icon = ({ LucideIcon, size, className, strokeValue, fill }: IconProps) => {
   return (
-    <div className="h-3 flex-center overflow-visible [&_svg]:shrink-0">
+    <div className="h-3 inline-flex justify-center items-center overflow-visible [&_svg]:shrink-0">
       <LucideIcon
         size={iconSizes[size as keyof typeof iconSizes] || size || '1em'}
         strokeWidth={weights[strokeValue as keyof typeof weights] || strokeValue || *value*}
@@ -54,7 +54,7 @@ export const MuiIcon = ({
   className,
 }: IconProps) => {
  return (
-    <div className="h-3 flex-center overflow-visible">
+    <div className="h-3 inline-flex justify-center items-center overflow-visible">
       <span
         className={\`material-symbols-rounded \${className}\`}
         style={{
