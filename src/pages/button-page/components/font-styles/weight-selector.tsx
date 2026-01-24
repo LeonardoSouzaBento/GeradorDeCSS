@@ -10,11 +10,12 @@ import {
   TooltipContent,
   TooltipTrigger,
   WrapperButtons,
-  WrapperForm
+  WrapperForm,
 } from '@/ui/index';
-import { normalizeDecimalInput, validateDecimalInput } from '@/utils';
+import { validateDecimalInput } from '@/utils';
 import { Maximize2, Minimize2, Package, Weight } from 'lucide-react';
 import { useState } from 'react';
+import { InputAlert } from '../padding-generator/input-alert';
 
 type Props = {
   currentWeight: number;
@@ -39,6 +40,7 @@ const WeightSelector = ({
 }: Props) => {
   const [inputValue, setInputValue] = useState<string>(strokeWidth.toString());
   const [expandIcon, setExpandIcon] = useState<boolean>(true);
+  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   function scrollToBottom() {
     containerRef.current?.scrollTo({
@@ -48,12 +50,18 @@ const WeightSelector = ({
   }
 
   function handleChange(value: string) {
-    const normalized = normalizeDecimalInput(value);
-    setInputValue(normalized);
-    if (!validateDecimalInput(normalized)) return;
-    const numberValue = parseFloat(normalized);
+    setInputValue(value);
+    if (!validateDecimalInput(value)) return;
+    const numberValue = parseFloat(value);
     if (numberValue >= 1.5 && numberValue <= 5) {
       setStrokeWidth(numberValue);
+    } else {
+      if (value.replace('.', '').length >= 2) {
+        setShowAlert(true);
+      }
+    }
+    if (value === '') {
+      setStrokeWidth(2);
     }
   }
 
@@ -95,7 +103,8 @@ const WeightSelector = ({
           value={inputValue}
           onClick={scrollToBottom}
           onChange={(e) => {
-            handleChange(e.target.value);
+            const value = e.target.value.replace(',', '.');
+            handleChange(value);
           }}
         />
         <WrapperButtons
@@ -146,6 +155,11 @@ const WeightSelector = ({
             </TooltipContent>
           </Tooltip>
         </WrapperButtons>
+        <InputAlert
+          message="Valor inválido! Escolha um valor entre 1.5 e 5."
+          showAlert={showAlert}
+          setShowAlert={setShowAlert}
+        />
       </WrapperForm>
     </div>
   );

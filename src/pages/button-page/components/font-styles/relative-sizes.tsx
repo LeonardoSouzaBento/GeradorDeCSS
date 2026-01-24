@@ -14,7 +14,6 @@ import {
   WrapperForm,
   WrapperInput,
 } from '@/ui/index';
-import { normalizeDecimalInput } from '@/utils/normalizeDecimalInput';
 import { validateDecimalInput } from '@/utils/validateDecimalInput';
 import { ALargeSmall, Info } from 'lucide-react';
 import { useState } from 'react';
@@ -37,7 +36,7 @@ const RelativeSizes = ({
   const [seeModal, setSeeModal] = useState<boolean>(false);
 
   const handleScaleFontSizeChange = (index: number, value: string) => {
-    const normalized = normalizeDecimalInput(value);
+    const normalized = value.replace(',', '.');
     if (!validateDecimalInput(normalized)) return;
     const newScale = [...relativeSizeScale];
     newScale[index] = normalized;
@@ -83,8 +82,8 @@ const RelativeSizes = ({
         <AlertDescription>
           Não se preocupe, definimos automaticamente pela{' '}
           <strong className="text-primary cursor-pointer font-semibold">
-            escala de cresimento 
-          </strong>{" "}
+            escala de cresimento
+          </strong>{' '}
           selecionada.
         </AlertDescription>
         <Button variant="link" size="sm" className="gap-[0.75ex]" onClick={() => setSeeModal(true)}>

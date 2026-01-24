@@ -16,6 +16,7 @@ import {
   Icon,
   CardHeader,
   CardTitle,
+  CardDescription,
 } from '@/ui/index';
 import chroma from 'chroma-js';
 import { AlertCircle, MousePointerClick } from 'lucide-react';
@@ -31,6 +32,7 @@ import {
   OutlineInput,
   PaddingXInput,
 } from './components/padding-generator/index';
+import ButtonStyleTester from '../home/components/button-style-tester';
 
 export const wrapperStyles = 'border rounded-lg p-5 pt-[1.5ex] bg-card';
 
@@ -62,12 +64,12 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
     { px: '', pb: '', pt: '', py: '' },
   ]);
   /* saidas e iteratividade */
-  const [openSelect, setOpenSelect] = useState<boolean>(false);
   const [optionReturn, setOptionReturn] = useState<OptionReturn>('botões');
+  const [removeHeader, setRemoveHeader] = useState<boolean>(false);
+  const [openSelect, setOpenSelect] = useState<boolean>(false);
   const currentOptionIndex = optionsReturn.findIndex((item) => item === optionReturn);
   const [returns, setReturns] = useState<string[]>([]);
-  const [navOptions, setNavOptions] = useState<NavOptions>('Peso');
-  const [removeHeader, setRemoveHeader] = useState<boolean>(false);
+  const [navOptions, setNavOptions] = useState<NavOptions>('Pesos');
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [openDialog, setOpenDialog] = useState<boolean>(true);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -164,7 +166,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
   useEffect(() => {
     if (navOptions === 'Paleta') {
       setOptionReturn('variáveis');
-    } else if (navOptions === 'Peso') {
+    } else if (navOptions === 'Pesos') {
       setOptionReturn('lucide icon');
     } else {
       if (optionReturn !== 'botões') {
@@ -181,7 +183,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
         marginBottom: !removeHeader ? '2rem' : '0rem',
       }}>
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-        <DialogContent>
+        <DialogContent className="p-5">
           <Alert>
             <Icon Icon={AlertCircle} />
             <AlertTitle>Importante</AlertTitle>
@@ -206,7 +208,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
       <main className={`w-full space-y-6 px-3 next-md:px-6 lg:max-w-5xl xl:max-w-6xl mx-auto`}>
         <div className="grid grid-cols-1 gap-6">
           <Card className="relative" ref={cardRef}>
-            <CardHeader className="border-none mb-1">
+            <CardHeader className="border-none mb-[0.25ex]">
               <CardTitle>Configurações</CardTitle>
             </CardHeader>
             <RemoveHeaderButton removeHeader={removeHeader} setRemoveHeader={setRemoveHeader} />
@@ -253,7 +255,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
                     <FontScales scaleValue={scaleValue} setScaleValue={setScaleValue} />
                   </div>
                 )}
-                {navOptions === 'Peso' && (
+                {navOptions === 'Pesos' && (
                   <WeightSelector
                     currentWeight={currentWeight}
                     setCurrentWeight={setCurrentWeight}
@@ -299,6 +301,15 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
             colorNickname={colorNickname}
             setColorNickname={setColorNickname}
           />
+          <Card>
+            <CardHeader>
+              <CardTitle>Componente para testar</CardTitle>
+              <CardDescription>Baixe esse componente para testar os estilos</CardDescription>
+            </CardHeader>
+            <CardContent className="max-w-max space-y-4">
+              <ButtonStyleTester />
+            </CardContent>
+          </Card>
         </div>
       </main>
     </div>

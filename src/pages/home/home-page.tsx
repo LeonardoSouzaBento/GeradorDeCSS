@@ -1,13 +1,11 @@
 import { CustomNavLink } from '@/components';
 import Header from '@/components/header';
-import { iconLg, iconSm } from '@/css/lucideIcons.ts';
-import { Alert, AlertDescription, AlertTitle, Icon, WrapperButtons, WrapperForm } from '@/ui';
+import { Icon, WrapperButtons, WrapperForm } from '@/ui';
 import { Button, ButtonVariants } from '@/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/ui/card';
-import { CaseSensitive, Download, Info, MousePointerClick, Palette, Sparkles } from 'lucide-react';
+import { CaseSensitive, MousePointerClick, Palette, Sparkles } from 'lucide-react';
 import ButtonStyleTester from './components/button-style-tester';
 import { ButtonsPreview, TypographyPreview } from './components/index';
-import buttonTesterContent from './components/button-tester-for-download.tsx?raw';
 
 const pages = [
   {
@@ -73,32 +71,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
             <CardDescription>Teste os estilos gerados com estes componentes</CardDescription>
           </CardHeader>
           <CardContent className="max-w-max space-y-4">
-            <WrapperForm>
-              <h6>Pré-visualizador de estilos e estados de botões</h6>
-              <ButtonStyleTester />
-              <Alert className="mt-4">
-                <Icon Icon={Info} size="xs" />
-                <AlertTitle>Atenção</AlertTitle>
-                <AlertDescription>
-                  Instale o{' '}
-                  <a
-                    href="https://ui.shadcn.com/docs/installation"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    Shadcn UI
-                  </a>{' '}
-                  para usar esse componente.
-                </AlertDescription>
-              </Alert>
-              <Alert className="mt-4">
-                <Icon Icon={Info} size="xs" />
-                <AlertDescription data-no-title>
-                  Nosso site é <strong>estático e seguro</strong>, fique tranquilo quanto a links
-                  externos.
-                </AlertDescription>
-              </Alert>
-            </WrapperForm>
-            <DownloadButtonPreview />
+            <ButtonStyleTester />
           </CardContent>
         </Card>
       </div>
@@ -107,34 +80,3 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
 };
 
 export default Home;
-
-const DownloadButtonPreview = () => {
-  const handleDownload = () => {
-    try {
-      // Create a blob with the file content
-      const blob = new Blob([buttonTesterContent], { type: 'text/plain;charset=utf-8' });
-
-      // Create a download link
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'button-tester.tsx';
-
-      // Trigger download
-      document.body.appendChild(link);
-      link.click();
-
-      // Cleanup
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error('Error downloading file:', error);
-    }
-  };
-
-  return (
-    <Button variant="ghost" data-w-full onClick={handleDownload}>
-      <Icon Icon={Download} size="sm" /> Baixar componente
-    </Button>
-  );
-};

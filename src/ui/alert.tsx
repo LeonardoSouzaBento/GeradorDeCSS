@@ -5,13 +5,13 @@ import { cn } from "@/lib/utils"
 import { DivProps, DivRef, ParagraphProps, ParagraphRef } from "@/types/htmlTags"
 
 const alertVariants = cva(
-  "relative w-full rounded-lg border p-4  [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:shrink-0",
+  "relative w-full rounded-lg border p-4  [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:shrink-0 transition-all duration-300 data-no-header:pt-4.5 data-no-header:[&>svg]:mt-[0.25ex]",
   {
     variants: {
       variant: {
         default: "text-foreground",
         destructive:
-          "ring ring-destructive/66 text-destructive [&>div:last-child]:text-destructive",
+          "bg-red-50/75 border-2 border-red-100 ring ring-destructive/66 text-red-700 [&>div:last-child]:text-red-700",
       },
     },
     defaultVariants: {
@@ -39,7 +39,7 @@ const AlertTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("mb-2 font-medium leading-none tracking-tight data-warn:", className)}
+    className={cn("mb-2 font-medium leading-none tracking-tight", className)}
     {...props}
   />
 ))
@@ -51,7 +51,7 @@ const AlertDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("text-xs [&_p]:leading-relaxed data-no-title:mt-px", className)}
+    className={cn("text-sm [&_p]:leading-relaxed data-no-title:mt-px", className)}
     {...props}
   />
 ))

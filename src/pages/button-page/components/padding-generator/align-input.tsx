@@ -15,6 +15,7 @@ import {
 } from '@/ui/index';
 import { AlignVerticalSpaceAround, Info } from 'lucide-react';
 import React, { ComponentPropsWithoutRef, useState } from 'react';
+import { InputAlert } from './input-alert';
 
 interface AdjustmentInputsProps {
   className?: string;
@@ -37,17 +38,23 @@ const AlignInput = ({
   setCurrentButtonsData,
   initialFontSize,
 }: AdjustmentInputsProps) => {
-  const [adjustmentScale, setAdjustmentScale] = useState('0');
+  const [inputValue, setInputValue] = useState('0');
+  const [showAlert, setShowAlert] = useState(false);
 
   function handleAdjustmentChange(value: string) {
-    setAdjustmentScale(value);
-    const numberValue = Number(value);
-    if (numberValue >= -50 && numberValue <= 50) {
+    const normalizedValue = value.replace(',', '.');
+    setInputValue(normalizedValue);
+    const numberValue = Number(normalizedValue);
+    if (numberValue >= -15 && numberValue <= 15) {
       const newValues = currentButtonsData.map((item) => ({
         ...item,
         adjustment: Number(((numberValue / 100) * initialFontSize * item.relativeSize).toFixed(4)),
       }));
       setCurrentButtonsData(newValues);
+    } else {
+      if (inputValue.replace('.', '').length >= 2) {
+        setShowAlert(true);
+      }
     }
   }
 
@@ -67,13 +74,18 @@ const AlignInput = ({
         <Input
           id="pb"
           type="text"
-          value={adjustmentScale}
+          value={inputValue}
           onChange={(e) => {
             const value = e.target.value;
             if (!/^-?\d*[.,]?\d*$/.test(value)) return;
             const newValue = value.includes(',') ? value.replace(',', '.') : value;
             handleAdjustmentChange(newValue);
           }}
+        />
+        <InputAlert
+          message="Valor inválido! Escolha um valor entre -15 e 15."
+          showAlert={showAlert}
+          setShowAlert={setShowAlert}
         />
       </WrapperInput>
 

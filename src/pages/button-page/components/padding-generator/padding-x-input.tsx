@@ -11,9 +11,9 @@ import {
   WrapperInput,
 } from '@/ui';
 import { Input } from '@/ui/input';
-import { normalizeDecimalInput } from '@/utils/normalizeDecimalInput';
 import { RulerDimensionLine } from 'lucide-react';
 import { useState } from 'react';
+import { InputAlert } from './input-alert';
 
 interface Props {
   paddingX: number;
@@ -22,15 +22,20 @@ interface Props {
 
 const PaddingXInput = ({ paddingX, setPaddingX }: Props) => {
   const [inputValue, setInputValue] = useState<string>(paddingX.toString());
+  const [showAlert, setShowAlert] = useState(false);
 
   function handleChangePaddingX(value: string) {
-    const stringValue = normalizeDecimalInput(value);
+    const stringValue = value.replace(',', '.');
     const numericValue = Number(stringValue);
     if (!/^\d*[.,]?\d*$/.test(value)) return;
     setInputValue(stringValue);
 
     if (numericValue >= 0.4 && numericValue <= 10) {
       setPaddingX(numericValue);
+    } else {
+      if (inputValue.replace('.', '').length >= 2) {
+        setShowAlert(true);
+      }
     }
   }
 
@@ -57,6 +62,11 @@ const PaddingXInput = ({ paddingX, setPaddingX }: Props) => {
             handleChangePaddingX(e.target.value);
           }}
         />
+        <InputAlert
+          message="Valor inválido! Escolha um valor entre 0.4 e 10."
+          showAlert={showAlert}
+          setShowAlert={setShowAlert}
+        />
       </WrapperInput>
       <WrapperButtons className="pt-4">
         {pxSuggestions.map((item) => (
@@ -68,7 +78,7 @@ const PaddingXInput = ({ paddingX, setPaddingX }: Props) => {
             key={item}
             onClick={() => {
               setPaddingX(item);
-              setInputValue((item).toString());
+              setInputValue(item.toString());
             }}>
             {item}
           </Button>

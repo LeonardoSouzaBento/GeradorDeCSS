@@ -11,10 +11,10 @@ import {
   WrapperForm,
   WrapperInput,
 } from '@/ui';
-import { normalizeDecimalInput } from '@/utils/normalizeDecimalInput';
 import { validateDecimalInput } from '@/utils/validateDecimalInput';
 import { LineSquiggle } from 'lucide-react';
 import { useState } from 'react';
+import { InputAlert } from './input-alert';
 
 const OutlineInput = ({
   outlineValue,
@@ -24,9 +24,10 @@ const OutlineInput = ({
   setOutlineValue: StateSetter<number>;
 }) => {
   const [inputValue, setInputValue] = useState<string>(outlineValue.toString());
+  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = normalizeDecimalInput(e.target.value);
+    const value = e.target.value.replace(',', '.');
     const numberValue = Number(value);
     if (!validateDecimalInput(value)) return;
     setInputValue(value);
@@ -34,7 +35,12 @@ const OutlineInput = ({
     // Aceitar valores entre 1 e 10
     if (numberValue >= 1 && numberValue <= 10 && value !== '') {
       setOutlineValue(numberValue);
-    } else if (value === '') {
+    } else {
+      if (value.replace('.', '').length >= 2) {
+        setShowAlert(true);
+      }
+    }
+    if (value === '') {
       setOutlineValue(2);
     }
   };
@@ -57,6 +63,11 @@ const OutlineInput = ({
           placeholder="Digite o valor"
           value={inputValue}
           onChange={(e) => handleInputChange(e)}
+        />
+        <InputAlert
+          message="Valor inválido! Escolha um valor entre 1 e 10."
+          showAlert={showAlert}
+          setShowAlert={setShowAlert}
         />
       </WrapperInput>
       <WrapperButtons className="pt-4">

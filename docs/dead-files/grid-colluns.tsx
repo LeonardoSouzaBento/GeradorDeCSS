@@ -1,5 +1,5 @@
 import { Button, Card, Icon, Input, Label, WrapperButtons, WrapperInput } from '../../src/ui';
-import { normalizeDecimalInput, validateDecimalInput } from '../../src/utils';
+import { validateDecimalInput } from '../../src/utils';
 import { ChevronDown, X } from 'lucide-react';
 import { useState } from 'react';
 
@@ -83,7 +83,7 @@ const Test = () => {
   };
 
   function handleChangeGap(value: string) {
-    const normalizedValue = normalizeDecimalInput(value);
+    const normalizedValue = value.replace(',', '.');
     if (!validateDecimalInput(normalizedValue)) return;
     setGapInput(normalizedValue);
 
@@ -92,7 +92,7 @@ const Test = () => {
   }
 
   function handleChangeCollunsQuantity(value: string) {
-    const normalizedValue = normalizeDecimalInput(value);
+    const normalizedValue = value.replace(',', '.');
     if (!validateDecimalInput(normalizedValue)) return;
     setCollunsInput(normalizedValue);
 
@@ -246,7 +246,6 @@ interface PreviewProps {
   gap: number;
   collunsQuantity: number;
 }
-
 
 const Preview = ({ screenWidth, margin, gap, collunsQuantity }: PreviewProps) => {
   const marginValue = typeof margin === 'number' ? `${margin}px` : null;

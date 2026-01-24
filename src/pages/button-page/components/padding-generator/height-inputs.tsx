@@ -16,6 +16,7 @@ import { validateDecimalInput } from '@/utils/validateDecimalInput';
 import { ChartColumnDecreasing, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { buttonScales } from '@/data/buttons/variables';
+import { InputAlert } from './input-alert';
 
 interface HeightInputsProps {
   currentButtonsData: ButtonsData[];
@@ -26,16 +27,22 @@ const css = { wrapperInputs: `flex flex-col gap-[2ex] min-[575px]:flex-row` };
 
 const HeightInputs = ({ currentButtonsData, setCurrentButtonsData }: HeightInputsProps) => {
   const [heightScale, setHeightScale] = useState<string[]>(
-    currentButtonsData.map((item) => item.height.toString())
+    currentButtonsData.map((item) => item.height.toString()),
+  );
+  const [inputsValue, setInputsValue] = useState<string[]>(
+    currentButtonsData.map((item) => item.height.toString()),
   );
   const [checkCount, setCheckCount] = useState<number>(0);
   const [stopOnChange, setStopOnChange] = useState<boolean>(false);
+  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   function handleHeightChange(index: number, value: string) {
     if (stopOnChange || !validateDecimalInput(value)) return;
-    setHeightScale((prev) => {
+    const normalizedValue = value.replace(',', '.');
+
+    setInputsValue((prev) => {
       const newScale = [...prev];
-      newScale[index] = value;
+      newScale[index] = normalizedValue;
       return newScale;
     });
     setCheckCount((prev) => prev + 1);
@@ -66,6 +73,20 @@ const HeightInputs = ({ currentButtonsData, setCurrentButtonsData }: HeightInput
     });
   }, [checkCount]);
 
+  useEffect(() => {
+    inputsValue.forEach((item, index) => {
+      if (Number(item) >= 32 && Number(item) <= 72) {
+        const newButtonsData = [...currentButtonsData];
+        newButtonsData[index].height = Number(item);
+        setCurrentButtonsData(newButtonsData);
+      } else {
+        if (inputsValue[index].replace('.', '').length >= 2) {
+          setShowAlert(true);
+        }
+      }
+    });
+  }, [inputsValue]);
+
   return (
     <WrapperForm>
       <HeaderH6 mb={0} className={`mb-[1cap]`}>
@@ -86,7 +107,7 @@ const HeightInputs = ({ currentButtonsData, setCurrentButtonsData }: HeightInput
             <Input
               id={item.name}
               type="text"
-              value={heightScale[index]}
+              value={inputsValue[index]}
               onClick={() => setStopOnChange(false)}
               onChange={(e) => {
                 handleHeightChange(index, e.target.value);
@@ -95,6 +116,11 @@ const HeightInputs = ({ currentButtonsData, setCurrentButtonsData }: HeightInput
           </WrapperInput>
         ))}
       </div>
+      <InputAlert
+        message="Valor inválido! Escolha um valor entre 32 e 72."
+        showAlert={showAlert}
+        setShowAlert={setShowAlert}
+      />
       <WrapperButtons className="pt-[2ex]">
         <Button variant="ghost" onClick={() => handleChangeScale('previous')}>
           <ChevronLeft {...iconSm} />

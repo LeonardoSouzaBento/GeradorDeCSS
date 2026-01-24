@@ -52,7 +52,7 @@ CardTitle.displayName = 'CardTitle';
 
 const CardDescription = React.forwardRef<ParagraphRef, ParagraphProps>(
   ({ className, children, ...props }, ref) => (
-    <p ref={ref} className={cn('text-muted-foreground text-sm -mt-[1.5ex]', className)} {...props}>
+    <p ref={ref} className={cn('text-muted-foreground text-sm -mt-cap-offset pb-0.5', className)} {...props}>
       {children}
     </p>
   )

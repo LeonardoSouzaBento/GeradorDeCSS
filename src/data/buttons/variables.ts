@@ -93,7 +93,7 @@ export type NavOptions =
   | 'Font-size dos botões'
   | 'Alinhamento'
   | 'Font-size base'
-  | 'Peso'
+  | 'Pesos'
   | 'Outline'
   | 'Cor'
   | 'Paleta'
@@ -132,7 +132,7 @@ export const fontConfigs: OptionButtonData[] = [
     icon: TypeOutline,
   },
   {
-    name: 'Peso',
+    name: 'Pesos',
     icon: Weight,
   },
   {
