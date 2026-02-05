@@ -79,7 +79,7 @@ const WeightSelector = ({
             <Button
               key={weight}
               variant="ghost"
-              optionButton
+              data-option
               isSelected={currentWeight === weight}
               onClick={() => {
                 setCurrentWeight(weight);

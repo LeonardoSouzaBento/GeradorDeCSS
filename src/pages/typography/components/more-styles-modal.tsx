@@ -16,13 +16,13 @@ function getPreHeight(
   cardRef: React.RefObject<HTMLDivElement>,
   headerRef: React.RefObject<HTMLDivElement>,
   buttonsDivRef: React.RefObject<HTMLDivElement>,
-  rootFontSize: number
+  rootFontSize: number,
 ) {
   const cardHeight = cardRef.current.scrollHeight;
   const headerHeight = headerRef.current?.scrollHeight || 0;
   const buttonsDivHeight = buttonsDivRef.current?.scrollHeight || 0;
   const preHeight = ((cardHeight - headerHeight - buttonsDivHeight) / rootFontSize - 1.5).toFixed(
-    3
+    3,
   );
   return preHeight;
 }
@@ -96,7 +96,9 @@ const MoreStylesModal = ({
           className={`w-full flex flex-row flex-nowrap 
           justify-between mb-0`}>
           <div>
-            <CardTitle className="mb-cap-offset">Estilos adicionais</CardTitle>
+            <CardTitle className="mb-cap-offset">
+              <h3>Estilos adicionais</h3>
+            </CardTitle>
             <CardDescription>Larguras máxima do corpo, pesos e line-height</CardDescription>
           </div>
           <Button
@@ -132,7 +134,7 @@ const MoreStylesModal = ({
                     size="sm"
                     variant="outline"
                     key={option.value}
-                    optionButton
+                    data-option
                     isSelected={isSelected}
                     className={`sm:min-w-max rounded-full shadow-xs`}
                     onClick={() => {

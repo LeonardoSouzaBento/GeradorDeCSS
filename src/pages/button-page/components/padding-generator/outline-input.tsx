@@ -75,7 +75,7 @@ const OutlineInput = ({
           <Button
             variant="ghost"
             size="sm"
-            optionButton
+            data-option
             isSelected={item === outlineValue}
             key={item}
             onClick={() => {

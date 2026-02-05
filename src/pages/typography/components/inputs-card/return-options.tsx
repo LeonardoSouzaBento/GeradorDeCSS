@@ -30,7 +30,7 @@ const ReturnOptions = ({ returnType, setReturnType, setCanGenerate }: Props) => 
             size="sm"
             variant="ghost"
             key={option.value}
-            optionButton
+            data-option
             isSelected={returnType === option.value}
             className={`rounded-full shadow-xs`}
             onClick={() => {

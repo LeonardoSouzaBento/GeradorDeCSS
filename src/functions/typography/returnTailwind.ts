@@ -12,11 +12,12 @@ export function returnTailwind(
   const scaledList = genScaledList(minSizeBody, maxSizeBody, scaleValue);
   const fontSizeVariables = genFontVariables(scaledList, 'tw');
 
-  const bodyClass = `@layer components {\nbody {\n@apply ${scaleFontForBody(minSizeBody, maxSizeBody)};\n}`;
+  const bodyClass = `/* prettier-ignore */
+@layer components {\nbody {\n@apply ${scaleFontForBody(minSizeBody, maxSizeBody)};\n}`;
 
   const tagsWithVars = `${genTagsWithVars(scaledList)
     .map(({ tagName, varName: value }) => {
-      return `${tagName} {@apply ${value};}`;
+      return `${tagName} { @apply ${value}; }`;
     })
     .join('\n\n')}\n}`;
 

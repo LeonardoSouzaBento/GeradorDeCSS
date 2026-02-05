@@ -1,4 +1,5 @@
-export const moreCSSStyles = `/* LARGURA MÁXIMA DO CORPO */
+export const moreCSSStyles = `/* prettier-ignore */
+/* LARGURA MÁXIMA DO CORPO */
 p {max-width: 65ch;}
 @media (min-width: 640px){p {max-width: 73ch;}}
 @media (min-width: 768px){p {max-width: 75ch;}}
@@ -21,7 +22,7 @@ p, li, input, select, option {
 }
 
 a, h6, h5, h4, button, 
-.small-button, .big-link, .small-link {
+.small-button, .large-button {
   font-weight: 500;
 }
 
@@ -57,7 +58,8 @@ button { @apply leading-[1.12]; }
 .smaller-text { @apply leading-[1.54]; }
 `;
 
-export const moreTwStyles = `@layer components { 
+export const moreTwStyles = `/* prettier-ignore */
+@layer components { 
 /* LARGURA MÁXIMA DO CORPO */ 
 p { 
   @apply max-w-[65ch] sm:max-w-[73ch] 
@@ -79,8 +81,7 @@ a, h6, h5, h4 {
   @apply font-medium; 
 }
 
-button, label, .small-button, 
-.big-link, .small-link { 
+button, label, .small-button, .large-button { 
   @apply font-medium; 
 } 
 
@@ -143,8 +144,7 @@ h4 {
 button,
 label,
 .small-button,
-.big-link,
-.small-link {
+.large-button {
   @apply font-semibold; /* 600 */
 }
 

@@ -113,7 +113,7 @@ const FontSelector = ({
             <Button
               key={font}
               variant="link"
-              optionButton
+              data-option
               isSelected={currentFont === font && !error}
               className={`mr-8`}
               onClick={() => {

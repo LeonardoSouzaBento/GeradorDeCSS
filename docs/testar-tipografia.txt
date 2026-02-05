@@ -1,0 +1,6 @@
+Line height:
+Títulos longos: Titulos com lorem, compridos, para ver espaçamento entre linhas.
+
+Preenchimentos
+Envolver as tags com cards de paddings para ver qual o valor de compesação necessário
+

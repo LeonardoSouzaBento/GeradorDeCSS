@@ -46,13 +46,13 @@ const CardHeader = React.forwardRef<DivRef, DivProps>(({ className, ...props }, 
 CardHeader.displayName = 'CardHeader';
 
 const CardTitle = React.forwardRef<HeadRef, HeadProps>(({ className, ...props }, ref) => (
-  <h3 ref={ref} className={cn('tracking-tight leading-normal pt-[1cap]', className)} {...props} />
+  <div ref={ref} className={cn('tracking-tight leading-normal pt-4.5', className)} {...props} />
 ));
 CardTitle.displayName = 'CardTitle';
 
 const CardDescription = React.forwardRef<ParagraphRef, ParagraphProps>(
   ({ className, children, ...props }, ref) => (
-    <p ref={ref} className={cn('text-muted-foreground text-sm -mt-cap-offset pb-0.5', className)} {...props}>
+    <p ref={ref} className={cn('text-muted-foreground text-sm -mt-ex-offset pb-0.5', className)} {...props}>
       {children}
     </p>
   )

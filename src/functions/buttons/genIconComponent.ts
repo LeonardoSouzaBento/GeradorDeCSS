@@ -1,16 +1,9 @@
-const sizePrefixes = ['xs', 'sm', 'md', 'lg', 'h6', 'h5', 'h4', 'h3'];
-const alternativePrefixes = ['xl', '"2xl"', '"3xl"', '"4xl"'];
+const sizePrefixes = ['xs', 'sm', 'base', 'md', 'lg', 'xl', '"2xl"', '"3xl"'];
+const alternativePrefixes = ['h6', 'h5', 'h4', 'h3'];
 
-const LucideIconFirstPart = `import { LucideIcon } from 'lucide-react';
+const LucideIconFirstPart = `import type { LucideIcon as LucideIconType, LucideProps } from 'lucide-react';
 
-interface IconProps {
-  LucideIcon: LucideIcon;
-  size?: string;
-  className?: string;
-  strokeValue?: string | number;
-  fill?: string;
-}
-
+type StrokeValue = keyof typeof weights;
 /* Ajuste depois */
 const weights = {
   thin: 2.25,
@@ -19,15 +12,23 @@ const weights = {
   semibold: 2.67,
   bold: 2.8,
   extrabold: 3,
-};
+}
+
+type SizeValue = keyof typeof iconSizes;
 `;
 
-const LucideIconSecondPart = `export const Icon = ({ LucideIcon, size, className, strokeValue, fill }: IconProps) => {
+const LucideIconSecondPart = `interface IconProps extends Omit<LucideProps, 'size' | 'strokeWidth'> {
+  LucideIcon: LucideIconType;
+  size?: SizeValue | string;
+  strokeWidth?: StrokeValue | string;
+}
+
+export const Icon = ({ Icon, size, className, strokeValue, fill }: IconProps) => {
   return (
     <div className="h-3 inline-flex justify-center items-center overflow-visible [&_svg]:shrink-0">
-      <LucideIcon
-        size={iconSizes[size as keyof typeof iconSizes] || size || '1em'}
-        strokeWidth={weights[strokeValue as keyof typeof weights] || strokeValue || *value*}
+      <Icon
+        size={iconSizes[size as SizeValue] || size || '1em'}
+        strokeWidth={weights[strokeWidth as StrokeValue] || strokeWidth || *value*}
         className={className}
         fill={fill || 'none'}
       />
@@ -101,5 +102,5 @@ export const genIconComponent = (
   }
   /* material icon */
   const secondPart = muiIconSecondPart.replace('*value*', strWeight);
-  return `const iconSizes = {\n${fontSizes}\n};\n\n${secondPart}`;
+  return `const iconSizes = {${fontSizes}};\n\n${secondPart}`;
 };

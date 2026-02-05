@@ -6,22 +6,18 @@ import { cn } from '@/lib/utils';
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 const buttonVariants = cva(
-  'w-auto tracking-wide inline-flex items-center justify-center gap-2 rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 relative data-w-full:w-full',
+  'w-auto tracking-wide inline-flex items-center justify-center gap-2 rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 relative data-w-full:w-full data-option:rounded-full',
   {
     variants: {
       variant: {
-        default:
-          'bg-primary hover:bg-primary/90 text-primary-foreground disabled:bg-neutral-300 disabled:text-neutral-500/80 data-active:bg-primary-800 data-hover:bg-primary-600 data-focus:border-3 data-focus:border-selected/75',
+        default: 'bg-primary hover:bg-primary/90 text-primary-foreground',
         outline:
-          'border-2 border-primary/88 text-primary bg-transparent hover:bg-gray-50 shadow-xs/12 disabled:bg-neutral-100 disabled:border-neutral-300 disabled:text-neutral-500/75 data-hover:bg-primary-50 data-focus:outline-selected/70 data-focus:outline-2 data-active:bg-primary-100',
-        ghost:
-          'hover:bg-secondary/50 border text-primary bg-transparent disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none data-hover:bg-primary-50 data-focus:outline-selected/70 data-focus:outline-3 data-focus:border-primary-400 data-active:bg-primary-100',
+          'border-2 border-primary/88 text-primary bg-transparent hover:bg-gray-50 shadow-xs/12',
+        ghost: 'hover:bg-secondary/50 border text-primary bg-transparent',
+        secondary: 'bg-primary-50 text-primary hover:bg-primary-100',
         transparent: 'bg-transparent text-primary hover:bg-primary-50',
         link: 'text-primary underline-offset-4 hover:underline',
-        secondary:
-          'bg-primary-50 text-primary hover:bg-primary-100 disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none data-hover:bg-primary-50/75 data-focus:outline-3 data-focus:outline-selected/75 data-active:bg-primary-100',
-        destructive:
-          'bg-red-700 text-red-50 hover:bg-red-600 data-hover:bg-red-600 data-focus:outline-3 data-focus:outline-red-200 data-active:bg-red-800',
+        destructive: 'bg-red-700 text-red-50 hover:bg-red-600',
       },
       size: {
         sm: 'min-h-9 rounded-md small-button',
@@ -37,56 +33,63 @@ const buttonVariants = cva(
       variant: 'default',
       size: 'default',
     },
-  }
+  },
 );
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-  optionButton?: boolean;
-  isSelected?: boolean;
-  disabled?: boolean;
-  closeButton?: boolean;
+//OBJETO COM OS ESTIOS DE ESTADO
+const buttonStatesClasses = {
+  default:
+    'disabled:bg-neutral-300 disabled:text-neutral-500/80 data-active:bg-primary-800 data-hover:bg-primary-600 data-focus:border-3 data-focus:border-selected/75',
+  outline:
+    'disabled:bg-neutral-100 disabled:border-neutral-300 disabled:text-neutral-500/75 data-hover:bg-primary-50 data-focus:outline-selected/70 data-focus:outline-2 data-active:bg-primary-100',
+  ghost:
+    'disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none data-hover:bg-primary-50 data-focus:outline-selected/70 data-focus:outline-3 data-focus:border-primary-400 data-active:bg-primary-100',
+  secondary:
+    'disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none data-hover:bg-primary-50/75 data-focus:outline-3 data-focus:outline-selected/75 data-active:bg-primary-100',
+  destructive:
+    'data-hover:bg-red-600 data-focus:outline-3 data-focus:outline-red-200 data-active:bg-red-800',
+  transparent: '',
+  link: '',
+};
+
+// BOTÃO
+type ButtonProps = React.ComponentPropsWithRef<'button'> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean;
+    selected?: boolean;
+  };
+
+function Button({
+  className,
+  variant = 'default',
+  size = 'default',
+  asChild = false,
+  disabled = false,
+  selected = false,
+  ...props
+}: ButtonProps) {
+  const Comp = asChild ? Slot : 'button';
+  const paddingX = !size || ['default', 'lg', 'sm'].includes(size) ? 'px-[0.9em]' : '';
+  const stateCSS = buttonStatesClasses[variant];
+  const selectedCSS = selected
+    ? 'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card'
+    : '';
+
+  return (
+    <Comp
+      className={cn(buttonVariants({ variant, size }), paddingX, stateCSS, selectedCSS, className)}
+      disabled={disabled}
+      {...props}
+    />
+  );
 }
-
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      className,
-      variant = 'default',
-      size,
-      asChild = false,
-      optionButton,
-      isSelected,
-      disabled,
-      closeButton,
-      ...props
-    },
-    ref
-  ) => {
-    const Comp = asChild ? Slot : 'button';
-    const paddingX = !size || ['default', 'lg', 'sm'].includes(size) ? 'px-[0.9em]' : '';
-
-    return (
-      <Comp
-        className={cn(
-          buttonVariants({ variant, size }),
-          paddingX,
-          {
-            'rounded-full': optionButton,
-            'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card': isSelected,
-            'rounded-full p-0! text-foreground': closeButton,
-          },
-          className
-        )}
-        ref={ref}
-        disabled={disabled}
-        {...props}
-      />
-    );
-  }
-);
 Button.displayName = 'Button';
+
+// DADOS PARA MAP
+type ButtonShowcaseState = {
+  name: string;
+  props?: Record<string, boolean>;
+};
 
 const buttons: ButtonVariants['variant'][] = [
   'default',
@@ -96,65 +99,39 @@ const buttons: ButtonVariants['variant'][] = [
   'destructive',
 ];
 
-const disabledButtons: ButtonVariants['variant'][] = ['default', 'outline', 'ghost', 'secondary'];
+const buttonStates: ButtonShowcaseState[] = [
+  { name: 'Padrão' },
+  { name: 'Hover', props: { 'data-hover': true } },
+  { name: 'Foco', props: { 'data-focus': true } },
+  { name: 'Ativo', props: { 'data-active': true } },
+  { name: 'Desabilitado', props: { disabled: true } },
+];
 
-const ButtonStyleTester = () => {
+export const ButtonStyleTester = () => {
   return (
     <div
       className={`flex flex-col gap-3 [&>div]:flex [&>div]:flex-col [&>div]:gap-2
       [&>div>div]:h-auto [&>div>div]:flex [&>div>div]:flex-wrap [&>div>div]:items-center [&>div>div]:gap-3`}>
-      <div>
-        <p>Padrão</p>
-        <div>
-          {buttons.map((button) => (
-            <Button key={button} variant={button as ButtonVariants['variant']}>
-              {button}
-            </Button>
-          ))}
+      {buttonStates.map(({ name, props }) => (
+        <div key={name}>
+          <p>{name}</p>
+          <div className="flex flex-wrap gap-3">
+            {buttons.map((button) => {
+              if (name === 'Desabilitado' && button === 'destructive') {
+                return null;
+              }
+              return (
+                <Button
+                  key={`${name}-${button}`}
+                  variant={button as ButtonVariants['variant']}
+                  {...props}>
+                  {button}
+                </Button>
+              );
+            })}
+          </div>
         </div>
-      </div>
-      <div>
-        <p>Desabiitado</p>
-        <div>
-          {disabledButtons.map((button) => (
-            <Button key={button} variant={button as ButtonVariants['variant']} disabled={true}>
-              {button}
-            </Button>
-          ))}
-        </div>
-      </div>
-      <div>
-        <p>Hover</p>
-        <div>
-          {buttons.map((button) => (
-            <Button key={button} variant={button as ButtonVariants['variant']} data-hover>
-              {button}
-            </Button>
-          ))}
-        </div>
-      </div>
-      <div>
-        <p>Focus</p>
-        <div>
-          {buttons.map((button) => (
-            <Button key={button} variant={button as ButtonVariants['variant']} data-focus>
-              {button}
-            </Button>
-          ))}
-        </div>
-      </div>
-      <div>
-        <p>Active</p>
-        <div>
-          {buttons.map((button) => (
-            <Button key={button} variant={button as ButtonVariants['variant']} data-active>
-              {button}
-            </Button>
-          ))}
-        </div>
-      </div>
+      ))}
     </div>
   );
 };
-
-export default ButtonStyleTester;

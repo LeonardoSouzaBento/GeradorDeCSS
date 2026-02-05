@@ -28,7 +28,7 @@ const FontScales = ({ scaleValue, setScaleValue }: Props) => {
             key={item.value}
             variant="ghost"
             size="sm"
-            optionButton
+            data-option
             isSelected={item.value === scaleValue}
             className={`min-w-18`}
             onClick={() => {

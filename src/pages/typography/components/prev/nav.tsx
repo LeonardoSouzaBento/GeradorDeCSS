@@ -1,5 +1,5 @@
 import { Button } from '@/ui/button';
-import { componentExamples } from "@/pages/typography/components/prev";
+import { componentExamples } from '@/pages/typography/components/prev';
 
 const Nav = ({
   selectedComponent,
@@ -16,7 +16,7 @@ const Nav = ({
           <Button
             variant="ghost"
             size="sm"
-            optionButton
+            data-option
             isSelected={selected}
             key={item}
             className={`capitalize`}

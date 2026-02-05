@@ -64,7 +64,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
     { px: '', pb: '', pt: '', py: '' },
   ]);
   /* saidas e iteratividade */
-  const [optionReturn, setOptionReturn] = useState<OptionReturn>('botões');
+  const [optionReturn, setOptionReturn] = useState<OptionReturn>('botão');
   const [removeHeader, setRemoveHeader] = useState<boolean>(false);
   const [openSelect, setOpenSelect] = useState<boolean>(false);
   const currentOptionIndex = optionsReturn.findIndex((item) => item === optionReturn);
@@ -169,8 +169,8 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
     } else if (navOptions === 'Pesos') {
       setOptionReturn('lucide icon');
     } else {
-      if (optionReturn !== 'botões') {
-        setOptionReturn('botões');
+      if (optionReturn !== 'botão') {
+        setOptionReturn('botão');
       }
     }
   }, [navOptions]);
@@ -209,7 +209,9 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
         <div className="grid grid-cols-1 gap-6">
           <Card className="relative" ref={cardRef}>
             <CardHeader className="border-none mb-[0.25ex]">
-              <CardTitle>Configurações</CardTitle>
+              <CardTitle>
+                <h3>Configurações</h3>
+              </CardTitle>
             </CardHeader>
             <RemoveHeaderButton removeHeader={removeHeader} setRemoveHeader={setRemoveHeader} />
             <div className="flex flex-col gap-4 md:flex-row">
@@ -303,7 +305,9 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
           />
           <Card>
             <CardHeader>
-              <CardTitle>Componente para testar</CardTitle>
+              <CardTitle>
+                <h3>Componente para pré-visualizar estilos de estados</h3>
+              </CardTitle>
               <CardDescription>Baixe esse componente para testar os estilos</CardDescription>
             </CardHeader>
             <CardContent className="max-w-max space-y-4">

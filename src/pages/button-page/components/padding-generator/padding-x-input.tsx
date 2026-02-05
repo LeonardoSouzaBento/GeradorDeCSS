@@ -73,7 +73,7 @@ const PaddingXInput = ({ paddingX, setPaddingX }: Props) => {
           <Button
             variant="ghost"
             size="sm"
-            optionButton
+            data-option
             isSelected={item === paddingX}
             key={item}
             onClick={() => {

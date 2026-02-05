@@ -104,8 +104,8 @@ export interface OptionButtonData {
   icon: LucideIcon;
 }
 
-export const optionsReturn = ['variáveis', 'botões', 'lucide icon', 'mui icon'];
-export type OptionReturn = 'variáveis' | 'botões' | 'lucide icon' | 'mui icon';
+export const optionsReturn = ['variáveis', 'botão', 'lucide icon', 'mui icon'];
+export type OptionReturn = 'variáveis' | 'botão' | 'lucide icon' | 'mui icon';
 
 export const sizeConfigs: OptionButtonData[] = [
   {

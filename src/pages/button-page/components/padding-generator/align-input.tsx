@@ -93,7 +93,7 @@ const AlignInput = ({
         <div className={css.containerButtons}>
           <WrapperButtons className={css.wrapperButtons}>
             {options.negative.map((value) => (
-              <OptionButton
+              <DataOption
                 key={value}
                 value={value}
                 onClick={() => handleAdjustmentChange(value)}
@@ -103,7 +103,7 @@ const AlignInput = ({
           <Separator orientation="vertical" className="sm:hidden" />
           <WrapperButtons className="h-max w-full relative sm:justify-between flex-nowrap">
             {options.positive.map((value) => (
-              <OptionButton
+              <DataOption
                 key={value}
                 value={value}
                 onClick={() => handleAdjustmentChange(value)}
@@ -130,9 +130,9 @@ interface OptionButtonProps extends ComponentPropsWithoutRef<'button'> {
   value: string;
 }
 
-const OptionButton = ({ value, ...props }: OptionButtonProps) => {
+const DataOption = ({ value, ...props }: OptionButtonProps) => {
   return (
-    <Button size="sm" variant="ghost" optionButton className="px-[1.4ex]" {...props}>
+    <Button size="sm" variant="ghost" data-option className="px-[1.4ex]" {...props}>
       {value}
     </Button>
   );

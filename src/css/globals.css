@@ -14,6 +14,14 @@ max-w-5xl,64rem,1024px
     'Google Sans Flex', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-button: 'Google Sans', sans-serif;
   --font-code: 'Ubuntu Mono', monospace;
+  /* Breakpoints */
+  --breakpoint-xxs: 320px;
+  --breakpoint-xs: 375px;
+  --breakpoint-md-sm: 430px;
+  --breakpoint-pre-sm: 575px;
+  --breakpoint-pre-md: 700px;
+  --breakpoint-next-md: 840px;
+  --breakpoint-pre-lg: 980px;
   /*font sizes*/
   --text-xs: 0.8783em;
   --text-sm: 0.9372em;
@@ -80,7 +88,7 @@ max-w-5xl,64rem,1024px
   /* Sombras */
   --shadow-xs: 0 1px 2px -1px rgba(0, 0, 0, 0.12);
   --shadow-sm: 0 2px 3px -1.5px rgba(0, 0, 0, 0.12);
-  --shadow-md: 0 4px 6px -3px rgba(0, 0, 0, 0.10);
+  --shadow-md: 0 4px 6px -3px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 8px 12px -6px rgba(0, 0, 0, 0.08);
   --shadow-xl: 0 12px 24px -8px rgba(0, 0, 0, 0.06);
 
@@ -112,14 +120,6 @@ max-w-5xl,64rem,1024px
       height: 0;
     }
   }
-  /* Breakpoints */
-  --breakpoint-xxs: 337px;
-  --breakpoint-xs: 375px;
-  --breakpoint-md-sm: 425px;
-  --breakpoint-pre-sm: 575px;
-  --breakpoint-pre-md: 704px;
-  --breakpoint-next-md: 840px;
-  --breakpoint-pre-lg: 980px;
 }
 
 /* Tema Escuro */
@@ -184,7 +184,7 @@ max-w-5xl,64rem,1024px
   p {
     @apply cursor-default;
   }
-  a{
+  a {
     @apply cursor-pointer text-blue-700 underline;
   }
   button {

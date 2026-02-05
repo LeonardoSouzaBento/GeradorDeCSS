@@ -21,7 +21,7 @@ const Nav = ({
         <p>Tamanho e outline</p>
         <div>
           {sizeConfigs.map((option) => (
-            <OptionButton
+            <DataOption
               Icon={option.icon}
               key={option.name}
               value={option.name}
@@ -35,7 +35,7 @@ const Nav = ({
         <p>Cor</p>
         <div>
           {colorConfigs.map((option) => (
-            <OptionButton
+            <DataOption
               Icon={option.icon}
               key={option.name}
               value={option.name}
@@ -49,7 +49,7 @@ const Nav = ({
         <p>Fonte</p>
         <div>
           {fontConfigs.map((option) => (
-            <OptionButton
+            <DataOption
               Icon={option.icon}
               key={option.name}
               value={option.name}
@@ -72,7 +72,7 @@ interface OptionButtonProps {
   Icon: LucideIcon;
 }
 
-const OptionButton = ({ value, navOption, setNavOption, Icon }: OptionButtonProps) => {
+const DataOption = ({ value, navOption, setNavOption, Icon }: OptionButtonProps) => {
   return (
     <Button
       size="sm"

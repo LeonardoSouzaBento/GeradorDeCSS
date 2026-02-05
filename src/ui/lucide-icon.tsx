@@ -1,14 +1,7 @@
-import { LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import type { LucideIcon as LucideIconType, LucideProps } from 'lucide-react';
 
-interface IconProps {
-  size?: string;
-  Icon: LucideIcon;
-  className?: string;
-  strokeValue?: string | number;
-  data?: string;
-}
-
+type SizeValue = keyof typeof iconSizes;
 const iconSizes = {
   xs: '0.937em',
   sm: '0.968em',
@@ -19,17 +12,25 @@ const iconSizes = {
   '3xl': '1.2148em',
 };
 
+type StrokeValue = keyof typeof weights;
 const weights = {
   thin: 2.2,
-  light: 2.4,
+  light: 2.5,
   regular: 2.6,
 };
 
-export const Icon = ({ size, Icon, className, strokeValue }: IconProps) => {
+interface IconProps extends Omit<LucideProps, 'size' | 'strokeWidth'> {
+  Icon: LucideIconType;
+  size?: SizeValue | string;
+  strokeValue?: StrokeValue | string;
+}
+
+export const Icon = ({ size, Icon, className, strokeValue, fill }: IconProps) => {
   return (
     <Icon
-      size={iconSizes[size || 'md']}
-      strokeWidth={weights[strokeValue] || strokeValue || 2.8}
+      size={iconSizes[size as SizeValue] || size || '1em'}
+      strokeWidth={weights[strokeValue as StrokeValue] || strokeValue || 2.8}
+      fill={fill || 'none'}
       className={cn(className)}
     />
   );

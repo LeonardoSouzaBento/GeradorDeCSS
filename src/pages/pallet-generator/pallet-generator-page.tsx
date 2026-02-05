@@ -6,15 +6,7 @@ import {
 } from '@/data/palette-generator/data';
 import { getHSL } from '@/functions/pallet-generator/genInitialColors';
 import { useColorShades } from '@/hooks/useColorShades';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  H6Title,
-  HeaderH6,
-  Separator,
-  WrapperForm
-} from '@/ui';
+import { Card, CardHeader, CardTitle, H6Title, HeaderH6, Separator, WrapperForm } from '@/ui';
 import { useEffect, useState } from 'react';
 import { CssReturn, Inputs, Preview } from './components';
 
@@ -30,7 +22,7 @@ export default function PaletteGeneratorPage() {
   /* pegar os stops de cada variável */
   const getBaseColor = (stops: number[]) => {
     for (const stop of stops) {
-      const found = shades.find((s: any) => s.stop === stop);
+      const found = shades.find((s) => s.stop === stop);
       if (found) return found.hex;
     }
     return shades[0].hex;
@@ -91,7 +83,9 @@ export default function PaletteGeneratorPage() {
     <main className="px-3 sm:px-4 mx-auto mt-4 space-y-6 pb-6 min-h-dvh max-w-7xl">
       <Card className="space-y-4">
         <CardHeader className="border-none mb-0">
-          <CardTitle className="text-primary">Cores neutras</CardTitle>
+          <CardTitle className="text-primary">
+            <h3>Cores neutras</h3>
+          </CardTitle>
         </CardHeader>
         <WrapperForm>
           <HeaderH6 mb={1.5}>

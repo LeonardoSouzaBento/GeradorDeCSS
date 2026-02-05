@@ -1,6 +1,6 @@
 import { cssButtonPreview } from '@/data/buttons/variables';
 import { Button, Icon, WrapperButtons, WrapperForm } from '@/ui/index';
-import { ThumbsUp } from 'lucide-react';
+import { ClipboardPen, ThumbsUp } from 'lucide-react';
 
 type ButtonData = {
   text: string;
@@ -24,33 +24,42 @@ const buttons: ButtonData[] = [
 
 const iconButtons: ButtonData['size'][] = ['icon-sm', 'icon', 'icon-md', 'icon-lg'];
 const iconSzes = ['xs', 'sm', 'md', 'lg'];
+const buttonVariantsToRender = [
+  { variant: 'default' },
+  { variant: 'outline' },
+  { variant: 'ghost' },
+] as const;
 
 const ButtonsPreview = () => {
   return (
     <WrapperForm>
-      <h3 className="mb-[0.75ex]">Gerador de estilos para botões</h3>
-
+      <h5>Gerador de estilos para botões</h5>
       <div className="mb-[1cap]">
-        <p>Defina a escala de botões do seu projeto</p>
+        <p className="small-text">Defina a escala de botões do seu projeto</p>
         <p className="smaller-text text-muted-foreground">
-          Gere paleta de cores e vários estilos para botões <strong>rapidamente</strong>
+          Gere paleta de cores e vários estilos para botões rapidamente
         </p>
       </div>
       <div className="space-y-[1ex] pb-4">
-        <WrapperButtons className="items-start">
-          {buttons.map((button, index) => (
-            <Button key={index} size={button.size}>
-              {button.text}
-            </Button>
-          ))}
-        </WrapperButtons>
-        <WrapperButtons className="items-start pb-0.5">
-          {buttons.map((button, index) => (
-            <Button variant="outline" key={index} size={button.size}>
-              {button.text}
-            </Button>
-          ))}
-        </WrapperButtons>
+        {buttonVariantsToRender.map(({ variant }) => (
+          <WrapperButtons key={variant} className="justify-start items-start pb-0.5">
+            {buttons.map((button, index) => (
+              <Button
+                key={`${variant}-${index}`}
+                variant={variant}
+                size={button.size}
+                className={`w-full xs:w-auto`}>
+                <Icon
+                  Icon={ClipboardPen}
+                  size={iconSzes[index]}
+                  className="mb-0.25"
+                  // strokeValue={'light'}
+                />
+                {button.text}
+              </Button>
+            ))}
+          </WrapperButtons>
+        ))}
         <WrapperButtons className="items-start pb-0.5">
           {iconButtons.map((button, index) => (
             <Button variant="secondary" key={index} size={button} className="rounded-full">
@@ -59,7 +68,7 @@ const ButtonsPreview = () => {
           ))}
         </WrapperButtons>
       </div>
-      <pre className="h-115.5">{cssButtonPreview}</pre>
+      <pre className="h-93">{cssButtonPreview}</pre>
     </WrapperForm>
   );
 };

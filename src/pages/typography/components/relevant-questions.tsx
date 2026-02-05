@@ -6,7 +6,9 @@ const RelevantQuestions = () => {
   return (
     <Card>
       <CardHeader className={`mb-3`}>
-        <CardTitle>Perguntas pertinentes</CardTitle>
+        <CardTitle>
+          <h3>Perguntas pertinentes</h3>
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Accordion type="single" collapsible className="w-full gap-cap-offset">

@@ -8,7 +8,7 @@ import { ButtonRef } from '@/types/htmlTags';
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 const buttonVariants = cva(
-  'w-auto tracking-wide inline-flex items-center justify-center gap-2 rounded-md ring-offset-background transition-colors disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 relative data-w-full:w-full data-round:rounded-full focus:outline-none',
+  'w-auto tracking-wide inline-flex items-center justify-center gap-2 rounded-md ring-offset-background transition-colors disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 relative data-w-full:w-full data-round:rounded-full focus:outline-none data-option:rounded-full',
   {
     variants: {
       variant: {
@@ -39,13 +39,26 @@ const buttonVariants = cva(
       variant: 'default',
       size: 'default',
     },
-  }
+  },
 );
+
+const getPx = (size: ButtonProps['size'], variant: ButtonProps['variant']) => {
+  if (!size || ['default', 'lg', 'sm'].includes(size)) {
+    switch (variant) {
+      case 'default':
+        return 'px-[0.9em]';
+      case 'outline':
+        return 'px-[0.808em]';
+      case 'ghost':
+        return 'px-[0.845em]';
+    }
+  }
+  return '';
+};
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
-  optionButton?: boolean;
   isSelected?: boolean;
   disabled?: boolean;
   closeButton?: boolean;
@@ -58,35 +71,33 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
       variant = 'default',
       size,
       asChild = false,
-      optionButton,
       isSelected,
       disabled,
       closeButton,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Comp = asChild ? Slot : 'button';
-    const paddingX = !size || ['default', 'lg', 'sm'].includes(size) ? 'px-[0.9em]' : '';
+    const paddingX = getPx(size, variant);
+    const selectedCSS = isSelected ? 'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card' : '';
+    const closeButtonCSS = closeButton ? 'rounded-full p-0! text-foreground' : '';
 
     return (
       <Comp
         className={cn(
           buttonVariants({ variant, size }),
           paddingX,
-          {
-            'rounded-full': optionButton,
-            'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card': isSelected,
-            'rounded-full p-0! text-foreground': closeButton,
-          },
-          className
+          selectedCSS,
+          closeButtonCSS,
+          className,
         )}
         ref={ref}
         disabled={disabled}
         {...props}
       />
     );
-  }
+  },
 );
 Button.displayName = 'Button';
 

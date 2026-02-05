@@ -1,0 +1,40 @@
+type VariantWithState = keyof typeof buttonStatesStyles;
+const buttonStatesStyles = {
+  default: `
+    active:bg-*primary-900*
+    disabled:bg-neutral-300 disabled:text-neutral-500/80
+    hover:*bg-primary-700*
+    focus:border-3 focus:border-selected-400
+  `,
+
+  outline: `
+    active:bg-primary-100
+    disabled:bg-neutral-100 disabled:border-neutral-300 disabled:text-neutral-500/75
+    hover:bg-primary-50
+    focus:outline-3 focus:outline-selected-400
+  `,
+
+  ghost: `
+    active:bg-primary-100
+    disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none
+    hover:bg-primary-50
+    focus:outline-3 focus:outline-selected-400 focus:border-primary-600
+  `,
+
+  secondary: `
+    active:bg-primary-200 active:text-primary-950
+    disabled:bg-neutral-100 disabled:text-neutral-400
+    hover:bg-primary-50
+    focus:outline-3 focus:outline-selected-400
+  `,
+
+  destructive: `bg-red-700 text-red-50 
+  hover:bg-red-600 
+  focus:outline-3 focus:outline-red-200 
+  active:bg-red-800
+  `,
+};
+
+function getStateClasses(variant: VariantWithState): string {
+  return buttonStatesStyles[variant];
+}

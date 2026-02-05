@@ -23,7 +23,9 @@ const CSSReturn = ({
   return (
     <Card className="h-full border space-y-5 relative">
       <CardHeader className="border-none mb-[0.25ex]">
-        <CardTitle>Retorno</CardTitle>
+        <CardTitle>
+          <h3>Retorno</h3>
+        </CardTitle>
       </CardHeader>
       <WrapperButtons>
         {optionsReturn.map((item: OptionReturn) => (
@@ -31,7 +33,7 @@ const CSSReturn = ({
             key={item}
             size="sm"
             variant="ghost"
-            optionButton
+            data-option
             isSelected={optionReturn === item}
             onClick={() => {
               setOptionReturn(item);
@@ -46,7 +48,7 @@ const CSSReturn = ({
           <Button
             size="sm"
             variant="ghost"
-            optionButton
+            data-option
             className="absolute bottom-4 right-4"
             onClick={() => {
               const nickname = colorNickname === 'primary' ? 'secondary' : 'primary';

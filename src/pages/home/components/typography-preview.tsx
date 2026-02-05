@@ -24,10 +24,10 @@ const textVariables = `@theme {
 const TypographyPreview = () => {
   return (
     <WrapperForm>
-      <h3 className="mb-[0.75ex]">Gerador de escala tipográfica </h3>
+      <h5 className="mb-0.5">Gerador de escala tipográfica </h5>
       <div className={`mb-4`}>
-        <p>Gere a escala tipográfica do seu projeto</p>
-        <div className={`flex flex-wrap items-baseline gap-3`}>
+        <p className="smaller-text text-muted-foreground mb-2">Gere a escala de tamanhos de fonte do seu projeto</p>
+        <div className={`flex flex-wrap gap-y-1 items-baseline gap-3`}>
           <h1>Aa</h1>
           <h2>Aa</h2>
           <h3>Aa</h3>

@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { useEffect, useRef, useState } from 'react';
 
 const linearGradient = 'from-start via-start to-end';
@@ -49,11 +50,11 @@ const Header = ({
       className="w-full box-border transition-all duration-400 overflow-hidden">
       <header
         ref={headerRef}
-        className={`w-full py-8 box-border min-h-max h-auto mx-auto flex items-center animate-in fade-in slide-in-from-top duration-500 ${className}`}>
+        className={cn(`w-full py-8 box-border min-h-max h-auto mx-auto flex items-center animate-in fade-in slide-in-from-top duration-500`, className)}>
         <div className={`flex items-center justify-center mb-2 pre-sm:mb-0`}>
           <div
-            className={`h-13.5 w-13.5 text-white/93 flex items-center justify-center
-             p-2.5 mb-0.5 bg-linear-to-br ${linearGradient} rounded-xl shadow-lg`}>
+            className={`h-13 w-13 text-white/93 flex items-center justify-center
+             p-2.5 mb-0.5 bg-linear-to-br ${linearGradient} rounded-lg shadow-lg`}>
             {icon}
           </div>
         </div>

@@ -8,7 +8,9 @@ const PersonalGuidelines = ({ setShowMoreStyles }: { setShowMoreStyles: StateSet
   return (
     <Card className={`xl:mb-0`}>
       <CardHeader>
-        <CardTitle>Orientações</CardTitle>
+        <CardTitle>
+          <h3>Orientações</h3>
+        </CardTitle>
       </CardHeader>
       <CardContent className={`space-y-4`}>
         <ul className={`list-disc list-inside space-y-[1ex] text-muted-foreground`}>

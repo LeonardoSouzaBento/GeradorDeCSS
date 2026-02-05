@@ -122,7 +122,7 @@ const Test = () => {
                     <Button
                       key={option.device}
                       variant="ghost"
-                      optionButton
+                      data-option
                       isSelected={selectedDevice === option.device}
                       size="sm"
                       onClick={() => {
@@ -144,7 +144,7 @@ const Test = () => {
                     <Button
                       key={width}
                       variant="ghost"
-                      optionButton
+                      data-option
                       size="sm"
                       isSelected={width === screenWidth}
                       onClick={() => setScreenWidth(width)}>
@@ -168,7 +168,7 @@ const Test = () => {
                     <Button
                       key={option}
                       variant="ghost"
-                      optionButton
+                      data-option
                       size="sm"
                       isSelected={option === collunsQuantity}
                       onClick={() => setCollunsQuantity(option)}>
@@ -189,7 +189,7 @@ const Test = () => {
                     <Button
                       key={option}
                       variant="ghost"
-                      optionButton
+                      data-option
                       size="sm"
                       isSelected={option === gap}
                       onClick={() => setGap(option)}>
@@ -208,7 +208,7 @@ const Test = () => {
                     <Button
                       key={option}
                       variant="ghost"
-                      optionButton
+                      data-option
                       size="sm"
                       isSelected={option === margin}
                       onClick={() => setMargin(option)}>
