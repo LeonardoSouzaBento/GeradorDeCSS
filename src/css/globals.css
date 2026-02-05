@@ -40,6 +40,9 @@ max-w-5xl,64rem,1024px
   --spacing-cap-offset: calc(1cap - ((1em - 1cap) / 2));
   --spacing-ex-offset: calc(1ex - ((1em - 1cap) / 2));
   /* Cores */
+  --color-light-bg: hsl(0, 0%, 100%);
+  --color-medium-bg: hsl(0, 0%, 98%);
+  --color-dark-bg: hsl(0, 20%, 95%);
   --color-white: hsl(0 0% 100%);
   --color-background: hsl(210 20% 98%);
   --color-foreground: hsl(215 25% 15%);
@@ -167,7 +170,7 @@ max-w-5xl,64rem,1024px
     scrollbar-color: var(--color-gray-200) #ffffff00; /*botão | fundo */
   }
   body {
-    @apply font-body text-gray-800 bg-linear-to-br from-[#f9fafb00] to-[#f3f5f7];
+    @apply font-body text-gray-800 bg-linear-to-br from-light-bg via-medium-bg to-light-bg;
   }
   html,
   body,

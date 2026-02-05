@@ -47,7 +47,7 @@ const ButtonStyleTester = () => {
           para usar esse componente.
         </AlertDescription>
       </Alert>
-      <WrapperForm className="space-y-2 p-3 pt-2">
+      <WrapperForm className="space-y-2 p-4 pt-3">
         <h6 className='pb-1 border-b'>Pré-visualizador de estilos e estados de botões</h6>
         <div
           className={`flex flex-col gap-3 border-b pb-5

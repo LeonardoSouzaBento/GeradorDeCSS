@@ -200,7 +200,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
         description="Estilize seus botões mais rapidamente"
         className={`flex flex-col px-3 justify-center gap-0 items-center text-center
         pre-sm:flex-row pre-sm:justify-start pre-sm:gap-3 next-md:px-6 lg:max-w-5xl xl:max-w-6xl mx-auto`}
-        icon={<MousePointerClick />}
+        icon={<MousePointerClick fill="currentColor" />}
         resizingCounter={resizingCounter}
         removeHeader={removeHeader}
         isMobile={isMobile}

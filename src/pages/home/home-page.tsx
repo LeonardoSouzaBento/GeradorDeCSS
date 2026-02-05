@@ -35,10 +35,10 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
       <Header
         resizingCounter={resizingCounter}
         title="Gerador de CSS"
-        className={`flex-col pre-sm:flex-row items-center gap-2 text-center
+        className={`flex-col pre-sm:flex-row items-center gap-3 text-center
           pre-sm:text-left main-wrapper sm:w-[calc(100%-3rem)] sm:px-0`}
         description="Gerador de estilos para começar seu projeto"
-        icon={<Icon Icon={Sparkles} size={'1.6rem'} strokeValue={"2.2"} fill="var(--color-primary-600)" />}
+        icon={<Icon Icon={Sparkles} size={'1.6rem'} strokeValue={"1"} fill="currentColor"/>}
       />
       <div className={`main-wrapper space-y-6`}>
         <Card>
@@ -63,7 +63,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
             </WrapperButtons>
             <CardContent
               className={`mt-4 grid grid-cols-1 xl:grid-cols-2 gap-4 
-              [&>div]:p-3 [&>div]:pt-2 [&>div>p:first-child]:text-muted-foreground
+              [&>div]:p-4 [&>div]:pt-3 [&>div>p:first-child]:text-muted-foreground
               [&>div>p:first-child]:mb-[0.75ex] [&>div>p:first-child]:capitalize`}>
               <TypographyPreview />
               <ButtonsPreview />
