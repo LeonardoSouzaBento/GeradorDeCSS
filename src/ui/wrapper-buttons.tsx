@@ -1,12 +1,13 @@
+import { cn } from '@/lib/utils';
 import React, { ReactNode } from 'react';
 
-interface WrapperButtonsProps {
+interface ButtonsWrapperProps {
   children: ReactNode;
   className?: string;
   gap?: number;
 }
 
-export const WrapperButtons: React.FC<WrapperButtonsProps> = ({
+export const ButtonsWrapper: React.FC<ButtonsWrapperProps> = ({
   children,
   className = '',
   gap = 3,
@@ -14,7 +15,7 @@ export const WrapperButtons: React.FC<WrapperButtonsProps> = ({
   return (
     <div
       style={{ '--custom-gap': `${gap * 0.25}rem` } as React.CSSProperties}
-      className={`h-auto flex flex-wrap items-center gap-(--custom-gap) ${className}`}>
+      className={cn(`h-auto flex flex-wrap items-center gap-(--custom-gap)`, className)}>
       {children}
     </div>
   );

@@ -1,4 +1,5 @@
-import { iconMd, iconSm, iconXs } from '@/css/lucideIcons';
+import { iconMd, iconSm } from '@/css/lucideIcons';
+import { Icon } from '@/ui/lucide-icon';
 import { applyFontToTargets, loadFont } from '@/functions/typography/changeFont';
 import {
   Alert,
@@ -8,7 +9,7 @@ import {
   H6Title,
   HeaderH6,
   Input,
-  WrapperForm,
+  FormWrapper,
 } from '@/ui/index';
 import { BookType, Check, EyeOff, Info } from 'lucide-react';
 import React, { useRef, useState } from 'react';
@@ -63,7 +64,7 @@ const FontSelector = ({
   const fontList = typographyPage ? typographyFonts : buttonPageFonts;
 
   return (
-    <WrapperForm className={`${typographyPage ? 'mt-4 xl:mt-2' : 'xl:mt-0'}`}>
+    <FormWrapper className={`${typographyPage ? 'mt-4 xl:mt-2' : 'xl:mt-0'}`}>
       <form onSubmit={handleSubmit} className={`border-b mb-[1cap]`}>
         <div className="pb-2">
           {typographyPage ? (
@@ -114,7 +115,7 @@ const FontSelector = ({
               key={font}
               variant="link"
               data-option
-              isSelected={currentFont === font && !error}
+              selected={currentFont === font && !error}
               className={`mr-8`}
               onClick={() => {
                 setFontName(font);
@@ -129,7 +130,7 @@ const FontSelector = ({
 
       {showAlert && typographyPage && (
         <Alert className={`mt-5`}>
-          <Info {...iconXs} className="warn-icon" />
+          <Icon Icon={Info} className="warn-icon" />
           <AlertTitle>Observações</AlertTitle>
           <Button
             variant="secondary"
@@ -137,7 +138,7 @@ const FontSelector = ({
             closeButton
             className={`absolute top-2 right-2 text-destructive`}
             onClick={() => setShowAlert(false)}>
-            <EyeOff {...iconXs} />
+            <Icon Icon={EyeOff} />
           </Button>
           <AlertDescription>
             <ul className={`list-disc pl-4 space-y-1`}>
@@ -147,7 +148,7 @@ const FontSelector = ({
           </AlertDescription>
         </Alert>
       )}
-    </WrapperForm>
+    </FormWrapper>
   );
 };
 

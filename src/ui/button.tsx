@@ -51,6 +51,10 @@ const getPx = (size: ButtonProps['size'], variant: ButtonProps['variant']) => {
         return 'px-[0.808em]';
       case 'ghost':
         return 'px-[0.845em]';
+      case 'transparent':
+        return 'px-[0.836em]';
+      case 'link':
+        return 'px-0';
     }
   }
   return '';
@@ -59,7 +63,7 @@ const getPx = (size: ButtonProps['size'], variant: ButtonProps['variant']) => {
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
-  isSelected?: boolean;
+  selected?: boolean;
   disabled?: boolean;
   closeButton?: boolean;
 }
@@ -71,7 +75,7 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
       variant = 'default',
       size,
       asChild = false,
-      isSelected,
+      selected,
       disabled,
       closeButton,
       ...props
@@ -80,7 +84,9 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
   ) => {
     const Comp = asChild ? Slot : 'button';
     const paddingX = getPx(size, variant);
-    const selectedCSS = isSelected ? 'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card' : '';
+    const selectedCSS = selected
+      ? 'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card'
+      : '';
     const closeButtonCSS = closeButton ? 'rounded-full p-0! text-foreground' : '';
 
     return (

@@ -1,37 +1,48 @@
-import { cn } from '@/lib/utils';
 import type { LucideIcon as LucideIconType, LucideProps } from 'lucide-react';
 
+type StrokeWidthValue = keyof typeof weights;
+/* Ajuste depois */
+const weights = {
+  thin: 2.25,
+  light: 2.35,
+  normal: 2.65, // valor padrão
+  semibold: 2.75,
+  bold: 2.85,
+  extrabold: 3,
+};
+
 type SizeValue = keyof typeof iconSizes;
+
 const iconSizes = {
   xs: '0.937em',
   sm: '0.968em',
-  md: '1em',
-  lg: '1.033em',
-  xl: '1.067em',
-  '2xl': '1.1385em',
-  '3xl': '1.2148em',
-};
-
-type StrokeValue = keyof typeof weights;
-const weights = {
-  thin: 2.2,
-  light: 2.5,
-  regular: 2.6,
+  base: '1em',
+  md: '1.033em',
+  lg: '1.067em',
+  xl: '1.138em',
+  '2xl': '1.215em',
+  '3xl': '1.296em',
+  h6: '1.067em',
+  h5: '1.138em',
+  h4: '1.215em',
+  h3: '1.296em',
 };
 
 interface IconProps extends Omit<LucideProps, 'size' | 'strokeWidth'> {
   Icon: LucideIconType;
   size?: SizeValue | string;
-  strokeValue?: StrokeValue | string;
+  strokeWidth?: StrokeWidthValue | string;
 }
 
-export const Icon = ({ size, Icon, className, strokeValue, fill }: IconProps) => {
+export const Icon = ({ Icon, size, className, strokeWidth, fill }: IconProps) => {
   return (
-    <Icon
-      size={iconSizes[size as SizeValue] || size || '1em'}
-      strokeWidth={weights[strokeValue as StrokeValue] || strokeValue || 2.8}
-      fill={fill || 'none'}
-      className={cn(className)}
-    />
+    <div className="h-3 inline-flex justify-center items-center overflow-visible [&_svg]:shrink-0">
+      <Icon
+        size={iconSizes[size as SizeValue] || size || '1em'}
+        strokeWidth={weights[strokeWidth as StrokeWidthValue] || strokeWidth || 2.6}
+        className={className}
+        fill={fill || 'none'}
+      />
+    </div>
   );
 };

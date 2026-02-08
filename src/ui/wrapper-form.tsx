@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import React from 'react';
 
-export const WrapperForm = ({
+export const FormWrapper = ({
   children,
   className,
 }: {
@@ -9,11 +9,10 @@ export const WrapperForm = ({
   className?: string;
 }) => {
   return (
-    <div
-      className={cn('w-full border rounded-lg p-5 pt-[1.5ex] bg-card', className)}>
+    <div className={cn('w-full border rounded-lg p-5 pt-[1.5ex] bg-card', className)}>
       {children}
     </div>
   );
 };
 
-WrapperForm.displayName = 'WrapperForm';
+FormWrapper.displayName = 'FormWrapper';

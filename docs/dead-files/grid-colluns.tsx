@@ -1,4 +1,4 @@
-import { Button, Card, Icon, Input, Label, WrapperButtons, WrapperInput } from '../../src/ui';
+import { Button, Card, Icon, Input, Label, ButtonsWrapper, InputWrapper } from '../../src/ui';
 import { validateDecimalInput } from '../../src/utils';
 import { ChevronDown, X } from 'lucide-react';
 import { useState } from 'react';
@@ -115,15 +115,15 @@ const Test = () => {
           <div className="w-lg flex flex-col">
             {/* preconfigurações */}
             <div className={css.configWrapper}>
-              <WrapperInput>
+              <InputWrapper>
                 <Label htmlFor="">Preconfigurações</Label>
-                <WrapperButtons gap={2}>
+                <ButtonsWrapper gap={2}>
                   {preConfigOptions.map((option, index) => (
                     <Button
                       key={option.device}
                       variant="ghost"
                       data-option
-                      isSelected={selectedDevice === option.device}
+                      selected={selectedDevice === option.device}
                       size="sm"
                       onClick={() => {
                         handlePreConfig(option as PreConfigOptions);
@@ -132,91 +132,91 @@ const Test = () => {
                       {option.device}
                     </Button>
                   ))}
-                </WrapperButtons>
-              </WrapperInput>
+                </ButtonsWrapper>
+              </InputWrapper>
             </div>
             {/* largura da tela */}
             <div>
-              <WrapperInput className={css.configWrapper}>
+              <InputWrapper className={css.configWrapper}>
                 <Label>Largura da tela</Label>
-                <WrapperButtons gap={2}>
+                <ButtonsWrapper gap={2}>
                   {scrennWidths.map((width) => (
                     <Button
                       key={width}
                       variant="ghost"
                       data-option
                       size="sm"
-                      isSelected={width === screenWidth}
+                      selected={width === screenWidth}
                       onClick={() => setScreenWidth(width)}>
                       {width}px
                     </Button>
                   ))}
-                </WrapperButtons>
-              </WrapperInput>
+                </ButtonsWrapper>
+              </InputWrapper>
             </div>
             {/* colunas e gap */}
             <div className={`${css.configWrapper} grid grid-cols-[5fr_4fr] gap-3`}>
-              <WrapperInput>
+              <InputWrapper>
                 <Label htmlFor="">Quantidade de colunas</Label>
                 <Input
                   type="text"
                   value={collunsInput}
                   onChange={(e) => handleChangeCollunsQuantity(e.target.value)}
                 />
-                <WrapperButtons gap={2}>
+                <ButtonsWrapper gap={2}>
                   {collunsOptions.map((option) => (
                     <Button
                       key={option}
                       variant="ghost"
                       data-option
                       size="sm"
-                      isSelected={option === collunsQuantity}
+                      selected={option === collunsQuantity}
                       onClick={() => setCollunsQuantity(option)}>
                       {option}
                     </Button>
                   ))}
-                </WrapperButtons>
-              </WrapperInput>
-              <WrapperInput>
+                </ButtonsWrapper>
+              </InputWrapper>
+              <InputWrapper>
                 <Label htmlFor="">Gap</Label>
                 <Input
                   type="text"
                   value={gapInput}
                   onChange={(e) => handleChangeGap(e.target.value)}
                 />
-                <WrapperButtons gap={2}>
+                <ButtonsWrapper gap={2}>
                   {gapOptions.map((option) => (
                     <Button
                       key={option}
                       variant="ghost"
                       data-option
                       size="sm"
-                      isSelected={option === gap}
+                      selected={option === gap}
                       onClick={() => setGap(option)}>
                       {option}
                     </Button>
                   ))}
-                </WrapperButtons>
-              </WrapperInput>
+                </ButtonsWrapper>
+              </InputWrapper>
             </div>
             {/* margens laterais */}
             <div className={`${css.configWrapper} pb-0 border-b-0`}>
-              <WrapperInput>
+              <InputWrapper>
                 <Label htmlFor="">Margens laterais</Label>
-                <WrapperButtons gap={2}>
+                <ButtonsWrapper gap={2}>
                   {marginsOptions[selectedDevice].map((option: number | string) => (
                     <Button
                       key={option}
                       variant="ghost"
                       data-option
                       size="sm"
-                      isSelected={option === margin}
+                      selected={option === margin}
                       onClick={() => setMargin(option)}>
                       {option}
                     </Button>
                   ))}
-                </WrapperButtons>
-              </WrapperInput>
+                </ButtonsWrapper>
+              </InputWrapper>
             </div>
           </div>
         </Card>

@@ -1,4 +1,4 @@
-import { Button, ButtonVariants, Card, WrapperButtons } from '@/ui';
+import { Button, ButtonVariants, Card, ButtonsWrapper } from '@/ui';
 
 const buttons: ButtonVariants['variant'][] = [
   'default',
@@ -15,53 +15,53 @@ const TestPage = () => {
     <Card noHeader className="space-y-4 [&>div]:space-y-1">
       <div>
         <p>Padrão</p>
-        <WrapperButtons>
+        <ButtonsWrapper>
           {disabledButtons.map((button) => (
             <Button key={button} variant={button as ButtonVariants['variant']}>
               {button}
             </Button>
           ))}
-        </WrapperButtons>
+        </ButtonsWrapper>
       </div>
       <div>
         <p>Desabiitado</p>
-        <WrapperButtons>
+        <ButtonsWrapper>
           {disabledButtons.map((button) => (
             <Button key={button} variant={button as ButtonVariants['variant']} disabled={true}>
               {button}
             </Button>
           ))}
-        </WrapperButtons>
+        </ButtonsWrapper>
       </div>
       <div>
         <p>Hover</p>
-        <WrapperButtons>
+        <ButtonsWrapper>
           {buttons.map((button) => (
             <Button key={button} variant={button as ButtonVariants['variant']} data-test-hover>
               {button}
             </Button>
           ))}
-        </WrapperButtons>
+        </ButtonsWrapper>
       </div>
       <div>
         <p>Focus</p>
-        <WrapperButtons>
+        <ButtonsWrapper>
           {buttons.map((button) => (
             <Button key={button} variant={button as ButtonVariants['variant']} data-test-focus>
               {button}
             </Button>
           ))}
-        </WrapperButtons>
+        </ButtonsWrapper>
       </div>
       <div>
         <p>Active</p>
-        <WrapperButtons>
+        <ButtonsWrapper>
           {buttons.map((button) => (
             <Button key={button} variant={button as ButtonVariants['variant']} data-test-active>
               {button}
             </Button>
           ))}
-        </WrapperButtons>
+        </ButtonsWrapper>
       </div>
     </Card>
   );

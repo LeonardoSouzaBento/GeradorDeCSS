@@ -171,7 +171,7 @@ interface IconProps {
   size?: string;
   Icon: LucideIcon;
   className?: string;
-  strokeValue: string | number;
+  strokeWidth: string | number;
 }
 
 const iconSizes = {
@@ -194,16 +194,16 @@ thin: 2.2,
 light: 2.4,
 };
 
-export const Icon = ({ size, LucideIcon, className, strokeValue }: IconProps) => {
+export const Icon = ({ size, LucideIcon, className, strokeWidth }: IconProps) => {
 return (
-<LucideIcon size={iconSizes[size] || size || "1em"} strokeWidth={weights[strokeValue] || strokeValue || 2.6} className={className || ""} />
+<LucideIcon size={iconSizes[size] || size || "1em"} strokeWidth={weights[strokeWidth] || strokeWidth || 2.6} className={className || ""} />
 );};
 
 /*Exemplo de uso
 <LucideIcon size="sm" Icon={Play} />
 Passe para a prop size uma string key de iconSizes ou qualquer valor de altura CSS válido, 12px por exemplo
 
-Passe para a prop strokeValue uma string key de weights ou qualquer valor de peso numérico válido*/
+Passe para a prop strokeWidth uma string key de weights ou qualquer valor de peso numérico válido*/
 ```
 
 ```js

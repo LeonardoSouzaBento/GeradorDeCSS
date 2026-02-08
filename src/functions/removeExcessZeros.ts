@@ -9,7 +9,7 @@ export function removeExcessZerosAndToFix(num: number): string {
     }
   }
 
-  let chars = str.split("");
+  const chars = str.split("");
   let zeroCount = 0;
 
   // 🔹 Remove zeros consecutivos finais (mantendo no máx. 2)

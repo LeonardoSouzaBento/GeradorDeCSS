@@ -22,11 +22,11 @@ const Card = React.forwardRef<DivRef, CardProps>(
         `rounded-lg bg-card text-card-foreground flex flex-col
        transition-shadow duration-300 shadow-lg hover:shadow-xl border border-border/30`,
         noHeader ? 'p-6' : 'p-6 pt-0',
-        className
+        className,
       )}
       {...props}
     />
-  )
+  ),
 );
 Card.displayName = 'Card';
 
@@ -37,7 +37,7 @@ const CardHeader = React.forwardRef<DivRef, DivProps>(({ className, ...props }, 
       className={cn(
         `flex flex-col space-y-[0.8ex] pb-1.5 mb-4
            border-b border-border`,
-        className
+        className,
       )}
       {...props}
     />
@@ -46,16 +46,26 @@ const CardHeader = React.forwardRef<DivRef, DivProps>(({ className, ...props }, 
 CardHeader.displayName = 'CardHeader';
 
 const CardTitle = React.forwardRef<HeadRef, HeadProps>(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('tracking-tight leading-normal pt-4.5', className)} {...props} />
+  <div
+    ref={ref}
+    className={cn(
+      'tracking-tight leading-normal pt-4.5 flex justify-start items-center gap-2',
+      className,
+    )}
+    {...props}
+  />
 ));
 CardTitle.displayName = 'CardTitle';
 
 const CardDescription = React.forwardRef<ParagraphRef, ParagraphProps>(
   ({ className, children, ...props }, ref) => (
-    <p ref={ref} className={cn('text-muted-foreground text-sm -mt-ex-offset pb-0.5', className)} {...props}>
+    <p
+      ref={ref}
+      className={cn('text-muted-foreground text-sm -mt-ex-offset pb-0.5', className)}
+      {...props}>
       {children}
     </p>
-  )
+  ),
 );
 CardDescription.displayName = 'CardDescription';
 

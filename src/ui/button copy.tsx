@@ -8,7 +8,7 @@ import { ButtonRef } from '@/types/htmlTags';
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 const buttonVariants = cva(
-  'w-auto tracking-wide inline-flex items-center justify-center gap-2 rounded-md ring-offset-background transition-colors disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 relative data-w-full:w-full data-round:rounded-full focus:outline-none',
+  'w-auto tracking-wide inline-flex items-center justify-center gap-2 rounded-md ring-offset-background transition-colors disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 relative data-w-full:w-full data-round:rounded-full focus:outline-none data-option:rounded-full',
   {
     variants: {
       variant: {
@@ -45,8 +45,7 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
-  data-option?: boolean;
-  isSelected?: boolean;
+  selected?: boolean;
   disabled?: boolean;
   closeButton?: boolean;
 }
@@ -58,8 +57,7 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
       variant = 'default',
       size,
       asChild = false,
-      data-option,
-      isSelected,
+      selected,
       disabled,
       closeButton,
       ...props
@@ -75,8 +73,7 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
           buttonVariants({ variant, size }),
           paddingX,
           {
-            'rounded-full': data-option,
-            'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card': isSelected,
+            'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card': selected,
             'rounded-full p-0! text-foreground': closeButton,
           },
           className,

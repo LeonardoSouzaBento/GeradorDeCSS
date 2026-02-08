@@ -30,7 +30,7 @@ export const genButtonStyles = (
   iconButtonSizes: number[],
   fillPaddings: PaddingTypes[],
   outlinePaddings: PaddingTypes[],
-  outlineValue: number
+  outlineValue: number,
 ) => {
   const iconHeights = iconButtonSizes.map((item) => {
     const sizeInTw = item / 4;

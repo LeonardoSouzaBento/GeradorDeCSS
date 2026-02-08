@@ -3,7 +3,8 @@ import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
-import { iconSm, iconXs } from '@/css/lucideIcons';
+import { iconSm } from '@/css/lucideIcons';
+import { Icon } from '@/ui/lucide-icon';
 
 const Accordion = AccordionPrimitive.Root;
 
@@ -25,10 +26,10 @@ const AccordionTrigger = React.forwardRef<
         className={cn(
           `w-full font-medium tracking-normal flex flex-1 items-center justify-between pb-[1ex] cursor-pointer 
           transition-all duration-200 [&[data-state=open]>svg]:rotate-180 select-none`,
-          className
+          className,
         )}>
         {children}
-        <ChevronDown {...iconXs} className="shrink-0 transition-transform duration-200" />
+        <Icon Icon={ChevronDown} className="shrink-0 transition-transform duration-200" />
       </div>
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>

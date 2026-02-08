@@ -8,4 +8,8 @@
   .warn-icon {
     @apply bg-warn/33 text-destructive/50 rounded-full;
   }
+  .dot-pattern-image {
+    @apply absolute inset-0 -z-10 h-full w-full; /* bg-[url('../assets/dot-pattern.png')] 
+    bg-size-[50%] bg-repeat opacity-[0.08] */
+  }
 }

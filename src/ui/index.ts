@@ -16,3 +16,4 @@ export * from './wrapper-buttons';
 export * from './wrapper-input';
 export * from './wrapper-form';
 export * from './lucide-icon';
+export * from './mui-icon';

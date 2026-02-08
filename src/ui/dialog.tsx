@@ -45,7 +45,7 @@ const DialogContent = React.forwardRef<
       <DialogPrimitive.Close
         className={`absolute right-3 top-3 ring-offset-background transition-opacity text-muted-foreground 
         hover:text-card-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none p-1.5 bg-primary-50 rounded-full`}>
-        <Icon Icon={X} strokeValue={'light'} />
+        <Icon Icon={X} strokeWidth={'light'} />
         <span className={`sr-only`}>Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
