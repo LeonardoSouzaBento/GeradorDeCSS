@@ -8,7 +8,7 @@ import { ButtonRef } from '@/types/htmlTags';
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 const buttonVariants = cva(
-  'w-auto tracking-wide inline-flex items-center justify-center gap-2 rounded-md ring-offset-background transition-colors disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 relative data-w-full:w-full data-round:rounded-full focus:outline-none data-option:rounded-full',
+  'w-auto tracking-wide inline-flex items-center justify-center gap-2 rounded-xs ring-offset-background transition-colors disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 relative data-w-full:w-full data-round:rounded-full focus:outline-none data-option:rounded-full',
   {
     variants: {
       variant: {
@@ -26,9 +26,9 @@ const buttonVariants = cva(
           'bg-red-700 text-red-50 hover:bg-red-600 hover:bg-red-600 focus:outline-3 focus:outline-red-200 active:bg-red-800',
       },
       size: {
-        sm: 'min-h-9 rounded-md small-button',
+        sm: 'min-h-9 rounded-xs small-button',
         default: `min-h-10 py-2`,
-        lg: 'min-h-11 rounded-md large-text large-button',
+        lg: 'min-h-11 rounded-xs large-text large-button',
         'icon-sm': 'size-8',
         icon: 'size-8.5',
         'icon-md': 'size-9.5',

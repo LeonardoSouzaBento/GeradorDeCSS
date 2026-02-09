@@ -155,7 +155,7 @@ const MoreStylesModal = ({
 
           <pre
             ref={preRef}
-            className={`bg-background rounded-md max-h-none mb-6`}
+            className={`bg-background rounded-xs max-h-none mb-6`}
             style={{ height: `${preHeight}rem` }}>
             {selected === 'tw' ? moreTwStyles : moreCSSStyles}
           </pre>

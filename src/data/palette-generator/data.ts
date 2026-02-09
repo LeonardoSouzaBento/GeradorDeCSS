@@ -1,5 +1,5 @@
 export const initialPaletteVariables = {
-  'card-foreground': {
+  foreground: {
     saturationMin: 15,
     saturationMax: 22,
     lightnessMin: 15,
@@ -27,7 +27,7 @@ export const initialPaletteVariables = {
     lightnessMax: 72,
     stops: [400, 500],
   },
-  'input-bg': {
+  'input': {
     saturationMin: 4,
     saturationMax: 6,
     lightnessMin: 95,
@@ -39,9 +39,7 @@ export const initialPaletteVariables = {
 function generateSteps(min: number, max: number, steps: number): number[] {
   const step = (max - min) / (steps - 1);
 
-  return Array.from({ length: steps }, (_, i) =>
-    Number((min + step * i).toFixed(2))
-  );
+  return Array.from({ length: steps }, (_, i) => Number((min + step * i).toFixed(2)));
 }
 
 export const paletteVariables = Object.fromEntries(
@@ -50,22 +48,16 @@ export const paletteVariables = Object.fromEntries(
       key,
       {
         ...item,
-        saturationsValues: generateSteps(
-          item.saturationMin,
-          item.saturationMax,
-          8
-        ),
-        lightnessValues: generateSteps(
-          item.lightnessMin,
-          item.lightnessMax,
-          11
-        ),
+        saturationsValues: generateSteps(item.saturationMin, item.saturationMax, 8),
+        lightnessValues: generateSteps(item.lightnessMin, item.lightnessMax, 11),
       },
     ];
-  })
+  }),
 );
 
-export const variables = Object.keys(paletteVariables);
+export const colorNames = Object.keys(paletteVariables);
 
-export const saturationValues = Object.values(paletteVariables).map((item) => item.saturationsValues);
+export const saturationValues = Object.values(paletteVariables).map(
+  (item) => item.saturationsValues,
+);
 export const lightnessValues = Object.values(paletteVariables).map((item) => item.lightnessValues);

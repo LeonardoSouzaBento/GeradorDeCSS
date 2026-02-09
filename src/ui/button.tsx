@@ -8,7 +8,7 @@ import { ButtonRef } from '@/types/htmlTags';
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 const buttonVariants = cva(
-  'w-auto tracking-wide inline-flex items-center justify-center gap-2 rounded-md ring-offset-background transition-colors disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 relative data-w-full:w-full data-round:rounded-full focus:outline-none data-option:rounded-full',
+  'w-auto tracking-wide inline-flex items-center justify-center gap-2 rounded-xs ring-offset-background transition-colors disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 relative data-w-full:w-full data-round:rounded-full focus:outline-none data-option:rounded-full data-black:text-foreground',
   {
     variants: {
       variant: {
@@ -26,9 +26,9 @@ const buttonVariants = cva(
           'bg-red-700 text-red-50 hover:bg-red-600 data-hover:bg-red-600 data-focus:outline-3 data-focus:outline-red-200 data-active:bg-red-800',
       },
       size: {
-        sm: 'min-h-9 rounded-md small-button',
-        default: `min-h-10 py-2`,
-        lg: 'min-h-11 rounded-md large-text large-button',
+        sm: 'min-h-9 small-button',
+        default: `min-h-10`,
+        lg: 'min-h-11 large-text large-button',
         'icon-sm': 'size-8',
         icon: 'size-8.5',
         'icon-md': 'size-9.5',
@@ -42,22 +42,41 @@ const buttonVariants = cva(
   },
 );
 
-const getPx = (size: ButtonProps['size'], variant: ButtonProps['variant']) => {
-  if (!size || ['default', 'lg', 'sm'].includes(size)) {
-    switch (variant) {
-      case 'default':
-        return 'px-[0.9em]';
-      case 'outline':
-        return 'px-[0.808em]';
-      case 'ghost':
-        return 'px-[0.845em]';
-      case 'transparent':
-        return 'px-[0.836em]';
-      case 'link':
-        return 'px-0';
+const paddings = {
+  default: {
+    sm: 'px-[0.93em] py-[0.63885rem]',
+    default: 'px-[0.93em] py-[0.73438rem]',
+    lg: 'px-[0.93em] py-[0.82813rem]',
+  },
+  outline: {
+    sm: 'px-[0.82716em] py-[0.54794rem]',
+    default: 'px-[0.83304em] py-[0.64347rem]',
+    lg: 'px-[0.83857em] py-[0.73722rem]',
+  },
+  ghost: {
+    sm: 'px-[0.82841em] py-[0.6076rem]',
+    default: 'px-[0.83429em] py-[0.70313rem]',
+    lg: 'px-[0.83982em] py-[0.79688rem]',
+  },
+};
+
+type OmitVariant = keyof typeof paddings | 'destructive' | 'secondary';
+type OmitSize = keyof typeof paddings.default;
+const paddingExptions = {
+  variants: ['link', 'transparent'],
+  sizes: ['icon', 'icon-sm', 'icon-md', 'icon-lg'],
+};
+
+const getPaddings = (variant: OmitVariant, size: OmitSize): string => {
+  let padding = '';
+  if (!paddingExptions.sizes.includes(size) && !paddingExptions.variants.includes(variant)) {
+    if (variant === 'destructive' || variant === 'secondary') {
+      padding = paddings.default[size];
+    } else {
+      padding = paddings[variant][size];
     }
   }
-  return '';
+  return padding;
 };
 
 export interface ButtonProps
@@ -73,7 +92,7 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
     {
       className,
       variant = 'default',
-      size,
+      size = "default",
       asChild = false,
       selected,
       disabled,
@@ -83,7 +102,7 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
     ref,
   ) => {
     const Comp = asChild ? Slot : 'button';
-    const paddingX = getPx(size, variant);
+    const padding = getPaddings(variant as OmitVariant, size as OmitSize);
     const selectedCSS = selected
       ? 'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card'
       : '';
@@ -93,9 +112,9 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
       <Comp
         className={cn(
           buttonVariants({ variant, size }),
-          paddingX,
           selectedCSS,
           closeButtonCSS,
+          padding,
           className,
         )}
         ref={ref}

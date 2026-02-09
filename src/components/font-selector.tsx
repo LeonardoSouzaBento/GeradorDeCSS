@@ -94,7 +94,7 @@ const FontSelector = ({
             disabled={isLoading}
           />
           <Button
-            className={`w-full ${typographyPage ? 'sm:w-max' : ''}`}
+            className={`w-full ${typographyPage ? 'sm:max-w-max' : ''}`}
             type="submit"
             variant="ghost"
             disabled={isLoading}>

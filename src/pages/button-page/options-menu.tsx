@@ -49,7 +49,7 @@ export default function OptionsMenu({
         setOpenSelect(!openSelect);
       }}>
       <div
-        className="w-full flex justify-end md:hidden rounded-md border mb-4"
+        className="w-full flex justify-end md:hidden rounded-xs border mb-4"
         onClick={handleClick}>
         <SelectTrigger
           data-show-icon="false"

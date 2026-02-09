@@ -1,4 +1,4 @@
-import { CustomNavLink } from '@/components';
+import { CustomNavLink, DecorativeBackGround } from '@/components';
 import Header from '@/components/header';
 import { Icon, ButtonsWrapper } from '@/ui';
 import { Button, ButtonVariants } from '@/ui/button';
@@ -32,34 +32,38 @@ const pages = [
 const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
   return (
     <div className={`pb-8 min-h-screen bg-transparent relative`}>
+      <DecorativeBackGround />
       <Header
         resizingCounter={resizingCounter}
         title="Gerador de CSS"
         className={`flex-col pre-sm:flex-row items-center gap-3 text-center
           pre-sm:text-left main-wrapper sm:w-[calc(100%-3rem)] sm:px-0`}
         description="Gerador de estilos para começar seu projeto"
-        icon={<Icon Icon={Sparkles} size={'1.6rem'} strokeWidth={'1'} fill="currentColor" />}
+        icon={<Icon Icon={Sparkles} size={'h2'} strokeWidth='thin' />}
       />
       <div className={`main-wrapper space-y-6`}>
         <Card>
-          <CardHeader>
+          <CardHeader className="border-none mb-2">
             <CardTitle>
-              <h2>Ferramentas do site</h2>
+              <h2 className='text-primary'>Ferramentas do site</h2>
             </CardTitle>
-            <CardDescription>Escolha uma ferramenta</CardDescription>
+            <CardDescription>Escolha uma ferramenta para começar</CardDescription>
           </CardHeader>
           <CardContent>
-            <ButtonsWrapper className="gap-4">
-              {pages.map((page) => (
-                <Button
-                  key={page.path}
-                  variant={page.variant as ButtonVariants['variant']}
-                  className={`${page.className || ''} max-[430px]:h-10 max-[720px]:w-full`}>
-                  <CustomNavLink link={page.path} />
-                  {page.name}
-                  <Icon Icon={page.icon} />
-                </Button>
-              ))}
+            <ButtonsWrapper>
+              {pages.map((page, index) => {
+                const size = { 0: "2xl", 1: "lg", 2: "md" }[index];
+                return (
+                  <Button
+                    key={page.path}
+                    variant={page.variant as ButtonVariants['variant']}
+                    className={`${page.className || ''} max-[430px]:h-10 max-[720px]:w-full`}>
+                    <CustomNavLink link={page.path} />
+                    <Icon Icon={page.icon} size={size} />
+                    {page.name}
+                  </Button>
+                );
+              })}
             </ButtonsWrapper>
             <CardContent
               className={`mt-4 grid grid-cols-1 xl:grid-cols-2 gap-4 
@@ -74,7 +78,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
         <Card>
           <CardHeader>
             <CardTitle>
-              <h3>Componentes para testar</h3>
+              <h3 className='text-primary'>Componentes para testar</h3>
             </CardTitle>
             <CardDescription>Teste os estilos gerados com estes componentes</CardDescription>
           </CardHeader>

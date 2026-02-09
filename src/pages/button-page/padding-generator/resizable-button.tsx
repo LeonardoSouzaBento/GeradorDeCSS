@@ -158,7 +158,7 @@ const ResizableButton = ({
           border: outlineValue ? `${outlineValue}px solid ${color}` : 'none',
         }}
         className={`h-fit flex items-center box-border
-          leading-none rounded-md gap-2`}>
+          leading-none rounded-xs gap-2`}>
         {children}
         <Sparkles size={'1em'} strokeWidth={strokeWidth} />
         {name}

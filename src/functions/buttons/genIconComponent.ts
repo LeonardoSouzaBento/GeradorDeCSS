@@ -1,4 +1,4 @@
-const sizePrefixes = ['xs', 'sm', 'base', 'md', 'lg', 'xl', '"2xl"', '"3xl"'];
+const sizePrefixes = ['xxs', 'xs', 'sm', 'base', 'md', 'lg', 'xl', '"2xl"'];
 const alternativePrefixes = ['h6', 'h5', 'h4', 'h3'];
 
 const LucideIconFirstPart = `import type { LucideIcon as LucideIconType, LucideProps } from 'lucide-react';
@@ -27,7 +27,7 @@ export const Icon = ({ Icon, size, className, strokeWidth, fill }: IconProps) =>
   return (
     <div className="h-3 inline-flex justify-center items-center overflow-visible [&_svg]:shrink-0">
       <Icon
-        size={iconSizes[size as SizeValue] || size || '1em'}
+        size={iconSizes[size as SizeValue] || size || iconSizes.md}
         strokeWidth={weights[strokeWidth as StrokeWidthValue] || strokeWidth || *value*}
         className={className}
         fill={fill || 'none'}
@@ -60,7 +60,7 @@ export const MuiIcon = ({
         className={\`material-symbols-rounded \${className}\`}
         style={{
           fontVariationSettings: \`"FILL" \${fill}, "wght" \${weight}\`,
-          fontSize: iconSizes[size as SizeValue] || size || '1em',
+          fontSize: iconSizes[size as SizeValue] || size || iconSizes.md,
         }}>
         {icon}
       </span>
@@ -102,5 +102,5 @@ export const genIconComponent = (
   }
   /* material icon */
   const secondPart = muiIconSecondPart.replace('*value*', strWeight);
-  return `const iconSizes = {${fontSizes}};\n\ntype SizeValue = keyof typeof iconSizes;\n${secondPart}`;
+  return `const iconSizes = {\n${fontSizes}\n};\n\ntype SizeValue = keyof typeof iconSizes;\n${secondPart}`;
 };

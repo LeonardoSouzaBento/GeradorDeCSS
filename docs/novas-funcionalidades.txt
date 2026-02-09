@@ -1,7 +1,7 @@
 Gerador de paleta de cores
 
 Gerar a peleta de preto pra pegar os valores a seguir:
-card-foreground
+foreground
 muted-foregorund
 border (cor pronta)
 input-border

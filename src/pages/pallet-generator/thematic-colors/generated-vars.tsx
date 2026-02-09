@@ -1,6 +1,8 @@
 import { ColorShade } from '@/hooks/useColorShades';
+import { H6Title, HeaderH6, Icon } from '@/ui';
+import { NotepadText } from 'lucide-react';
 
-function genPalletVariables(
+function genVariables(
   shades: ColorShade[],
   colorName: string = 'primary',
   colorPrefix: boolean = true,
@@ -11,7 +13,7 @@ function genPalletVariables(
     .map((item) => {
       const step = item.stop;
       const color = item.hex;
-      const comment = item.isBase ? ' /*Sua cor*/' : '';
+      const comment = item.isBase ? '/*Sua cor*/' : '';
       return `${currentNickname}${step}: ${color};${comment}\n`;
     })
     .join('');
@@ -25,13 +27,16 @@ interface Props {
   colorPrefix: boolean;
 }
 
-const ThematicColorVars = ({ shades, colorName, colorPrefix }: Props) => {
+export const GeneratedVars = ({ shades, colorName, colorPrefix }: Props) => {
   return (
     <div>
-      <pre>{genPalletVariables(shades, colorName, colorPrefix)}</pre>
+      <HeaderH6>
+        <H6Title>
+          <Icon Icon={NotepadText} />
+          <h6>Saída</h6>
+        </H6Title>
+      </HeaderH6>
+      <pre>{genVariables(shades, colorName, colorPrefix)}</pre>
     </div>
   );
 };
-
-export { ThematicColorVars };
-

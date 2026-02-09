@@ -107,7 +107,7 @@ const WeightSelector = ({
           }}
         />
         <ButtonsWrapper
-          className={`mt-[1cap] border rounded-md px-[0.5ex] 
+          className={`mt-[1cap] border rounded-xs px-[0.5ex] 
           py-[0.25ex] justify-between`}>
           {!expandIcon ? (
             <div className="flex gap-[0.5ex]">
@@ -115,7 +115,7 @@ const WeightSelector = ({
                 <div
                   key={size}
                   className={`flex gap-[0.75ex] items-center
-                  py-[0.5ex] px-[1ex] rounded-sm relative`}
+                  py-[0.5ex] px-[1ex] rounded-xs relative`}
                   style={{
                     color: color,
                     border: `${index === 2 ? `1.2px solid var(--color-input)` : 'none'}`,
@@ -129,7 +129,7 @@ const WeightSelector = ({
           ) : (
             <div
               className={`flex gap-[0.6ex] items-center
-                  py-[0.5ex] px-[1ex] rounded-md relative text-[calc(var(--text-h1-hero)*2)]`}
+                  py-[0.5ex] px-[1ex] rounded-xs relative text-[calc(var(--text-h1-hero)*2)]`}
               style={{
                 color: color,
               }}>

@@ -29,7 +29,12 @@ const ColorInput = ({ color, setColor }: { color: string; setColor: StateSetter<
             }
           }}
         />
-        <Input type="color" value={color} onChange={(e) => setColor(e.target.value)} />
+        <Input
+          type="color"
+          className="py-1 px-1.5"
+          value={color}
+          onChange={(e) => setColor(e.target.value)}
+        />
       </InputWrapper>
     </FormWrapper>
   );

@@ -12,4 +12,7 @@
     @apply absolute inset-0 -z-10 h-full w-full; /* bg-[url('../assets/dot-pattern.png')] 
     bg-size-[50%] bg-repeat opacity-[0.08] */
   }
+  .header-bg {
+    @apply bg-linear-to-tr from-[hsl(176,46%,68%)] to-[hsl(256,73%,58%)] bg-size-[100%_3rem] bg-no-repeat;
+  }
 }

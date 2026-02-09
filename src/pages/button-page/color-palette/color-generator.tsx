@@ -3,7 +3,7 @@ import { ColorShade } from '@/hooks/useColorShades';
 import { H6Description, H6Title, HeaderH6, ButtonsWrapper, FormWrapper } from '@/ui';
 import { ChartSpline, Palette } from 'lucide-react';
 import { useMemo } from 'react';
-import { ColorPalletPreview } from '@/components';
+import { PalletPreview } from '@/components';
 
 interface ColorGeneratorProps {
   shades: ColorShade[];
@@ -40,7 +40,7 @@ const ColorGenerator = ({ shades }: ColorGeneratorProps) => {
             <h6>Paleta de Cores</h6>
           </H6Title>
         </HeaderH6>
-        <ColorPalletPreview shades={shades} />
+        <PalletPreview shades={shades} />
       </FormWrapper>
       <FormWrapper>
         <HeaderH6 mb={1.5}>
@@ -54,7 +54,7 @@ const ColorGenerator = ({ shades }: ColorGeneratorProps) => {
           {suggestedColorTones.map((item, index) => (
             <div
               key={index}
-              className="h-10 px-[1.4ex] rounded-full"
+              className="h-10 px-[1.4ex] rounded-full flex justify-center items-center"
               style={{ backgroundColor: item.hex, color: item.textColor }}>
               <p className="small-text">
                 {item.stop} - <span className="font-medium underline">{item.contrastValue}</span>

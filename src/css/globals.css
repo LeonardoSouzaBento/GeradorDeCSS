@@ -45,10 +45,15 @@ max-w-5xl,64rem,1024px
   --color-dark-bg: hsl(0, 20%, 95%);
   --color-white: hsl(0 0% 100%);
   --color-background: hsl(210 20% 98%);
-  --color-foreground: hsl(215 25% 15%);
+  --color-foreground: hsl(233 18% 20%);
+  --color-muted-foreground: hsl(233 10.57% 43%);
+  --color-border: hsl(233 6.29% 88%);
+  --color-input-border: hsl(233 9.71% 88%);
+  --color-input: hsl(233 4.86% 98%);
 
   --color-card: hsl(0 0% 100%);
-  --color-card-foreground: hsl(227 25% 15%);
+  --color-muted: hsl(215 15% 94%);
+  --color-ring: #bfdbfe;
   --other-foreground: hsl(227, 25%, 12%);
 
   --color-popover: hsl(0 0% 100%);
@@ -71,9 +76,6 @@ max-w-5xl,64rem,1024px
 
   --color-secondary: hsl(215 15% 92%);
   --color-secondary-foreground: hsl(215 25% 15%);
-
-  --color-muted: hsl(215 15% 94%);
-  --color-muted-foreground: hsl(215 10% 33%);
   --color-selected: oklch(80.9% 0.105 251.813);
   --color-accent: hsla(215, 90%, 45%, 0.5);
   --color-accent-foreground: hsl(0 0% 100%);
@@ -83,10 +85,6 @@ max-w-5xl,64rem,1024px
 
   --color-warn: hsl(38 92% 50%);
   --color-warn-foreground: hsl(215 25% 15%);
-
-  --color-border: hsl(214 20% 88%);
-  --color-input: hsl(214 20% 90%);
-  --color-ring: #bfdbfe;
 
   /* Sombras */
   --shadow-xs: 0 1px 2px -1px rgba(0, 0, 0, 0.12);
@@ -131,7 +129,7 @@ max-w-5xl,64rem,1024px
   --color-foreground: hsl(210 20% 95%);
 
   --color-card: hsl(215 25% 12%);
-  --color-card-foreground: hsl(210 20% 95%);
+  --color-foreground: hsl(210 20% 95%);
 
   --color-popover: hsl(215 25% 12%);
   --color-popover-foreground: hsl(210 20% 95%);
@@ -197,12 +195,12 @@ max-w-5xl,64rem,1024px
     @apply text-muted-foreground tracking-normal;
   }
   pre {
-    @apply cursor-default bg-background text-foreground rounded-md 
+    @apply cursor-default bg-background text-foreground rounded-xs 
     wrap-break-word py-4 px-5 whitespace-pre-wrap transition-opacity duration-400 font-code overflow-y-scroll;
   }
   textarea {
     @apply bg-background text-foreground pl-3 pt-3 pb-4 
-    rounded-md border border-input ring-offset-background placeholder:text-muted-foreground
+    rounded-xs border border-input ring-offset-background placeholder:text-muted-foreground
     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
     disabled:cursor-not-allowed disabled:opacity-50 w-full h-32 resize-none;
   }

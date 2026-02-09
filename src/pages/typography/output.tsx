@@ -48,7 +48,7 @@ const Output = ({
       style={{ height: cardHeight || '22rem' }}>
       <div className={`relative space-y-4`}>
         <div
-          className={`absolute top-0 -z-1 left-0 size-full rounded-md bg-transparent 
+          className={`absolute top-0 -z-1 left-0 size-full rounded-xs bg-transparent 
             transition-all duration-200 ${animate && 'bg-white/66 z-2'}`}
         />
         <pre

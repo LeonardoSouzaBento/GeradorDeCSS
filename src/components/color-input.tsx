@@ -1,18 +1,20 @@
 import { StateSetter } from '@/data/typography/types';
-import { Input, InputWrapper } from '@/ui';
+import { cn } from '@/lib/utils';
+import { Input } from '@/ui';
 import { isHexColor } from '@/utils/isHexColor';
 import React from 'react';
 
 interface Props {
   color: string;
   setColor: StateSetter<string>;
+  cssWrapper?: string;
 }
 
-const ColorInput = ({ color, setColor }: Props) => {
+const ColorInput = ({ color, setColor, cssWrapper }: Props) => {
   const [inputValue, setInputValue] = React.useState<string>(color);
 
   return (
-    <InputWrapper gap={0} className="space-y-3">
+    <div className={cn('grid grid-cols-1 gap-3', cssWrapper)}>
       <Input
         type="text"
         placeholder="#1F4780"
@@ -25,9 +27,15 @@ const ColorInput = ({ color, setColor }: Props) => {
           }
         }}
       />
-      <Input type="color" value={color} onChange={(e) => setColor(e.target.value)} />
-    </InputWrapper>
+      <Input
+        className="py-1 px-1.5"
+        type="color"
+        value={color}
+        onChange={(e) => setColor(e.target.value)}
+      />
+    </div>
   );
 };
 
 export { ColorInput };
+

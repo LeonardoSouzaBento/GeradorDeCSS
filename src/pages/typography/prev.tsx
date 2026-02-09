@@ -23,7 +23,7 @@ import {
 
 const css = {
   wrapper: `w-full mb-7 mx-auto`,
-  section: `min-h-max space-y-3 box-content bg-background/33 p-5 rounded-md`,
+  section: `min-h-max space-y-3 box-content bg-background/50 p-5 rounded-xs`,
 };
 
 export const componentExamples = ['títulos', 'parágrafos', 'botões', 'formulários'];

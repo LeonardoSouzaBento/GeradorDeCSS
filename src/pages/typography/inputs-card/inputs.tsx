@@ -1,4 +1,4 @@
-import { InputWrapper } from '@/pages/typography/inputs-card/wrapper-input';
+import { InputWrapper } from '@/pages/typography/inputs-card/input-wrapper';
 import { StateSetter } from '@/data/typography/types';
 import { Input } from '@/ui/input';
 import { useEffect } from 'react';

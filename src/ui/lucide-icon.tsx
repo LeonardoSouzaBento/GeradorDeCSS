@@ -26,6 +26,8 @@ const iconSizes = {
   h5: '1.138em',
   h4: '1.215em',
   h3: '1.296em',
+  h2: '1.383em',
+  h1: '1.4757em',
 };
 
 interface IconProps extends Omit<LucideProps, 'size' | 'strokeWidth'> {
@@ -38,7 +40,7 @@ export const Icon = ({ Icon, size, className, strokeWidth, fill }: IconProps) =>
   return (
     <div className="h-3 inline-flex justify-center items-center overflow-visible [&_svg]:shrink-0">
       <Icon
-        size={iconSizes[size as SizeValue] || size || '1em'}
+        size={iconSizes[size as SizeValue] || size || '1.067em'}
         strokeWidth={weights[strokeWidth as StrokeWidthValue] || strokeWidth || 2.6}
         className={className}
         fill={fill || 'none'}

@@ -34,7 +34,7 @@ import {
 } from './button-page/padding-generator/index';
 import ButtonStyleTester from './home/button-style-tester';
 
-export const wrapperStyles = 'border rounded-lg p-5 pt-[1.5ex] bg-card';
+export const wrapperStyles = 'border rounded-xs p-5 pt-[1.5ex] bg-card';
 
 export default function ButtonPage({ resizingCounter }: { resizingCounter?: number }) {
   /* valores unicos */
@@ -142,7 +142,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
       outlineValue,
     );
     const iconReturn = genIconComponent(iconSizes, strokeWidth);
-    const muiIconReturn = genIconComponent(iconSizes, strokeWidth, currentWeight, 'mui icon');
+    const muiIconReturn = genIconComponent(iconSizes, strokeWidth, currentWeight, 'mui-icon');
     setReturns([varsReturn, buttonsReturn, iconReturn, muiIconReturn]);
   };
 
@@ -201,7 +201,7 @@ export default function ButtonPage({ resizingCounter }: { resizingCounter?: numb
         description="Estilize seus botões mais rapidamente"
         className={`flex flex-col px-3 justify-center gap-0 items-center text-center
         pre-sm:flex-row pre-sm:justify-start pre-sm:gap-3 next-md:px-6 lg:max-w-5xl xl:max-w-6xl mx-auto`}
-        icon={<MousePointerClick fill="currentColor" />}
+        icon={<MousePointerClick />}
         resizingCounter={resizingCounter}
         removeHeader={removeHeader}
         isMobile={isMobile}

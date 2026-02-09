@@ -48,7 +48,7 @@ const ButtonsPreview = () => {
                 key={`${variant}-${index}`}
                 variant={variant}
                 size={button.size}
-                className={`w-full xs:w-auto`}>
+                className={`w-full md-sm:max-w-34 flex`}>
                 <Icon
                   Icon={ClipboardPen}
                   size={iconSzes[index]}

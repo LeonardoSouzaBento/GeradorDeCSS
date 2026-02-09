@@ -9,7 +9,7 @@ export const FormWrapper = ({
   className?: string;
 }) => {
   return (
-    <div className={cn('w-full border rounded-lg p-5 pt-[1.5ex] bg-card', className)}>
+    <div className={cn('w-full border rounded-xs p-5 pt-[1.5ex] bg-card', className)}>
       {children}
     </div>
   );

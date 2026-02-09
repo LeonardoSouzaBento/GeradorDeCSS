@@ -19,7 +19,7 @@ const Card = React.forwardRef<DivRef, CardProps>(
     <div
       ref={ref}
       className={cn(
-        `rounded-lg bg-card text-card-foreground flex flex-col
+        `rounded-sm bg-card text-foreground flex flex-col
        transition-shadow duration-300 shadow-lg hover:shadow-xl border border-border/30`,
         noHeader ? 'p-6' : 'p-6 pt-0',
         className,

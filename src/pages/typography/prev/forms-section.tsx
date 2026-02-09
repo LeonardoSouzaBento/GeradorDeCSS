@@ -7,7 +7,7 @@ const smallText = findKey('--text-sm-');
 const smallButton = findKey('--text-sm-button');
 
 const css = {
-  form: `p-5 pt-4 overflow-y-scroll rounded-md border bg-white 
+  form: `p-5 pt-4 overflow-y-scroll rounded-xs border bg-white 
   border-border! space-y-4`,
   InputWrapper: `flex flex-col gap-2`,
 };
@@ -47,7 +47,7 @@ const FormsSection = ({ clampValues }: { clampValues: ClampValue }) => {
           </label>
           <select
             id="assunto"
-            className={`h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50`}
+            className={`h-10 w-full rounded-xs border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50`}
             style={{ fontSize: clampValues[normalText] }}>
             <option style={{ fontSize: clampValues[smallButton] }}>Suporte</option>
             <option style={{ fontSize: clampValues[smallButton] }}>Feedback</option>

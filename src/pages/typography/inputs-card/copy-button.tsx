@@ -17,7 +17,7 @@ hover:scale-[1.02] relative`,
   disabled: `bg-gray-200! text-foreground hover:bg-gray-200! hover:text-foreground`,
   warn: `size-full absolute top-0 left-0 z-2 border-destructive-foreground
   text-destructive text-center bg-destructive-foreground flex items-center justify-center
-  normal-case rounded-md small-text`,
+  normal-case rounded-xs small-text`,
 };
 
 const CopyButton = ({ output, secondOutput, disabled, returnType }: CopyButtonProps) => {
