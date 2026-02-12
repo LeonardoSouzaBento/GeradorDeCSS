@@ -1,44 +1,38 @@
-import { ButtonsData, PaddingTypes } from '@/data/buttons/variables';
-import { StateSetter } from '@/data/typography/types';
-import { Alert, AlertDescription, AlertTitle, H6Title, HeaderH6, Icon, FormWrapper } from '@/ui';
-import { ButtonsWrapper } from '@/ui/index';
-import { Info, ThumbsUp } from 'lucide-react';
-import { ResizableButton } from './padding-generator';
+import { ButtonsData, PaddingTypes } from "@/data/buttons/variables";
+import { StateSetter } from "@/data/typography/types";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  H6Title,
+  HeaderH6,
+  Icon,
+  FormWrapper,
+} from "@/ui";
+import { ButtonsWrapper } from "@/ui/index";
+import { Info, ThumbsUp } from "lucide-react";
+import { ResizableButton } from "./padding-generator";
+import { ButtonPageContext } from "@/contexts";
+import { useContext } from "react";
 
-interface PreviewProps {
-  currentButtonsData: ButtonsData[];
-  initialFontSize: number;
-  currentWeight: number;
-  color: string;
-  color50: string;
-  color1000: string;
-  outlineValue: number;
-  paddingX: number;
-  iconButtonSizes: number[];
-  iconSizes: string[];
-  strokeWidth: number;
-  setFillPaddings: StateSetter<PaddingTypes[]>;
-  setOutlinePaddings: StateSetter<PaddingTypes[]>;
-  badContrast: boolean;
-}
+const Preview = ({ color50 }: { color50: string }) => {
+  const {
+    badContrast,
+    currentButtonsData,
+    initialFontSize,
+    currentWeight,
+    color,
+    outlineValue,
+    paddingX,
+    iconButtonSizes,
+    iconSizes,
+    strokeWidth,
+    setFillPaddings,
+    setOutlinePaddings,
+  } = useContext(ButtonPageContext);
 
-const Preview = ({
-  badContrast,
-  currentButtonsData,
-  initialFontSize,
-  currentWeight,
-  color,
-  outlineValue,
-  paddingX,
-  iconButtonSizes,
-  color50,
-  iconSizes,
-  strokeWidth,
-  setFillPaddings,
-  setOutlinePaddings,
-}: PreviewProps) => {
   return (
-    <FormWrapper className={`flex flex-col gap-3 min-w-full`}>
+    <FormWrapper className={`flex flex-col gap-3 min-w-full pb-0 border-none`}>
       <HeaderH6 mb={0}>
         <H6Title>
           <h6>Prévia</h6>
@@ -108,9 +102,18 @@ const Preview = ({
               <div
                 className="bg-primary-50 rounded-full flex items-center justify-center text-base"
                 key={id}
-                style={{ height: `${item}px`, width: `${item}px`, color: color }}>
-                {' '}
-                <ThumbsUp size={iconSizes[index]} strokeWidth={strokeWidth} className="ml-px" />
+                style={{
+                  height: `${item}px`,
+                  width: `${item}px`,
+                  color: color,
+                }}
+              >
+                {" "}
+                <ThumbsUp
+                  size={iconSizes[index]}
+                  strokeWidth={strokeWidth}
+                  className="ml-px"
+                />
               </div>
             );
           })}

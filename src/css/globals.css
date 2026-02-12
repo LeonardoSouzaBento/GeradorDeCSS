@@ -196,7 +196,7 @@ max-w-5xl,64rem,1024px
   }
   pre {
     @apply cursor-default bg-background text-foreground rounded-xs 
-    wrap-break-word py-4 px-5 whitespace-pre-wrap transition-opacity duration-400 font-code overflow-y-scroll;
+    wrap-break-word p-5 pt-4 whitespace-pre-wrap transition-opacity duration-400 font-code overflow-y-scroll;
   }
   textarea {
     @apply bg-background text-foreground pl-3 pt-3 pb-4 

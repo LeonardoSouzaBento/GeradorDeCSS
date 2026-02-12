@@ -116,7 +116,7 @@ const InputsCard = ({
 
       <div
         className={`flex flex-col gap-3 pt-3 pb-5 sm:flex-row border-t 
-        border-b border-input box-content`}>
+        border-b box-content`}>
         <OptionsScale
           scaleValue={scaleValue}
           setScaleValue={setScaleValue}

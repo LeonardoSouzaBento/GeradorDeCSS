@@ -1,4 +1,3 @@
-import { FormWrapper } from '@/ui';
 
 const bodyVariables = `body {
 @apply text-[1.05rem] sm:text-[1.0625rem] md:text-[1.065rem] lg:text-[1.07rem] xl:text-[1.075rem] 2xl:text-[1.0800rem];
@@ -23,7 +22,7 @@ const textVariables = `@theme {
 
 const TypographyPreview = () => {
   return (
-    <FormWrapper>
+    <div className="pt-0.5">
       <h5 className="mb-0.5">Gerador de escala tipográfica </h5>
       <div className={`mb-4`}>
         <p className="smaller-text text-muted-foreground mb-2">
@@ -46,7 +45,7 @@ const TypographyPreview = () => {
         <pre>{bodyVariables}</pre>
         <pre>{textVariables}</pre>
       </div>
-    </FormWrapper>
+    </div>
   );
 };
 

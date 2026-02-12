@@ -1,6 +1,6 @@
 import { CustomNavLink, DecorativeBackGround } from '@/components';
 import Header from '@/components/header';
-import { Icon, ButtonsWrapper } from '@/ui';
+import { Icon, ButtonsWrapper, Separator } from '@/ui';
 import { Button, ButtonVariants } from '@/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/ui/card';
 import { CaseSensitive, MousePointerClick, Palette, Sparkles } from 'lucide-react';
@@ -66,16 +66,18 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
               })}
             </ButtonsWrapper>
             <CardContent
-              className={`mt-4 grid grid-cols-1 xl:grid-cols-2 gap-4 
-              [&>div]:p-4 [&>div]:pt-3 [&>div>p:first-child]:text-muted-foreground
+              className={`mt-5 grid grid-cols-1 gap-4 xl:grid-cols-[1fr_max-content_1fr] xl:gap-5 border-t pt-3
+              [&>div>p:first-child]:text-muted-foreground
               [&>div>p:first-child]:mb-[0.75ex] [&>div>p:first-child]:capitalize`}>
               <TypographyPreview />
+              <Separator orientation='vertical' className='max-xl:hidden' />
+              <Separator className='xl:hidden' />
               <ButtonsPreview />
             </CardContent>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className='border-none'>
           <CardHeader>
             <CardTitle>
               <h3 className='text-primary'>Componentes para testar</h3>

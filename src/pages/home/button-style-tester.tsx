@@ -34,7 +34,7 @@ const buttonStates: ButtonShowcaseState[] = [
 const ButtonStyleTester = () => {
   return (
     <div className="space-y-4">
-      <Alert data-no-header>
+      <Alert data-no-title>
         <Icon Icon={Info} size="xs" />
         <AlertDescription>
           Instale o{' '}
@@ -47,10 +47,10 @@ const ButtonStyleTester = () => {
           para usar esse componente.
         </AlertDescription>
       </Alert>
-      <FormWrapper className="space-y-2 p-4 pt-3">
+      <FormWrapper className="space-y-2 border-none">
         <h6 className="pb-1 border-b">Pré-visualizador de estilos e estados de botões</h6>
         <div
-          className={`flex flex-col gap-3 border-b pb-5
+          className={`flex flex-col gap-3 pb-4
            [&>div]:flex [&>div]:flex-col [&>div]:gap-2 [&>div>div>button]:min-w-34 `}>
           {buttonStates.map(({ name, props }) => (
             <div key={name}>
@@ -75,7 +75,7 @@ const ButtonStyleTester = () => {
           ))}
         </div>
         <DownloadButtonPreview />
-        <Alert data-no-header>
+        <Alert data-no-title className='mt-3'>
           <Icon Icon={Info} size="xs" />
           <AlertDescription>
             Nosso site é <strong>estático e seguro</strong>, fique tranquilo quanto a links

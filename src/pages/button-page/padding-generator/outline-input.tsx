@@ -1,5 +1,5 @@
-import { outlineSuggestions } from '@/data/buttons/variables';
-import { StateSetter } from '@/data/typography/types';
+import { outlineSuggestions } from "@/data/buttons/variables";
+import { StateSetter } from "@/data/typography/types";
 import {
   Button,
   H6Title,
@@ -9,25 +9,17 @@ import {
   FormWrapper,
   InputWrapper,
   Icon,
-} from '@/ui';
-import { validateDecimalInput } from '@/utils/validateDecimalInput';
-import { LineSquiggle } from 'lucide-react';
-import { useState } from 'react';
-import { InputAlert } from './input-alert';
+} from "@/ui";
+import { validateDecimalInput } from "@/utils/validateDecimalInput";
+import { LineSquiggle } from "lucide-react";
+import { useContext, useState } from "react";
+import { InputAlert } from "./input-alert";
+import { ButtonPageContext } from "@/contexts";
 
-interface OutlineInputProps {
-  outlineValue: number;
-  setOutlineValue: StateSetter<number>;
-  ghostOutline: number;
-  setGhostOutline: StateSetter<number>;
-}
-
-const OutlineInput = ({
-  outlineValue,
-  setOutlineValue,
-  ghostOutline,
-  setGhostOutline,
-}: OutlineInputProps) => {
+const OutlineInput = () => {
+  const { outlineValue, setOutlineValue, ghostOutline, setGhostOutline } =
+    useContext(ButtonPageContext);
+    
   const [inputValues, setInputValues] = useState<string[]>([
     outlineValue.toString(),
     ghostOutline.toString(),
@@ -36,19 +28,22 @@ const OutlineInput = ({
 
   const buttons = [
     {
-      name: 'outline',
+      name: "outline",
       value: outlineValue,
       setValue: setOutlineValue,
     },
     {
-      name: 'ghost',
+      name: "ghost",
       value: ghostOutline,
       setValue: setGhostOutline,
     },
   ];
 
-  const handleInputChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(',', '.');
+  const handleInputChange = (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const value = e.target.value.replace(",", ".");
     const numberValue = Number(value);
 
     if (!validateDecimalInput(value)) return;
@@ -62,17 +57,17 @@ const OutlineInput = ({
     const newAlerts = [...alerts];
 
     // Aceitar valores entre 1 e 10
-    if (numberValue >= 1 && numberValue <= 10 && value !== '') {
+    if (numberValue >= 1 && numberValue <= 10 && value !== "") {
       buttons[index].setValue(numberValue);
       newAlerts[index] = false;
     } else {
-      if (value.replace('.', '').length >= 2) {
+      if (value.replace(".", "").length >= 2) {
         newAlerts[index] = true;
       }
     }
     setAlerts(newAlerts);
 
-    if (value === '') {
+    if (value === "") {
       buttons[index].setValue(2);
     }
   };
@@ -116,7 +111,8 @@ const OutlineInput = ({
                 setShowAlert={(show) =>
                   setAlerts((prev) => {
                     const newAlerts = [...prev];
-                    newAlerts[index] = typeof show === 'function' ? show(prev[index]) : show;
+                    newAlerts[index] =
+                      typeof show === "function" ? show(prev[index]) : show;
                     return newAlerts;
                   })
                 }
@@ -130,7 +126,8 @@ const OutlineInput = ({
                   data-option
                   selected={item === btn.value}
                   key={item}
-                  onClick={() => handleSuggestionClick(index, item)}>
+                  onClick={() => handleSuggestionClick(index, item)}
+                >
                   {item}
                 </Button>
               ))}

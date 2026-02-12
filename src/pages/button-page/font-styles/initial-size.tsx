@@ -6,12 +6,11 @@ import { useEffect, useState } from 'react';
 import { validateDecimalInput } from '@/utils/validateDecimalInput';
 
 type Props = {
-  styles: string;
   initialFontSize: number;
   setInitialFontSize: (fontSize: number) => void;
 };
 
-const InitialSize = ({ styles, initialFontSize, setInitialFontSize }: Props) => {
+const InitialSize = ({ initialFontSize, setInitialFontSize }: Props) => {
   const [localValue, setLocalValue] = useState<number>(initialFontSize);
   const [showAlert, setShowAlert] = useState<boolean>(false);
 
@@ -29,7 +28,7 @@ const InitialSize = ({ styles, initialFontSize, setInitialFontSize }: Props) => 
   }, [localValue]);
 
   return (
-    <InputWrapper className={styles}>
+    <InputWrapper className='pb-5 border-b mb-3'>
       <HeaderH6 mb={0}>
         <H6Title>
           <Icon Icon={Ruler} />

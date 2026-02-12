@@ -1,25 +1,25 @@
-import { iconSm } from '@/css/lucideIcons';
-import { Icon } from '@/ui/lucide-icon';
-import { ButtonsData, buttonsData } from '@/data/buttons/variables';
-import { StateSetter } from '@/data/typography/types';
+import { ButtonPageContext } from "@/contexts";
+import { iconSm } from "@/css/lucideIcons";
+import { ButtonsData, buttonsData } from "@/data/buttons/variables";
+import { StateSetter } from "@/data/typography/types";
 import {
   Alert,
   AlertDescription,
-  AlertTitle,
   Button,
+  FormWrapper,
   H6Description,
   H6Title,
   HeaderH6,
   Input,
-  Label,
-  FormWrapper,
   InputWrapper,
-} from '@/ui/index';
-import { validateDecimalInput } from '@/utils/validateDecimalInput';
-import { ALargeSmall, Info } from 'lucide-react';
-import { useState } from 'react';
+  Label
+} from "@/ui/index";
+import { Icon } from "@/ui/lucide-icon";
+import { validateDecimalInput } from "@/utils/validateDecimalInput";
+import { ALargeSmall, Info } from "lucide-react";
+import { useContext, useState } from "react";
 
-const inputs = ['Botão pequeno', 'Botão normal', 'Botão grande'];
+const inputs = ["Botão pequeno", "Botão normal", "Botão grande"];
 
 interface Props {
   relativeSizeScale: string[];
@@ -29,15 +29,13 @@ interface Props {
 
 const dica = `Deixe o botão normal levemente menor que o corpo do texto do seu app/site.`;
 
-const RelativeSizes = ({
-  relativeSizeScale,
-  setRelativeSizeScale,
-  setCurrentButtonsData,
-}: Props) => {
+const RelativeSizes = () => {
+  const { relativeSizeScale, setRelativeSizeScale, setCurrentButtonsData } =
+    useContext(ButtonPageContext);
   const [seeModal, setSeeModal] = useState<boolean>(false);
 
   const handleScaleFontSizeChange = (index: number, value: string) => {
-    const normalized = value.replace(',', '.');
+    const normalized = value.replace(",", ".");
     if (!validateDecimalInput(normalized)) return;
     const newScale = [...relativeSizeScale];
     newScale[index] = normalized;
@@ -60,7 +58,8 @@ const RelativeSizes = ({
         </H6Title>
         <H6Description>
           <p>
-            Tamanhos na medida <strong>em</strong> (em relação ao tamanho do p normal)
+            Tamanhos na medida <strong>em</strong> (em relação ao tamanho do p
+            normal)
           </p>
         </H6Description>
       </HeaderH6>
@@ -81,13 +80,18 @@ const RelativeSizes = ({
       <Alert className={`mt-5`}>
         <Icon Icon={Info} className="warn-icon" />
         <AlertDescription>
-          Não se preocupe, definimos automaticamente pela{' '}
+          Não se preocupe, definimos automaticamente pela{" "}
           <strong className="text-primary cursor-pointer font-semibold">
             escala de cresimento
-          </strong>{' '}
+          </strong>{" "}
           selecionada.
         </AlertDescription>
-        <Button variant="link" size="sm" className="gap-[0.75ex]" onClick={() => setSeeModal(true)}>
+        <Button
+          variant="link"
+          size="sm"
+          className="gap-[0.75ex]"
+          onClick={() => setSeeModal(true)}
+        >
           Saiba mais
         </Button>
       </Alert>

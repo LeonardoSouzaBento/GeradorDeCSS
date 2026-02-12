@@ -10,33 +10,28 @@ import {
   TooltipTrigger,
   ButtonsWrapper,
   FormWrapper,
-} from '@/ui/index';
-import { validateDecimalInput } from '@/utils';
-import { Maximize2, Minimize2, Package, Weight } from 'lucide-react';
-import { useState } from 'react';
-import { InputAlert } from '../padding-generator/input-alert';
-
-type Props = {
-  currentWeight: number;
-  setCurrentWeight: (weight: number) => void;
-  strokeWidth: number;
-  setStrokeWidth: (strokeWidth: number) => void;
-  color: string;
-  iconSizes: string[];
-  containerRef: React.RefObject<HTMLDivElement>;
-};
+} from "@/ui/index";
+import { validateDecimalInput } from "@/utils";
+import { Maximize2, Minimize2, Package, Weight } from "lucide-react";
+import { useContext, useState } from "react";
+import { InputAlert } from "../padding-generator/input-alert";
+import { ButtonPageContext } from "@/contexts";
 
 const weights = [500, 600, 700];
 
 const WeightSelector = ({
-  currentWeight,
-  setCurrentWeight,
-  strokeWidth,
-  setStrokeWidth,
-  color,
-  iconSizes,
   containerRef,
-}: Props) => {
+}: {
+  containerRef: React.RefObject<HTMLDivElement>;
+}) => {
+  const {
+    currentWeight,
+    setCurrentWeight,
+    strokeWidth,
+    setStrokeWidth,
+    iconSizes,
+    color,
+  } = useContext(ButtonPageContext);
   const [inputValue, setInputValue] = useState<string>(strokeWidth.toString());
   const [expandIcon, setExpandIcon] = useState<boolean>(true);
   const [showAlert, setShowAlert] = useState<boolean>(false);
@@ -44,7 +39,7 @@ const WeightSelector = ({
   function scrollToBottom() {
     containerRef.current?.scrollTo({
       top: containerRef.current.scrollHeight,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }
 
@@ -55,17 +50,17 @@ const WeightSelector = ({
     if (numberValue >= 1.5 && numberValue <= 5) {
       setStrokeWidth(numberValue);
     } else {
-      if (value.replace('.', '').length >= 2) {
+      if (value.replace(".", "").length >= 2) {
         setShowAlert(true);
       }
     }
-    if (value === '') {
+    if (value === "") {
       setStrokeWidth(2);
     }
   }
 
   return (
-    <div className={`w-full space-y-5 pb-px`}>
+    <div className={`w-full space-y-3 pb-px`}>
       <FormWrapper className={`w-full`}>
         <HeaderH6 mb={0.75}>
           <H6Title>
@@ -82,7 +77,8 @@ const WeightSelector = ({
               selected={currentWeight === weight}
               onClick={() => {
                 setCurrentWeight(weight);
-              }}>
+              }}
+            >
               {weight}
             </Button>
           ))}
@@ -95,20 +91,23 @@ const WeightSelector = ({
             <Icon Icon={Weight} />
             <h6>Peso do ícone</h6>
           </H6Title>
-          <H6Description>Harmonize o peso do ícone com o peso da fonte</H6Description>
+          <H6Description>
+            Harmonize o peso do ícone com o peso da fonte
+          </H6Description>
         </HeaderH6>
         <Input
           type="text"
           value={inputValue}
           onClick={scrollToBottom}
           onChange={(e) => {
-            const value = e.target.value.replace(',', '.');
+            const value = e.target.value.replace(",", ".");
             handleChange(value);
           }}
         />
         <ButtonsWrapper
           className={`mt-[1cap] border rounded-xs px-[0.5ex] 
-          py-[0.25ex] justify-between`}>
+          py-[0.25ex] justify-between`}
+        >
           {!expandIcon ? (
             <div className="flex gap-[0.5ex]">
               {iconSizes.slice(0, 5).map((size, index) => (
@@ -118,11 +117,16 @@ const WeightSelector = ({
                   py-[0.5ex] px-[1ex] rounded-xs relative`}
                   style={{
                     color: color,
-                    border: `${index === 2 ? `1.2px solid var(--color-input)` : 'none'}`,
-                  }}>
+                    border: `${index === 2 ? `1.2px solid var(--color-input)` : "none"}`,
+                  }}
+                >
                   <Package size={size} strokeWidth={strokeWidth} />
-                  {index === 2 && <p className="absolute left-1 -top-1 text-lg">*</p>}
-                  <p style={{ fontSize: size, fontWeight: currentWeight }}>Aa</p>
+                  {index === 2 && (
+                    <p className="absolute left-1 -top-1 text-lg">*</p>
+                  )}
+                  <p style={{ fontSize: size, fontWeight: currentWeight }}>
+                    Aa
+                  </p>
                 </div>
               ))}
             </div>
@@ -132,8 +136,13 @@ const WeightSelector = ({
                   py-[0.5ex] px-[1ex] rounded-xs relative text-[calc(var(--text-h1-hero)*2)]`}
               style={{
                 color: color,
-              }}>
-              <Package color={color} strokeWidth={strokeWidth} size={'0.97em'} />
+              }}
+            >
+              <Package
+                color={color}
+                strokeWidth={strokeWidth}
+                size={"0.97em"}
+              />
               <p style={{ fontWeight: currentWeight }}>Aa</p>
             </div>
           )}
@@ -145,12 +154,17 @@ const WeightSelector = ({
                 className="text-primary"
                 onClick={() => {
                   setExpandIcon(!expandIcon);
-                }}>
+                }}
+              >
                 <Icon size="md" Icon={expandIcon ? Minimize2 : Maximize2} />
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <p>{expandIcon ? 'Diminuir previsualização' : 'Aumentar previsualização'}</p>
+              <p>
+                {expandIcon
+                  ? "Diminuir previsualização"
+                  : "Aumentar previsualização"}
+              </p>
             </TooltipContent>
           </Tooltip>
         </ButtonsWrapper>

@@ -1,5 +1,5 @@
 import { cssButtonPreview } from '@/data/buttons/variables';
-import { Button, Icon, ButtonsWrapper, FormWrapper } from '@/ui/index';
+import { Button, ButtonsWrapper, Icon } from '@/ui/index';
 import { ClipboardPen, ThumbsUp } from 'lucide-react';
 
 type ButtonData = {
@@ -32,7 +32,7 @@ const buttonVariantsToRender = [
 
 const ButtonsPreview = () => {
   return (
-    <FormWrapper>
+    <div className='-mt-px xl:mt-0'>
       <h5>Gerador de estilos para botões</h5>
       <div className="mb-[1cap]">
         <p className="small-text">Defina a escala de botões do seu projeto</p>
@@ -69,7 +69,7 @@ const ButtonsPreview = () => {
         </ButtonsWrapper>
       </div>
       <pre className="h-93">{cssButtonPreview}</pre>
-    </FormWrapper>
+    </div>
   );
 };
 

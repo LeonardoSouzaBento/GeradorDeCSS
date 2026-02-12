@@ -1,5 +1,5 @@
-import chroma from 'chroma-js';
-import { useMemo } from 'react';
+import chroma from "chroma-js";
+import { useMemo, useRef } from "react";
 
 export interface ColorShade {
   stop: number;
@@ -9,16 +9,32 @@ export interface ColorShade {
   contrastValue: number;
 }
 
-export const useColorShades = (baseColor: string) => {
-  const shades = useMemo<ColorShade[]>(() => {
-    if (!chroma.valid(baseColor)) return [];
+export const useColorShades = (
+  baseColor: string,
+  freeze = false
+) => {
+  const lastResult = useRef<{
+    shades: ColorShade[];
+    color1000?: string;
+    color50?: string;
+  } | null>(null);
+
+  const result = useMemo(() => {
+    if (freeze && lastResult.current) {
+      return lastResult.current;
+    }
+
+    if (!chroma.valid(baseColor)) {
+      return { shades: [], color1000: undefined, color50: undefined };
+    }
 
     const color = chroma(baseColor);
     const [L] = color.lch();
     const perceptualLightness = L / 100;
     const luminance = color.luminance();
 
-    const perceivedDarkness = (1 - perceptualLightness) * 0.75 + (1 - luminance) * 0.25;
+    const perceivedDarkness =
+      (1 - perceptualLightness) * 0.75 + (1 - luminance) * 0.25;
 
     const rawWeight = perceivedDarkness * 1000;
 
@@ -29,11 +45,10 @@ export const useColorShades = (baseColor: string) => {
     );
 
     const scale = chroma
-      .scale(['white', baseColor, 'black'])
+      .scale(["white", baseColor, "black"])
       .domain([0, closestStop / 1000, 1])
-      .mode('lch');
+      .mode("lch");
 
-    // 1️⃣ gera todas as cores
     const baseShades = stops.map((stop) => {
       const isBase = stop === closestStop;
       const hex = isBase ? color.hex() : scale(stop / 1024).hex();
@@ -45,14 +60,16 @@ export const useColorShades = (baseColor: string) => {
       };
     });
 
-    // 2️⃣ descobre cores extremas
-    const color1000 = baseShades.find((s) => s.stop === 1000)?.hex ?? '#000';
-    const color50 = baseShades.find((s) => s.stop === 50)?.hex ?? '#fff';
+    const color1000 = baseShades.find((s) => s.stop === 1000)?.hex ?? "#000";
+    const color50 = baseShades.find((s) => s.stop === 50)?.hex ?? "#fff";
 
-    return baseShades.map((item) => {
-      const textColor = chroma(item.hex).luminance() > 0.2 ? color1000 : color50;
+    const shades = baseShades.map((item) => {
+      const textColor =
+        chroma(item.hex).luminance() > 0.2 ? color1000 : color50;
 
-      const contrastValue = chroma.contrast(item.hex, textColor).toFixed(2);
+      const contrastValue = chroma
+        .contrast(item.hex, textColor)
+        .toFixed(2);
 
       return {
         ...item,
@@ -60,10 +77,13 @@ export const useColorShades = (baseColor: string) => {
         contrastValue,
       };
     });
-  }, [baseColor]);
 
-  const color1000 = shades.find((item) => item.stop === 1000)?.hex;
-  const color50 = shades.find((item) => item.stop === 50)?.hex;
+    const finalResult = { shades, color1000, color50 };
+    lastResult.current = finalResult;
 
-  return { shades, color1000, color50 };
+    return finalResult;
+  }, [baseColor, freeze]);
+
+  return result;
 };
+

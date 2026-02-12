@@ -1,9 +1,9 @@
 type VariantWithState = keyof typeof buttonStatesStyles;
 const buttonStatesStyles = {
   default: `
-    active:bg-*primary-900*
+    active:bg-*stop-superior*
     disabled:bg-neutral-300 disabled:text-neutral-500/80
-    hover:*bg-primary-700*
+    hover:*stop-inferior*
     focus:border-3 focus:border-selected-400
   `,
 

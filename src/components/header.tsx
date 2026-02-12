@@ -69,7 +69,7 @@ const Header = ({
           </h1>
           <h4
             className={`text-muted-foreground max-w-2xl font-normal
-              mx-auto px-3 pre-sm:text-left ${page === 'typography' ? 'pre-sm:pl-1' : 'pl-[0.1ex]'}`}>
+              mx-auto px-3 pre-sm:text-left ${page === 'typography' ? 'pre-sm:pl-0' : 'pl-[0.1ex]'}`}>
             {description}
           </h4>
         </div>

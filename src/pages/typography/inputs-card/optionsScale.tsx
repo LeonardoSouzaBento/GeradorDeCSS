@@ -13,7 +13,7 @@ const OptionsScale = ({ scaleValue, setScaleValue, setCanGenerate }: OptionsScal
   return (
     <div
       className={`flex flex-col gap-[1cap] rounded-none border-b 
-        border-input sm:border-b-0 pb-4.5 sm:pb-0`}>
+        sm:border-b-0 pb-4.5 sm:pb-0`}>
       <Label htmlFor="scale">Escala tipográfica</Label>
       <div
         className={`flex flex-wrap gap-3 rounded-xs 
