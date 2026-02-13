@@ -4,7 +4,7 @@ import React from 'react';
 export const InputWrapper = ({
   children,
   className = '',
-  gap = 0.7,
+  gap = 0.5,
 }: {
   children: React.ReactNode;
   className?: string;

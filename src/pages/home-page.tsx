@@ -57,7 +57,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
                   <Button
                     key={page.path}
                     variant={page.variant as ButtonVariants['variant']}
-                    className={`${page.className || ''} max-[430px]:h-10 max-[720px]:w-full`}>
+                    className={`${page.className || ''} h-10 max-[430px]:h-10 max-[720px]:w-full`}>
                     <CustomNavLink link={page.path} />
                     <Icon Icon={page.icon} size={size} />
                     {page.name}
@@ -89,7 +89,6 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
           </CardContent>
         </Card>
       </div>
-      <div className="dot-pattern-image" />
     </div>
   );
 };
