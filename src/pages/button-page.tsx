@@ -22,6 +22,7 @@ import {
 import chroma from "chroma-js";
 import { AlertCircle, MousePointerClick } from "lucide-react";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { BorderRadiusInput } from "./button-page/BorderRadiusInput";
 import ColorGenerator from "./button-page/color-palette/color-generator";
 import {
   InitialSize,
@@ -44,7 +45,6 @@ import {
   PaddingXInput,
 } from "./button-page/padding-generator/index";
 import ButtonStyleTester from "./home/button-style-tester";
-import { BorderRadiusInput } from "./button-page/BorderRadiusInput";
 
 export type MainStopColors = {
   base: string;

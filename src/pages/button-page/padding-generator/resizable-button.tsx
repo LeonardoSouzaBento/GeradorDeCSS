@@ -91,7 +91,6 @@ const ResizableButton = ({
 
   useLayoutEffect(() => {
     if (!buttonRef.current || definingPx) return;
-
     buttonRef.current.style.paddingTop = "0px";
     buttonRef.current.style.paddingBottom = "0px";
 
@@ -105,6 +104,11 @@ const ResizableButton = ({
     const basePadding = totalSpaceNeeded > 0 ? totalSpaceNeeded / 2 : 0;
     const pt = Number((basePadding - adjustment).toFixed(5));
     const pb = Number((basePadding + adjustment).toFixed(5));
+    
+    //evitar bug
+    buttonRef.current.style.paddingTop = `${pt}px`;
+    buttonRef.current.style.paddingBottom = `${pb}px`;
+
     setPaddingTop(pt);
     setPaddingBottom(pb);
     // Cria um novo objeto ao invés de mutar a referência
