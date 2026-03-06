@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/ui/card';
 import { ChevronDown } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { questions } from '@/data/typography/questions';
+import { Icon } from '@/ui';
 
 const css = {
   wrapperQuestions: `mb-3 last:mb-0!`,
@@ -39,7 +40,7 @@ const RelevantQuestions = () => {
                   <p className={`${css.pQuestion}`}>{item.question}</p>
 
                   <Button className={`rounded-full`} variant="ghost" size="icon">
-                    <ChevronDown {...iconLg} className={selected ? 'rotate-180' : ''} />
+                    <Icon Icon={ChevronDown} size="lg" className={selected ? 'rotate-180' : ''} />
                   </Button>
                 </div>
 

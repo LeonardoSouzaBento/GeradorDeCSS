@@ -64,7 +64,7 @@ const WeightSelector = ({
       <FormWrapper className={`w-full`}>
         <HeaderH6 mb={0.75}>
           <H6Title>
-            <Icon Icon={Weight} />
+            <Icon Icon={Weight} className="mb-1" />
             <h6>Peso da fonte</h6>
           </H6Title>
         </HeaderH6>
@@ -88,7 +88,7 @@ const WeightSelector = ({
       <FormWrapper className={`w-full relative`}>
         <HeaderH6 mb={1}>
           <H6Title>
-            <Icon Icon={Weight} />
+            <Icon Icon={Weight} className="mb-1" />
             <h6>Peso do ícone</h6>
           </H6Title>
           <H6Description>

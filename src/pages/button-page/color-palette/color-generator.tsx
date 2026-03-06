@@ -1,9 +1,15 @@
-import { iconSm } from '@/css/lucideIcons';
-import { ColorShade } from '@/hooks/useColorShades';
-import { H6Description, H6Title, HeaderH6, ButtonsWrapper, FormWrapper } from '@/ui';
-import { ChartSpline, Palette } from 'lucide-react';
-import { useMemo } from 'react';
-import { PalletPreview } from '@/components';
+import { ColorShade } from "@/hooks/useColorShades";
+import {
+  H6Description,
+  H6Title,
+  HeaderH6,
+  ButtonsWrapper,
+  FormWrapper,
+  Icon,
+} from "@/ui";
+import { ChartSpline, Palette } from "lucide-react";
+import { useMemo } from "react";
+import { PalletPreview } from "@/components";
 
 interface ColorGeneratorProps {
   shades: ColorShade[];
@@ -21,13 +27,18 @@ const ColorGenerator = ({ shades }: ColorGeneratorProps) => {
       .filter((s) => MIDDLE_STOPS.includes(s.stop))
       .sort((a, b) => b.contrastValue - a.contrastValue);
 
-    const bestAccessible = middleCandidates.find((s) => s.contrastValue > CONTRAST_THRESHOLD);
+    const bestAccessible = middleCandidates.find(
+      (s) => s.contrastValue > CONTRAST_THRESHOLD
+    );
     const fallback400 = shades.find((s) => s.stop === 400);
     const middle = bestAccessible ?? fallback400;
 
     return [...fixed, middle]
       .filter(Boolean)
-      .filter((item, index, arr) => arr.findIndex((i) => i.stop === item!.stop) === index)
+      .filter(
+        (item, index, arr) =>
+          arr.findIndex((i) => i.stop === item!.stop) === index
+      )
       .sort((a, b) => a.contrastValue - b.contrastValue);
   }, [shades]);
 
@@ -36,7 +47,7 @@ const ColorGenerator = ({ shades }: ColorGeneratorProps) => {
       <FormWrapper>
         <HeaderH6 mb={1.2}>
           <H6Title>
-            <Palette {...iconSm} />
+            <Icon Icon={Palette} />
             <h6>Paleta de Cores</h6>
           </H6Title>
         </HeaderH6>
@@ -45,19 +56,25 @@ const ColorGenerator = ({ shades }: ColorGeneratorProps) => {
       <FormWrapper>
         <HeaderH6 mb={1.5}>
           <H6Title>
-            <ChartSpline {...iconSm} />
+            <Icon Icon={ChartSpline} size="sm" />
             <h6>Contrastes sugeridos</h6>
           </H6Title>
-          <H6Description>Contraste dos fundos com a cor 50 ou 1000 aplicada no texto</H6Description>
+          <H6Description>
+            Contraste dos fundos com a cor 50 ou 1000 aplicada no texto
+          </H6Description>
         </HeaderH6>
         <ButtonsWrapper className="flex gap-2">
           {suggestedColorTones.map((item, index) => (
             <div
               key={index}
               className="h-10 px-[1.4ex] rounded-full flex justify-center items-center"
-              style={{ backgroundColor: item.hex, color: item.textColor }}>
+              style={{ backgroundColor: item.hex, color: item.textColor }}
+            >
               <p className="small-text">
-                {item.stop} - <span className="font-medium underline">{item.contrastValue}</span>
+                {item.stop} -{" "}
+                <span className="font-medium underline">
+                  {item.contrastValue}
+                </span>
               </p>
             </div>
           ))}

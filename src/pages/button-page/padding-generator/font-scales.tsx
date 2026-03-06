@@ -1,4 +1,3 @@
-import { iconMd } from '@/css/lucideIcons';
 import { Icon } from '@/ui/lucide-icon';
 import { StateSetter } from '@/data/typography/types';
 import { scales } from '@/data/typography/variables';
@@ -16,7 +15,7 @@ const FontScales = ({ scaleValue, setScaleValue }: Props) => {
     <FormWrapper>
       <HeaderH6 mb={0}>
         <H6Title>
-          <ALargeSmall {...iconMd} />
+          <Icon Icon={ALargeSmall} size="md" />
           <h6>Escala de crescimento</h6>
         </H6Title>
         <H6Description>

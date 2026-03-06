@@ -60,7 +60,7 @@ const AlignInput = () => {
     <FormWrapper className="space-y-[1cap]">
       <HeaderH6 mb={1}>
         <H6Title>
-          <Icon Icon={AlignVerticalSpaceAround} />
+          <Icon Icon={AlignVerticalSpaceAround}/>
           <h6>Alinhar botões</h6>
         </H6Title>
         <H6Description>

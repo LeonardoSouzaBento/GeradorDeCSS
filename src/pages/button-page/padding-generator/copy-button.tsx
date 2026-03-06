@@ -1,5 +1,4 @@
-import { iconMd, iconSm } from '@/css/lucideIcons';
-import { Button } from '@/ui/index';
+import { Button, Icon } from '@/ui/index';
 import { ClipboardCopy, CopyCheck } from 'lucide-react';
 import { useState } from 'react';
 
@@ -15,7 +14,7 @@ const CopyButton = ({ returnString }: { returnString: string }) => {
 
   return (
     <Button className='max-w-max' onClick={copyToClipboard}>
-      {copied ? <CopyCheck {...iconMd} /> : <ClipboardCopy {...iconSm} />}
+      {copied ? <Icon Icon={CopyCheck} size="md" /> : <Icon Icon={ClipboardCopy} size="sm" />}
       {copied ? 'Copiado!' : 'Copiar CSS'}
     </Button>
   );

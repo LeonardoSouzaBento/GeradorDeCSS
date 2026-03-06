@@ -1,7 +1,7 @@
 import { StateSetter } from '@/data/typography/types';
-import { iconSm } from '@/css/lucideIcons';
 import { Button } from '@/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/ui/card';
+import { Icon } from '@/ui/lucide-icon';
 import { Eye } from 'lucide-react';
 
 const PersonalGuidelines = ({ setShowMoreStyles }: { setShowMoreStyles: StateSetter<boolean> }) => {
@@ -44,7 +44,7 @@ const PersonalGuidelines = ({ setShowMoreStyles }: { setShowMoreStyles: StateSet
           variant="outline"
           className={`w-full hover:shadow-xs`}
           onClick={() => setShowMoreStyles(true)}>
-          <Eye {...iconSm} />
+          <Icon Icon={Eye} size="sm" />
           Ver mais estilos recomendados
         </Button>
       </CardContent>

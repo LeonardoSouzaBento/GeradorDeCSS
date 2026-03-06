@@ -195,7 +195,7 @@ max-w-5xl,64rem,1024px
     @apply text-muted-foreground tracking-normal;
   }
   pre {
-    @apply cursor-default bg-background text-foreground rounded-xs 
+    @apply cursor-default bg-primary-50/40 text-foreground rounded-xs 
     wrap-break-word p-5 pt-4 whitespace-pre-wrap transition-opacity duration-400 font-code overflow-y-scroll;
   }
   textarea {

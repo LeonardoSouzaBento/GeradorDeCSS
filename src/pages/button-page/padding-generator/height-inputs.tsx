@@ -1,4 +1,3 @@
-import { iconSm } from '@/css/lucideIcons';
 import { buttonScales, ButtonsData } from '@/data/buttons/variables';
 import { StateSetter } from '@/data/typography/types';
 import {
@@ -91,7 +90,7 @@ const HeightInputs = ({ currentButtonsData, setCurrentButtonsData }: HeightInput
     <FormWrapper>
       <HeaderH6 mb={0} className={`mb-[1cap]`}>
         <H6Title>
-          <Icon Icon={ChartColumnDecreasing} />
+          <Icon Icon={ChartColumnDecreasing} className='mb-1' />
           <h6>Alturas</h6>
         </H6Title>
         <H6Description>
@@ -123,12 +122,12 @@ const HeightInputs = ({ currentButtonsData, setCurrentButtonsData }: HeightInput
       />
       <ButtonsWrapper className="pt-[2ex]">
         <Button variant="ghost" onClick={() => handleChangeScale('previous')}>
-          <ChevronLeft {...iconSm} />
+          <Icon Icon={ChevronLeft} size="sm" />
           Escala anterior
         </Button>
         <Button variant="ghost" onClick={() => handleChangeScale('next')}>
           Próxima escala
-          <ChevronRight {...iconSm} />
+          <Icon Icon={ChevronRight} size="sm" />
         </Button>
       </ButtonsWrapper>
     </FormWrapper>

@@ -1,5 +1,4 @@
 import { moreCSSStyles, moreTwStyles } from '@/data/typography/moreStyles';
-import { iconSm } from '@/css/lucideIcons';
 import { Icon } from '@/ui/lucide-icon';
 import { StateSetter } from '@/data/typography/types';
 import { Button } from '@/ui/button';
@@ -111,7 +110,7 @@ const MoreStylesModal = ({
               e.stopPropagation();
               setShowMoreStyles(false);
             }}>
-            <X {...iconSm} />
+            <Icon Icon={X} size="sm" />
           </Button>
         </CardHeader>
 

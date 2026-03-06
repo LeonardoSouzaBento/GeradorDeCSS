@@ -82,10 +82,10 @@ export const ButtonPageProvider = ({ children }: { children: React.ReactNode }) 
   const [ghostOutline, setGhostOutline] = useState(1);
   const [paddingX, setPaddingX] = useState(0.9);
   const [scaleValue, setScaleValue] = useState<number>(1.067);
-  const [strokeWidth, setStrokeWidth] = useState<number>(2.6);
+  const [strokeWidth, setStrokeWidth] = useState<number>(2.35);
   const [badContrast, setBadContrast] = useState<boolean>(false);
   const [colorNickname, setColorNickname] = useState<string>("primary");
-  const [borderRadius, setBorderRadius] = useState(0);
+  const [borderRadius, setBorderRadius] = useState(999);
 
   /* escalas e dados compostos */
   const [iconSizes, setIconSizes] = useState<string[]>(defaultIconSizes);

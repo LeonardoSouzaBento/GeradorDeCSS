@@ -1,4 +1,3 @@
-import { iconMd, iconSm } from '@/css/lucideIcons';
 import { Icon } from '@/ui/lucide-icon';
 import { applyFontToTargets, loadFont } from '@/functions/typography/changeFont';
 import {
@@ -72,7 +71,7 @@ const FontSelector = ({
           ) : (
             <HeaderH6 mb={0}>
               <H6Title>
-                <BookType {...iconSm} />
+                <Icon Icon={BookType} />
                 <h6>Fonte</h6>
               </H6Title>
             </HeaderH6>
@@ -98,7 +97,7 @@ const FontSelector = ({
             type="submit"
             variant="ghost"
             disabled={isLoading}>
-            <Check {...iconMd} />
+            <Icon Icon={Check} size="md" />
             {isLoading ? 'Carregando...' : 'Aplicar Esta Fonte'}
           </Button>
         </div>

@@ -1,5 +1,4 @@
 import { ButtonPageContext } from "@/contexts";
-import { iconSm } from "@/css/lucideIcons";
 import { ButtonsData, buttonsData } from "@/data/buttons/variables";
 import { StateSetter } from "@/data/typography/types";
 import {
@@ -53,7 +52,7 @@ const RelativeSizes = () => {
     <FormWrapper className="space-y-[1cap]">
       <HeaderH6 mb={0}>
         <H6Title>
-          <ALargeSmall {...iconSm} />
+          <Icon Icon={ALargeSmall} size="sm" />
           <h6>Tamanhos relativos</h6>
         </H6Title>
         <H6Description>
