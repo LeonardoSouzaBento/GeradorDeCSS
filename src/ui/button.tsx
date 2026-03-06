@@ -96,7 +96,7 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
       asChild = false,
       selected,
       disabled,
-      closeButton,
+      closeButton = false,
       ...props
     },
     ref,
@@ -106,7 +106,7 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
     const selectedCSS = selected
       ? 'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card'
       : '';
-    const closeButtonCSS = closeButton ? 'rounded-full p-0! text-foreground' : '';
+    const closeButtonCSS = closeButton ? 'rounded-full text-foreground' : '';
 
     return (
       <Comp

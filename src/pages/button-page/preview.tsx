@@ -1,34 +1,28 @@
-import { ButtonsData, PaddingTypes } from "@/data/buttons/variables";
-import { StateSetter } from "@/data/typography/types";
+import { ButtonPageContext } from "@/contexts";
 import {
   Alert,
   AlertDescription,
   AlertTitle,
+  FormWrapper,
   H6Title,
   HeaderH6,
   Icon,
-  FormWrapper,
 } from "@/ui";
 import { ButtonsWrapper } from "@/ui/index";
 import { Info, ThumbsUp } from "lucide-react";
-import { ResizableButton } from "./padding-generator";
-import { ButtonPageContext } from "@/contexts";
 import { useContext } from "react";
+import { ResizableButton } from "./padding-generator";
+
+const buttonTypes = ["fill", "outline", "ghost"] as const;
 
 const Preview = ({ color50 }: { color50: string }) => {
   const {
     badContrast,
     currentButtonsData,
-    initialFontSize,
-    currentWeight,
-    color,
-    outlineValue,
-    paddingX,
     iconButtonSizes,
     iconSizes,
     strokeWidth,
-    setFillPaddings,
-    setOutlinePaddings,
+    color,
   } = useContext(ButtonPageContext);
 
   return (
@@ -47,55 +41,28 @@ const Preview = ({ color50 }: { color50: string }) => {
           </AlertDescription>
         </Alert>
       )}
-      <div className="next-md:flex gap-4 space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-[max-content_max-content] gap-4">
-          <ButtonsWrapper className="items-start! font-target md:flex-col">
-            {currentButtonsData.map((item, index) => {
-              return (
-                <ResizableButton
-                  key={index}
-                  name={item.name}
-                  height={Number(item.height)}
-                  relativeSize={item.relativeSize}
-                  initialFontSize={initialFontSize}
-                  currentWeight={currentWeight}
-                  color={color}
-                  color50={color50}
-                  paddingX={paddingX}
-                  adjustment={item.adjustment}
-                  strokeWidth={strokeWidth}
-                  index={index}
-                  setFillPaddings={setFillPaddings}
-                />
-              );
-            })}
-          </ButtonsWrapper>
-          <ButtonsWrapper className="items-start! font-target md:flex-col">
-            {currentButtonsData.map((item, index) => {
-              const fontSize = item.relativeSize * initialFontSize;
-              const pxInPx = fontSize * paddingX - (4 / 5) * outlineValue;
-              const fixedPx = Number((pxInPx / fontSize).toFixed(5));
-              return (
-                <ResizableButton
-                  key={index}
-                  name={item.name}
-                  height={Number(item.height)}
-                  relativeSize={item.relativeSize}
-                  initialFontSize={initialFontSize}
-                  currentWeight={currentWeight}
-                  outlineValue={outlineValue}
-                  color={color}
-                  paddingX={fixedPx}
-                  adjustment={item.adjustment}
-                  strokeWidth={strokeWidth}
-                  index={index}
-                  setOutlinePaddings={setOutlinePaddings}
-                />
-              );
-            })}
-          </ButtonsWrapper>
+      <div className="w-auto space-y-4">
+        <div className="flex flex-wrap gap-4 max-w-max">
+          {buttonTypes.map((type) => (
+            <ButtonsWrapper key={type} className="items-start">
+              {currentButtonsData.map((item, index) => {
+                return (
+                  <ResizableButton
+                    key={index}
+                    name={item.name}
+                    height={Number(item.height)}
+                    relativeSize={item.relativeSize}
+                    adjustment={item.adjustment}
+                    index={index}
+                    color50={color50}
+                    variant={type}
+                  />
+                );
+              })}
+            </ButtonsWrapper>
+          ))}
         </div>
-        <ButtonsWrapper className="next-md:flex-col next-md:w-max lg:flex-row xl:flex-col">
+        <ButtonsWrapper>
           {iconButtonSizes.map((item, index) => {
             const id = `icon-${index}`;
             return (
@@ -108,7 +75,6 @@ const Preview = ({ color50 }: { color50: string }) => {
                   color: color,
                 }}
               >
-                {" "}
                 <ThumbsUp
                   size={iconSizes[index]}
                   strokeWidth={strokeWidth}

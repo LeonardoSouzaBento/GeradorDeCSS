@@ -12,7 +12,7 @@ export function ConfigButton({
   onToggleConfig: () => void;
   setShow: StateSetter<boolean>;
 }) {
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>, item: number) => {
+  const handleClick = (e: MouseEvent<HTMLButtonElement>, item: number) => {
     if (item === 1) {
       onToggleConfig();
     } else {

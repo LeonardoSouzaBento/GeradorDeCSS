@@ -1,8 +1,7 @@
-import { Icon as LucideIconComp } from '@/ui/lucide-icon';
-import { colorConfigs, fontConfigs, NavOptions, sizeConfigs } from '@/data/buttons/variables';
-import { StateSetter } from '@/data/typography/types';
-import { Button } from '@/ui';
-import { LucideIcon } from 'lucide-react';
+import { configOptions, NavOptions } from "@/data/buttons/variables";
+import { StateSetter } from "@/data/typography/types";
+import { Button, Icon } from "@/ui";
+import { LucideIcon } from "lucide-react";
 
 const Nav = ({
   navOption,
@@ -14,51 +13,24 @@ const Nav = ({
   return (
     <nav
       className={`hidden md:flex min-w-max flex-col space-y-[1ex]
-      border-r rounded-xs pr-4 box-content [&>div]:space-y-[0.8ex] 
-      [&>div>div]:flex [&>div>div]:flex-col [&>div>div]:items-start [&>div>div]:gap-[1ex]
-      [&>div>p]:text-muted-foreground [&>div>p]:font-medium `}>
-      <div>
-        <p>Tamanho e outline</p>
-        <div>
-          {sizeConfigs.map((option) => (
-            <DataOption
-              Icon={option.icon}
-              key={option.name}
-              value={option.name}
-              navOption={navOption}
-              setNavOption={setNavOption}
-            />
-          ))}
+      border-r rounded-xs pr-4 box-content`}
+    >
+      {configOptions.map((section) => (
+        <div key={section.name} className="space-y-1">
+          <p className="text-muted-foreground font-medium">{section.name}</p>
+          <div className="flex flex-col items-start gap-[1ex]">
+            {section.options.map((option) => (
+              <DataOption
+                IconComp={option.icon}
+                key={option.name}
+                value={option.name as NavOptions}
+                navOption={navOption}
+                setNavOption={setNavOption}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-      <div>
-        <p>Cor</p>
-        <div>
-          {colorConfigs.map((option) => (
-            <DataOption
-              Icon={option.icon}
-              key={option.name}
-              value={option.name}
-              navOption={navOption}
-              setNavOption={setNavOption}
-            />
-          ))}
-        </div>
-      </div>
-      <div>
-        <p>Fonte</p>
-        <div>
-          {fontConfigs.map((option) => (
-            <DataOption
-              Icon={option.icon}
-              key={option.name}
-              value={option.name}
-              navOption={navOption}
-              setNavOption={setNavOption}
-            />
-          ))}
-        </div>
-      </div>
+      ))}
     </nav>
   );
 };
@@ -69,18 +41,24 @@ interface OptionButtonProps {
   value: NavOptions;
   navOption: NavOptions;
   setNavOption: StateSetter<NavOptions>;
-  Icon: LucideIcon;
+  IconComp: LucideIcon;
 }
 
-const DataOption = ({ value, navOption, setNavOption, Icon }: OptionButtonProps) => {
+const DataOption = ({
+  value,
+  navOption,
+  setNavOption,
+  IconComp,
+}: OptionButtonProps) => {
   return (
     <Button
       size="sm"
       variant="link"
       selected={value === navOption}
       onClick={() => setNavOption(value)}
-      className="w-full justify-start px-[1.4ex] gap-[1ex]">
-      <LucideIconComp Icon={Icon} />
+      className="w-full justify-start px-[1.4ex] gap-[1ex]"
+    >
+      <Icon Icon={IconComp} size="md" />
       {value}
     </Button>
   );

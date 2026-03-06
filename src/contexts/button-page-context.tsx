@@ -63,14 +63,15 @@ export interface ButtonPageContextType {
 
   outlinePaddings: PaddingTypes[];
   setOutlinePaddings: StateSetter<PaddingTypes[]>;
+  
+  ghostPaddings: PaddingTypes[];
+  setGhostPaddings: StateSetter<PaddingTypes[]>;
+
+  borderRadius: number;
+  setBorderRadius: StateSetter<number>;
 }
 
-/* provider */
-interface ButtonPageProviderProps {
-  children: React.ReactNode;
-}
-
-export const ButtonPageProvider = ({ children }: ButtonPageProviderProps) => {
+export const ButtonPageProvider = ({ children }: { children: React.ReactNode }) => {
   /* valores únicos */
   const [freezeColors, setFreezeColors] = useState<boolean>(false);
   const [color, setColor] = useState("#1F4780");
@@ -84,6 +85,7 @@ export const ButtonPageProvider = ({ children }: ButtonPageProviderProps) => {
   const [strokeWidth, setStrokeWidth] = useState<number>(2.6);
   const [badContrast, setBadContrast] = useState<boolean>(false);
   const [colorNickname, setColorNickname] = useState<string>("primary");
+  const [borderRadius, setBorderRadius] = useState(0);
 
   /* escalas e dados compostos */
   const [iconSizes, setIconSizes] = useState<string[]>(defaultIconSizes);
@@ -106,13 +108,19 @@ export const ButtonPageProvider = ({ children }: ButtonPageProviderProps) => {
     { px: "", pb: "", pt: "", py: "" },
     { px: "", pb: "", pt: "", py: "" },
   ]);
-
+  
   const [outlinePaddings, setOutlinePaddings] = useState<PaddingTypes[]>([
     { px: "", pb: "", pt: "", py: "" },
     { px: "", pb: "", pt: "", py: "" },
     { px: "", pb: "", pt: "", py: "" },
   ]);
 
+  const [ghostPaddings, setGhostPaddings] = useState<PaddingTypes[]>([
+    { px: "", pb: "", pt: "", py: "" },
+    { px: "", pb: "", pt: "", py: "" },
+    { px: "", pb: "", pt: "", py: "" },
+  ]);
+  
   return (
     <ButtonPageContext.Provider
       value={{
@@ -152,6 +160,10 @@ export const ButtonPageProvider = ({ children }: ButtonPageProviderProps) => {
         setFillPaddings,
         outlinePaddings,
         setOutlinePaddings,
+        ghostPaddings,
+        setGhostPaddings,
+        borderRadius,
+        setBorderRadius,
       }}
     >
       {children}

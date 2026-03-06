@@ -1,25 +1,7 @@
-import {
-  colorConfigs,
-  fontConfigs,
-  NavOptions,
-  OptionButtonData,
-  sizeConfigs,
-} from '@/data/buttons/variables';
-import { StateSetter } from '@/data/typography/types';
-import { Button, Icon, ButtonsWrapper } from '@/ui';
-import { Select, SelectContent, SelectGroup, SelectLabel, SelectTrigger } from '@/ui/select';
-import { Menu } from 'lucide-react';
-
-interface OptionGroup {
-  label: string;
-  options: OptionButtonData[];
-}
-
-const data: OptionGroup[] = [
-  { label: 'Tamanho e outline', options: sizeConfigs },
-  { label: 'Cor', options: colorConfigs },
-  { label: 'Fonte', options: fontConfigs },
-];
+import { configOptions, NavOptions } from "@/data/buttons/variables";
+import { StateSetter } from "@/data/typography/types";
+import { Button, ButtonsWrapper, Icon } from "@/ui";
+import { Settings } from "lucide-react";
 
 interface OptionsMenuProps {
   setNavOption: StateSetter<NavOptions>;
@@ -38,54 +20,58 @@ export default function OptionsMenu({
 }: OptionsMenuProps) {
   function handleClick() {
     if (!cardRef.current) return;
-    cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    cardRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     setOpenSelect(!openSelect);
   }
 
   return (
-    <Select
-      open={openSelect}
-      onOpenChange={() => {
-        setOpenSelect(!openSelect);
-      }}>
-      <div
-        className="w-full flex justify-end md:hidden rounded-xs border mb-4"
-        onClick={handleClick}>
-        <SelectTrigger
-          data-show-icon="false"
-          className={`w-max h-max
-           border-none`}>
-          <Button asChild variant="transparent">
-            <div onClick={handleClick}>
-              Propriedades
-              <Icon Icon={Menu} />
-            </div>
-          </Button>
-        </SelectTrigger>
-      </div>
-      <SelectContent className="w-max">
-        {data.map(({ label, options }) => (
-          <SelectGroup key={label}>
-            <SelectLabel>{label}</SelectLabel>
-            <ButtonsWrapper className="gap-[0.25ex]">
-              {options.map((option) => (
-                <Button
-                  key={option.name}
-                  variant="link"
-                  selected={option.name === navOption}
-                  onClick={() => {
-                    setNavOption(option.name);
-                    setOpenSelect(false);
-                  }}
-                  className="w-full justify-start px-[1.4ex] gap-[1ex]">
-                  <Icon Icon={option.icon} />
-                  {option.name}
-                </Button>
-              ))}
-            </ButtonsWrapper>
-          </SelectGroup>
-        ))}
-      </SelectContent>
-    </Select>
+    <div className="relative w-full md:hidden">
+      <Button
+        className="absolute -top-9 -right-2 rounded-sm"
+        size="icon"
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpenSelect(!openSelect);
+        }}
+      >
+        <Icon
+          Icon={Settings}
+          strokeWidth={"thin"}
+          size="2xl"
+          className="mb-px ml-px"
+        />
+      </Button>
+
+      {openSelect && (
+        <>
+          <div className="w-64 flex flex-col absolute top-2 -right-2 z-20 
+          bg-background border border-border/75 rounded-sm shadow-lg p-2">
+            {configOptions.map(({ name, options }) => (
+              <div key={name}>
+                <p className="font-medium text-muted-foreground p-1">{name}</p>
+                <ButtonsWrapper className="gap-[0.25ex]">
+                  {options.map((option) => (
+                    <Button
+                      key={option.name}
+                      variant="link"
+                      selected={option.name === navOption}
+                      onClick={() => {
+                        setNavOption(option.name as NavOptions);
+                        setOpenSelect(false);
+                      }}
+                      className="w-full justify-start px-[1.4ex] gap-[1ex]"
+                    >
+                      <Icon Icon={option.icon} />
+                      {option.name}
+                    </Button>
+                  ))}
+                </ButtonsWrapper>
+              </div>
+            ))}
+          </div>
+          <div className="fixed bottom-0 left-0 bg-black/3 backdrop-blur-[2px] h-dvh w-full z-10" />
+        </>
+      )}
+    </div>
   );
 }

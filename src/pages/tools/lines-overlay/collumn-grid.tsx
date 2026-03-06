@@ -1,5 +1,5 @@
-import { Button, Card, Icon, Input, Label, ButtonsWrapper, InputWrapper } from '../../src/ui';
-import { validateDecimalInput } from '../../src/utils';
+import { Button, Card, Icon, Input, Label, ButtonsWrapper, InputWrapper } from '@/ui/index';
+import { validateDecimalInput } from '@/utils/index';
 import { ChevronDown, X } from 'lucide-react';
 import { useState } from 'react';
 
@@ -61,7 +61,7 @@ const css = {
   configWrapper: `border-b pt-3.5 py-4`,
 };
 
-const Test = () => {
+export const CollumnGrid = () => {
   const [gap, setGap] = useState<number>(defaultGaps.mobile);
   const [collunsQuantity, setCollunsQuantity] = useState<number>(defaultCollunsQuantity.mobile);
   const [screenWidth, setScreenWidth] = useState<number>(screenWidths.mobile[0]);
@@ -101,7 +101,7 @@ const Test = () => {
   }
 
   return (
-    <div className="fixed min-w-screen min-h-full">
+    <div className="fixed min-w-screen min-h-full z-40 top-0 left-0">
       {seeConfigs ? (
         <Card className="size-max flex flex-col bg-card absolute bottom-4 right-4 pt-[1ex] z-6">
           <Button
@@ -237,8 +237,6 @@ const Test = () => {
     </div>
   );
 };
-
-export default Test;
 
 interface PreviewProps {
   screenWidth: number;

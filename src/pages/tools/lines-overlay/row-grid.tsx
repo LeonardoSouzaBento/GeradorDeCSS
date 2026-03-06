@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ConfigButton, ConfigOptions, MoveLinesButton } from './collumn-grid/index';
+import { ConfigButton, ConfigOptions, MoveLinesButton } from './row-grid/index';
 import { StateSetter } from '@/data/typography/types';
 import { Button, Icon } from '@/ui';
 import { Eye } from 'lucide-react';

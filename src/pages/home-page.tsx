@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/ui/
 import { CaseSensitive, MousePointerClick, Palette, Sparkles } from 'lucide-react';
 import ButtonStyleTester from './home/button-style-tester';
 import { ButtonsPreview, TypographyPreview } from './home/index';
+// import { CollumnGrid } from './tools/lines-overlay/collumn-grid';
 
 const pages = [
   {
@@ -76,7 +77,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
             </CardContent>
           </CardContent>
         </Card>
-
+        
         <Card className='border-none'>
           <CardHeader>
             <CardTitle>
@@ -89,6 +90,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
           </CardContent>
         </Card>
       </div>
+      {/* <CollumnGrid /> */}
     </div>
   );
 };

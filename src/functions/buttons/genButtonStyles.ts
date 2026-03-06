@@ -1,15 +1,41 @@
-import { PaddingTypes } from '@/data/buttons/variables';
+import {
+  ButtonsData,
+  PaddingTypes,
+  buttonFirstPart,
+  buttonLastPart,
+  buttonPaddings,
+} from "@/data/buttons/variables";
+import type { MainStopColors } from "@/pages/button-page";
 
-const iconVars = ['icon-sm:', 'icon:', 'icon-md:', 'icon-button:'];
+export function genButtonPaddingsVar(
+  fillPaddings: PaddingTypes[],
+  outlinePaddings: PaddingTypes[],
+  ghostPaddings: PaddingTypes[]
+) {
+  const fill = getPadding(fillPaddings);
+  const outline = getPadding(outlinePaddings);
+  const ghost = getPadding(ghostPaddings);
 
-const buttonCSS = `globais:\nh-fit flex items-center box-border leading-none!;\n\ndefault:\n'bg-primary hover:bg-primary/90 text-primary-50 disabled:bg-neutral-300 disabled:text-neutral-500/80',\n
-outline:\n'border-*value* border-primary text-primary bg-transparent hover:bg-primary-50/50 disabled:bg-neutral-100 disabled:border-neutral-300 disabled:text-neutral-500/75',\n
-ghost:\n'hover:bg-primary-50 border text-primary bg-transparent disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none',\n
-secondary:\n'bg-primary-100 text-primary hover:bg-primary-200 disabled:bg-neutral-100 disabled:text-neutral-400 disabled:border-none',...};\n`;
+  let result = buttonPaddings;
+
+  fill.forEach((p) => {
+    result = result.replace("*1*", p);
+  });
+  outline.forEach((p) => {
+    result = result.replace("*2*", p);
+  });
+  ghost.forEach((p) => {
+    result = result.replace("*3*", p);
+  });
+
+  return result;
+}
+
+const iconVars = ["icon-sm:", "icon:", "icon-md:", "icon-button:"];
 
 const getPadding = (paddings: PaddingTypes[]): string[] => {
   const values = paddings.map((item) => {
-    let value = '';
+    let value = "";
 
     if (item.px) {
       value += `px-[${item.px}]`;
@@ -26,43 +52,70 @@ const getPadding = (paddings: PaddingTypes[]): string[] => {
   return values;
 };
 
-export const genButtonStyles = (
-  iconButtonSizes: number[],
-  fillPaddings: PaddingTypes[],
-  outlinePaddings: PaddingTypes[],
-  outlineValue: number,
-) => {
-  const iconHeights = iconButtonSizes.map((item) => {
-    const sizeInTw = item / 4;
-    const isInteger = Number.isInteger(sizeInTw);
-    const endsInHalf = sizeInTw % 1 === 0.5;
-
+function getTailwindHeight(height: number, isButton: boolean = false) {
+  const sizeInTw = height / 4;
+  const isInteger = Number.isInteger(sizeInTw);
+  const endsInHalf = sizeInTw % 1 === 0.5;
+  if (!isButton) {
     if (isInteger || endsInHalf) {
       return `size-${sizeInTw}`;
     }
     return `size-[${sizeInTw.toFixed(4)}rem]`;
-  });
+  } else {
+    if (isInteger || endsInHalf) {
+      return `${sizeInTw}`;
+    }
+    return `[${sizeInTw.toFixed(4)}rem]`;
+  }
+}
 
+export const genButtonStyles = (
+  iconButtonSizes: number[],
+  fillPaddings: PaddingTypes[],
+  outlinePaddings: PaddingTypes[],
+  ghostPaddings: PaddingTypes[],
+  outlineValue: number,
+  ghostOutlineValue: number,
+  currentButtonsData: ButtonsData[],
+  mainStopColors: MainStopColors,
+  borderRadius: number
+) => {
+  const paddings = genButtonPaddingsVar(
+    fillPaddings,
+    outlinePaddings,
+    ghostPaddings
+  );
+  const buttonsHeights = currentButtonsData.map((item) => {
+    return getTailwindHeight(Number(item.height), true);
+  });
+  const iconHeights = iconButtonSizes.map((item) => {
+    return getTailwindHeight(Number(item));
+  });
   const iconSizes = iconVars
     .map((item, index) => {
       return `${item} ${iconHeights[index]},\n`;
     })
-    .join('')
+    .join("")
     .trimEnd();
 
-  const fillPadding = getPadding(fillPaddings);
-  const outlinePadding = getPadding(outlinePaddings);
-  const buttonStyles = buttonCSS.replace('*value*', outlineValue.toString());
-
   const sizeStyles = `size:{
-sm:\n '${fillPadding[0]} text-sm-button',\n
-default:\n '${fillPadding[1]} text-button',\n
-lg:\n '${fillPadding[2]} text-lg-button',\n
-"outline-sm":\n '${outlinePadding[0]} text-sm-button',\n
-"outline-default":\n '${outlinePadding[1]} text-button',\n
-"outline-lg":\n '${outlinePadding[2]} text-lg-button',\n
-${iconSizes}
+    sm:\n 'text-sm-button ${`min-h-${buttonsHeights[0]}`}',\n
+    default:\n 'text-button ${`min-h-${buttonsHeights[1]}`}',\n
+    lg:\n 'text-lg-button ${`min-h-${buttonsHeights[2]}`}',\n
+    ${iconSizes}
 }`;
 
-  return `/*Estilos*/\n${buttonStyles}\n/*Tamanhos*/\n${sizeStyles}`;
+  const firstPart = buttonFirstPart
+    .replace("*outline-value*", outlineValue.toString())
+    .replace("*ghost-outline*", ghostOutlineValue.toString())
+    .replace("*size*", sizeStyles)
+    .replace("*stop-atual*", mainStopColors.base)
+    .replace("*stop-atual*", mainStopColors.base)
+    .replace("*stop-atual*", mainStopColors.base)
+    .replace("*stop-atual*", mainStopColors.base)
+    .replace("*stop-anterior*", mainStopColors.less)
+    .replace("*stop-superior*", mainStopColors.more)
+    .replace("*border-radius*", borderRadius.toString());
+
+  return `${firstPart}\n${paddings}\n${buttonLastPart}`;
 };

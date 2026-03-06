@@ -100,7 +100,7 @@ const InputsCard = ({
       acc[item.tagName] = generateClamp(item.minSize, item.maxSize);
       return acc;
     }, {} as ClampValue);
-
+    
     setClampValues(clampTable);
   }, [scaledList]);
 

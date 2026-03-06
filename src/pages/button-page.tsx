@@ -44,6 +44,13 @@ import {
   PaddingXInput,
 } from "./button-page/padding-generator/index";
 import ButtonStyleTester from "./home/button-style-tester";
+import { BorderRadiusInput } from "./button-page/BorderRadiusInput";
+
+export type MainStopColors = {
+  base: string;
+  less: string;
+  more: string;
+};
 
 export default function ButtonPage({
   resizingCounter,
@@ -76,6 +83,10 @@ export default function ButtonPage({
     setRelativeSizeScale,
     fillPaddings,
     outlinePaddings,
+    ghostPaddings,
+    ghostOutline,
+    borderRadius,
+    setBorderRadius,
   } = useContext(ButtonPageContext);
   const { shades, color1000, color50 } = useColorShades(color, freezeColors);
   /* saidas e iteratividade */
@@ -83,7 +94,7 @@ export default function ButtonPage({
   const [removeHeader, setRemoveHeader] = useState<boolean>(false);
   const [openSelect, setOpenSelect] = useState<boolean>(false);
   const currentOptionIndex = optionsReturn.findIndex(
-    (item) => item === optionReturn,
+    (item) => item === optionReturn
   );
   const [returns, setReturns] = useState<string[]>([]);
   const [navOptions, setNavOptions] = useState<NavOptions>("Pesos");
@@ -167,20 +178,25 @@ export default function ButtonPage({
       relativeSizeScale,
       shades.map((item) => item.hex),
       color,
-      colorNickname,
+      colorNickname
     );
     const buttonsReturn = genButtonStyles(
       iconButtonSizes,
       fillPaddings,
       outlinePaddings,
+      ghostPaddings,
       outlineValue,
+      ghostOutline,
+      currentButtonsData,
+      mainStopColors,
+      borderRadius
     );
     const iconReturn = genIconComponent(iconSizes, strokeWidth);
     const muiIconReturn = genIconComponent(
       iconSizes,
       strokeWidth,
       currentWeight,
-      "mui-icon",
+      "mui-icon"
     );
     setReturns([varsReturn, buttonsReturn, iconReturn, muiIconReturn]);
   };
@@ -310,6 +326,12 @@ export default function ButtonPage({
                 )}
                 {navOptions === "Font-size dos botões" && <RelativeSizes />}
                 {navOptions === "Paleta" && <ColorGenerator shades={shades} />}
+                {navOptions === "Raio de borda" && (
+                  <BorderRadiusInput
+                    borderRadius={borderRadius}
+                    setBorderRadius={setBorderRadius}
+                  />
+                )}
                 <Preview color50={color50} />
               </CardContent>
             </div>
