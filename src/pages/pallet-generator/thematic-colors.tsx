@@ -1,10 +1,10 @@
 import { PalletPreview } from '@/components/common/index';
 import { ColorShade } from '@/hooks/useColorShades';
 import { Card, CardHeader, CardTitle, H6Title, HeaderH6, Icon } from '@/ui';
+import { Separator } from '@radix-ui/react-separator';
 import { Eye, Palette } from 'lucide-react';
 import { useState } from 'react';
 import { GeneratedVars, Preferences } from './thematic-colors/index';
-import { Separator } from '@radix-ui/react-separator';
 
 interface Props {
   baseColor: string;

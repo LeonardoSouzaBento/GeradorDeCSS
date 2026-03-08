@@ -1,9 +1,16 @@
-import { ColorInput } from '@/components/common/color-input';
-import { StateSetter } from '@/data/typography/types';
-import { Button, H6Title, HeaderH6, Icon, Input, InputWrapper, Label } from '@/ui';
-import { Menu, Settings2 } from 'lucide-react';
-
-const colorNameOptions = ['primary', 'secondary', 'destructive', 'theme'];
+import { ColorInput } from "@/components/common/color-input";
+import { StateSetter } from "@/data/typography/types";
+import {
+  Button,
+  H6Title,
+  HeaderH6,
+  Icon,
+  Input,
+  InputWrapper,
+  Label,
+} from "@/ui";
+import { Menu, Settings2, X } from "lucide-react";
+import { useState } from "react";
 
 interface Props {
   color: string;
@@ -32,23 +39,19 @@ export const Preferences = ({
       </HeaderH6>
       <div
         className={`grid grid-cols-1 md:grid-cols-[0.4fr_0.6fr] 
-        lg:grid-cols-[0.6fr_0.4fr] gap-4`}>
-        <LocalColorInput color={color} setColor={setColor} />
+        lg:grid-cols-[0.6fr_0.4fr] gap-4`}
+      >
+        <BaseColorInput color={color} setColor={setColor} />
+
         <div className="grid grid-cols-1 gap-3 items-start sm:grid-cols-2 lg:grid-cols-1 sm:items-end">
-          <InputWrapper className="w-full">
-            <Label>Nome da variavel</Label>
-            <div className="w-full relative grid grid-cols-1 gap-4">
-              <Input type="text" value={colorName} onChange={(e) => setColorName(e.target.value)} />
-              <Button size="icon-sm" className="absolute right-1 top-1" variant="transparent" data-black>
-                <Icon Icon={Menu} size="lg" />
-              </Button>
-            </div>
-          </InputWrapper>
+          <ColorNameInput colorName={colorName} setColorName={setColorName} />
           <Button
+            selected={colorPrefix}
             className="normal-case min-w-max justify-start w-full mt-1"
-            variant="secondary"
-            size="default"
-            onClick={() => setColorPrefix(!colorPrefix)}>
+            variant="ghost"
+            size="sm"
+            onClick={() => setColorPrefix(!colorPrefix)}
+          >
             <Input
               className="size-3.75 text-foreground bg-text-foreground"
               type="checkbox"
@@ -63,7 +66,13 @@ export const Preferences = ({
   );
 };
 
-const LocalColorInput = ({ color, setColor }: { color: string; setColor: StateSetter<string> }) => {
+const BaseColorInput = ({
+  color,
+  setColor,
+}: {
+  color: string;
+  setColor: StateSetter<string>;
+}) => {
   return (
     <InputWrapper className="lg:order-2 pb-5 border-b md:pb-0 md:border-none">
       <Label>Cor base</Label>
@@ -72,6 +81,73 @@ const LocalColorInput = ({ color, setColor }: { color: string; setColor: StateSe
         setColor={setColor}
         cssWrapper="sm:grid-cols-2 lg:grid-cols-1 gap-4"
       />
+    </InputWrapper>
+  );
+};
+
+const colorNameOptions = ["primary", "secondary", "destructive", "theme"];
+
+const ColorNameInput = ({
+  colorName,
+  setColorName,
+}: {
+  colorName: string;
+  setColorName: StateSetter<string>;
+}) => {
+  const [setseeColorNameOptions, setSetseeColorNameOptions] = useState(false);
+
+  return (
+    <InputWrapper className="w-full relative">
+      <Label>Nome da variavel</Label>
+      <div className="w-full relative grid grid-cols-1 gap-4">
+        <Input
+          type="text"
+          value={colorName}
+          onChange={(e) => setColorName(e.target.value)}
+        />
+        <Button
+          onClick={() => setSetseeColorNameOptions(!setseeColorNameOptions)}
+          size="icon-sm"
+          className="absolute right-0.5 top-0.5"
+          variant="transparent"
+          data-black
+        >
+          <Icon Icon={Menu} size="lg" />
+        </Button>
+      </div>
+      {setseeColorNameOptions && (
+        <div
+          className="absolute top-18 right-0 w-40 z-10
+         p-2 rounded-sm shadow-lg bg-light-bg border"
+        >
+          <div className="border-b relative pb-2 mb-2">
+            <p className="text-sm text-muted-foreground font-medium">Opções</p>
+            <Button
+              size="icon-sm"
+              data-round
+              className="absolute -top-1 -right-1"
+              variant="secondary"
+              onClick={() => setSetseeColorNameOptions(false)}
+            >
+              <Icon Icon={X} />
+            </Button>
+          </div>
+          <div className="flex flex-col gap-2">
+            {colorNameOptions.map((option) => (
+              <Button
+                key={option}
+                data-option
+                variant="ghost"
+                size="sm"
+                className="justify-start"
+                onClick={() => setColorName(option)}
+              >
+                {option}
+              </Button>
+            ))}
+          </div>
+        </div>
+      )}
     </InputWrapper>
   );
 };

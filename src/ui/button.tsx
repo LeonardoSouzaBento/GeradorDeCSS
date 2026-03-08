@@ -67,10 +67,12 @@ const paddingExptions = {
   sizes: ['icon', 'icon-sm', 'icon-md', 'icon-lg'],
 };
 
+const otherVariants = ["destructive", "secondary", "transparent"];
+
 const getPaddings = (variant: OmitVariant, size: OmitSize): string => {
   let padding = '';
   if (!paddingExptions.sizes.includes(size) && !paddingExptions.variants.includes(variant)) {
-    if (variant === 'destructive' || variant === 'secondary') {
+    if (otherVariants.includes(variant)) {
       padding = paddings.default[size];
     } else {
       padding = paddings[variant][size];

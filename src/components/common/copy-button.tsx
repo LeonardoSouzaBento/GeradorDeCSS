@@ -2,10 +2,10 @@ import { Button, Icon } from '@/ui/index';
 import { ClipboardCopy, CopyCheck } from 'lucide-react';
 import { useState } from 'react';
 
-export const CopyButton = ({ returnString }: { returnString: string }) => {
+export const CopyButton = ({ toCopy }: { toCopy: string }) => {
   const [copied, setCopied] = useState(false);
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(returnString);
+    navigator.clipboard.writeText(toCopy);
     setCopied(true);
     setTimeout(() => {
       setCopied(false);

@@ -5,7 +5,7 @@ import {
   type PaddingTypes,
 } from "@/data/buttons/variables";
 import { BooleanSetter, StateSetter } from "@/data/typography/types";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { ButtonPageContext } from ".";
 
 export interface ButtonPageContextType {

@@ -13,13 +13,13 @@ import {
 } from "@/ui";
 import { validateDecimalInput } from "@/utils/validateDecimalInput";
 import { LineSquiggle } from "lucide-react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { InputAlert } from "./input-alert";
-import { ButtonPageContext } from "@/contexts";
+import { ButtonPageContext, useButtonPageContext } from "@/contexts";
 
 const OutlineInput = () => {
   const { outlineValue, setOutlineValue, ghostOutline, setGhostOutline } =
-    useContext(ButtonPageContext);
+    useButtonPageContext();
 
   const [inputValues, setInputValues] = useState<string[]>([
     outlineValue.toString(),

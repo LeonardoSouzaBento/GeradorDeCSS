@@ -1,4 +1,4 @@
-import { ButtonPageContext } from "@/contexts";
+import { ButtonPageContext, useButtonPageContext } from "@/contexts";
 import {
   Alert,
   AlertDescription,
@@ -10,7 +10,6 @@ import {
 } from "@/ui";
 import { ButtonsWrapper } from "@/ui/index";
 import { Info, ThumbsUp } from "lucide-react";
-import { useContext } from "react";
 import { ResizableButton } from "./padding-generator";
 
 const buttonTypes = ["fill", "outline", "ghost"] as const;
@@ -23,7 +22,7 @@ const Preview = ({ color50 }: { color50: string }) => {
     iconSizes,
     strokeWidth,
     color,
-  } = useContext(ButtonPageContext);
+  } = useButtonPageContext();
 
   return (
     <FormWrapper className={`flex flex-col gap-3 min-w-full pb-0 border-none`}>

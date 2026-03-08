@@ -1,4 +1,4 @@
-import { ButtonPageContext } from "@/contexts";
+import { useButtonPageContext } from "@/contexts";
 import { ButtonsData, buttonsData } from "@/data/buttons/variables";
 import { StateSetter } from "@/data/typography/types";
 import {
@@ -11,12 +11,12 @@ import {
   HeaderH6,
   Input,
   InputWrapper,
-  Label
+  Label,
 } from "@/ui/index";
 import { Icon } from "@/ui/lucide-icon";
 import { validateDecimalInput } from "@/utils/validateDecimalInput";
 import { ALargeSmall, Info } from "lucide-react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 const inputs = ["Botão pequeno", "Botão normal", "Botão grande"];
 
@@ -30,7 +30,7 @@ const dica = `Deixe o botão normal levemente menor que o corpo do texto do seu 
 
 const RelativeSizes = () => {
   const { relativeSizeScale, setRelativeSizeScale, setCurrentButtonsData } =
-    useContext(ButtonPageContext);
+    useButtonPageContext();
   const [seeModal, setSeeModal] = useState<boolean>(false);
 
   const handleScaleFontSizeChange = (index: number, value: string) => {
@@ -62,7 +62,9 @@ const RelativeSizes = () => {
           </p>
         </H6Description>
       </HeaderH6>
-      <div className={`flex flex-col gap-3 sm:flex-row sm:justify-between max-w-lg`}>
+      <div
+        className={`flex flex-col gap-3 sm:flex-row sm:justify-between max-w-lg`}
+      >
         {inputs.map((item, index) => (
           <InputWrapper key={item}>
             <Label htmlFor={item}>{item}</Label>

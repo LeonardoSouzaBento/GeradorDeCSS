@@ -1,9 +1,7 @@
-import { ButtonPageContext } from "@/contexts";
+import { useButtonPageContext } from "@/contexts";
 import { PaddingTypes } from "@/data/buttons/variables";
-import { StateSetter } from "@/data/typography/types";
 import { Sparkles } from "lucide-react";
 import {
-  useContext,
   useEffect,
   useLayoutEffect,
   useMemo,
@@ -51,7 +49,7 @@ const ResizableButton = ({
     setGhostPaddings,
     ghostOutline,
     borderRadius
-  } = useContext(ButtonPageContext);
+  } = useButtonPageContext();
 
   const isOutline = variant === "outline";
   const isGhost = variant === "ghost";

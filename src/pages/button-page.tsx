@@ -1,5 +1,5 @@
 import { FontSelector, Header } from "@/components/common/index";
-import { ButtonPageContext } from "@/contexts";
+import { ButtonPageContext, useButtonPageContext } from "@/contexts";
 import type { NavOptions, OptionReturn } from "@/data/buttons/variables";
 import { buttonsData, optionsReturn } from "@/data/buttons/variables";
 import { genButtonStyles } from "@/functions/buttons/genButtonStyles";
@@ -21,7 +21,7 @@ import {
 } from "@/ui/index";
 import chroma from "chroma-js";
 import { AlertCircle, MousePointerClick } from "lucide-react";
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { BorderRadiusInput } from "./button-page/BorderRadiusInput";
 import ColorGenerator from "./button-page/color-palette/color-generator";
 import {
@@ -88,7 +88,7 @@ export default function ButtonPage({
     borderRadius,
     setBorderRadius,
     lucideIconWeightStep,
-  } = useContext(ButtonPageContext);
+  } = useButtonPageContext();
   const { shades, color1000, color50 } = useColorShades(color, freezeColors);
   /* saidas e iteratividade */
   const [optionReturn, setOptionReturn] = useState<OptionReturn>("botão");
@@ -196,7 +196,7 @@ export default function ButtonPage({
       iconSizes,
       strokeWidth,
       currentWeight,
-      lucideIconWeightStep,
+      lucideIconWeightStep
     );
     const muiIconReturn = genIconComponent(
       iconSizes,

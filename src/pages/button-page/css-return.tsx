@@ -58,7 +58,7 @@ const CSSReturn = ({
           </Button>
         )}
       </CardContent>
-      <CopyButton returnString={returns[currentOptionIndex]} />
+      <CopyButton toCopy={returns[currentOptionIndex]} />
     </Card>
   );
 };

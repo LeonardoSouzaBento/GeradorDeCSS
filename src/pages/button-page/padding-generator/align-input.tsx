@@ -1,4 +1,4 @@
-import { ButtonPageContext } from "@/contexts";
+import { useButtonPageContext } from "@/contexts";
 import {
   Alert,
   AlertDescription,
@@ -14,7 +14,7 @@ import {
 } from "@/ui/index";
 import { Icon } from "@/ui/lucide-icon";
 import { AlignVerticalSpaceAround, Info } from "lucide-react";
-import { ComponentPropsWithoutRef, useContext, useState } from "react";
+import { ComponentPropsWithoutRef, useState } from "react";
 import { InputAlert } from "./input-alert";
 
 const css = {
@@ -31,7 +31,7 @@ const options = {
 
 const AlignInput = () => {
   const { currentButtonsData, setCurrentButtonsData, initialFontSize } =
-    useContext(ButtonPageContext);
+    useButtonPageContext(); 
   const [inputValue, setInputValue] = useState("0");
   const [showAlert, setShowAlert] = useState(false);
 

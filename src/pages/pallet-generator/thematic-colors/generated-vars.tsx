@@ -1,3 +1,4 @@
+import { CopyButton } from '@/components/common';
 import { ColorShade } from '@/hooks/useColorShades';
 import { H6Title, HeaderH6, Icon } from '@/ui';
 import { NotepadText } from 'lucide-react';
@@ -36,7 +37,8 @@ export const GeneratedVars = ({ shades, colorName, colorPrefix }: Props) => {
           <h6>Saída</h6>
         </H6Title>
       </HeaderH6>
-      <pre>{genVariables(shades, colorName, colorPrefix)}</pre>
+      <pre className='mb-4'>{genVariables(shades, colorName, colorPrefix)}</pre>
+      <CopyButton toCopy={genVariables(shades, colorName, colorPrefix)} />
     </div>
   );
 };
