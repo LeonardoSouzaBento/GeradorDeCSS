@@ -11,10 +11,10 @@ export const IconWeightScalePreview = ({
   color: string;
 }) => {
   return (
-    <ButtonsWrapper className="p-4 border gap-3.5">
+    <ButtonsWrapper className="p-4 border gap-3.5 max-w-max lg:max-w-none">
       {iconWeightScale.map((weight) => (
         <Package
-          size={24}
+          size={28}
           key={weight}
           strokeWidth={weight}
           color={color}

@@ -24,7 +24,7 @@ function genIconWeightScale(step: number, normalValue: number): number[] {
   });
 }
 
-export const IconWeightScaleInput = ({
+export const IconWeightStepInput = ({
   setIconWeightScale,
 }: {
   setIconWeightScale: StateSetter<number[]>;
@@ -37,13 +37,13 @@ export const IconWeightScaleInput = ({
   }, [lucideIconWeightStep, strokeWidth]);
 
   return (
-    <div className="mt-4">
+    <div>
       <HeaderH6 mb={0.5}>
         <H6Title>
           <Icon Icon={Weight} /> <h6>Passo de peso</h6>
         </H6Title>
       </HeaderH6>
-      <div className="grid grid-cols-1 lg:grid-cols-[max-content_1fr] items-end gap-4 mb-4">
+      <div className="grid grid-cols-1 items-end gap-4 mb-4">
         <InputWrapper>
           <Input
             id="weight-step"

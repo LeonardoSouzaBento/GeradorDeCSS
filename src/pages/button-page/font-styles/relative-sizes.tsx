@@ -62,7 +62,7 @@ const RelativeSizes = () => {
           </p>
         </H6Description>
       </HeaderH6>
-      <div className={`flex flex-col gap-3 sm:flex-row sm:justify-between`}>
+      <div className={`flex flex-col gap-3 sm:flex-row sm:justify-between max-w-lg`}>
         {inputs.map((item, index) => (
           <InputWrapper key={item}>
             <Label htmlFor={item}>{item}</Label>

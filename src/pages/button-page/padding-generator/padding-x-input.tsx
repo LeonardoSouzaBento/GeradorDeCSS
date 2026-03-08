@@ -55,6 +55,7 @@ const PaddingXInput = ({ paddingX, setPaddingX }: Props) => {
 
       <InputWrapper>
         <Input
+        className='max-w-64'
           type="text"
           inputMode="decimal"
           value={inputValue}

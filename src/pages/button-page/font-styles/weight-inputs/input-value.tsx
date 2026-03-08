@@ -1,7 +1,5 @@
 import { H6Description, H6Title, HeaderH6, Icon, Input } from "@/ui";
-import { validateDecimalInput } from "@/utils";
 import { Weight } from "lucide-react";
-import { useState } from "react";
 
 export const InputValue = ({
   scrollToBottom,
@@ -14,17 +12,17 @@ export const InputValue = ({
 }) => {
   return (
     <>
-      <HeaderH6 mb={1}>
+      <HeaderH6 mb={0.5}>
         <H6Title>
           <Icon Icon={Weight} className="mb-1" />
           <h6>Peso do ícone</h6>
         </H6Title>
-        <H6Description>
-          Harmonize o peso do ícone com o peso da fonte
-        </H6Description>
       </HeaderH6>
       <Input
+        className="max-w-56 lg:max-w-none"
         type="number"
+        min={1.5}
+        max={5}
         step={0.15}
         value={strokeWidth}
         onClick={scrollToBottom}
@@ -32,6 +30,7 @@ export const InputValue = ({
           setStrokeWidth(Number(e.target.value));
         }}
       />
+      
     </>
   );
 };

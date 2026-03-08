@@ -22,7 +22,7 @@ interface HeightInputsProps {
   setCurrentButtonsData: StateSetter<ButtonsData[]>;
 }
 
-const css = { wrapperInputs: `flex flex-col gap-[2ex] min-[575px]:flex-row` };
+const css = { wrapperInputs: `flex flex-col gap-[2ex] min-[575px]:flex-row max-w-lg` };
 
 const HeightInputs = ({ currentButtonsData, setCurrentButtonsData }: HeightInputsProps) => {
   const [heightScale, setHeightScale] = useState<string[]>(

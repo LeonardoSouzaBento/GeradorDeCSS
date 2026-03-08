@@ -9,6 +9,7 @@ import {
   FormWrapper,
   InputWrapper,
   Icon,
+  Label,
 } from "@/ui";
 import { validateDecimalInput } from "@/utils/validateDecimalInput";
 import { LineSquiggle } from "lucide-react";
@@ -19,7 +20,7 @@ import { ButtonPageContext } from "@/contexts";
 const OutlineInput = () => {
   const { outlineValue, setOutlineValue, ghostOutline, setGhostOutline } =
     useContext(ButtonPageContext);
-    
+
   const [inputValues, setInputValues] = useState<string[]>([
     outlineValue.toString(),
     ghostOutline.toString(),
@@ -41,7 +42,7 @@ const OutlineInput = () => {
 
   const handleInputChange = (
     index: number,
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const value = e.target.value.replace(",", ".");
     const numberValue = Number(value);
@@ -82,7 +83,7 @@ const OutlineInput = () => {
   };
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full max-w-md space-y-6">
       <HeaderH6 mb={1}>
         <H6Title>
           <Icon Icon={LineSquiggle} />
@@ -92,12 +93,8 @@ const OutlineInput = () => {
       <div className="flex flex-col pre-sm:flex-row gap-4">
         {buttons.map((btn, index) => (
           <FormWrapper key={btn.name}>
-            <HeaderH6 mb={0.66}>
-              <H6Title>
-                <h6>Botão {btn.name}</h6>
-              </H6Title>
-            </HeaderH6>
             <InputWrapper>
+              <Label>Botão {btn.name}</Label>
               <Input
                 type="text"
                 pattern="[0-9]*"

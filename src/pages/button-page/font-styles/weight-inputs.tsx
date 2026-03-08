@@ -9,12 +9,11 @@ import {
 } from "@/ui/index";
 import { Weight } from "lucide-react";
 import { useState } from "react";
-import { InputAlert } from "../padding-generator/input-alert";
 import {
   ComparePreview,
-  IconWeightScaleInput,
-  InputValue,
+  IconWeightStepInput,
   IconWeightScalePreview,
+  InputValue,
 } from "./weight-inputs/index";
 
 const weights = [500, 600, 700];
@@ -29,11 +28,8 @@ const WeightInputs = ({
     setCurrentWeight,
     strokeWidth,
     setStrokeWidth,
-    iconSizes,
     color,
   } = useButtonPageContext();
-  const [expandIcon, setExpandIcon] = useState<boolean>(true);
-  const [showAlert, setShowAlert] = useState<boolean>(false);
   const [iconWeightScale, setIconWeightScale] = useState<number[]>([]);
 
   function scrollToBottom() {
@@ -69,31 +65,27 @@ const WeightInputs = ({
         </ButtonsWrapper>
       </FormWrapper>
 
-      <FormWrapper className={`w-full relative`}>
-        <InputValue
-          scrollToBottom={scrollToBottom}
-          strokeWidth={strokeWidth}
-          setStrokeWidth={setStrokeWidth}
-        />
-        <ComparePreview
-          currentWeight={currentWeight}
-          strokeWidth={strokeWidth}
-          iconSizes={iconSizes}
-          color={color}
-          expandIcon={expandIcon}
-          setExpandIcon={setExpandIcon}
-        />
-        <IconWeightScaleInput setIconWeightScale={setIconWeightScale} />
-        <IconWeightScalePreview
-          iconWeightScale={iconWeightScale}
-          strokeWidth={strokeWidth}
-          color={color}
-        />
-        <InputAlert
-          message="Valor inválido! Escolha um valor entre 1.5 e 5."
-          showAlert={showAlert}
-          setShowAlert={setShowAlert}
-        />
+      <FormWrapper className={`w-full relative grid grid-cols-1 pre-lg:grid-cols-[1fr_1.5fr] gap-5 items-start`}>
+        <div>
+          <InputValue
+            scrollToBottom={scrollToBottom}
+            strokeWidth={strokeWidth}
+            setStrokeWidth={setStrokeWidth}
+          />
+          <ComparePreview
+            currentWeight={currentWeight}
+            strokeWidth={strokeWidth}
+            color={color}
+          />
+        </div>
+        <div>
+          <IconWeightStepInput setIconWeightScale={setIconWeightScale} />
+          <IconWeightScalePreview
+            iconWeightScale={iconWeightScale}
+            strokeWidth={strokeWidth}
+            color={color}
+          />
+        </div>
       </FormWrapper>
     </div>
   );

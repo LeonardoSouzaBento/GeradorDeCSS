@@ -16,7 +16,7 @@ const ColorInput = ({ color, setColor }: { color: string; setColor: StateSetter<
           <h6>Cor base</h6>
         </H6Title>
       </HeaderH6>
-      <InputWrapper gap={0} className="space-y-3">
+      <InputWrapper gap={0} className="space-y-3 max-w-max">
         <Input
           type="text"
           placeholder="#1F4780"
