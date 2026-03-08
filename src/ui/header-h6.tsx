@@ -24,7 +24,7 @@ const H6Title = ({ children, className }: { children: React.ReactNode; className
   return (
     <div
       className={`h-max max-w-max flex justify-center items-center 
-        gap-[0.9ex] [&>div>svg]:mb-1 ${className}`}>
+        gap-[0.9ex] [&>div>svg]:mb-0.75 ${className}`}>
       {children}
     </div>
   );

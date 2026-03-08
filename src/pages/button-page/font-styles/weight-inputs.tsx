@@ -9,12 +9,7 @@ import {
 } from "@/ui/index";
 import { Weight } from "lucide-react";
 import { useState } from "react";
-import {
-  ComparePreview,
-  IconWeightStepInput,
-  IconWeightScalePreview,
-  InputValue,
-} from "./weight-inputs/index";
+import { IconWeightStepInput, ValueInput } from "./weight-inputs/index";
 
 const weights = [500, 600, 700];
 
@@ -65,27 +60,22 @@ const WeightInputs = ({
         </ButtonsWrapper>
       </FormWrapper>
 
-      <FormWrapper className={`w-full relative grid grid-cols-1 pre-lg:grid-cols-[1fr_1.5fr] gap-5 items-start`}>
-        <div>
-          <InputValue
-            scrollToBottom={scrollToBottom}
-            strokeWidth={strokeWidth}
-            setStrokeWidth={setStrokeWidth}
-          />
-          <ComparePreview
-            currentWeight={currentWeight}
-            strokeWidth={strokeWidth}
-            color={color}
-          />
-        </div>
-        <div>
-          <IconWeightStepInput setIconWeightScale={setIconWeightScale} />
-          <IconWeightScalePreview
-            iconWeightScale={iconWeightScale}
-            strokeWidth={strokeWidth}
-            color={color}
-          />
-        </div>
+      <FormWrapper
+        className={`w-full relative grid grid-cols-1 pre-lg:grid-cols-[max-content_1fr] gap-5 items-start`}
+      >
+        <ValueInput
+          scrollToBottom={scrollToBottom}
+          strokeWidth={strokeWidth}
+          setStrokeWidth={setStrokeWidth}
+          currentWeight={currentWeight}
+          color={color}
+        />
+        <IconWeightStepInput
+          iconWeightScale={iconWeightScale}
+          strokeWidth={strokeWidth}
+          color={color}
+          setIconWeightScale={setIconWeightScale}
+        />
       </FormWrapper>
     </div>
   );

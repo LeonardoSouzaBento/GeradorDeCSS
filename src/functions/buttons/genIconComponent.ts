@@ -18,12 +18,12 @@ const LucideIconSecondPart = `interface IconProps extends Omit<LucideProps, 'siz
   strokeWidth?: StrokeWidthValue | string;
 }
 
-export const Icon = ({ Icon, size, className, strokeWidth, fill }: IconProps) => {
+export const Icon = ({ Icon, size, className, strokeWidth = "normal", fill }: IconProps) => {
   return (
     <div className="h-3 inline-flex justify-center items-center overflow-visible [&_svg]:shrink-0">
       <Icon
         size={iconSizes[size as SizeValue] || size || iconSizes.md}
-        strokeWidth={weights[strokeWidth as StrokeWidthValue] || strokeWidth || *value*}
+        strokeWidth={weights[strokeWidth as StrokeWidthValue] || strokeWidth || weights.normal}
         className={className}
         fill={fill || 'none'}
       />
@@ -44,17 +44,19 @@ const muiIconSecondPart = `interface IconProps {
 export const MuiIcon = ({
   icon,
   size,
-  fill = 0,
+  fill = false,
   weight = *value*,
   margin = '0',
   className,
 }: IconProps) => {
+ const fillValue = fill ? 1 : 0;
+ 
  return (
     <div className="h-3 inline-flex justify-center items-center overflow-visible">
       <span
         className={\`material-symbols-rounded \${className}\`}
         style={{
-          fontVariationSettings: \`"FILL" \${fill}, "wght" \${weight}\`,
+          fontVariationSettings: \`"FILL" \${fillValue}, "wght" \${weight}\`,
           fontSize: iconSizes[size as SizeValue] || size || iconSizes.md,
         }}>
         {icon}
@@ -108,7 +110,10 @@ export const genIconComponent = (
     const firstPart = LucideIconFirstPart.replace(
       "*value*",
       strStrokeWidth
-    ).replace("*lucide-weights*", generateLucideIconWeights(strokeWidth, lucideIconWeightStep));
+    ).replace(
+      "*lucide-weights*",
+      generateLucideIconWeights(strokeWidth, lucideIconWeightStep)
+    );
     const secondPart = LucideIconSecondPart.replace("*value*", strStrokeWidth);
     return `${firstPart}\nconst iconSizes = {\n${fontSizes}\n};\n\n${secondPart}`;
   }

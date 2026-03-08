@@ -8,10 +8,33 @@ import {
   HeaderH6,
   Icon,
   Input,
-  InputWrapper
+  InputWrapper,
 } from "@/ui";
-import { Weight } from "lucide-react";
+import { Package, Weight } from "lucide-react";
 import { useEffect } from "react";
+
+export const IconWeightStepInput = ({
+  iconWeightScale,
+  strokeWidth,
+  color,
+  setIconWeightScale,
+}: {
+  iconWeightScale: number[];
+  strokeWidth: number;
+  color: string;
+  setIconWeightScale: StateSetter<number[]>;
+}) => {
+  return (
+    <div>
+      <LocalInput setIconWeightScale={setIconWeightScale} />
+      <Preview
+        iconWeightScale={iconWeightScale}
+        strokeWidth={strokeWidth}
+        color={color}
+      />
+    </div>
+  );
+};
 
 const spetsOptions = [0.1, 0.15, 0.2, 0.25, 0.3];
 
@@ -24,7 +47,7 @@ function genIconWeightScale(step: number, normalValue: number): number[] {
   });
 }
 
-export const IconWeightStepInput = ({
+const LocalInput = ({
   setIconWeightScale,
 }: {
   setIconWeightScale: StateSetter<number[]>;
@@ -49,6 +72,7 @@ export const IconWeightStepInput = ({
             id="weight-step"
             type="number"
             step="0.15"
+            className="max-w-44"
             value={lucideIconWeightStep}
             onChange={(e) => setLucideIconWeightStep(Number(e.target.value))}
           />
@@ -70,3 +94,35 @@ export const IconWeightStepInput = ({
     </div>
   );
 };
+
+export const Preview = ({
+  iconWeightScale,
+  strokeWidth,
+  color,
+}: {
+  iconWeightScale: number[];
+  strokeWidth: number;
+  color: string;
+}) => {
+  return (
+    <ButtonsWrapper className="gap-3.5 max-w-max lg:max-w-none border-t pt-4">
+      {iconWeightScale.map((weight) => (
+        <Package
+          size={32}
+          key={weight}
+          strokeWidth={weight}
+          color={color}
+          className="box-content rounded-sm"
+          style={{
+            padding:
+              strokeWidth === weight ? 6 : 0,
+            border:
+              strokeWidth === weight ? "1px solid var(--color-border)" : "none",
+          }}
+        />
+      ))}
+    </ButtonsWrapper>
+  );
+};
+
+
