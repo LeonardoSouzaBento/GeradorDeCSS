@@ -22,7 +22,7 @@ export const Icon = ({ Icon, size, className, strokeWidth = "normal", fill }: Ic
   return (
     <div className="h-3 inline-flex justify-center items-center overflow-visible [&_svg]:shrink-0">
       <Icon
-        size={iconSizes[size as SizeValue] || size || iconSizes.md}
+        size={iconSizes[size as SizeValue] || size || iconSizes.base}
         strokeWidth={weights[strokeWidth as StrokeWidthValue] || strokeWidth || weights.normal}
         className={className}
         fill={fill || 'none'}
@@ -50,14 +50,14 @@ export const MuiIcon = ({
   className,
 }: IconProps) => {
  const fillValue = fill ? 1 : 0;
- 
+
  return (
     <div className="h-3 inline-flex justify-center items-center overflow-visible">
       <span
         className={\`material-symbols-rounded \${className}\`}
         style={{
           fontVariationSettings: \`"FILL" \${fillValue}, "wght" \${weight}\`,
-          fontSize: iconSizes[size as SizeValue] || size || iconSizes.md,
+          fontSize: iconSizes[size as SizeValue] || size || iconSizes.base,
         }}>
         {icon}
       </span>

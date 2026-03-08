@@ -140,7 +140,10 @@ const ColorNameInput = ({
                 variant="ghost"
                 size="sm"
                 className="justify-start normal-case"
-                onClick={() => setColorName(option)}
+                onClick={() => {
+                  setColorName(option);
+                  setSetseeColorNameOptions(false);
+                }}
               >
                 {option}
               </Button>

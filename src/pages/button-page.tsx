@@ -98,7 +98,7 @@ export default function ButtonPage({
     (item) => item === optionReturn
   );
   const [returns, setReturns] = useState<string[]>([]);
-  const [navOptions, setNavOptions] = useState<NavOptions>("Pesos");
+  const [navOptions, setNavOptions] = useState<NavOptions>("Alturas");
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [openDialog, setOpenDialog] = useState<boolean>(true);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -251,7 +251,7 @@ export default function ButtonPage({
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
         <DialogContent className="p-5">
           <Alert>
-            <Icon Icon={AlertCircle} size="lg" />
+            <Icon Icon={AlertCircle} size="lg" strokeWidth="light"/>
             <div>
               <AlertTitle>Importante</AlertTitle>
               <AlertDescription>
@@ -268,7 +268,7 @@ export default function ButtonPage({
         description="Estilize seus botões mais rapidamente"
         className={`flex flex-col px-3 justify-center gap-0 items-center text-center
         pre-sm:flex-row pre-sm:justify-start pre-sm:gap-3 next-md:px-6 lg:max-w-5xl xl:max-w-6xl mx-auto`}
-        icon={<MousePointerClick />}
+        icon={<Icon Icon={MousePointerClick} size="h3" strokeWidth="thin" className="scale-98" />}
         resizingCounter={resizingCounter}
         removeHeader={removeHeader}
         isMobile={isMobile}
@@ -280,7 +280,7 @@ export default function ButtonPage({
           <Card className="relative" ref={cardRef}>
             <CardHeader className="border-none mb-[0.25ex]">
               <CardTitle>
-                <h3>Configurações</h3>
+                <h3 className="text-primary">Configurações</h3>
               </CardTitle>
             </CardHeader>
             <RemoveHeaderButton

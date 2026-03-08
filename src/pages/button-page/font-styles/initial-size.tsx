@@ -42,7 +42,7 @@ const InitialSize = ({ initialFontSize, setInitialFontSize }: Props) => {
       </HeaderH6>
 
       <Input
-        className='max-w-58'
+        className='max-w-54'
         type="number"
         step={0.5}
         min={12}

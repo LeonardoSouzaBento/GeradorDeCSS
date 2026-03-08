@@ -23,20 +23,20 @@ max-w-5xl,64rem,1024px
   --breakpoint-next-md: 840px;
   --breakpoint-pre-lg: 980px;
   /*font sizes*/
-  --text-xs: 0.8783em;
-  --text-sm: 0.9372em;
-  --text-base: 1em;
-  --text-lg: 1.067em;
-  --text-h6: 1.067em;
-  --text-h5: 1.1385em;
-  --text-h4: 1.2148em;
-  --text-h3: 1.29616em;
-  --text-h2: 1.383em;
-  --text-h1: 1.4757em;
-  --text-h1-hero: 1.5745em;
-  --text-sm-button: 0.937em;
-  --text-button: 0.97em;
-  --text-lg-button: 1em;
+  --text-xs: 0.790123em;
+ --text-sm: 0.888889em;
+ --text-base: 1.00em;
+ --text-lg: 1.125em;
+ --text-h6: 1.125em;
+ --text-h5: 1.265625em;
+ --text-h4: 1.423828em;
+ --text-h3: 1.601807em;
+ --text-h2: 1.802032em;
+ --text-h1: 2.027287em;
+ --text-h1-hero: 2.280697em;
+ --text-button: 0.942809em;
+ --text-sm-button: 0.888889em;
+ --text-lg-button: 1.00em;
   --spacing-cap-offset: calc(1cap - ((1em - 1cap) / 2));
   --spacing-ex-offset: calc(1ex - ((1em - 1cap) / 2));
   /* Cores */

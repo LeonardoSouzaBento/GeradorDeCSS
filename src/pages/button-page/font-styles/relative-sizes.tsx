@@ -52,7 +52,7 @@ const RelativeSizes = () => {
     <FormWrapper className="space-y-[1cap]">
       <HeaderH6 mb={0}>
         <H6Title>
-          <Icon Icon={ALargeSmall} size="sm" />
+          <Icon Icon={ALargeSmall} size="md" strokeWidth="light" />
           <h6>Tamanhos relativos</h6>
         </H6Title>
         <H6Description>

@@ -14,7 +14,7 @@ export const CopyButton = ({ toCopy }: { toCopy: string }) => {
 
   return (
     <Button className='max-w-max' onClick={copyToClipboard}>
-      <Icon Icon={copied ? CopyCheck : ClipboardCopy} size="xl" />
+      <Icon Icon={copied ? CopyCheck : ClipboardCopy} size="md" />
       {copied ? 'Copiado!' : 'Copiar CSS'}
     </Button>
   );

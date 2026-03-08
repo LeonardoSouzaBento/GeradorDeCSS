@@ -49,7 +49,7 @@ const CardTitle = React.forwardRef<HeadRef, HeadProps>(({ className, ...props },
   <div
     ref={ref}
     className={cn(
-      'tracking-tight leading-normal pt-4.5 flex justify-start items-center gap-2',
+      'tracking-tight leading-normal pt-4.5 flex justify-start items-center gap-2 text-primary',
       className,
     )}
     {...props}

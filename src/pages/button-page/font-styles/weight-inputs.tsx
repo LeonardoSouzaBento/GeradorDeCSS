@@ -48,6 +48,7 @@ const WeightInputs = ({
             <Button
               key={weight}
               variant="ghost"
+              size="sm"
               data-option
               selected={currentWeight === weight}
               onClick={() => {
@@ -61,7 +62,7 @@ const WeightInputs = ({
       </FormWrapper>
 
       <FormWrapper
-        className={`w-full relative grid grid-cols-1 pre-lg:grid-cols-[max-content_1fr] gap-5 items-start`}
+        className={`w-full relative grid grid-cols-1 gap-1 items-start`}
       >
         <ValueInput
           scrollToBottom={scrollToBottom}

@@ -54,13 +54,13 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
         className={`flex-col pre-sm:flex-row items-center gap-3 text-center
           pre-sm:text-left main-wrapper sm:w-[calc(100%-3rem)] sm:px-0`}
         description="Gerador de estilos para começar seu projeto"
-        icon={<Icon Icon={Sparkles} size={"h2"} strokeWidth="thin" />}
+        icon={<Icon Icon={Sparkles} size={"h4"} strokeWidth="extralight" className="scale-108" />}
       />
       <div className={`main-wrapper space-y-6`}>
         <Card>
           <CardHeader className="border-none mb-2">
             <CardTitle>
-              <h2 className="text-primary">Ferramentas do site</h2>
+              <h3 className="text-primary">Ferramentas do site</h3>
             </CardTitle>
             <CardDescription>
               Escolha uma ferramenta para começar
@@ -69,7 +69,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
           <CardContent>
             <ButtonsWrapper>
               {pages.map((page, index) => {
-                const size = { 0: "2xl", 1: "lg", 2: "md" }[index];
+                const size = { 0: "lg", 1: "md", 2: "base" }[index];
                 return (
                   <Button
                     key={page.path}
@@ -77,7 +77,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
                     className={`${page.className || ""} h-10 max-[430px]:h-10 max-[720px]:w-full`}
                   >
                     <CustomNavLink link={page.path} />
-                    <Icon Icon={page.icon} size={size} strokeWidth="semibold" />
+                    <Icon Icon={page.icon} size={size} strokeWidth="medium" />
                     {page.name}
                   </Button>
                 );
@@ -89,7 +89,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
         <Card>
           <CardHeader className="border-none mb-1">
             <CardTitle>
-              <h2 className="text-primary">Como usar?</h2>
+              <h3 className="text-primary">Como usar</h3>
             </CardTitle>
             <CardDescription>
               Gere estilos de tipográfia, de botões ou de cores

@@ -58,7 +58,7 @@ const DataOption = ({
       onClick={() => setNavOption(value)}
       className="w-full justify-start px-[1.4ex] gap-[1ex]"
     >
-      <Icon Icon={IconComp} size="md" />
+      <Icon Icon={IconComp} size="md" className="mb-0.75" strokeWidth="medium" />
       {value}
     </Button>
   );

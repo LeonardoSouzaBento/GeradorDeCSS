@@ -25,7 +25,7 @@ export const TypographyDemo = () => {
     <div>
       <h5 className="mb-0.5">Gere uma escala tipográfica</h5>
       <div className={`mb-4`}>
-        <p className="smaller-text text-muted-foreground mb-2">
+        <p className="small-text text-muted-foreground mb-2">
           Defina a escala de tamanhos de fonte do seu projeto
         </p>
         <div className={`flex flex-wrap gap-y-1 items-baseline gap-3`}>

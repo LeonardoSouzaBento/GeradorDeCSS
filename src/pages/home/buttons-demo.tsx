@@ -35,7 +35,7 @@ export const ButtonsDemo = () => {
     <div className='-mt-px xl:mt-0'>
       <h5>Gere estilos para botões</h5>
       <div className="mb-[1cap]">
-        <p className="smaller-text text-muted-foreground">Estilize rapidamente e veja: fonte, paleta de cor, pesos e muito mais</p>
+        <p className="small-text text-muted-foreground">Estilize rapidamente e veja: fonte, paleta de cor, pesos e muito mais</p>
       </div>
       <div className="space-y-[1ex] pb-4">
         {buttonVariantsToRender.map(({ variant }) => (

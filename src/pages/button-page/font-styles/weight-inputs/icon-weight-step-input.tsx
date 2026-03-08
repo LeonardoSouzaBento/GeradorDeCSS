@@ -61,12 +61,12 @@ const LocalInput = ({
 
   return (
     <div>
-      <HeaderH6 mb={0.5}>
+      <HeaderH6 mb={0.1}>
         <H6Title>
           <Icon Icon={Weight} /> <h6>Passo de peso</h6>
         </H6Title>
       </HeaderH6>
-      <div className="grid grid-cols-1 items-end gap-4 mb-4">
+      <div className="flex flex-col items-end gap-4 mb-4 max-w-max">
         <InputWrapper>
           <Input
             id="weight-step"
@@ -77,11 +77,11 @@ const LocalInput = ({
             onChange={(e) => setLucideIconWeightStep(Number(e.target.value))}
           />
         </InputWrapper>
-        <ButtonsWrapper>
+        <ButtonsWrapper className="w-full lg:min-w-max">
           {spetsOptions.map((step) => (
             <Button
               onClick={() => setLucideIconWeightStep(step)}
-              data-option={step}
+              data-option
               variant="ghost"
               size="sm"
               selected={step === lucideIconWeightStep}
@@ -105,24 +105,26 @@ export const Preview = ({
   color: string;
 }) => {
   return (
-    <ButtonsWrapper className="gap-3.5 max-w-max lg:max-w-none border-t pt-4">
-      {iconWeightScale.map((weight) => (
-        <Package
-          size={32}
-          key={weight}
-          strokeWidth={weight}
-          color={color}
-          className="box-content rounded-sm"
-          style={{
-            padding:
-              strokeWidth === weight ? 6 : 0,
-            border:
-              strokeWidth === weight ? "1px solid var(--color-border)" : "none",
-          }}
-        />
+    <ButtonsWrapper className="max-w-max lg:max-w-none border-t pt-4 gap-0">
+      {iconWeightScale.map((weight, index) => (
+        <div className="w-17 flex flex-col items-center gap-2 ">
+          <Package
+            size={32}
+            key={weight}
+            strokeWidth={weight}
+            color={color}
+            className="box-content rounded-sm"
+          />
+          <p
+            className="text-xs text-center text-muted-foreground"
+            style={{
+              fontWeight: strokeWidth === weight ? 600 : 400,
+            }}
+          >
+            {lucideIconWeights[index]}
+          </p>
+        </div>
       ))}
     </ButtonsWrapper>
   );
 };
-
-

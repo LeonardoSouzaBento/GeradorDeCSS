@@ -27,7 +27,7 @@ export const BorderRadiusInput = ({
         <InputWrapper>
           <HeaderH6 mb={0}>
             <H6Title>
-              <Icon Icon={SquareRoundCorner} size="sm" className="mb-0.5" />
+              <Icon Icon={SquareRoundCorner} className="mb-0.5" />
               <h6>Raio de borda</h6>
             </H6Title>
           </HeaderH6>

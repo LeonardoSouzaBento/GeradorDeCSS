@@ -56,22 +56,22 @@ export const Header = ({
         )}>
         <div className={`flex items-center justify-center mb-2 pre-sm:mb-0`}>
           <div
-            className={`h-13 w-13 text-white/93 flex items-center justify-center [&>svg]:text-h2
-             p-2.5 mb-0.5 bg-linear-to-br ${linearGradient} rounded-xs shadow-lg`}>
+            className={`size-13 text-white/93 flex items-center justify-center [&>svg]:text-h2
+           p-2.5 mb-0.5 bg-linear-to-br ${linearGradient} rounded-lg shadow-lg`}>
             {icon}
           </div>
         </div>
         <div>
           <h1
-            className={`h-auto h1-hero bg-linear-to-r from-start to-end bg-clip-text text-transparent
+            className={`h-auto bg-linear-to-r from-start to-end bg-clip-text text-transparent
             mb-0 capitalize pre-sm:text-left`}>
             {title}
           </h1>
-          <h4
+          <h6
             className={`text-muted-foreground max-w-2xl font-normal
               mx-auto px-3 pre-sm:text-left ${page === 'typography' ? 'pre-sm:pl-0' : 'pl-[0.1ex]'}`}>
             {description}
-          </h4>
+          </h6>
         </div>
       </header>
     </div>

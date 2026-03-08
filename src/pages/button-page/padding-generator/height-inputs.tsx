@@ -90,7 +90,7 @@ const HeightInputs = ({ currentButtonsData, setCurrentButtonsData }: HeightInput
     <FormWrapper>
       <HeaderH6 mb={0} className={`mb-[1cap]`}>
         <H6Title>
-          <Icon Icon={ChartColumnDecreasing} className='mb-1' />
+          <Icon Icon={ChartColumnDecreasing} className='mb-2.5' />
           <h6>Alturas</h6>
         </H6Title>
         <H6Description>
