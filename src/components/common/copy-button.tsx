@@ -2,7 +2,7 @@ import { Button, Icon } from '@/ui/index';
 import { ClipboardCopy, CopyCheck } from 'lucide-react';
 import { useState } from 'react';
 
-const CopyButton = ({ returnString }: { returnString: string }) => {
+export const CopyButton = ({ returnString }: { returnString: string }) => {
   const [copied, setCopied] = useState(false);
   const copyToClipboard = () => {
     navigator.clipboard.writeText(returnString);
@@ -14,10 +14,8 @@ const CopyButton = ({ returnString }: { returnString: string }) => {
 
   return (
     <Button className='max-w-max' onClick={copyToClipboard}>
-      {copied ? <Icon Icon={CopyCheck} size="md" /> : <Icon Icon={ClipboardCopy} size="sm" />}
+      <Icon Icon={copied ? CopyCheck : ClipboardCopy} size="xl" />
       {copied ? 'Copiado!' : 'Copiar CSS'}
     </Button>
   );
 };
-
-export default CopyButton;

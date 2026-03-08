@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const alertVariants = cva(
-  `relative w-full rounded-sm border p-4 data-no-title:pb-3
+  `relative w-full rounded-sm border p-4 data-no-title:pb-3 text-sm
   data-no-title:[&>div:has(>svg)]:mt-0.75
   [&>div:has(>svg)]:absolute
   [&>div:has(>svg)]:left-4
@@ -47,7 +47,7 @@ const AlertTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h5
     ref={ref}
-    className={cn("mb-1 font-medium leading-none tracking-tight", className)}
+    className={cn("mb-2 font-medium leading-none tracking-tight", className)}
     {...props}
   />
 ));

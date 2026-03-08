@@ -14,7 +14,7 @@ interface Props {
   isMobile?: boolean;
 }
 
-const Header = ({
+export const Header = ({
   title,
   description,
   icon,
@@ -77,5 +77,3 @@ const Header = ({
     </div>
   );
 };
-
-export default Header;

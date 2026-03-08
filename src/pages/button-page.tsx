@@ -1,4 +1,4 @@
-import { FontSelector, Header } from "@/components/index";
+import { FontSelector, Header } from "@/components/common/index";
 import { ButtonPageContext } from "@/contexts";
 import type { NavOptions, OptionReturn } from "@/data/buttons/variables";
 import { buttonsData, optionsReturn } from "@/data/buttons/variables";
@@ -27,7 +27,7 @@ import ColorGenerator from "./button-page/color-palette/color-generator";
 import {
   InitialSize,
   RelativeSizes,
-  WeightSelector,
+  WeightInputs,
 } from "./button-page/font-styles/index";
 import {
   CSSReturn,
@@ -87,6 +87,7 @@ export default function ButtonPage({
     ghostOutline,
     borderRadius,
     setBorderRadius,
+    lucideIconWeightStep,
   } = useContext(ButtonPageContext);
   const { shades, color1000, color50 } = useColorShades(color, freezeColors);
   /* saidas e iteratividade */
@@ -191,11 +192,17 @@ export default function ButtonPage({
       mainStopColors,
       borderRadius
     );
-    const iconReturn = genIconComponent(iconSizes, strokeWidth);
+    const iconReturn = genIconComponent(
+      iconSizes,
+      strokeWidth,
+      currentWeight,
+      lucideIconWeightStep,
+    );
     const muiIconReturn = genIconComponent(
       iconSizes,
       strokeWidth,
       currentWeight,
+      lucideIconWeightStep,
       "mui-icon"
     );
     setReturns([varsReturn, buttonsReturn, iconReturn, muiIconReturn]);
@@ -203,6 +210,7 @@ export default function ButtonPage({
 
   useEffect(() => {
     formatCss();
+    console.log(lucideIconWeightStep);
   }, [
     color,
     currentWeight,
@@ -216,6 +224,7 @@ export default function ButtonPage({
     iconButtonSizes,
     currentButtonsData,
     colorNickname,
+    lucideIconWeightStep,
   ]);
 
   /* Mudar o retorno conforme a opção selecionada */
@@ -242,12 +251,12 @@ export default function ButtonPage({
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
         <DialogContent className="p-5">
           <Alert>
-            <Icon Icon={AlertCircle} />
+            <Icon Icon={AlertCircle} size="lg" />
             <div>
               <AlertTitle>Importante</AlertTitle>
               <AlertDescription>
-                Use nosso componente de ícone mostrado na saída para evitar a
-                distorçao da altura do botão.
+                Use nosso <strong>componente de ícone</strong> mostrado na saída
+                para evitar a distorçao da altura do botão.
               </AlertDescription>
             </div>
           </Alert>
@@ -322,7 +331,7 @@ export default function ButtonPage({
                   </div>
                 )}
                 {navOptions === "Pesos" && (
-                  <WeightSelector containerRef={containerRef} />
+                  <WeightInputs containerRef={containerRef} />
                 )}
                 {navOptions === "Font-size dos botões" && <RelativeSizes />}
                 {navOptions === "Paleta" && <ColorGenerator shades={shades} />}
@@ -347,14 +356,14 @@ export default function ButtonPage({
           <Card>
             <CardHeader>
               <CardTitle>
-                <h3>Componente para pré-visualizar estilos de estados</h3>
+                <h3>Mais: pré-visualizador de estados</h3>
               </CardTitle>
               <CardDescription>
-                Baixe esse componente para testar os estilos
+                Veja os estilos dos botões em diferentes estados.
               </CardDescription>
             </CardHeader>
             <CardContent className="max-w-max space-y-4">
-              <ButtonStyleTester />
+              <ButtonStyleTester title={false} />
             </CardContent>
           </Card>
         </div>

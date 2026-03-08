@@ -1,4 +1,4 @@
-import { PalletPreview } from '@/components/index';
+import { PalletPreview } from '@/components/common/index';
 import { ColorShade } from '@/hooks/useColorShades';
 import { Card, CardHeader, CardTitle, H6Title, HeaderH6, Icon } from '@/ui';
 import { Eye, Palette } from 'lucide-react';

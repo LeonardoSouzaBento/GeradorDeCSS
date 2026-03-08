@@ -1,7 +1,7 @@
 import type { OptionReturn } from '@/data/buttons/variables';
 import { optionsReturn } from '@/data/buttons/variables';
 import { Button, Card, CardContent, CardHeader, CardTitle, ButtonsWrapper } from '@/ui';
-import CopyButton from './padding-generator/copy-button';
+import {CopyButton} from '@/components/common/copy-button';
 
 interface CSSReturnProps {
   optionReturn: OptionReturn;

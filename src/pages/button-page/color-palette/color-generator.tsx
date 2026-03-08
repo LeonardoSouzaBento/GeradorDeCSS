@@ -9,7 +9,7 @@ import {
 } from "@/ui";
 import { ChartSpline, Palette } from "lucide-react";
 import { useMemo } from "react";
-import { PalletPreview } from "@/components";
+import { PalletPreview } from "@/components/common/index";
 
 interface ColorGeneratorProps {
   shades: ColorShade[];
@@ -48,7 +48,7 @@ const ColorGenerator = ({ shades }: ColorGeneratorProps) => {
         <HeaderH6 mb={1.2}>
           <H6Title>
             <Icon Icon={Palette} />
-            <h6>Paleta de Cores</h6>
+            <h6>Paleta de Cor</h6>
           </H6Title>
         </HeaderH6>
         <PalletPreview shades={shades} />

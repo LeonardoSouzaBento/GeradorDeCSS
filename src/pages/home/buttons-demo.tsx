@@ -1,6 +1,6 @@
 import { cssButtonPreview } from '@/data/buttons/variables';
 import { Button, ButtonsWrapper, Icon } from '@/ui/index';
-import { ClipboardPen, ThumbsUp } from 'lucide-react';
+import { Pencil, ThumbsUp } from 'lucide-react';
 
 type ButtonData = {
   text: string;
@@ -30,15 +30,12 @@ const buttonVariantsToRender = [
   { variant: 'ghost' },
 ] as const;
 
-const ButtonsPreview = () => {
+export const ButtonsDemo = () => {
   return (
     <div className='-mt-px xl:mt-0'>
-      <h5>Gerador de estilos para botões</h5>
+      <h5>Gere estilos para botões</h5>
       <div className="mb-[1cap]">
-        <p className="small-text">Defina a escala de botões do seu projeto</p>
-        <p className="smaller-text text-muted-foreground">
-          Gere paleta de cores e vários estilos para botões rapidamente
-        </p>
+        <p className="smaller-text text-muted-foreground">Estilize rapidamente e veja: fonte, paleta de cor, pesos e muito mais</p>
       </div>
       <div className="space-y-[1ex] pb-4">
         {buttonVariantsToRender.map(({ variant }) => (
@@ -48,12 +45,11 @@ const ButtonsPreview = () => {
                 key={`${variant}-${index}`}
                 variant={variant}
                 size={button.size}
-                className={`w-full md-sm:max-w-34 flex`}>
+                className={`w-full md-sm:max-w-30 flex rounded-full`}>
                 <Icon
-                  Icon={ClipboardPen}
+                  Icon={Pencil}
                   size={iconSzes[index]}
-                  className="mb-0.25"
-                  // strokeWidth={'light'}
+                  strokeWidth='semibold'
                 />
                 {button.text}
               </Button>
@@ -72,5 +68,3 @@ const ButtonsPreview = () => {
     </div>
   );
 };
-
-export default ButtonsPreview;

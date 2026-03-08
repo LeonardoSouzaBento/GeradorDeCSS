@@ -180,6 +180,17 @@ export const configOptions = [
   },
 ];
 
+export const lucideIconWeights = [
+  "thin",
+  "extralight",
+  "light",
+  "normal",
+  "medium",
+  "semibold",
+  "bold",
+  "extrabold",
+];
+
 export interface ColorCombination {
   contrast: string;
   backgroundColor: string;

@@ -20,13 +20,13 @@ const textVariables = `@theme {
   --text-lg-button: 1.00em;
 }`;
 
-const TypographyPreview = () => {
+export const TypographyDemo = () => {
   return (
-    <div className="pt-0.5">
-      <h5 className="mb-0.5">Gerador de escala tipográfica </h5>
+    <div>
+      <h5 className="mb-0.5">Gere uma escala tipográfica</h5>
       <div className={`mb-4`}>
         <p className="smaller-text text-muted-foreground mb-2">
-          Gere a escala de tamanhos de fonte do seu projeto
+          Defina a escala de tamanhos de fonte do seu projeto
         </p>
         <div className={`flex flex-wrap gap-y-1 items-baseline gap-3`}>
           <h1>Aa</h1>
@@ -48,5 +48,3 @@ const TypographyPreview = () => {
     </div>
   );
 };
-
-export default TypographyPreview;

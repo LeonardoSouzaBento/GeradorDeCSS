@@ -1,9 +1,9 @@
-import Header from '@/components/header';
-import { ClampValue } from '@/data/typography/types';
-import { useRemObserver } from '@/hooks/useRemObserver';
-import { Card, CardContent } from '@/ui/card';
-import { CaseSensitive } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { Header } from "@/components/common/header";
+import { ClampValue } from "@/data/typography/types";
+import { useRemObserver } from "@/hooks/useRemObserver";
+import { Card, CardContent } from "@/ui/card";
+import { CaseSensitive } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import {
   Footer,
   InputsCard,
@@ -12,17 +12,21 @@ import {
   PersonalGuidelines,
   Prev,
   RelevantQuestions,
-} from './typography/index';
+} from "./typography/index";
 
-export default function TypographyPage({ resizingCounter }: { resizingCounter?: number }) {
+export default function TypographyPage({
+  resizingCounter,
+}: {
+  resizingCounter?: number;
+}) {
   /* estados de controle */
-  const [returnType, setReturnType] = useState<'tw' | 'css'>('tw');
+  const [returnType, setReturnType] = useState<"tw" | "css">("tw");
   const [disabled, setDisabled] = useState<boolean>(false);
   const [canGenerate, setCanGenerate] = useState<number>(0);
   /* estados para saídas */
   const [clampValues, setClampValues] = useState<ClampValue>({});
-  const [output, setOutput] = useState<string>('');
-  const [secondOutput, setSecondOutput] = useState<string>('');
+  const [output, setOutput] = useState<string>("");
+  const [secondOutput, setSecondOutput] = useState<string>("");
   const [showMoreStyles, setShowMoreStyles] = useState<boolean>(false);
   /* altura do segundo card */
   const [cardHeight, setCardHeight] = useState<number>(0);
@@ -48,13 +52,20 @@ export default function TypographyPage({ resizingCounter }: { resizingCounter?: 
         description="Gere o CSS de escala tipográfica do seu projeto"
         className={`flex flex-col sm:flex-row max-w-2xl px-4 sm:px-0 sm:w-[calc(100%-3rem)] text-center pre-sm:flex gap-3.5 justify-center pre-sm:justify-start xl:max-w-7xl`}
         page="typography"
-        icon={<CaseSensitive className={`text-white/93`} strokeWidth={2.2} size={'2rem'} />}
+        icon={
+          <CaseSensitive
+            className={`text-white/93`}
+            strokeWidth={2.2}
+            size={"2rem"}
+          />
+        }
         resizingCounter={resizingCounter}
       />
       <main
         className={`main-wrapper
           pb-7 space-y-7 overflow-hidden xl:pb-0 xl:grid
-          xl:grid-cols-2 gap-7 relative`}>
+          xl:grid-cols-2 gap-7 relative`}
+      >
         <Card ref={cardRef} className={`w-full h-full max-h-max mx-auto pt-5`}>
           <CardContent className={`flex flex-col gap-5`}>
             <InputsCard
@@ -93,7 +104,10 @@ export default function TypographyPage({ resizingCounter }: { resizingCounter?: 
         </div>
       </div>
       {showMoreStyles && (
-        <MoreStylesModal setShowMoreStyles={setShowMoreStyles} rootFontSize={rootFontSize} />
+        <MoreStylesModal
+          setShowMoreStyles={setShowMoreStyles}
+          rootFontSize={rootFontSize}
+        />
       )}
       <Footer />
     </div>

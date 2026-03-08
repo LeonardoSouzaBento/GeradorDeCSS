@@ -23,7 +23,7 @@ const typographyFonts = [
 ];
 const buttonPageFonts = ['Roboto', 'Montserrat', 'Lato', 'Poppins'];
 
-const FontSelector = ({
+export const FontSelector = ({
   targetClassName = 'font-target',
   page = 'typography',
 }: {
@@ -150,5 +150,3 @@ const FontSelector = ({
     </FormWrapper>
   );
 };
-
-export default FontSelector;

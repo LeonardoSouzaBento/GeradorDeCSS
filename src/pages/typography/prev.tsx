@@ -1,7 +1,7 @@
-import FontSelector from '@/components/font-selector';
-import { Icon } from '@/ui/lucide-icon';
-import { ClampValue } from '@/data/typography/types';
-import { useResizeWatcher } from '@/hooks/useResizeWatcher';
+import { FontSelector } from "@/components/common/font-selector";
+import { Icon } from "@/ui/lucide-icon";
+import { ClampValue } from "@/data/typography/types";
+import { useResizeWatcher } from "@/hooks/useResizeWatcher";
 import {
   Alert,
   AlertDescription,
@@ -10,28 +10,41 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from '@/ui/index';
-import { TriangleAlert } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+} from "@/ui/index";
+import { TriangleAlert } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import {
   ButtonsSection,
   FormsSection,
   Nav,
   ParagraphsSection,
   TitlesSection,
-} from './prev/index';
+} from "./prev/index";
 
 const css = {
   wrapper: `w-full mb-7 mx-auto`,
   section: `min-h-max space-y-3 box-content bg-background/50 p-5 rounded-xs`,
 };
 
-export const componentExamples = ['títulos', 'parágrafos', 'botões', 'formulários'];
+export const componentExamples = [
+  "títulos",
+  "parágrafos",
+  "botões",
+  "formulários",
+];
 
-const Prev = ({ clampValues, disabled }: { clampValues: ClampValue; disabled: boolean }) => {
-  const [selectedComponent, setSelectedComponent] = useState<string>('títulos');
+const Prev = ({
+  clampValues,
+  disabled,
+}: {
+  clampValues: ClampValue;
+  disabled: boolean;
+}) => {
+  const [selectedComponent, setSelectedComponent] = useState<string>("títulos");
   const firstSectionRef = useRef<HTMLDivElement>(null);
-  const [firstSectionHeight, setFirstSectionHeight] = useState<string | number>('auto');
+  const [firstSectionHeight, setFirstSectionHeight] = useState<string | number>(
+    "auto"
+  );
   const [wasResize, setWasResize] = useState<number>();
   useResizeWatcher(setWasResize);
 
@@ -53,7 +66,10 @@ const Prev = ({ clampValues, disabled }: { clampValues: ClampValue; disabled: bo
         <CardTitle>
           <h3>Prévia</h3>
         </CardTitle>
-        <Nav selectedComponent={selectedComponent} setSelectedComponent={setSelectedComponent} />
+        <Nav
+          selectedComponent={selectedComponent}
+          setSelectedComponent={setSelectedComponent}
+        />
       </CardHeader>
 
       {disabled && (
@@ -72,13 +88,23 @@ const Prev = ({ clampValues, disabled }: { clampValues: ClampValue; disabled: bo
             className={css.section}
             style={{
               height: firstSectionHeight,
-            }}>
-            {selectedComponent === 'títulos' && (
-              <TitlesSection props={{ ref: firstSectionRef }} clampValues={clampValues} />
+            }}
+          >
+            {selectedComponent === "títulos" && (
+              <TitlesSection
+                props={{ ref: firstSectionRef }}
+                clampValues={clampValues}
+              />
             )}
-            {selectedComponent === 'parágrafos' && <ParagraphsSection clampValues={clampValues} />}
-            {selectedComponent === 'botões' && <ButtonsSection clampValues={clampValues} />}
-            {selectedComponent === 'formulários' && <FormsSection clampValues={clampValues} />}
+            {selectedComponent === "parágrafos" && (
+              <ParagraphsSection clampValues={clampValues} />
+            )}
+            {selectedComponent === "botões" && (
+              <ButtonsSection clampValues={clampValues} />
+            )}
+            {selectedComponent === "formulários" && (
+              <FormsSection clampValues={clampValues} />
+            )}
           </section>
         </CardContent>
         <FontSelector />

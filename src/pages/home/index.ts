@@ -1,2 +1,2 @@
-export { default as TypographyPreview } from "./typography-preview";
-export { default as ButtonsPreview } from "./buttons-preview";
+export { TypographyDemo } from "./typography-demo";
+export { ButtonsDemo } from "./buttons-demo";

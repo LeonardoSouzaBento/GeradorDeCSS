@@ -1,4 +1,4 @@
-import { ColorInput } from '@/components/color-input';
+import { ColorInput } from '@/components/common/color-input';
 import { StateSetter } from '@/data/typography/types';
 import { Button, H6Title, HeaderH6, Icon, Input, InputWrapper, Label } from '@/ui';
 import { Menu, Settings2 } from 'lucide-react';

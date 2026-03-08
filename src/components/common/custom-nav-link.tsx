@@ -6,4 +6,4 @@ const CustomNavLink = ({ link }: { link: string }) => {
   )
 }
 
-export default CustomNavLink;
+export { CustomNavLink };
