@@ -72,8 +72,8 @@ const WeightInputs = ({
       <FormWrapper className={`w-full relative`}>
         <InputValue
           scrollToBottom={scrollToBottom}
+          strokeWidth={strokeWidth}
           setStrokeWidth={setStrokeWidth}
-          setShowAlert={setShowAlert}
         />
         <ComparePreview
           currentWeight={currentWeight}
@@ -86,6 +86,7 @@ const WeightInputs = ({
         <IconWeightScaleInput setIconWeightScale={setIconWeightScale} />
         <IconWeightScalePreview
           iconWeightScale={iconWeightScale}
+          strokeWidth={strokeWidth}
           color={color}
         />
         <InputAlert

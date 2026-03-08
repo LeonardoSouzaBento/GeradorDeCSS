@@ -4,32 +4,14 @@ import { Weight } from "lucide-react";
 import { useState } from "react";
 
 export const InputValue = ({
-  scrollToBottom,   
+  scrollToBottom,
+  strokeWidth,
   setStrokeWidth,
-  setShowAlert,
 }: {
   scrollToBottom: () => void;
+  strokeWidth: number;
   setStrokeWidth: (value: number) => void;
-  setShowAlert: (value: boolean) => void;
 }) => {
-  const [inputValue, setInputValue] = useState<string>("");
-  
-  function handleChange(value: string) {
-    setInputValue(value);
-    if (!validateDecimalInput(value)) return;
-    const numberValue = parseFloat(value);
-    if (numberValue >= 1.5 && numberValue <= 5) {
-      setStrokeWidth(numberValue);
-    } else {
-      if (value.replace(".", "").length >= 2) {
-        setShowAlert(true);
-      }
-    }
-    if (value === "") {
-      setStrokeWidth(2);
-    }
-  }
-
   return (
     <>
       <HeaderH6 mb={1}>
@@ -42,12 +24,12 @@ export const InputValue = ({
         </H6Description>
       </HeaderH6>
       <Input
-        type="text"
-        value={inputValue}
+        type="number"
+        step={0.15}
+        value={strokeWidth}
         onClick={scrollToBottom}
         onChange={(e) => {
-          const value = e.target.value.replace(",", ".");
-          handleChange(value);
+          setStrokeWidth(Number(e.target.value));
         }}
       />
     </>
