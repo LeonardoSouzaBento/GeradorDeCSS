@@ -75,7 +75,7 @@ export const Inputs = ({
           {rangePreferences.map((preference) => (
             <InputWrapper key={preference.name}>
               <Label className="capitalize">{preference.name}</Label>
-              <div className="h-10 rounded-xs px-2 bg-input border border-input-border">
+              <div className="h-9 rounded-sm px-2 bg-input border border-input-border">
                 <Input
                   className="px-0 accent-primary-600"
                   type="range"

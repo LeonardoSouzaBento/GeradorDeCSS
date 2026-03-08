@@ -47,7 +47,7 @@ export const Preferences = ({
           <ColorNameInput colorName={colorName} setColorName={setColorName} />
           <Button
             selected={colorPrefix}
-            className="normal-case min-w-max justify-start w-full mt-1"
+            className="normal-case max-w-max justify-start mt-1"
             variant="ghost"
             size="sm"
             onClick={() => setColorPrefix(!colorPrefix)}
@@ -139,7 +139,7 @@ const ColorNameInput = ({
                 data-option
                 variant="ghost"
                 size="sm"
-                className="justify-start"
+                className="justify-start normal-case"
                 onClick={() => setColorName(option)}
               >
                 {option}

@@ -22,7 +22,7 @@ export const Preview = ({ neutralColors }: PreviewProps) => {
           {Object.entries(neutralColors).map(([name, color]) => (
             <div
               key={name}
-              className="flex pre-lg:flex-auto items-center gap-2 border px-3"
+              className="flex pre-lg:flex-auto items-center gap-2 border px-3 rounded-sm"
               style={{ borderColor: neutralColors['border'] }}>
               <div className="w-8 h-9.5 rounded-xs" style={{ background: color }} />
               <div className="flex-1 pt-ex-offset pb-cap-offset">
@@ -40,7 +40,7 @@ export const Preview = ({ neutralColors }: PreviewProps) => {
         </div>
 
         <div
-          className="rounded-xs p-4 pt-3 pb-6 relative"
+          className="p-4 pt-3 pb-6 relative rounded-sm"
           style={{ border: `1px solid ${neutralColors['border']}` }}>
           <h3 className="mb-1" style={{ color: neutralColors['foreground'] }}>
             Color: foreground
