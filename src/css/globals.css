@@ -11,9 +11,9 @@ max-w-5xl,64rem,1024px
 @theme {
   /* fontes */
   --font-body:
-    'Google Sans Flex', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-button: 'Google Sans', sans-serif;
-  --font-code: 'Ubuntu Mono', monospace;
+    'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-button: 'Plus Jakarta Sans', sans-serif;
+  --font-code: 'JetBrains Mono', monospace;
   /* Breakpoints */
   --breakpoint-xxs: 320px;
   --breakpoint-xs: 375px;
@@ -22,62 +22,62 @@ max-w-5xl,64rem,1024px
   --breakpoint-pre-md: 700px;
   --breakpoint-next-md: 840px;
   --breakpoint-pre-lg: 980px;
-  /*font sizes*/
-  --text-xs: 0.790123em;
- --text-sm: 0.888889em;
- --text-base: 1.00em;
- --text-lg: 1.125em;
- --text-h6: 1.125em;
- --text-h5: 1.265625em;
- --text-h4: 1.423828em;
- --text-h3: 1.601807em;
- --text-h2: 1.802032em;
- --text-h1: 2.027287em;
- --text-h1-hero: 2.280697em;
- --text-button: 0.942809em;
- --text-sm-button: 0.888889em;
- --text-lg-button: 1.00em;
+  /*font sizes (escala 1.067 - Minor Second)*/
+  --text-xs: 0.878357em;
+  --text-sm: 0.937207em;
+  --text-base: 1.00em;
+  --text-lg: 1.067em;
+  --text-h6: 1.067em;
+  --text-h5: 1.138489em;
+  --text-h4: 1.214768em;
+  --text-h3: 1.296157em;
+  --text-h2: 1.38300em;
+  --text-h1: 1.475661em;
+  --text-h1-hero: 1.574530em;
+  --text-button: 0.968095em;
+  --text-sm-button: 0.937207em;
+  --text-lg-button: 1.00em;
   --spacing-cap-offset: calc(1cap - ((1em - 1cap) / 2));
   --spacing-ex-offset: calc(1ex - ((1em - 1cap) / 2));
   /* Cores */
-  --color-light-bg: hsl(0, 0%, 100%);
-  --color-medium-bg: hsl(0, 0%, 98%);
-  --color-dark-bg: hsl(0, 20%, 95%);
-  --color-white: hsl(0 0% 100%);
-  --color-background: hsl(210 20% 98%);
+  --color-light-bg: hsl(220, 15%, 99%);
+  --color-medium-bg: hsl(220, 14%, 97.5%);
+  --color-dark-bg: hsl(220, 14%, 95%);
+  --color-white: hsl(220 15% 99%);
+  --color-background: hsl(220 14% 97.5%);
   --color-foreground: hsl(233 18% 20%);
   --color-muted-foreground: hsl(233 10.57% 43%);
   --color-border: hsl(233 6.29% 88%);
   --color-input-border: hsl(233 9.71% 88%);
   --color-input: hsl(233 4.86% 98%);
 
-  --color-card: hsl(0 0% 100%);
-  --color-muted: hsl(215 15% 94%);
-  --color-ring: #bfdbfe;
-  --other-foreground: hsl(227, 25%, 12%);
+  --color-card: hsl(220 15% 99.2%);
+  --color-muted: hsl(220 14% 94%);
+  --color-ring: #d5d8e0;
+  --other-foreground: hsl(225, 20%, 11%);
 
-  --color-popover: hsl(0 0% 100%);
-  --color-popover-foreground: hsl(215 25% 15%);
+  --color-popover: hsl(220 15% 99.2%);
+  --color-popover-foreground: hsl(225 20% 12%);
 
-  --color-primary: #0b5bcb;
-  --color-primary-50: #f2f3fc;
-  --color-primary-100: #e5e6f8;
-  --color-primary-200: #cbcef2;
-  --color-primary-300: #b1b6ea;
-  --color-primary-400: #959fe3;
-  --color-primary-500: #7789dc;
-  --color-primary-600: #5573d4;
-  --color-primary-700: #0b5bcb; /* Sua cor principal */
-  --color-primary-800: #0042ac;
-  --color-primary-900: #002688;
-  --color-primary-950: #001a76;
-  --color-primary-1000: #000b65;
-  --color-primary-foreground: hsl(220 25% 98%);
+  --color-primary: #181a20;
+  --color-primary-50: #f4f5f7;
+  --color-primary-100: #e9ebef;
+  --color-primary-200: #d5d8e0;
+  --color-primary-300: #b4b9c6;
+  --color-primary-400: #8e95a5;
+  --color-primary-500: #6b7284;
+  --color-primary-600: #4b5162;
+  --color-primary-700: #2c303b;
+  --color-primary-800: #1f222a;
+  --color-primary-900: #181a20;
+  --color-primary-950: #111318;
+  --color-primary-1000: #0a0b0e;
+  --color-primary-foreground: hsl(220 20% 98%);
 
-  --color-secondary: hsl(215 15% 92%);
-  --color-secondary-foreground: hsl(215 25% 15%);
-  --color-selected: oklch(80.9% 0.105 251.813);
-  --color-accent: hsla(215, 90%, 45%, 0.5);
+  --color-secondary: hsl(220 13% 92%);
+  --color-secondary-foreground: hsl(225 20% 14%);
+  --color-selected: #8e95a5;
+  --color-accent: hsla(225, 15%, 18%, 0.5);
   --color-accent-foreground: hsl(0 0% 100%);
 
   --color-destructive: hsl(0 80% 45%);
@@ -94,8 +94,8 @@ max-w-5xl,64rem,1024px
   --shadow-xl: 0 12px 24px -8px rgba(0, 0, 0, 0.06);
 
   /* Gradientes */
-  --color-start: hsl(215 90% 45%);
-  --color-end: hsl(220, 93%, 28%);
+  --color-start: hsl(225 15% 18%);
+  --color-end: hsl(225, 20%, 9%);
 
   /* Transições */
   --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -158,17 +158,28 @@ max-w-5xl,64rem,1024px
   * {
     @apply border-border;
   }
+  div::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  div::-webkit-scrollbar-track {
+    background: hsl(215 15% 94%);
+    border-radius: 2px;
+  }
   div::-webkit-scrollbar-thumb {
-    background: oklch(87% 0 0);
-    border-radius: 6px;
+    background: oklch(78% 0 0);
+    border-radius: 2px;
+  }
+  div::-webkit-scrollbar-thumb:hover {
+    background: oklch(68% 0 0);
   }
   div,
   form {
     scrollbar-width: thin;
-    scrollbar-color: var(--color-gray-200) #ffffff00; /*botão | fundo */
+    scrollbar-color: oklch(78% 0 0) hsl(215 15% 94%); /*botão | fundo */
   }
   body {
-    @apply font-body text-gray-800 bg-linear-to-br from-light-bg via-medium-bg to-light-bg;
+    @apply font-body text-gray-800 bg-background;
   }
   html,
   body,
@@ -186,7 +197,7 @@ max-w-5xl,64rem,1024px
     @apply cursor-default;
   }
   a {
-    @apply cursor-pointer text-blue-700 underline;
+    @apply cursor-pointer text-primary underline;
   }
   button {
     @apply font-button capitalize flex items-center;
@@ -195,8 +206,8 @@ max-w-5xl,64rem,1024px
     @apply text-muted-foreground tracking-normal;
   }
   pre {
-    @apply cursor-default bg-primary-50/40 text-foreground rounded-xs 
-    wrap-break-word p-5 pt-4 whitespace-pre-wrap transition-opacity duration-400 font-code overflow-y-scroll;
+    @apply cursor-default bg-primary-50/70 text-foreground rounded-[2px] tabular-nums
+    wrap-break-word p-4 whitespace-pre-wrap transition-opacity duration-400 font-code overflow-y-scroll;
   }
   textarea {
     @apply bg-background text-foreground pl-3 pt-3 pb-4 

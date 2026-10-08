@@ -1,5 +1,5 @@
 import { cssButtonPreview } from '@/data/buttons/variables';
-import { Button, ButtonsWrapper, Icon } from '@/ui/index';
+import { Button, ButtonsWrapper, ExpandablePre, Icon } from '@/ui/index';
 import { Pencil, ThumbsUp } from 'lucide-react';
 
 type ButtonData = {
@@ -32,30 +32,37 @@ const buttonVariantsToRender = [
 
 export const ButtonsDemo = () => {
   return (
-    <div className='-mt-px xl:mt-0'>
-      <h5>Gere estilos para botões</h5>
+    <div className="-mt-px xl:mt-0 min-w-0">
       <div className="mb-[1cap]">
-        <p className="small-text text-muted-foreground">Estilize rapidamente e veja: fonte, paleta de cor, pesos e muito mais</p>
+        <p className="small-text text-muted-foreground">
+          Estilize rapidamente e veja: fonte, paleta de cor, pesos e muito mais
+        </p>
       </div>
-      <div className="space-y-[1ex] pb-4">
-        {buttonVariantsToRender.map(({ variant }) => (
-          <ButtonsWrapper key={variant} className="justify-start items-start pb-0.5">
-            {buttons.map((button, index) => (
-              <Button
-                key={`${variant}-${index}`}
-                variant={variant}
-                size={button.size}
-                className={`w-full md-sm:max-w-30 flex rounded-full`}>
-                <Icon
-                  Icon={Pencil}
-                  size={iconSzes[index]}
-                  strokeWidth='semibold'
-                />
-                {button.text}
-              </Button>
-            ))}
-          </ButtonsWrapper>
-        ))}
+      <div className="space-y-3 pb-4">
+        <div className="flex gap-3 overflow-x-auto pb-2.5">
+          {buttonVariantsToRender.map(({ variant }) => (
+            <div
+              key={variant}
+              className="flex flex-col gap-2 shrink-0 w-max"
+            >
+              {buttons.map((button, index) => (
+                <Button
+                  key={`${variant}-${index}`}
+                  variant={variant}
+                  size={button.size}
+                  className="w-full whitespace-nowrap rounded-full"
+                >
+                  <Icon
+                    Icon={Pencil}
+                    size={iconSzes[index]}
+                    strokeWidth="semibold"
+                  />
+                  {button.text}
+                </Button>
+              ))}
+            </div>
+          ))}
+        </div>
         <ButtonsWrapper className="items-start pb-0.5">
           {iconButtons.map((button, index) => (
             <Button variant="secondary" key={index} size={button} className="rounded-full">
@@ -64,7 +71,7 @@ export const ButtonsDemo = () => {
           ))}
         </ButtonsWrapper>
       </div>
-      <pre className="h-93">{cssButtonPreview}</pre>
+      <ExpandablePre content={cssButtonPreview} />
     </div>
   );
 };

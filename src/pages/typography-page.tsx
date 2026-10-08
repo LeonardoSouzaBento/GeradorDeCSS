@@ -48,17 +48,10 @@ export default function TypographyPage({
   return (
     <div className="min-h-dvh">
       <Header
-        title="Gerador de Escala Tipográfica"
-        description="Gere o CSS de escala tipográfica do seu projeto"
-        className={`flex flex-col sm:flex-row max-w-2xl px-4 sm:px-0 sm:w-[calc(100%-3rem)] text-center pre-sm:flex gap-3.5 justify-center pre-sm:justify-start xl:max-w-7xl`}
+        title="Escala Tipográfica"
+        description="clamp() · rem · Tailwind e CSS"
         page="typography"
-        icon={
-          <CaseSensitive
-            className={`text-white/93`}
-            strokeWidth={2.2}
-            size={"2rem"}
-          />
-        }
+        icon={<CaseSensitive strokeWidth={2} />}
         resizingCounter={resizingCounter}
       />
       <main
@@ -66,8 +59,8 @@ export default function TypographyPage({
           pb-7 space-y-7 overflow-hidden xl:pb-0 xl:grid
           xl:grid-cols-2 gap-7 relative`}
       >
-        <Card ref={cardRef} className={`w-full h-full max-h-max mx-auto pt-5`}>
-          <CardContent className={`flex flex-col gap-5`}>
+        <Card ref={cardRef} className={`w-full h-full max-h-max mx-auto pt-3.5 sm:pt-4`}>
+          <CardContent className={`flex flex-col gap-4`}>
             <InputsCard
               rootFontSize={rootFontSize}
               output={output}

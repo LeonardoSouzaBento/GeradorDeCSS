@@ -1,4 +1,6 @@
 
+import { ExpandablePre } from '@/ui';
+
 const bodyVariables = `body {
 @apply text-[1.05rem] sm:text-[1.0625rem] md:text-[1.065rem] lg:text-[1.07rem] xl:text-[1.075rem] 2xl:text-[1.0800rem];
 }`;
@@ -23,7 +25,6 @@ const textVariables = `@theme {
 export const TypographyDemo = () => {
   return (
     <div>
-      <h5 className="mb-0.5">Gere uma escala tipográfica</h5>
       <div className={`mb-4`}>
         <p className="small-text text-muted-foreground mb-2">
           Defina a escala de tamanhos de fonte do seu projeto
@@ -42,8 +43,8 @@ export const TypographyDemo = () => {
         </div>
       </div>
       <div className={`space-y-4`}>
-        <pre>{bodyVariables}</pre>
-        <pre>{textVariables}</pre>
+        <ExpandablePre content={bodyVariables} />
+        <ExpandablePre content={textVariables} />
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ const ModalButtonsPage = ({
   setOpenModal: StateSetter<boolean>;
 }) => {
   return (
-    <div className="size-full absolute top-0 left-0 z-4 rounded-lg bg-card">
+    <div className="size-full absolute top-0 left-0 z-4 rounded-[2px] bg-card">
       <Button
         variant="transparent"
         size="icon"

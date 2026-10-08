@@ -19,8 +19,8 @@ export const ThematicColors = ({ baseColor, setBaseColor, shades }: Props) => {
   return (
     <Card className="space-y-4">
       <CardHeader className="border-none mb-1">
-        <CardTitle className="text-primary">
-          <Icon Icon={Palette} size="h3" />
+        <CardTitle>
+          <Icon Icon={Palette} size="md" className="text-primary" />
           <h3>Cores temáticas</h3>
         </CardTitle>
       </CardHeader>

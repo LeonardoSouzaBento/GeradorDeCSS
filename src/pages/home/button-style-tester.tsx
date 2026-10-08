@@ -34,19 +34,25 @@ const buttonStates: ButtonShowcaseState[] = [
 
 const ButtonStyleTester = ({ title = true }: { title?: boolean }) => {
   return (
-    <div className="space-y-4">
-      <FormWrapper className="space-y-2 border-none">
-        <h6 className={`pb-1 border-b ${title ? "" : "hidden"}`}>
+    <div className="space-y-4 w-full min-w-0">
+      <FormWrapper className="space-y-3 border-none w-full min-w-0">
+        <h6 className={`${title ? "" : "hidden"}`}>
           Pré-visualizador de estilos e estados de botões
         </h6>
-        <div
-          className={`flex flex-col gap-3 pb-4
-           [&>div]:flex [&>div]:flex-col [&>div]:gap-2 [&>div>div>button]:min-w-34 `}
-        >
+        <div className="space-y-1.5">
+          <DownloadButtonPreview />
+          <p className="smaller-text text-muted-foreground text-center">
+            Download <strong>seguro</strong>. Nosso site é estático.
+          </p>
+        </div>
+        <div className="flex gap-3 overflow-x-auto pb-3 pt-1">
           {buttonStates.map(({ name, props }) => (
-            <div key={name}>
-              <p>{name}</p>
-              <ButtonsWrapper>
+            <div
+              key={name}
+              className="flex flex-col gap-2 shrink-0 w-max"
+            >
+              <p className="small-text text-muted-foreground font-medium">{name}</p>
+              <div className="flex flex-col gap-2">
                 {buttons.map((button) => {
                   if (name === "Desabilitado" && button === "destructive") {
                     return null;
@@ -56,20 +62,16 @@ const ButtonStyleTester = ({ title = true }: { title?: boolean }) => {
                       key={`${name}-${button}`}
                       variant={button as ButtonVariants["variant"]}
                       {...props}
-                      className="w-full md-sm:w-auto rounded-full"
+                      className="w-full whitespace-nowrap rounded-full"
                     >
                       {button}
                     </Button>
                   );
                 })}
-              </ButtonsWrapper>
+              </div>
             </div>
           ))}
         </div>
-        <DownloadButtonPreview />
-        <p className="smaller-text text-muted-foreground text-center">
-          Download <strong>seguro</strong>. Nosso site é estático.
-        </p>
         <Alert data-no-title>
           <Icon Icon={Info} size="sm" strokeWidth="extrabold" fill="white" />
           <AlertTitle>Importante</AlertTitle>

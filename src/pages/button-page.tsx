@@ -264,11 +264,10 @@ export default function ButtonPage({
       </Dialog>
       <Header
         page="buttons"
-        title="Gerador de estilos para botões"
-        description="Estilize seus botões mais rapidamente"
-        className={`flex flex-col px-3 justify-center gap-0 items-center text-center
-        pre-sm:flex-row pre-sm:justify-start pre-sm:gap-3 next-md:px-6 lg:max-w-5xl xl:max-w-6xl mx-auto`}
-        icon={<Icon Icon={MousePointerClick} size="h3" strokeWidth="thin" className="scale-98" />}
+        title="Estilos de Botões"
+        description="Alturas, paddings, contraste e ícones"
+        className="lg:max-w-5xl xl:max-w-6xl"
+        icon={<Icon Icon={MousePointerClick} size="md" strokeWidth="medium" />}
         resizingCounter={resizingCounter}
         removeHeader={removeHeader}
         isMobile={isMobile}
@@ -280,7 +279,7 @@ export default function ButtonPage({
           <Card className="relative" ref={cardRef}>
             <CardHeader className="border-none mb-[0.25ex]">
               <CardTitle>
-                <h3 className="text-primary">Configurações</h3>
+                <h3>Configurações</h3>
               </CardTitle>
             </CardHeader>
             <RemoveHeaderButton
@@ -356,13 +355,10 @@ export default function ButtonPage({
           <Card>
             <CardHeader>
               <CardTitle>
-                <h3>Mais: pré-visualizador de estados</h3>
+                <h3>Pré-visualizador de estados</h3>
               </CardTitle>
-              <CardDescription>
-                Veja os estilos dos botões em diferentes estados.
-              </CardDescription>
             </CardHeader>
-            <CardContent className="max-w-max space-y-4">
+            <CardContent className="w-full min-w-0 space-y-4">
               <ButtonStyleTester title={false} />
             </CardContent>
           </Card>

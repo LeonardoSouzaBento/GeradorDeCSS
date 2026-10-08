@@ -8,7 +8,7 @@ import { ButtonRef } from '@/types/htmlTags';
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 const buttonVariants = cva(
-  'w-auto tracking-wide inline-flex items-center justify-center gap-2 rounded-sm ring-offset-background transition-colors disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 relative data-w-full:w-full data-round:rounded-full focus:outline-none data-option:rounded-full data-black:text-foreground data-option:text-sm data-option:px-[0.64em]',
+  'w-auto tracking-wide inline-flex items-center justify-center gap-2 rounded-[2px] ring-offset-background transition-colors disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 relative data-w-full:w-full data-round:rounded-full focus:outline-none data-black:text-foreground data-option:text-sm data-option:px-[0.64em] data-[variant=ghost]:[&:has(+button[data-variant=ghost])]:rounded-full data-[variant=ghost]:[button[data-variant=ghost]+&]:rounded-full',
   {
     variants: {
       variant: {
@@ -108,10 +108,11 @@ const Button = React.forwardRef<ButtonRef, ButtonProps>(
     const selectedCSS = selected
       ? 'border-2 border-selected text-primary bg-primary-50/25 hover:bg-card'
       : '';
-    const closeButtonCSS = closeButton ? 'rounded-full text-foreground' : '';
+    const closeButtonCSS = closeButton ? 'rounded-[2px] text-foreground' : '';
 
     return (
       <Comp
+        data-variant={variant}
         className={cn(
           buttonVariants({ variant, size }),
           selectedCSS,

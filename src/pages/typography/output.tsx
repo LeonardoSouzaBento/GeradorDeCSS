@@ -24,7 +24,7 @@ const Output = ({
 }: Props) => {
   const [animate, setAnimate] = useState<boolean>(false);
   const preRef = useRef<HTMLPreElement>(null);
-  const preHeight = (cardHeight / rootFontSize - 3).toFixed(3);
+  const preHeight = (cardHeight / rootFontSize - 2).toFixed(3);
 
   useEffect(() => {
     if (!preRef.current) return;
@@ -43,7 +43,7 @@ const Output = ({
   return (
     <Card
       className={`animate-in fade-in slide-in-from-bottom-4 relative max-h-full 
-      space-y-5 pr-5`}
+      space-y-4`}
       noHeader
       style={{ height: cardHeight || '22rem' }}>
       <div className={`relative space-y-4`}>

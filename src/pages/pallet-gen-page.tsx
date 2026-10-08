@@ -1,4 +1,6 @@
+import { Header } from '@/components/common/header';
 import { useColorShades } from '@/hooks/useColorShades';
+import { Palette } from 'lucide-react';
 import { useState } from 'react';
 import { ThematicColors } from './pallet-generator/index';
 import { NeutralColors } from './pallet-generator/neutral-colors';
@@ -8,8 +10,13 @@ export default function PaletteGeneratorPage() {
   const { shades } = useColorShades(baseColor);
 
   return (
-    <div className="relative">
-      <main className="px-3 sm:px-4 mx-auto pt-4 space-y-6 pb-6 min-h-dvh max-w-7xl">
+    <div className="relative min-h-dvh">
+      <Header
+        title="Paleta de Cores"
+        description="HSL · cores neutras e tons temáticos 50–1000"
+        icon={<Palette strokeWidth={2} />}
+      />
+      <main className="px-3 sm:px-6 mx-auto space-y-6 pb-8 max-w-7xl">
         <NeutralColors baseColor={baseColor} setBaseColor={setBaseColor} shades={shades} />
         <ThematicColors baseColor={baseColor} setBaseColor={setBaseColor} shades={shades} />
       </main>
