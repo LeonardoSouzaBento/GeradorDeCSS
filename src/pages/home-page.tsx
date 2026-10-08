@@ -74,7 +74,7 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
         <Card className="bg-white/50 border border-border/80 [&_.bg-card]:bg-transparent [&_[role=alert]]:bg-transparent">
           <CardHeader>
             <CardTitle>
-              <h5>Baixe um visualizador de estado dos botões</h5>
+              <h5>Baixe este componente react para previsualizar estilos de estados</h5>
             </CardTitle>
           </CardHeader>
           <CardContent className="w-full min-w-0 space-y-4">

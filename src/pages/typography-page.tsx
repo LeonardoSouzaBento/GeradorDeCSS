@@ -54,38 +54,39 @@ export default function TypographyPage({
         icon={<CaseSensitive strokeWidth={1.75} className="size-7!" />}
         resizingCounter={resizingCounter}
       />
-      <main
-        className={`main-wrapper
-          pb-7 space-y-7 overflow-hidden xl:pb-0 xl:grid
-          xl:grid-cols-2 gap-7 relative`}
-      >
-        <Card ref={cardRef} className={`w-full h-full max-h-max mx-auto pt-3.5 sm:pt-4`}>
-          <CardContent className={`flex flex-col gap-4`}>
-            <InputsCard
-              rootFontSize={rootFontSize}
-              output={output}
-              secondOutput={secondOutput}
-              setOutput={setOutput}
-              setSecondOutput={setSecondOutput}
-              setClampValues={setClampValues}
-              disabled={disabled}
-              setDisabled={setDisabled}
-              returnType={returnType}
-              setReturnType={setReturnType}
-              canGenerate={canGenerate}
-              setCanGenerate={setCanGenerate}
-            />
-          </CardContent>
-        </Card>
-        <Output
-          cardHeight={cardHeight}
-          output={output}
-          secondOutput={secondOutput}
-          disabled={disabled}
-          returnType={returnType}
-          canGenerate={canGenerate}
-          rootFontSize={rootFontSize}
-        />
+      <main className="main-wrapper pb-7 xl:pb-0 relative">
+        <div
+          className={`flex overflow-x-auto pb-2 xl:pb-0 xl:grid
+          xl:grid-cols-2 gap-4 xl:gap-5 snap-x snap-mandatory`}
+        >
+          <Card ref={cardRef} className={`w-[85%] sm:w-[82%] shrink-0 snap-start xl:w-full h-full max-h-max pt-3.5 sm:pt-4`}>
+            <CardContent className={`flex flex-col gap-4`}>
+              <InputsCard
+                rootFontSize={rootFontSize}
+                output={output}
+                secondOutput={secondOutput}
+                setOutput={setOutput}
+                setSecondOutput={setSecondOutput}
+                setClampValues={setClampValues}
+                disabled={disabled}
+                setDisabled={setDisabled}
+                returnType={returnType}
+                setReturnType={setReturnType}
+                canGenerate={canGenerate}
+                setCanGenerate={setCanGenerate}
+              />
+            </CardContent>
+          </Card>
+          <Output
+            cardHeight={cardHeight}
+            output={output}
+            secondOutput={secondOutput}
+            disabled={disabled}
+            returnType={returnType}
+            canGenerate={canGenerate}
+            rootFontSize={rootFontSize}
+          />
+        </div>
       </main>
 
       <div className={`main-wrapper mb-7`}>

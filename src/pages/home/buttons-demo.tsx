@@ -43,7 +43,7 @@ export const ButtonsDemo = () => {
           {buttonVariantsToRender.map(({ variant }) => (
             <div
               key={variant}
-              className="flex flex-col gap-2 shrink-0 w-max"
+              className="flex flex-col gap-3 shrink-0 w-max"
             >
               {buttons.map((button, index) => (
                 <Button

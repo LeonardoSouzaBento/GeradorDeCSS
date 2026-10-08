@@ -39,12 +39,7 @@ const ButtonStyleTester = ({ title = true }: { title?: boolean }) => {
         <h6 className={`${title ? "" : "hidden"}`}>
           Pré-visualizador de estilos e estados de botões
         </h6>
-        <div className="space-y-1.5">
-          <DownloadButtonPreview />
-          <p className="smaller-text text-muted-foreground text-center">
-            Download <strong>seguro</strong>. Nosso site é estático.
-          </p>
-        </div>
+        <DownloadButtonPreview />
         <div className="flex gap-3 overflow-x-auto pb-3 pt-1">
           {buttonStates.map(({ name, props }) => (
             <div
@@ -52,7 +47,7 @@ const ButtonStyleTester = ({ title = true }: { title?: boolean }) => {
               className="flex flex-col gap-2 shrink-0 w-max"
             >
               <p className="small-text text-muted-foreground font-medium">{name}</p>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-3">
                 {buttons.map((button) => {
                   if (name === "Desabilitado" && button === "destructive") {
                     return null;
