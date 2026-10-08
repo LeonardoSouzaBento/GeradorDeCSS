@@ -19,9 +19,9 @@ import { InputAlert } from "./input-alert";
 
 const css = {
   buttonsWrapperAlert: `mt-4 gap-4 grid grid-cols-1 sm:grid-cols-[1.5fr_1fr] xl:grid-cols-[1.5fr_1fr] max-w-xl`,
-  containerButtons: `h-max flex flex-row justify-start flex-nowrap gap-[1.5ex] 
-  sm:justify-between sm:flex-col sm:order-2`,
-  ButtonsWrapper: `h-max min-w-max sm:w-full relative sm:justify-between flex-nowrap`,
+  containerButtons: `h-max flex flex-row justify-start flex-nowrap gap-1.5 
+  sm:flex-col sm:order-2`,
+  ButtonsWrapper: `h-max min-w-max sm:w-full relative gap-1.5 flex-nowrap`,
 };
 
 const options = {
@@ -102,7 +102,7 @@ const AlignInput = () => {
             ))}
           </ButtonsWrapper>
           <Separator orientation="vertical" className="sm:hidden" />
-          <ButtonsWrapper className="h-max w-full relative sm:justify-between flex-nowrap">
+          <ButtonsWrapper className="h-max w-full relative gap-1.5 flex-nowrap">
             {options.positive.map((value) => (
               <DataOption
                 key={value}

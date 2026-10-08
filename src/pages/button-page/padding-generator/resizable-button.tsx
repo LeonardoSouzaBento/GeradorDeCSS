@@ -228,7 +228,7 @@ const ResizableButton = ({
             : "none",
           borderRadius: `${borderRadius}px`,
         }}
-        className={`h-fit flex items-center box-border
+        className={`h-fit flex items-center box-border whitespace-nowrap shrink-0
           leading-none rounded-xs gap-2`}
       >
         {children}

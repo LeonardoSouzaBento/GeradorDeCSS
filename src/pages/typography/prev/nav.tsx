@@ -9,7 +9,7 @@ const Nav = ({
   setSelectedComponent: (value: string) => void;
 }) => {
   return (
-    <nav className={`flex flex-wrap gap-3`}>
+    <nav className={`flex flex-wrap gap-1.5`}>
       {componentExamples.map((item) => {
         const selected = selectedComponent === item;
         return (

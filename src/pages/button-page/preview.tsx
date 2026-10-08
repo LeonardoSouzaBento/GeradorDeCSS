@@ -25,7 +25,7 @@ const Preview = ({ color50 }: { color50: string }) => {
   } = useButtonPageContext();
 
   return (
-    <FormWrapper className={`flex flex-col gap-3 min-w-full pb-0 border-none`}>
+    <FormWrapper className={`flex flex-col gap-3 w-full min-w-0 pb-0 border-none`}>
       <HeaderH6 mb={0}>
         <H6Title>
           <h6>Prévia</h6>
@@ -40,10 +40,10 @@ const Preview = ({ color50 }: { color50: string }) => {
           </AlertDescription>
         </Alert>
       )}
-      <div className="w-auto space-y-4">
-        <div className="flex flex-wrap gap-4 max-w-max">
+      <div className="w-full min-w-0 space-y-4">
+        <div className="flex gap-3 overflow-x-auto pb-2.5">
           {buttonTypes.map((type) => (
-            <ButtonsWrapper key={type} className="items-start">
+            <div key={type} className="flex flex-col gap-2 shrink-0 w-max items-start">
               {currentButtonsData.map((item, index) => {
                 return (
                   <ResizableButton
@@ -58,7 +58,7 @@ const Preview = ({ color50 }: { color50: string }) => {
                   />
                 );
               })}
-            </ButtonsWrapper>
+            </div>
           ))}
         </div>
         <ButtonsWrapper>

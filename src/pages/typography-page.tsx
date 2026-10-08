@@ -51,7 +51,7 @@ export default function TypographyPage({
         title="Escala Tipográfica"
         description="clamp() · rem · Tailwind e CSS"
         page="typography"
-        icon={<CaseSensitive strokeWidth={2} />}
+        icon={<CaseSensitive strokeWidth={1.75} className="size-7!" />}
         resizingCounter={resizingCounter}
       />
       <main

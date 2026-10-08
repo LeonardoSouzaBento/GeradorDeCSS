@@ -53,7 +53,7 @@ export const Header = ({
     <div
       ref={wrapperRef}
       style={{ height: removeHeader ? 0 : isMobile ? 'auto' : headerHeight || 'auto' }}
-      className="w-full box-border transition-all duration-300 overflow-hidden mb-5 bg-card/90 backdrop-blur-xs shadow-[0_2px_10px_-2px_rgba(0,0,0,0.07),0_1px_3px_-1px_rgba(0,0,0,0.04)]">
+      className="w-full box-border transition-all duration-300 overflow-hidden mb-5 bg-card/90 backdrop-blur-xs shadow-[0_1px_6px_-1px_rgba(0,0,0,0.045)]">
       <header
         ref={headerRef}
         className={cn(
@@ -61,10 +61,9 @@ export const Header = ({
           flex flex-col gap-3 md:flex-row md:items-center md:justify-between`,
           className,
         )}>
-        <div className="flex items-center gap-3 min-w-0">
+        <div className="flex items-center gap-2.5 min-w-0">
           <div
-            className="size-10 shrink-0 text-primary bg-primary-50 border border-primary-200/70
-            flex items-center justify-center rounded-[2px] [&>svg]:size-6 [&>div>svg]:size-6">
+            className="shrink-0 text-primary flex items-center justify-center [&>svg]:size-6 [&>div>svg]:size-6">
             {icon}
           </div>
           <div className="min-w-0 flex flex-col sm:flex-row sm:items-baseline sm:gap-2.5 text-left">
@@ -98,7 +97,13 @@ export const Header = ({
                     ? 'bg-secondary text-secondary-foreground font-medium'
                     : 'text-muted-foreground hover:text-foreground hover:bg-muted/60',
                 )}>
-                <ItemIcon className="size-5 shrink-0" />
+                <ItemIcon
+                  strokeWidth={item.icon === CaseSensitive ? 1.75 : 2}
+                  className={cn(
+                    'shrink-0',
+                    item.icon === CaseSensitive ? 'size-5.5' : 'size-5',
+                  )}
+                />
                 <span>{item.label}</span>
               </Link>
             );

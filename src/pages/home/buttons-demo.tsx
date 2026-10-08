@@ -50,6 +50,7 @@ export const ButtonsDemo = () => {
                   key={`${variant}-${index}`}
                   variant={variant}
                   size={button.size}
+                  data-demo-size
                   className="w-full whitespace-nowrap rounded-full"
                 >
                   <Icon

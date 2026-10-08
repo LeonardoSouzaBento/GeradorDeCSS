@@ -20,10 +20,10 @@ const ReturnOptions = ({ returnType, setReturnType, setCanGenerate }: Props) => 
   }, [returnType]);
 
   return (
-    <div className={`flex flex-col gap-[0.95cap] sm:pl-5 sm:border-l`}>
+    <div className={`flex flex-col gap-[0.85cap] sm:pl-5 sm:border-l`}>
       <Label>Saída</Label>
       <div
-        className={`w-full flex justify-start gap-3 sticky bottom-0
+        className={`w-full flex justify-start gap-1.5 sticky bottom-0
           right-0! sm:flex-col sm:max-w-max`}>
         {options.map((option) => (
           <Button

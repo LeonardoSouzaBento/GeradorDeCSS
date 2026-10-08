@@ -44,7 +44,7 @@ export const BorderRadiusInput = ({
               data-round
               variant="ghost"
               selected={borderRadius === radius}
-              size="icon"
+              size="sm"
               key={radius}
               onClick={() => setBorderRadius(radius)}
             >

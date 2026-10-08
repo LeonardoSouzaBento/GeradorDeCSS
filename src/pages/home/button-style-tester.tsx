@@ -35,7 +35,7 @@ const buttonStates: ButtonShowcaseState[] = [
 const ButtonStyleTester = ({ title = true }: { title?: boolean }) => {
   return (
     <div className="space-y-4 w-full min-w-0">
-      <FormWrapper className="space-y-3 border-none w-full min-w-0">
+      <FormWrapper className="space-y-3 border-none bg-transparent w-full min-w-0">
         <h6 className={`${title ? "" : "hidden"}`}>
           Pré-visualizador de estilos e estados de botões
         </h6>
@@ -72,7 +72,7 @@ const ButtonStyleTester = ({ title = true }: { title?: boolean }) => {
             </div>
           ))}
         </div>
-        <Alert data-no-title>
+        <Alert data-no-title className="bg-transparent">
           <Icon Icon={Info} size="sm" strokeWidth="extrabold" fill="white" />
           <AlertTitle>Importante</AlertTitle>
           <AlertDescription>

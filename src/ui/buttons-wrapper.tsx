@@ -10,7 +10,7 @@ interface ButtonsWrapperProps {
 export const ButtonsWrapper: React.FC<ButtonsWrapperProps> = ({
   children,
   className = '',
-  gap = 3,
+  gap = 1.5,
 }) => {
   return (
     <div

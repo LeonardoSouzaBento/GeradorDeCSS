@@ -121,11 +121,11 @@ const HeightInputs = ({ currentButtonsData, setCurrentButtonsData }: HeightInput
         setShowAlert={setShowAlert}
       />
       <ButtonsWrapper className="pt-[2ex]">
-        <Button variant="ghost" onClick={() => handleChangeScale('previous')}>
+        <Button variant="ghost" size="sm" onClick={() => handleChangeScale('previous')}>
           <Icon Icon={ChevronLeft} size="sm" />
           Escala anterior
         </Button>
-        <Button variant="ghost" onClick={() => handleChangeScale('next')}>
+        <Button variant="ghost" size="sm" onClick={() => handleChangeScale('next')}>
           Próxima escala
           <Icon Icon={ChevronRight} size="sm" />
         </Button>

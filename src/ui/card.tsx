@@ -20,8 +20,10 @@ const Card = React.forwardRef<DivRef, CardProps>(
       ref={ref}
       className={cn(
         `rounded-[2px] bg-card text-foreground flex flex-col
-       transition-shadow duration-200 shadow-[0_6px_22px_-4px_rgba(0,0,0,0.14),0_2px_8px_-2px_rgba(0,0,0,0.09)]`,
-        noHeader ? 'p-3.5 sm:p-4' : 'p-3.5 sm:p-4 pt-0',
+       transition-shadow duration-200 shadow-[0_3px_10px_-2px_rgba(0,0,0,0.07),0_1px_3px_-1px_rgba(0,0,0,0.04)]`,
+        noHeader
+          ? 'px-5 pb-5.5 pt-3.5 sm:px-6 sm:pb-6 sm:pt-4'
+          : 'px-5 pb-5.5 pt-0 sm:px-6 sm:pb-6 sm:pt-0',
         className,
       )}
       {...props}

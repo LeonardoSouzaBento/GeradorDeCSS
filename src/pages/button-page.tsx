@@ -297,7 +297,7 @@ export default function ButtonPage({
               <Nav setNavOption={setNavOptions} navOption={navOptions} />
               <CardContent
                 ref={containerRef}
-                className={`w-full flex flex-col gap-3 items-start overflow-y-scroll scrollbar-hidden`}
+                className={`w-full min-w-0 flex flex-col gap-3 items-start overflow-y-scroll scrollbar-hidden`}
               >
                 {navOptions === "Alturas" && (
                   <HeightInputs
