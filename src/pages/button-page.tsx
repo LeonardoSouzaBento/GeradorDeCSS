@@ -1,5 +1,5 @@
 import { FontSelector, Header } from "@/components/common/index";
-import { ButtonPageContext, useButtonPageContext } from "@/contexts";
+import { useButtonPageContext } from "@/contexts";
 import type { NavOptions, OptionReturn } from "@/data/buttons/variables";
 import { buttonsData, optionsReturn } from "@/data/buttons/variables";
 import { genButtonStyles } from "@/functions/buttons/genButtonStyles";
@@ -7,20 +7,14 @@ import { genIconComponent } from "@/functions/buttons/genIconComponent";
 import { genVariables } from "@/functions/buttons/genVariables";
 import { useColorShades } from "@/hooks/useColorShades";
 import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
-  Dialog,
-  DialogContent,
   Icon,
 } from "@/ui/index";
 import chroma from "chroma-js";
-import { AlertCircle, MousePointerClick } from "lucide-react";
+import { MousePointerClick } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BorderRadiusInput } from "./button-page/BorderRadiusInput";
 import ColorGenerator from "./button-page/color-palette/color-generator";
@@ -32,7 +26,6 @@ import {
 import {
   CSSReturn,
   Nav,
-  OptionsMenu,
   Preview,
   RemoveHeaderButton,
 } from "./button-page/index";
@@ -93,14 +86,12 @@ export default function ButtonPage({
   /* saidas e iteratividade */
   const [optionReturn, setOptionReturn] = useState<OptionReturn>("botão");
   const [removeHeader, setRemoveHeader] = useState<boolean>(false);
-  const [openSelect, setOpenSelect] = useState<boolean>(false);
   const currentOptionIndex = optionsReturn.findIndex(
     (item) => item === optionReturn
   );
   const [returns, setReturns] = useState<string[]>([]);
   const [navOptions, setNavOptions] = useState<NavOptions>("Alturas");
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [openDialog, setOpenDialog] = useState<boolean>(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -242,26 +233,11 @@ export default function ButtonPage({
 
   return (
     <div
-      onClick={() => setOpenSelect(false)}
       className="w-screen min-h-dvh grid grid-cols-1"
       style={{
         marginBottom: !removeHeader ? "2rem" : "0rem",
       }}
     >
-      <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-        <DialogContent className="p-5">
-          <Alert>
-            <Icon Icon={AlertCircle} size="lg" strokeWidth="light"/>
-            <div>
-              <AlertTitle>Importante</AlertTitle>
-              <AlertDescription>
-                Use nosso <strong>componente de ícone</strong> mostrado na saída
-                para evitar a distorçao da altura do botão.
-              </AlertDescription>
-            </div>
-          </Alert>
-        </DialogContent>
-      </Dialog>
       <Header
         page="buttons"
         title="Estilos de Botões"
@@ -273,11 +249,11 @@ export default function ButtonPage({
         isMobile={isMobile}
       />
       <main
-        className={`w-full space-y-6 px-3 next-md:px-6 lg:max-w-5xl xl:max-w-6xl mx-auto`}
+        className={`w-full space-y-5 sm:space-y-6 px-3 next-md:px-6 lg:max-w-5xl xl:max-w-6xl mx-auto pb-8`}
       >
-        <div className="grid grid-cols-1 gap-6">
-          <Card className="relative" ref={cardRef}>
-            <CardHeader className="border-none mb-[0.25ex]">
+        <div className="grid grid-cols-1 gap-5 sm:gap-6">
+          <Card className="relative min-w-0" ref={cardRef}>
+            <CardHeader className="border-none mb-2">
               <CardTitle>
                 <h3>Configurações</h3>
               </CardTitle>
@@ -286,14 +262,7 @@ export default function ButtonPage({
               removeHeader={removeHeader}
               setRemoveHeader={setRemoveHeader}
             />
-            <div className="flex flex-col gap-4 md:flex-row">
-              <OptionsMenu
-                openSelect={openSelect}
-                setNavOption={setNavOptions}
-                navOption={navOptions}
-                cardRef={cardRef}
-                setOpenSelect={setOpenSelect}
-              />
+            <div className="flex flex-col gap-4 min-w-0 w-full">
               <Nav setNavOption={setNavOptions} navOption={navOptions} />
               <CardContent
                 ref={containerRef}
@@ -352,10 +321,10 @@ export default function ButtonPage({
             colorNickname={colorNickname}
             setColorNickname={setColorNickname}
           />
-          <Card>
+          <Card className="[&_.bg-card]:bg-transparent [&_[role=alert]]:bg-transparent pb-4 sm:pb-5">
             <CardHeader>
-              <CardTitle>
-                <h3>Pré-visualizador de estados</h3>
+              <CardTitle className="justify-center text-center">
+                <h5>Baixe este componente react para previsualizar estilos de estados</h5>
               </CardTitle>
             </CardHeader>
             <CardContent className="w-full min-w-0 space-y-4">

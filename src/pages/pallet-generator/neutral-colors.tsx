@@ -6,7 +6,7 @@ import {
 } from '@/data/palette-generator/data';
 import { getHSL } from '@/functions/pallet-generator/genInitialColors';
 import { ColorShade } from '@/hooks/useColorShades';
-import { Card, CardHeader, CardTitle, Icon } from '@/ui';
+import { Card, Icon } from '@/ui';
 import { Palette } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { CssReturn, Inputs, Preview } from './index';
@@ -91,27 +91,27 @@ export const NeutralColors = ({ baseColor, setBaseColor, shades }: Props) => {
   }, [neutralColors]);
 
   return (
-    <Card className="space-y-4">
-      <CardHeader className="mb-3">
-        <CardTitle>
-          <Icon Icon={Palette} size="md" className="text-primary" />
-          <h3>Cores neutras</h3>
-        </CardTitle>
-      </CardHeader>
-
-      <div className="space-y-4">
-        <Inputs
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          setBaseColor={setBaseColor}
-          saturation={saturation}
-          setSaturation={setSaturation}
-          lightness={lightness}
-          setLightness={setLightness}
-        />
-        <Preview neutralColors={neutralColorsResult} />
-        <CssReturn neutralColors={cssReturn} />
+    <div className="space-y-3">
+      <div className="flex items-center gap-2 text-foreground">
+        <Icon Icon={Palette} size="md" className="text-primary" />
+        <h3>Cores neutras</h3>
       </div>
-    </Card>
+
+      <Card noHeader className="space-y-4">
+        <div className="space-y-4">
+          <Inputs
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            setBaseColor={setBaseColor}
+            saturation={saturation}
+            setSaturation={setSaturation}
+            lightness={lightness}
+            setLightness={setLightness}
+          />
+          <Preview neutralColors={neutralColorsResult} />
+          <CssReturn neutralColors={cssReturn} />
+        </div>
+      </Card>
+    </div>
   );
 };

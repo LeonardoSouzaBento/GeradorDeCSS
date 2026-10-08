@@ -30,7 +30,7 @@ export const Preferences = ({
   setColorName,
 }: Props) => {
   return (
-    <div className="w-full pb-5 border-b lg:pb-0 lg:border-none">
+    <div className="w-full">
       <HeaderH6 mb={1.5}>
         <H6Title>
           <Icon Icon={Settings2} />
@@ -74,7 +74,7 @@ const BaseColorInput = ({
   setColor: StateSetter<string>;
 }) => {
   return (
-    <InputWrapper className="lg:order-2 pb-5 border-b md:pb-0 md:border-none">
+    <InputWrapper className="lg:order-2">
       <Label>Cor base</Label>
       <ColorInput
         color={color}

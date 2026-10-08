@@ -39,38 +39,48 @@ export const ButtonsDemo = () => {
         </p>
       </div>
       <div className="space-y-3 pb-4">
-        <div className="flex gap-3 overflow-x-auto pb-2.5">
-          {buttonVariantsToRender.map(({ variant }) => (
-            <div
-              key={variant}
-              className="flex flex-col gap-3 shrink-0 w-max"
-            >
-              {buttons.map((button, index) => (
-                <Button
-                  key={`${variant}-${index}`}
-                  variant={variant}
-                  size={button.size}
-                  data-demo-size
-                  className="w-full whitespace-nowrap rounded-full"
-                >
-                  <Icon
-                    Icon={Pencil}
-                    size={iconSzes[index]}
-                    strokeWidth="semibold"
-                  />
-                  {button.text}
-                </Button>
-              ))}
-            </div>
-          ))}
+        <div className="space-y-1.5">
+          <p className="small-text text-muted-foreground font-medium">
+            Botões de texto
+          </p>
+          <div className="flex gap-3 overflow-x-auto pb-2.5">
+            {buttonVariantsToRender.map(({ variant }) => (
+              <div
+                key={variant}
+                className="flex flex-col gap-3 shrink-0 w-max"
+              >
+                {buttons.map((button, index) => (
+                  <Button
+                    key={`${variant}-${index}`}
+                    variant={variant}
+                    size={button.size}
+                    data-demo-size
+                    className="w-full whitespace-nowrap rounded-full"
+                  >
+                    <Icon
+                      Icon={Pencil}
+                      size={iconSzes[index]}
+                      strokeWidth="semibold"
+                    />
+                    {button.text}
+                  </Button>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
-        <ButtonsWrapper className="items-start pb-0.5">
-          {iconButtons.map((button, index) => (
-            <Button variant="secondary" key={index} size={button} className="rounded-full">
-              <Icon Icon={ThumbsUp} size={iconSzes[index]} className="mb-0.5 ml-0.5" />
-            </Button>
-          ))}
-        </ButtonsWrapper>
+        <div className="space-y-1.5">
+          <p className="small-text text-muted-foreground font-medium">
+            Botões de ícone
+          </p>
+          <ButtonsWrapper className="items-start pb-0.5">
+            {iconButtons.map((button, index) => (
+              <Button variant="secondary" key={index} size={button} className="rounded-full">
+                <Icon Icon={ThumbsUp} size={iconSzes[index]} className="mb-0.5 ml-0.5" />
+              </Button>
+            ))}
+          </ButtonsWrapper>
+        </div>
       </div>
       <ExpandablePre content={cssButtonPreview} />
     </div>

@@ -49,14 +49,14 @@ const App = () => {
               path="/buttons"
               element={
                 <ButtonPageProvider>
-                  <ButtonPage />
+                  <ButtonPage resizingCounter={resizingCounter} />
                 </ButtonPageProvider>
               }
             />
             <Route path="/test" element={<TestPage />} />
             <Route
               path="/palette-generator"
-              element={<PaletteGeneratorPage />}
+              element={<PaletteGeneratorPage resizingCounter={resizingCounter} />}
             />
             <Route path="*" element={<NotFound />} />
           </Routes>

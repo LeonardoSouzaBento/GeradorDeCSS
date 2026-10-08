@@ -1,7 +1,9 @@
 import { configOptions, NavOptions } from "@/data/buttons/variables";
 import { StateSetter } from "@/data/typography/types";
-import { Button, Icon } from "@/ui";
+import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
+
+const allOptions = configOptions.flatMap((section) => section.options);
 
 const Nav = ({
   navOption,
@@ -11,25 +13,15 @@ const Nav = ({
   setNavOption: StateSetter<NavOptions>;
 }) => {
   return (
-    <nav
-      className={`hidden md:flex min-w-max flex-col space-y-[1ex]
-      border-r rounded-xs pr-4 box-content`}
-    >
-      {configOptions.map((section) => (
-        <div key={section.name} className="space-y-1">
-          <p className="text-muted-foreground font-medium">{section.name}</p>
-          <div className="flex flex-col items-start gap-[1ex]">
-            {section.options.map((option) => (
-              <DataOption
-                IconComp={option.icon}
-                key={option.name}
-                value={option.name as NavOptions}
-                navOption={navOption}
-                setNavOption={setNavOption}
-              />
-            ))}
-          </div>
-        </div>
+    <nav className="w-full min-w-0 max-w-full flex items-center gap-1 overflow-x-auto pb-2.5 border-b border-border/50">
+      {allOptions.map((option) => (
+        <DataOption
+          IconComp={option.icon}
+          key={option.name}
+          value={option.name as NavOptions}
+          navOption={navOption}
+          setNavOption={setNavOption}
+        />
       ))}
     </nav>
   );
@@ -50,16 +42,21 @@ const DataOption = ({
   setNavOption,
   IconComp,
 }: OptionButtonProps) => {
+  const isActive = value === navOption;
+
   return (
-    <Button
-      size="sm"
-      variant="link"
-      selected={value === navOption}
+    <button
+      type="button"
       onClick={() => setNavOption(value)}
-      className="w-full justify-start px-[1.4ex] gap-[1ex]"
+      className={cn(
+        "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full small-text transition-colors whitespace-nowrap shrink-0 cursor-pointer",
+        isActive
+          ? "bg-secondary text-secondary-foreground font-medium"
+          : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+      )}
     >
-      <Icon Icon={IconComp} size="md" className="mb-0.75" strokeWidth="medium" />
-      {value}
-    </Button>
+      <IconComp strokeWidth={2} className="size-5 shrink-0" />
+      <span>{value}</span>
+    </button>
   );
 };

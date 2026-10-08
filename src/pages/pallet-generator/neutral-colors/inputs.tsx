@@ -36,7 +36,7 @@ export const Inputs = ({
   setLightness,
 }: InputsProps) => {
   return (
-    <div className="pb-5 border-b">
+    <div>
       <HeaderH6 mb={1.5}>
         <H6Title>
           <Icon Icon={Settings2} />

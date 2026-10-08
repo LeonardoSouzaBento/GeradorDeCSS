@@ -22,7 +22,7 @@ const Card = React.forwardRef<DivRef, CardProps>(
         `rounded-[2px] bg-card text-foreground flex flex-col
        transition-shadow duration-200 shadow-[0_3px_10px_-2px_rgba(0,0,0,0.07),0_1px_3px_-1px_rgba(0,0,0,0.04)]`,
         noHeader
-          ? 'px-5 pb-5.5 pt-3.5 sm:px-6 sm:pb-6 sm:pt-4'
+          ? 'px-5 pb-5.5 pt-4 sm:px-6 sm:pb-6 sm:pt-5'
           : 'px-5 pb-5.5 pt-0 sm:px-6 sm:pb-6 sm:pt-0',
         className,
       )}
@@ -37,7 +37,7 @@ const CardHeader = React.forwardRef<DivRef, DivProps>(({ className, ...props }, 
     <div
       ref={ref}
       className={cn(
-        `flex flex-col space-y-0.5 pb-0 mb-1`,
+        `flex flex-col space-y-1 pb-0 mb-2`,
         className,
       )}
       {...props}
@@ -50,7 +50,7 @@ const CardTitle = React.forwardRef<HeadRef, HeadProps>(({ className, ...props },
   <div
     ref={ref}
     className={cn(
-      'tracking-tight leading-snug pt-3 flex justify-start items-center gap-2 text-foreground',
+      'tracking-tight leading-snug pt-4 sm:pt-4.5 flex justify-start items-center gap-2 text-foreground',
       className,
     )}
     {...props}

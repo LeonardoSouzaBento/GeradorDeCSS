@@ -42,7 +42,7 @@ const Output = ({
 
   return (
     <Card
-      className={`w-[88%] sm:w-[85%] shrink-0 snap-start xl:w-full animate-in fade-in slide-in-from-bottom-4 relative max-h-full 
+      className={`w-full animate-in fade-in slide-in-from-bottom-4 relative max-h-full 
       space-y-4`}
       noHeader
       style={{ height: cardHeight || '22rem' }}>

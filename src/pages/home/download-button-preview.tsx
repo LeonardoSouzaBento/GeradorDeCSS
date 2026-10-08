@@ -27,7 +27,7 @@ export const DownloadButtonPreview = () => {
   };
 
   return (
-    <Button variant="ghost" data-w-full onClick={handleDownload} className="shadow-sm">
+    <Button variant="ghost" size="sm" data-w-full onClick={handleDownload} className="shadow-sm">
       <Icon Icon={Download} size="lg" /> Baixar componente
     </Button>
   );

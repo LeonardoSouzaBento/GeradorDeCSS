@@ -21,8 +21,8 @@ const CSSReturn = ({
   colorNickname,
 }: CSSReturnProps) => {
   return (
-    <Card className="h-full space-y-5 relative">
-      <CardHeader className="border-none mb-[0.25ex]">
+    <Card className="h-full space-y-4 relative">
+      <CardHeader className="border-none mb-0">
         <CardTitle>
           <h3>Retorno</h3>
         </CardTitle>

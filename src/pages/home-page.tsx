@@ -28,8 +28,8 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
         description="Utilitários de tipografia, botões e cores"
         icon={<Icon Icon={Sparkles} size="md" strokeWidth="medium" />}
       />
-      <div className="main-wrapper space-y-5">
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
+      <div className="main-wrapper space-y-5 sm:space-y-6">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 sm:gap-6">
           <Card className="min-w-0 justify-between">
             <div>
               <CardHeader>
@@ -71,9 +71,9 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
           </Card>
         </div>
 
-        <Card className="bg-white/50 border border-border/80 [&_.bg-card]:bg-transparent [&_[role=alert]]:bg-transparent">
+        <Card className="bg-white/50 border border-border/80 [&_.bg-card]:bg-transparent [&_[role=alert]]:bg-transparent pb-4 sm:pb-5">
           <CardHeader>
-            <CardTitle>
+            <CardTitle className="justify-center text-center">
               <h5>Baixe este componente react para previsualizar estilos de estados</h5>
             </CardTitle>
           </CardHeader>

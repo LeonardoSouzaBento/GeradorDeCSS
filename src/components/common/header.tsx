@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { CaseSensitive, Home, MousePointerClick, Palette } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 interface Props {
@@ -21,6 +21,8 @@ const navItems = [
   { path: '/palette-generator', label: 'Paleta', icon: Palette },
 ];
 
+let savedNavScrollLeft = 0;
+
 export const Header = ({
   title,
   description,
@@ -32,7 +34,8 @@ export const Header = ({
 }: Props) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const [headerHeight, setHeaderHeight] = useState<number | string>(0);
+  const navRef = useRef<HTMLElement>(null);
+  const [headerHeight, setHeaderHeight] = useState<number | string>('auto');
   const location = useLocation();
 
   function getHeight() {
@@ -41,8 +44,11 @@ export const Header = ({
     setHeaderHeight(height);
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     getHeight();
+    if (navRef.current && savedNavScrollLeft > 0) {
+      navRef.current.scrollLeft = savedNavScrollLeft;
+    }
   }, []);
 
   useEffect(() => {
@@ -53,11 +59,11 @@ export const Header = ({
     <div
       ref={wrapperRef}
       style={{ height: removeHeader ? 0 : isMobile ? 'auto' : headerHeight || 'auto' }}
-      className="w-full box-border transition-all duration-300 overflow-hidden mb-5 bg-card/90 backdrop-blur-xs shadow-[0_1px_6px_-1px_rgba(0,0,0,0.045)]">
+      className="w-full box-border transition-all duration-300 overflow-hidden mb-5 sm:mb-6 bg-card/90 backdrop-blur-xs shadow-[0_1px_6px_-1px_rgba(0,0,0,0.045)]">
       <header
         ref={headerRef}
         className={cn(
-          `w-full py-3.5 px-3 sm:px-6 max-w-7xl mx-auto box-border
+          `w-full py-3.5 sm:py-4 px-3 sm:px-6 max-w-7xl mx-auto box-border
           flex flex-col gap-3 md:flex-row md:items-center md:justify-between`,
           className,
         )}>
@@ -83,7 +89,12 @@ export const Header = ({
           </div>
         </div>
 
-        <nav className="flex items-center gap-1 overflow-x-auto scrollbar-hidden border-t border-border/50 pt-2 md:border-none md:pt-0">
+        <nav
+          ref={navRef}
+          onScroll={(e) => {
+            savedNavScrollLeft = e.currentTarget.scrollLeft;
+          }}
+          className="flex items-center gap-1 overflow-x-auto pb-2.5 md:pb-0 border-t border-border/50 pt-2 md:border-none md:pt-0">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             const ItemIcon = item.icon;

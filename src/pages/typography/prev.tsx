@@ -1,4 +1,3 @@
-import { FontSelector } from "@/components/common/font-selector";
 import { Icon } from "@/ui/lucide-icon";
 import { ClampValue } from "@/data/typography/types";
 import { useResizeWatcher } from "@/hooks/useResizeWatcher";
@@ -22,7 +21,7 @@ import {
 } from "./prev/index";
 
 const css = {
-  wrapper: `w-full mb-7 mx-auto`,
+  wrapper: `w-full mx-auto`,
   section: `min-h-max space-y-3 box-content bg-background/50 p-5 rounded-xs`,
 };
 
@@ -62,7 +61,7 @@ const Prev = ({
 
   return (
     <Card className={css.wrapper}>
-      <CardHeader className={`pb-5 mb-4.5 space-y-ex-offset`}>
+      <CardHeader className={`pb-4 mb-3 space-y-2`}>
         <CardTitle>
           <h3>Prévia</h3>
         </CardTitle>
@@ -82,33 +81,30 @@ const Prev = ({
         </Alert>
       )}
 
-      <div className={`xl:grid xl:grid-cols-2 xl:gap-7`}>
-        <CardContent className={`font-target`}>
-          <section
-            className={css.section}
-            style={{
-              height: firstSectionHeight,
-            }}
-          >
-            {selectedComponent === "títulos" && (
-              <TitlesSection
-                props={{ ref: firstSectionRef }}
-                clampValues={clampValues}
-              />
-            )}
-            {selectedComponent === "parágrafos" && (
-              <ParagraphsSection clampValues={clampValues} />
-            )}
-            {selectedComponent === "botões" && (
-              <ButtonsSection clampValues={clampValues} />
-            )}
-            {selectedComponent === "formulários" && (
-              <FormsSection clampValues={clampValues} />
-            )}
-          </section>
-        </CardContent>
-        <FontSelector />
-      </div>
+      <CardContent className={`font-target`}>
+        <section
+          className={css.section}
+          style={{
+            height: firstSectionHeight,
+          }}
+        >
+          {selectedComponent === "títulos" && (
+            <TitlesSection
+              props={{ ref: firstSectionRef }}
+              clampValues={clampValues}
+            />
+          )}
+          {selectedComponent === "parágrafos" && (
+            <ParagraphsSection clampValues={clampValues} />
+          )}
+          {selectedComponent === "botões" && (
+            <ButtonsSection clampValues={clampValues} />
+          )}
+          {selectedComponent === "formulários" && (
+            <FormsSection clampValues={clampValues} />
+          )}
+        </section>
+      </CardContent>
     </Card>
   );
 };

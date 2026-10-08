@@ -35,18 +35,18 @@ const buttonStates: ButtonShowcaseState[] = [
 const ButtonStyleTester = ({ title = true }: { title?: boolean }) => {
   return (
     <div className="space-y-4 w-full min-w-0">
-      <FormWrapper className="space-y-3 border-none bg-transparent w-full min-w-0">
-        <h6 className={`${title ? "" : "hidden"}`}>
+      <FormWrapper className="space-y-3 border-none pb-0 bg-transparent w-full min-w-0">
+        <h6 className={`text-center ${title ? "" : "hidden"}`}>
           Pré-visualizador de estilos e estados de botões
         </h6>
         <DownloadButtonPreview />
-        <div className="flex gap-3 overflow-x-auto pb-3 pt-1">
+        <div className="flex gap-3 overflow-x-auto pb-3 pt-1 justify-start sm:justify-center">
           {buttonStates.map(({ name, props }) => (
             <div
               key={name}
-              className="flex flex-col gap-2 shrink-0 w-max"
+              className="flex flex-col items-center gap-2 shrink-0 w-max"
             >
-              <p className="small-text text-muted-foreground font-medium">{name}</p>
+              <p className="small-text text-muted-foreground font-medium text-center w-full">{name}</p>
               <div className="flex flex-col gap-3">
                 {buttons.map((button) => {
                   if (name === "Desabilitado" && button === "destructive") {
