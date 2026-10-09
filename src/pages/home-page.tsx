@@ -15,7 +15,6 @@ import {
   MousePointerClick,
   Sparkles,
 } from "lucide-react";
-import ButtonStyleTester from "./home/button-style-tester";
 import { ButtonsDemo, TypographyDemo } from "./home/index";
 
 const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
@@ -70,17 +69,6 @@ const Home = ({ resizingCounter }: { resizingCounter?: number }) => {
             </div>
           </Card>
         </div>
-
-        <Card className="bg-white/50 border border-border/80 [&_.bg-card]:bg-transparent [&_[role=alert]]:bg-transparent pb-4 sm:pb-5">
-          <CardHeader>
-            <CardTitle className="justify-center text-center">
-              <h5>Baixe este componente react para previsualizar estilos de estados</h5>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="w-full min-w-0 space-y-4">
-            <ButtonStyleTester title={false} />
-          </CardContent>
-        </Card>
       </div>
     </div>
   );

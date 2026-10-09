@@ -63,7 +63,7 @@ export const FontSelector = ({
   const fontList = typographyPage ? typographyFonts : buttonPageFonts;
 
   return (
-    <FormWrapper className={`${typographyPage ? 'mt-4 xl:mt-2' : 'xl:mt-0'}`}>
+    <FormWrapper className="xl:mt-0">
       <form onSubmit={handleSubmit} className={`border-b mb-[1cap]`}>
         <div className="pb-2">
           {typographyPage ? (

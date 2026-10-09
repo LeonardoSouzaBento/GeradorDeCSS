@@ -1,9 +1,11 @@
 import { StateSetter } from '@/data/typography/types';
+import { cn } from '@/lib/utils';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/ui/accordion';
 import { Button } from '@/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/ui/card';
 import { Icon } from '@/ui/lucide-icon';
-import { Eye } from 'lucide-react';
+import { ChevronDown, Eye } from 'lucide-react';
+import { useState } from 'react';
 
 const guidelines = [
   {
@@ -59,34 +61,49 @@ const guidelines = [
 ];
 
 const PersonalGuidelines = ({ setShowMoreStyles }: { setShowMoreStyles: StateSetter<boolean> }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Card className={`xl:mb-0 flex flex-col justify-between`}>
+    <Card className={cn('xl:mb-0 flex flex-col justify-between h-fit', !isOpen && 'pb-4 sm:pb-4.5')}>
       <div>
-        <CardHeader className={`mb-3`}>
-          <CardTitle>
+        <CardHeader className={cn(isOpen ? 'mb-3' : 'mb-0')}>
+          <CardTitle
+            onClick={() => setIsOpen((prev) => !prev)}
+            className="w-full justify-between cursor-pointer select-none">
             <h3>Orientações</h3>
+            <Icon
+              Icon={ChevronDown}
+              className={cn(
+                'shrink-0 transition-transform duration-200',
+                isOpen && 'rotate-180',
+              )}
+            />
           </CardTitle>
         </CardHeader>
-        <CardContent className={`space-y-3`}>
-          <Accordion type="single" collapsible className="w-full gap-cap-offset">
-            {guidelines.map((item, index) => (
-              <AccordionItem key={index} value={`guideline-${index}`} className="mb-2">
-                <AccordionTrigger>{item.title}</AccordionTrigger>
-                <AccordionContent>{item.content}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </CardContent>
+        {isOpen && (
+          <CardContent className="space-y-3">
+            <Accordion type="single" collapsible className="w-full gap-cap-offset">
+              {guidelines.map((item, index) => (
+                <AccordionItem key={index} value={`guideline-${index}`} className="mb-2">
+                  <AccordionTrigger>{item.title}</AccordionTrigger>
+                  <AccordionContent>{item.content}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </CardContent>
+        )}
       </div>
-      <CardContent className="pt-2">
-        <Button
-          variant="outline"
-          className={`w-full px-5 sm:px-6 hover:shadow-xs`}
-          onClick={() => setShowMoreStyles(true)}>
-          <Icon Icon={Eye} size="sm" />
-          Ver mais estilos recomendados
-        </Button>
-      </CardContent>
+      {isOpen && (
+        <CardContent className="pt-2">
+          <Button
+            variant="outline"
+            className="w-full px-5 sm:px-6 hover:shadow-xs"
+            onClick={() => setShowMoreStyles(true)}>
+            <Icon Icon={Eye} size="sm" />
+            Ver mais estilos recomendados
+          </Button>
+        </CardContent>
+      )}
     </Card>
   );
 };

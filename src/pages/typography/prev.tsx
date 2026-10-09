@@ -48,13 +48,13 @@ const Prev = ({
   useResizeWatcher(setWasResize);
 
   useEffect(() => {
-    if (firstSectionRef.current) {
+    if (firstSectionRef.current && firstSectionRef.current.offsetHeight > 0) {
       setFirstSectionHeight(firstSectionRef.current.offsetHeight);
     }
   }, []);
 
   useEffect(() => {
-    if (firstSectionRef.current) {
+    if (firstSectionRef.current && firstSectionRef.current.scrollHeight > 0) {
       setFirstSectionHeight(firstSectionRef.current.scrollHeight);
     }
   }, [wasResize]);

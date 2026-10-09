@@ -1,9 +1,18 @@
 import { PalletPreview } from '@/components/common/index';
 import { ColorShade } from '@/hooks/useColorShades';
+import { cn } from '@/lib/utils';
 import { Card, H6Title, HeaderH6, Icon } from '@/ui';
-import { Eye, Palette } from 'lucide-react';
+import { Eye, NotepadText, Palette, Settings2 } from 'lucide-react';
 import { useState } from 'react';
 import { GeneratedVars, Preferences } from './thematic-colors/index';
+
+type CardSection = 'preferencias' | 'previa' | 'saida';
+
+const sectionOptions: { id: CardSection; label: string; icon: typeof Settings2 }[] = [
+  { id: 'preferencias', label: 'Preferências', icon: Settings2 },
+  { id: 'previa', label: 'Prévia', icon: Eye },
+  { id: 'saida', label: 'Código', icon: NotepadText },
+];
 
 interface Props {
   baseColor: string;
@@ -12,6 +21,7 @@ interface Props {
 }
 
 export const ThematicColors = ({ baseColor, setBaseColor, shades }: Props) => {
+  const [activeSection, setActiveSection] = useState<CardSection>('preferencias');
   const [colorPrefix, setColorPrefix] = useState<boolean>(true);
   const [colorName, setColorName] = useState<string>('primary');
 
@@ -23,16 +33,42 @@ export const ThematicColors = ({ baseColor, setBaseColor, shades }: Props) => {
       </div>
 
       <Card noHeader className="space-y-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <Preferences
-            color={baseColor}
-            setColor={setBaseColor}
-            colorPrefix={colorPrefix}
-            setColorPrefix={setColorPrefix}
-            colorName={colorName}
-            setColorName={setColorName}
-          />
-          <div>
+        <nav className="w-full min-w-0 max-w-full flex items-center gap-1 overflow-x-auto pb-2.5 border-b border-border/50">
+          {sectionOptions.map((opt) => {
+            const isActive = activeSection === opt.id;
+            const OptIcon = opt.icon;
+            return (
+              <button
+                key={opt.id}
+                type="button"
+                onClick={() => setActiveSection(opt.id)}
+                className={cn(
+                  'inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full small-text transition-colors whitespace-nowrap shrink-0 cursor-pointer',
+                  isActive
+                    ? 'bg-secondary text-secondary-foreground font-medium'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/60',
+                )}
+              >
+                <OptIcon strokeWidth={2} className="size-5 shrink-0" />
+                <span>{opt.label}</span>
+              </button>
+            );
+          })}
+        </nav>
+
+        <div className="space-y-4">
+          <div className={cn(activeSection !== 'preferencias' && 'hidden')}>
+            <Preferences
+              color={baseColor}
+              setColor={setBaseColor}
+              colorPrefix={colorPrefix}
+              setColorPrefix={setColorPrefix}
+              colorName={colorName}
+              setColorName={setColorName}
+            />
+          </div>
+
+          <div className={cn(activeSection !== 'previa' && 'hidden')}>
             <HeaderH6 mb={1.5}>
               <H6Title>
                 <Icon Icon={Eye} />
@@ -41,8 +77,11 @@ export const ThematicColors = ({ baseColor, setBaseColor, shades }: Props) => {
             </HeaderH6>
             <PalletPreview shades={shades} cssWrapper={'max-w-max'} />
           </div>
+
+          <div className={cn(activeSection !== 'saida' && 'hidden')}>
+            <GeneratedVars shades={shades} colorName={colorName} colorPrefix={colorPrefix} />
+          </div>
         </div>
-        <GeneratedVars shades={shades} colorName={colorName} colorPrefix={colorPrefix} />
       </Card>
     </div>
   );

@@ -6,10 +6,19 @@ import {
 } from '@/data/palette-generator/data';
 import { getHSL } from '@/functions/pallet-generator/genInitialColors';
 import { ColorShade } from '@/hooks/useColorShades';
+import { cn } from '@/lib/utils';
 import { Card, Icon } from '@/ui';
-import { Palette } from 'lucide-react';
+import { Eye, NotepadText, Palette, Settings2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { CssReturn, Inputs, Preview } from './index';
+
+type CardSection = 'preferencias' | 'previa' | 'saida';
+
+const sectionOptions: { id: CardSection; label: string; icon: typeof Settings2 }[] = [
+  { id: 'preferencias', label: 'Preferências', icon: Settings2 },
+  { id: 'previa', label: 'Prévia', icon: Eye },
+  { id: 'saida', label: 'Código', icon: NotepadText },
+];
 
 /* pegar os stops de cada variável */
 const getBaseColor = (stops: number[], shades: ColorShade[]) => {
@@ -29,6 +38,7 @@ interface Props {
 export type NeutralColors = Record<string, string>;
 
 export const NeutralColors = ({ baseColor, setBaseColor, shades }: Props) => {
+  const [activeSection, setActiveSection] = useState<CardSection>('preferencias');
   const [inputValue, setInputValue] = useState<string>('#1F4780');
   const [cssReturn, setCssReturn] = useState('');
   const [saturation, setSaturation] = useState<number>(3);
@@ -98,18 +108,47 @@ export const NeutralColors = ({ baseColor, setBaseColor, shades }: Props) => {
       </div>
 
       <Card noHeader className="space-y-4">
+        <nav className="w-full min-w-0 max-w-full flex items-center gap-1 overflow-x-auto pb-2.5 border-b border-border/50">
+          {sectionOptions.map((opt) => {
+            const isActive = activeSection === opt.id;
+            const OptIcon = opt.icon;
+            return (
+              <button
+                key={opt.id}
+                type="button"
+                onClick={() => setActiveSection(opt.id)}
+                className={cn(
+                  'inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full small-text transition-colors whitespace-nowrap shrink-0 cursor-pointer',
+                  isActive
+                    ? 'bg-secondary text-secondary-foreground font-medium'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/60',
+                )}
+              >
+                <OptIcon strokeWidth={2} className="size-5 shrink-0" />
+                <span>{opt.label}</span>
+              </button>
+            );
+          })}
+        </nav>
+
         <div className="space-y-4">
-          <Inputs
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-            setBaseColor={setBaseColor}
-            saturation={saturation}
-            setSaturation={setSaturation}
-            lightness={lightness}
-            setLightness={setLightness}
-          />
-          <Preview neutralColors={neutralColorsResult} />
-          <CssReturn neutralColors={cssReturn} />
+          <div className={cn(activeSection !== 'preferencias' && 'hidden')}>
+            <Inputs
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              setBaseColor={setBaseColor}
+              saturation={saturation}
+              setSaturation={setSaturation}
+              lightness={lightness}
+              setLightness={setLightness}
+            />
+          </div>
+          <div className={cn(activeSection !== 'previa' && 'hidden')}>
+            <Preview neutralColors={neutralColorsResult} />
+          </div>
+          <div className={cn(activeSection !== 'saida' && 'hidden')}>
+            <CssReturn neutralColors={cssReturn} />
+          </div>
         </div>
       </Card>
     </div>

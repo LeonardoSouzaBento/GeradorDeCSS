@@ -6,6 +6,7 @@ import { genButtonStyles } from "@/functions/buttons/genButtonStyles";
 import { genIconComponent } from "@/functions/buttons/genIconComponent";
 import { genVariables } from "@/functions/buttons/genVariables";
 import { useColorShades } from "@/hooks/useColorShades";
+import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -14,7 +15,7 @@ import {
   Icon,
 } from "@/ui/index";
 import chroma from "chroma-js";
-import { MousePointerClick } from "lucide-react";
+import { CodeXml, Eye, MousePointerClick, SlidersHorizontal } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BorderRadiusInput } from "./button-page/BorderRadiusInput";
 import ColorGenerator from "./button-page/color-palette/color-generator";
@@ -44,6 +45,14 @@ export type MainStopColors = {
   less: string;
   more: string;
 };
+
+type ButtonPageTab = "configurar" | "previa" | "saida";
+
+const buttonTabOptions: { id: ButtonPageTab; label: string; icon: typeof SlidersHorizontal }[] = [
+  { id: "configurar", label: "Configurar", icon: SlidersHorizontal },
+  { id: "previa", label: "Prévia", icon: Eye },
+  { id: "saida", label: "Código", icon: CodeXml },
+];
 
 export default function ButtonPage({
   resizingCounter,
@@ -84,6 +93,7 @@ export default function ButtonPage({
   } = useButtonPageContext();
   const { shades, color1000, color50 } = useColorShades(color, freezeColors);
   /* saidas e iteratividade */
+  const [activeTab, setActiveTab] = useState<ButtonPageTab>("configurar");
   const [optionReturn, setOptionReturn] = useState<OptionReturn>("botão");
   const [removeHeader, setRemoveHeader] = useState<boolean>(false);
   const currentOptionIndex = optionsReturn.findIndex(
@@ -248,79 +258,109 @@ export default function ButtonPage({
         removeHeader={removeHeader}
         isMobile={isMobile}
       />
+      <div className="w-full px-3 next-md:px-6 lg:max-w-5xl xl:max-w-6xl mx-auto mb-4 sm:mb-5">
+        <nav className="w-full min-w-0 max-w-full flex items-center gap-1 overflow-x-auto pb-2.5 border-b border-border/50">
+          {buttonTabOptions.map((tab) => {
+            const isActive = activeTab === tab.id;
+            const TabIcon = tab.icon;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+                className={cn(
+                  "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full small-text transition-colors whitespace-nowrap shrink-0 cursor-pointer",
+                  isActive
+                    ? "bg-secondary text-secondary-foreground font-medium"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                )}
+              >
+                <TabIcon strokeWidth={2} className="size-5 shrink-0" />
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
+        </nav>
+      </div>
       <main
         className={`w-full space-y-5 sm:space-y-6 px-3 next-md:px-6 lg:max-w-5xl xl:max-w-6xl mx-auto pb-8`}
       >
         <div className="grid grid-cols-1 gap-5 sm:gap-6">
-          <Card className="relative min-w-0" ref={cardRef}>
-            <CardHeader className="border-none mb-2">
-              <CardTitle>
-                <h3>Configurações</h3>
-              </CardTitle>
-            </CardHeader>
-            <RemoveHeaderButton
-              removeHeader={removeHeader}
-              setRemoveHeader={setRemoveHeader}
+          <div className={cn("min-w-0", activeTab !== "configurar" && "hidden")}>
+            <Card className="relative min-w-0" ref={cardRef}>
+              <CardHeader className="border-none mb-2">
+                <CardTitle>
+                  <h3>Configurações</h3>
+                </CardTitle>
+              </CardHeader>
+              <RemoveHeaderButton
+                removeHeader={removeHeader}
+                setRemoveHeader={setRemoveHeader}
+              />
+              <div className="flex flex-col gap-4 min-w-0 w-full">
+                <Nav setNavOption={setNavOptions} navOption={navOptions} />
+                <CardContent
+                  ref={containerRef}
+                  className={`w-full min-w-0 flex flex-col gap-3 items-start overflow-y-scroll scrollbar-hidden`}
+                >
+                  {navOptions === "Alturas" && (
+                    <HeightInputs
+                      currentButtonsData={currentButtonsData}
+                      setCurrentButtonsData={setCurrentButtonsData}
+                    />
+                  )}
+                  {navOptions === "Outline" && <OutlineInput />}
+                  {navOptions === "Cor" && (
+                    <ColorInput color={color} setColor={setColor} />
+                  )}
+                  {navOptions === "Alinhamento" && <AlignInput />}
+                  {navOptions === "Padding X" && (
+                    <PaddingXInput
+                      paddingX={paddingX}
+                      setPaddingX={setPaddingX}
+                    />
+                  )}
+                  {navOptions === "Fonte" && <FontSelector page="button-page" />}
+                  {navOptions === "Font-size base" && (
+                    <div className="space-y-5">
+                      <InitialSize
+                        initialFontSize={initialFontSize}
+                        setInitialFontSize={setInitialFontSize}
+                      />
+                      <FontScales
+                        scaleValue={scaleValue}
+                        setScaleValue={setScaleValue}
+                      />
+                    </div>
+                  )}
+                  {navOptions === "Pesos" && (
+                    <WeightInputs containerRef={containerRef} />
+                  )}
+                  {navOptions === "Font-size dos botões" && <RelativeSizes />}
+                  {navOptions === "Paleta" && <ColorGenerator shades={shades} />}
+                  {navOptions === "Raio de borda" && (
+                    <BorderRadiusInput
+                      borderRadius={borderRadius}
+                      setBorderRadius={setBorderRadius}
+                    />
+                  )}
+                </CardContent>
+              </div>
+            </Card>
+          </div>
+          <div className={cn("min-w-0", activeTab !== "previa" && "hidden")}>
+            <Preview color50={color50} />
+          </div>
+          <div className={cn("min-w-0", activeTab !== "saida" && "hidden")}>
+            <CSSReturn
+              optionReturn={optionReturn}
+              setOptionReturn={setOptionReturn}
+              returns={returns}
+              currentOptionIndex={currentOptionIndex}
+              colorNickname={colorNickname}
+              setColorNickname={setColorNickname}
             />
-            <div className="flex flex-col gap-4 min-w-0 w-full">
-              <Nav setNavOption={setNavOptions} navOption={navOptions} />
-              <CardContent
-                ref={containerRef}
-                className={`w-full min-w-0 flex flex-col gap-3 items-start overflow-y-scroll scrollbar-hidden`}
-              >
-                {navOptions === "Alturas" && (
-                  <HeightInputs
-                    currentButtonsData={currentButtonsData}
-                    setCurrentButtonsData={setCurrentButtonsData}
-                  />
-                )}
-                {navOptions === "Outline" && <OutlineInput />}
-                {navOptions === "Cor" && (
-                  <ColorInput color={color} setColor={setColor} />
-                )}
-                {navOptions === "Alinhamento" && <AlignInput />}
-                {navOptions === "Padding X" && (
-                  <PaddingXInput
-                    paddingX={paddingX}
-                    setPaddingX={setPaddingX}
-                  />
-                )}
-                {navOptions === "Fonte" && <FontSelector page="button-page" />}
-                {navOptions === "Font-size base" && (
-                  <div className="space-y-5">
-                    <InitialSize
-                      initialFontSize={initialFontSize}
-                      setInitialFontSize={setInitialFontSize}
-                    />
-                    <FontScales
-                      scaleValue={scaleValue}
-                      setScaleValue={setScaleValue}
-                    />
-                  </div>
-                )}
-                {navOptions === "Pesos" && (
-                  <WeightInputs containerRef={containerRef} />
-                )}
-                {navOptions === "Font-size dos botões" && <RelativeSizes />}
-                {navOptions === "Paleta" && <ColorGenerator shades={shades} />}
-                {navOptions === "Raio de borda" && (
-                  <BorderRadiusInput
-                    borderRadius={borderRadius}
-                    setBorderRadius={setBorderRadius}
-                  />
-                )}
-                <Preview color50={color50} />
-              </CardContent>
-            </div>
-          </Card>
-          <CSSReturn
-            optionReturn={optionReturn}
-            setOptionReturn={setOptionReturn}
-            returns={returns}
-            currentOptionIndex={currentOptionIndex}
-            colorNickname={colorNickname}
-            setColorNickname={setColorNickname}
-          />
+          </div>
           <Card className="[&_.bg-card]:bg-transparent [&_[role=alert]]:bg-transparent pb-4 sm:pb-5">
             <CardHeader>
               <CardTitle className="justify-center text-center">
