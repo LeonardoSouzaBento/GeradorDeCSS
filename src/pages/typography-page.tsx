@@ -73,7 +73,7 @@ export default function TypographyPage({
       />
 
       <div className="main-wrapper mb-4 sm:mb-5">
-        <nav className="w-full min-w-0 max-w-full flex items-center gap-1 overflow-x-auto pb-2.5 border-b border-border/50">
+        <nav className="w-fit max-w-full flex items-center gap-1 overflow-x-auto scrollbar-hidden p-1 bg-secondary rounded-full">
           {tabOptions.map((tab) => {
             const isActive = activeTab === tab.id;
             const TabIcon = tab.icon;
@@ -85,8 +85,8 @@ export default function TypographyPage({
                 className={cn(
                   "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full small-text transition-colors whitespace-nowrap shrink-0 cursor-pointer",
                   isActive
-                    ? "bg-secondary text-secondary-foreground font-medium"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                    ? "bg-card text-secondary-foreground font-medium shadow-xs"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 <TabIcon strokeWidth={2} className="size-5 shrink-0" />

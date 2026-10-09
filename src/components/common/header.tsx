@@ -105,7 +105,7 @@ export const Header = ({
                 className={cn(
                   `no-underline inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full small-text transition-colors whitespace-nowrap shrink-0`,
                   isActive
-                    ? 'bg-secondary text-secondary-foreground font-medium'
+                    ? 'text-secondary-foreground font-semibold'
                     : 'text-muted-foreground hover:text-foreground hover:bg-muted/60',
                 )}>
                 <ItemIcon
